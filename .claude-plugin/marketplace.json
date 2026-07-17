@@ -1,0 +1,19 @@
+{
+  "name": "dius-agent-toolkit",
+  "owner": {
+    "name": "DiUS"
+  },
+  "metadata": {
+    "description": "DiUS's shared toolkit of skills, commands, agents and hooks for AI coding agents."
+  },
+  "plugins": [
+    {
+      "name": "agent-toolkit",
+      "source": {
+        "source": "github",
+        "repo": "DiUS/agent-toolkit"
+      },
+      "description": "A toolkit of DiUS agent skills, commands, agents and hooks for AI coding agents."
+    }
+  ]
+}

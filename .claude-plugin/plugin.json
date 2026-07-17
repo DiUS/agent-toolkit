@@ -1,0 +1,16 @@
+{
+  "name": "agent-toolkit",
+  "description": "A toolkit of DiUS agent skills, commands, agents and hooks for AI coding agents.",
+  "author": {
+    "name": "DiUS"
+  },
+  "homepage": "https://github.com/DiUS/agent-toolkit",
+  "repository": "https://github.com/DiUS/agent-toolkit",
+  "license": "MIT",
+  "skills": "./skills",
+  "commands": "./commands",
+  "agents": [
+    "./agents/codebase-recon-scout.md",
+    "./agents/codebase-doc-verifier.md"
+  ]
+}

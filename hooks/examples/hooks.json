@@ -1,0 +1,18 @@
+{
+  "_comment": "EXAMPLE ONLY — not wired into this toolkit's plugin.json. Copy into your own project's Claude Code settings (e.g. .claude/settings.json 'hooks' key) to enable it there. JSON has no native comment syntax, so notes are kept in '_comment' keys — strip them if you want a minimal config.",
+  "_docs": "https://docs.claude.com/en/docs/claude-code/hooks",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "_comment": "Fires after every tool call completes. Matcher '*' means it runs unconditionally — narrow it (e.g. to 'Edit|Write') in a real config.",
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$CLAUDE_PROJECT_DIR/hooks/examples/example-hook.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
