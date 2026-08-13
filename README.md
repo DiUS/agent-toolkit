@@ -57,6 +57,7 @@ and any other agent).
 | Skill | Description |
 |---|---|
 | [`codebase-discovery`](skills/codebase-discovery/) | Reverse-engineers domain, architecture, business rules, workflows and a business glossary from an existing codebase into lean onboarding docs — ready for harness engineering / Spec Kit. |
+| [`prd-to-steel-thread`](skills/prd-to-steel-thread/) | Converts a product PRD into a steel-thread-first roadmap of demo-ready vertical slices, with just-in-time infrastructure and capacity-aware parallelism for SDD technical planning. |
 
 New skills, commands, agents and hooks are added over time — see
 [CONTRIBUTING.md](CONTRIBUTING.md) to add your own.
