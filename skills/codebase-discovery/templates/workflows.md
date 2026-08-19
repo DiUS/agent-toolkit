@@ -3,7 +3,7 @@
 > **Last updated:** YYYY-MM-DD
 > **Scope:** The <workflow name> flow in <system>
 > **Mode:** full | code-only
-> **Status:** <full: accepted knowledge unless flagged | code-only: code-derived, not validated by a person> — see ../_discovery/assumptions-register.md
+> **Status:** <full: accepted knowledge unless flagged | code-only: code-derived, not validated by a person> — see <../ | ../../>_discovery/assumptions-register.md
 
 <!-- ONE FLOW PER FILE. Written as `workflow-<concept>.md` — inside areas/<area>/ when an area owns
 it, or under business/ when it crosses areas. A second flow is a SECOND FILE, not another section

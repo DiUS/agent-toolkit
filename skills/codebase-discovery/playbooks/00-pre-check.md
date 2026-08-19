@@ -89,11 +89,14 @@ a public page because of where it landed.
 would write (`business/`, `domain/`, `tech/`, `_discovery/` under the output root). These are
 human-authored until proven otherwise.
 
-**c. Agree the output root with the user.** The default is `docs/`. Where `docs/` is a published
-site, or is already occupied, propose an alternative — `docs/discovery/` is the usual choice — and
-let the user decide. If `--output` was given, that's the decision; still report what you found, since
-a published site is worth knowing about either way. If the docs do belong in the published site, ask explicitly whether they
-should be registered in its nav/sidebar or deliberately left out of it.
+**c. Agree the output root with the user.** The default is `docs/` at the **project root** — locate
+that with `git rev-parse --show-toplevel`, falling back to the session's working directory, and say
+which directory you settled on if you're working from somewhere below it. Where `docs/` is a
+published site, or is already occupied, propose an alternative — `docs/discovery/` is the usual
+choice — and let the user decide. If `--output` was given, that's the decision; still report what you
+found, since a published site is worth knowing about either way. If the docs do belong in the
+published site, ask explicitly whether they should be registered in its nav/sidebar or deliberately
+left out of it.
 
 Record all three outcomes — root, tooling + nav decision, and the pre-existing files — in
 `docs/_discovery/discovery-state.md`. They bind every later phase via the

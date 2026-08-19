@@ -3,7 +3,7 @@
 > **Last updated:** YYYY-MM-DD
 > **Scope:** Core domain entities and relationships of <system>
 > **Mode:** full | code-only
-> **Status:** <full: accepted knowledge unless flagged | code-only: code-derived, not validated by a person> — see ../_discovery/assumptions-register.md
+> **Status:** <full: accepted knowledge unless flagged | code-only: code-derived, not validated by a person> — see <../ | ../../>_discovery/assumptions-register.md
 
 <!-- The business entities and how they relate — not the raw DB schema. This template serves TWO
 modes; delete the one you're not writing.

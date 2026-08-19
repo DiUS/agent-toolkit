@@ -26,7 +26,7 @@ infer. All optional; absent means work it out as usual.
 
 | Argument | Effect |
 |---|---|
-| `<path>` | analyse that directory instead of the working directory |
+| `<path>` | analyse that directory instead of the working directory. Narrows what's **read**; output still lands at the project root — see the write contract |
 | `full` \| `code-only` | the mode (see Modes) |
 | `--scope <paths>` | limit recon to these paths |
 | `--areas <names>` | cover only these areas this run |

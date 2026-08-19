@@ -206,8 +206,13 @@ Start every file with:
 > **Last updated:** YYYY-MM-DD (use the real current date)
 > **Scope:** <one line — what this covers>
 > **Mode:** full | code-only
-> **Status:** <pick per mode — see below> — see docs/_discovery/assumptions-register.md
+> **Status:** <pick per mode — see below> — see ../_discovery/assumptions-register.md
 ```
+
+**The register link is relative to the file's own depth.** `../_discovery/…` from `business/`,
+`domain/` and `tech/`; `../../_discovery/…` from `areas/<area>/`. A template that can be written at
+either depth leaves that segment as a placeholder rather than shipping a path that's wrong half the
+time — resolve it against where the file actually lands. Phase 4 checks it resolves.
 
 The `Last updated` date is mandatory — it's how staleness is judged at a glance, alongside the
 recon manifest.

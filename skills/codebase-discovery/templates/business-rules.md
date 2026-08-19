@@ -3,7 +3,7 @@
 > **Last updated:** YYYY-MM-DD
 > **Scope:** Rules governing <concept> in <system>
 > **Mode:** full | code-only
-> **Status:** <full: accepted knowledge unless flagged | code-only: code-derived, not validated by a person> — see ../_discovery/assumptions-register.md
+> **Status:** <full: accepted knowledge unless flagged | code-only: code-derived, not validated by a person> — see <../ | ../../>_discovery/assumptions-register.md
 
 <!-- ONE RULE CLUSTER PER FILE. Written as `rules-<concept>.md` — inside areas/<area>/ when an area
 owns it, or under domain/ when it applies system-wide. A second cluster is a SECOND FILE, not another
