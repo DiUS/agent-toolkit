@@ -7,7 +7,7 @@
 
 | Claim ID | Claim (short) | Evidence (path:line / symbol / stakeholder) | Confidence | Used in doc |
 |---|---|---|---|---|
-| C-1 | <claim> | src/... : <line> or "<stakeholder name>" | H/M/L | domain/business-rules.md |
+| C-1 | <claim> | src/... : <line> or "<stakeholder name>" | H/M/L | areas/billing/rules-refund-eligibility.md |
 
 <!-- Every accepted (unmarked) claim in the docs should have a row here pointing to real code
 or a named person. Phase 4 verifies this. -->

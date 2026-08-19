@@ -48,6 +48,12 @@ surfaces.
 If the stakeholder reorders the list or adds something not on it, follow them: they know things the
 register doesn't. Record the change of priority.
 
+**Where areas have different owners, group the queue by who can answer.** Nobody knows a large system
+end to end, and a top-5 that spans four owners can't be worked in one conversation. Sort within the
+person in front of you, keep the rest for whoever owns it, and record in `discovery-state.md` which
+SME covered which area so a later session doesn't re-ask them. The register's *who can confirm* column
+is what makes this possible — an item with nobody against it doesn't get actioned.
+
 ---
 
 ## Reconcile contradictions (important)

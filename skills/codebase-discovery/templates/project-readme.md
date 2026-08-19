@@ -21,12 +21,19 @@ Onboarding docs live under [`docs/`](./docs/):
 |---|---|
 | [docs/tech/current-architecture.md](./docs/tech/current-architecture.md) | How the system is built, as-is |
 | [docs/tech/integrations.md](./docs/tech/integrations.md) | External systems and dependencies |
-| [docs/domain/domain-model.md](./docs/domain/domain-model.md) | Core entities and relationships |
+| [docs/domain/domain-model.md](./docs/domain/domain-model.md) | Core entities and cross-area relationships |
 | [docs/domain/domain-glossary.md](./docs/domain/domain-glossary.md) | Business language |
-| [docs/domain/business-rules.md](./docs/domain/business-rules.md) | The rules the system enforces |
-| [docs/business/workflows.md](./docs/business/workflows.md) | Key end-to-end processes |
 | [docs/business/business-requirements.md](./docs/business/business-requirements.md) | Functional + non-functional requirements |
 | [docs/business/user-personas.md](./docs/business/user-personas.md) | Who uses it |
+
+<!-- If the system has areas, list them here — one line each, linking the directory, not every file
+inside it. Omit this section entirely on a single-area system. -->
+
+### Areas
+
+| Area | What it covers |
+|---|---|
+| [docs/areas/<area>/](./docs/areas/<area>/) | <one line: what this part of the business does> |
 
 ## Getting started
 

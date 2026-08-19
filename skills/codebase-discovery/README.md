@@ -63,20 +63,28 @@ The destination is agreed rather than assumed. Because the output lands in a rep
 doesn't own, Phase 0 surveys the write target — is `docs/` a published site, is anything already
 there? — and settles the **output root** with the user before a byte is written.
 
+**Area-specific material is filed by area, under names drawn from the domain language** — so an agent
+working on billing loads `areas/billing/`, not every rule in the system. What no single area owns
+stays at the top level, and the glossary is always one file: it's the shared vocabulary, and splitting
+it would defeat the point. A single-area system keeps the flat layout with no `areas/` at all — the
+trigger is whether the content has an area dimension, not how big the repo is.
+
 ```
 README.md                         # project-root: onboarding index / entry point — the file CLAUDE.md/AGENTS.md links
 docs/
-├── business/
+├── business/                     # cross-cutting only
 │   ├── business-requirements.md  # functional + non-functional
-│   ├── user-personas.md          # users & stakeholders
-│   └── workflows.md              # business/process workflows (+ Mermaid)
-├── domain/
-│   ├── domain-model.md           # entities, relationships, lifecycles (+ Mermaid)
-│   ├── domain-glossary.md        # business language
-│   └── business-rules.md         # rules, each with provenance
+│   └── user-personas.md          # users & stakeholders
+├── domain/                       # system-wide domain
+│   ├── domain-glossary.md        # business language — always a single file
+│   └── domain-model.md           # aggregates + cross-area relationships (+ Mermaid)
 ├── tech/
-│   ├── current-architecture.md   # as-is architecture (+ Mermaid), dated
+│   ├── current-architecture.md   # as-is architecture (+ Mermaid), names the areas
 │   └── integrations.md           # external systems, dependencies, data feeds
+├── areas/<area>/                 # area-specific, named from the domain language
+│   ├── model-<concept>.md        # e.g. model-invoice.md
+│   ├── rules-<concept>.md        # e.g. rules-refund-eligibility.md
+│   └── workflow-<concept>.md     # e.g. workflow-invoice-run.md
 └── _discovery/                   # provenance & working state — NOT onboarding docs
     ├── assumptions-register.md   #   audit trail — committed
     ├── traceability-index.md     #   audit trail — committed

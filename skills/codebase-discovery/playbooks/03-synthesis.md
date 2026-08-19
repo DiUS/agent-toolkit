@@ -27,16 +27,21 @@ with the user rather than assuming `docs/`.
 
 ## What to write
 
-The set of documents and where they go is defined in output-conventions. Two judgements are
-this phase's own:
+The set of documents, where they go, and how they're named is defined in output-conventions. Three
+judgements are this phase's own:
 
 - **Create only what the system warrants.** Skip any document with nothing meaningful to say; an
   empty scaffold costs a reader's trust and gains nothing.
 - **Apply the onboarding test to every document, section and paragraph** — *does this help a new
   joiner (or an AI harness) become productive?* If not, cut it. Favour the load-bearing entities,
   rules and workflows over exhaustive catalogues.
+- **Place each fact by ownership.** Area-specific material goes in that area's directory under a
+  logical name; anything no single area owns is cross-cutting and belongs at the top level. Getting
+  this wrong is what turns one document into an unreadable pile — and the glossary in particular
+  stays a single file whatever the system's size.
 
-Use the matching file in `../templates/`.
+Use the matching file in `../templates/`; the area files use the same templates as their unsplit
+equivalents, written per concept rather than per repo.
 
 ---
 

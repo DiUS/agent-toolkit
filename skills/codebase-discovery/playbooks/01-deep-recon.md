@@ -72,8 +72,27 @@ folder layout and import patterns where nothing is declared. Then add:
 - Rough size (module count, file/line counts) so the cost of deep dives is visible.
 
 Record the map in `discovery-state.md`, and note in `recon-manifest.md` which tier produced it — a
-graph from a manifest is fact; one inferred from imports is not. Ask the user to confirm the scope of
-deep dives before continuing (especially on large repos).
+graph from a manifest is fact; one inferred from imports is not.
+
+### Name the areas, then choose an order
+
+The declared graph gives you modules; **areas** are what the business calls them, and they're what
+the docs get filed under (see the area layout in
+[`../references/output-conventions.md`](../references/output-conventions.md)). Group the modules into
+areas and name each one from the domain language, not the namespace — a candidate glossary term,
+which the interview then confirms.
+
+Where a system has more than one area, you won't cover them all at once. Choose the order:
+
+1. **Ask the user.** They have a reason for doing this now, and it beats any heuristic.
+2. **Fan-in from the declared graph.** The most-depended-upon modules are the shared kernel; getting
+   those wrong poisons every other area's docs. This is a fact from the graph, not an inference.
+3. **Entry points.** User-facing areas first when nothing else decides it.
+
+Record every area in the manifest's coverage ledger — including the ones you aren't covering, with
+why. An area missing from the ledger is an invisible gap; an area listed as uncovered is a known one.
+
+Ask the user to confirm the scope of deep dives before continuing (especially on large repos).
 
 ---
 

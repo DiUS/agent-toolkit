@@ -27,8 +27,8 @@ whose document wasn't written — index only what exists:
 
 - Architecture: [docs/tech/current-architecture.md](./docs/tech/current-architecture.md)
 - Domain model & language: [docs/domain/domain-model.md](./docs/domain/domain-model.md), [docs/domain/domain-glossary.md](./docs/domain/domain-glossary.md)
-- Business rules: [docs/domain/business-rules.md](./docs/domain/business-rules.md)
-- Workflows: [docs/business/workflows.md](./docs/business/workflows.md)
+- Area detail — rules, workflows and models for the part you're working in:
+  [docs/areas/](./docs/areas/). Load the one area you need, not the directory.
 
 ## Working conventions
 

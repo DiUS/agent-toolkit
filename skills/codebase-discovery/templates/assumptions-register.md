@@ -8,9 +8,12 @@
 <!-- Every open item: assumptions, unverified claims, contradictions, outdated docs. Resolve
 the high-impact ones before relying on the docs for a change. -->
 
-| ID | Item | Flag | Confidence | Impact if wrong | Source | Resolution / next step |
-|---|---|---|---|---|---|---|
-| A-1 | <statement> | [assumption] / [unverified] / [outdated] / [contradicted] / [unchecked] | H/M/L | <what breaks> | <path:line / doc / stakeholder> | <interview / confirm with X / recon <area> (out of scope this run)> |
+<!-- "Who can confirm" is what makes an item actionable: at any scale beyond one area, "needs SME" is
+useless without naming which one. It's also how the interview queue groups questions by person. -->
+
+| ID | Item | Flag | Confidence | Impact if wrong | Source | Who can confirm | Resolution / next step |
+|---|---|---|---|---|---|---|---|
+| A-1 | <statement> | [assumption] / [unverified] / [outdated] / [contradicted] / [unchecked] | H/M/L | <what breaks> | <path:line / doc / stakeholder> | <role / name, or area owner> | <interview / recon <area> (out of scope this run)> |
 
 ## Resolved
 

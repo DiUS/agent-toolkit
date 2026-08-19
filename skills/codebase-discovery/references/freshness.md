@@ -36,7 +36,8 @@ be detected and re-recon the load-bearing areas rather than assuming the docs st
 ## Reporting drift, and what the user can do about it
 
 Report it plainly and usefully — *"12 files changed in the billing area since the last recon at
-`a1b2c3d`; `docs/domain/business-rules.md` and `docs/business/workflows.md` draw on that area"* —
+`a1b2c3d`; `areas/billing/rules-refund-eligibility.md` and `areas/billing/workflow-invoice-run.md`
+draw on that area"* —
 naming the **areas** and the **documents that depend on them**, not just a file count. Then offer
 the choice, with a recommendation:
 

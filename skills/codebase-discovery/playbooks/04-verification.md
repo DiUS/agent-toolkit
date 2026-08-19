@@ -49,6 +49,10 @@ path to `references/output-conventions.md`.
    agent file points at a file that exists — skipped documents are the usual culprit, since the
    index templates list the full set.
 
+   **Names use the agreed language.** Area directories and area filenames are glossary terms, not
+   namespaces or codenames, with no catch-alls (`misc`, `other`, `general`). A file that couldn't be
+   named specifically usually means the split was wrong.
+
 7. **Write contract honoured.** Check the output against the write contract in
    [`../references/output-conventions.md`](../references/output-conventions.md), using the root,
    nav decision and pre-existing-file list Phase 0 recorded in `discovery-state.md`.

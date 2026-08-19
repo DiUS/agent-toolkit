@@ -22,17 +22,19 @@ there is **no `docs/README.md`**. The detail docs live under `docs/`:
 ```
 README.md                         # project-root: onboarding index / entry point — the only file the agent file links
 docs/
-├── business/
+├── business/                     # cross-cutting only
 │   ├── business-requirements.md
-│   ├── user-personas.md
-│   └── workflows.md
-├── domain/
-│   ├── domain-model.md
-│   ├── domain-glossary.md
-│   └── business-rules.md
+│   └── user-personas.md
+├── domain/                       # system-wide domain
+│   ├── domain-glossary.md        #   single file, always
+│   └── domain-model.md           #   aggregates + cross-area relationships
 ├── tech/
-│   ├── current-architecture.md
+│   ├── current-architecture.md   #   the system map; names the areas
 │   └── integrations.md
+├── areas/<area>/                 # anything area-specific (see below)
+│   ├── model-<concept>.md
+│   ├── rules-<concept>.md
+│   └── workflow-<concept>.md
 └── _discovery/                   # NOT onboarding docs — see disposition below
     ├── assumptions-register.md   #   audit trail — commit
     ├── traceability-index.md     #   audit trail — commit
@@ -45,6 +47,41 @@ Only create a doc if the system gives it real content. Do not create empty place
 **Index only what exists.** Because some documents get skipped, the project-root `README.md` and the
 agent onboarding file must link only the ones actually written — delete the rest of the rows. A dead
 link in the front door misleads the reader it was written for, and costs an agent a wasted turn.
+
+---
+
+## Area docs vs system docs
+
+A single file per artefact stops working as soon as a system has more than one area: a combined
+business-rules document grows without limit, and a reader after billing's rules has to load
+everything to find them. So **area-specific material is filed by area** and the rest stays at the top
+level.
+
+**Placement rule: a fact lives with the area that owns it. If no single area owns it, it's
+cross-cutting and lives at the top level.** A system-wide authorization policy is a top-level rule; a
+workflow spanning three areas is a top-level workflow.
+
+Which artefacts split, and which must not:
+
+| Artefact | Splits by area? | Why |
+|---|---|---|
+| domain model | **yes**, as `model-<concept>.md` | entities cluster by area; `domain/domain-model.md` keeps the aggregates and cross-area relationships |
+| business rules | **yes**, as `rules-<concept>.md` | the clearest case — rules cluster by area and grow with the codebase |
+| workflows | **yes**, as `workflow-<concept>.md` | one flow per file; you rarely need all of them at once |
+| **domain glossary** | **never** | it's the shared vocabulary. Splitting it defeats the point that a term means one thing system-wide |
+| current architecture | no | it *is* the system view; the per-area detail is the area docs |
+| integrations | no | a table of external systems, inherently system-level |
+| user personas | no | global, and small |
+| business requirements | no | mostly cross-area; splitting scatters them along an axis they don't have |
+
+**When to split: content shape, not repo size.** One area's worth of material → keep the flat layout
+and no `areas/` directory at all. Material for more than one area → areas appear. There's no size
+threshold to judge, because the trigger is whether the content has an area dimension.
+
+The area files use the same `templates/` as their unsplit equivalents — written per concept rather
+than per repo. **No per-area index files:** logical names make a directory listing self-describing,
+and every index is another thing to drift. The root `README.md` lists the areas, and
+`current-architecture.md` names them as it describes the system.
 
 ---
 
@@ -104,8 +141,24 @@ different fates:
 
 ## Naming
 
-- Hyphenated, lower-case filenames: `current-architecture.md`, `business-rules.md`.
-- Keep the names above; don't invent variants.
+Hyphenated, lower-case throughout. The system-level files keep the fixed names in the layout above —
+don't invent variants of those. Area directories and area files are named for what's **in** them,
+because a name is the cheapest signal a reader or an agent has about whether to open a file.
+
+- **Area directory** — the agreed **glossary term** for that area: `areas/order-fulfilment/`. Not the
+  namespace, not the `src/` folder name, not an internal service codename.
+- **Area file** — a fixed type prefix plus a glossary-derived noun phrase:
+  `rules-refund-eligibility.md`, `workflow-invoice-run.md`, `model-invoice.md`. The prefix stays
+  generic on purpose; it's the discriminator that makes a directory scannable without opening
+  anything. Only `model-`, `rules-`, `workflow-`.
+- **If the concept isn't in the glossary, add it there first.** A filename is a use of the ubiquitous
+  language, so it should be an agreed one — and it keeps names consistent between runs and between
+  areas.
+- **No catch-alls.** No `misc`, `other`, `general`, `common`, `shared-rules`. A file you can't name
+  specifically is a sign the split is wrong, and catch-alls are exactly where bloat accumulates.
+- **No dates, no versions, no `v2`.** The header block carries `Last updated`.
+- **Stable across runs.** If a file already covers a concept, update it — never create a
+  near-duplicate name beside it. The write contract's never-overwrite rule then applies per file.
 
 ---
 
@@ -155,16 +208,19 @@ Aim for onboarding density, not completeness:
 | Doc | Target |
 |---|---|
 | project-root README.md (onboarding index) | ~1 page |
-| current-architecture.md | ~1–2 pages + 1 diagram |
-| domain-model.md | ~1–2 pages + 1 diagram |
-| business-rules.md | the load-bearing rules, grouped; not every conditional in the code |
-| workflows.md | the key flows only, each with a diagram |
-| domain-glossary.md | one line per term |
-| business-requirements.md | ~1–2 pages, functional + NFR |
-| integrations.md | a table of systems + purpose + direction |
+| tech/current-architecture.md | ~1–2 pages + 1 diagram |
+| domain/domain-model.md | ~1–2 pages + 1 diagram — aggregates and cross-area relationships only |
+| domain/domain-glossary.md | one line per term |
+| business/business-requirements.md | ~1–2 pages, functional + NFR |
+| tech/integrations.md | a table of systems + purpose + direction |
+| areas/…/model-*.md | one concept: its entities, attributes and lifecycle |
+| areas/…/rules-*.md | one rule cluster, each rule with condition, exceptions and rationale |
+| areas/…/workflow-*.md | one flow + its diagram |
 
-If a doc wants to grow past this, push the detail into a clearly-marked appendix section that
-isn't loaded by default — don't bloat the linked doc.
+**If a doc wants to grow past this, split it — don't hide it.** Area-shaped material becomes another
+area file with its own logical name; anything else fails the onboarding test and gets cut. Pushing the
+overflow into an appendix in the same file doesn't help: the file is still loaded whole, so the reader
+pays for it either way.
 
 ---
 
