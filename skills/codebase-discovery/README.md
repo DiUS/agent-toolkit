@@ -84,21 +84,18 @@ docs/
 ```
 
 `_discovery/` is deliberately kept out of the onboarding set and is never linked from
-`CLAUDE.md` / `AGENTS.md`. The two audit files are committed, because provenance for committed
-docs has to be there for everyone; the two state files are one run's scratch memory, so
-git-ignoring them is recommended at finish — safe to delete, at the cost of a cold start next
-run. The full rule lives in `references/output-conventions.md`.
+`CLAUDE.md` / `AGENTS.md`. Its two audit files are committed and its two state files are not.
+
+The tree above is illustrative — `references/output-conventions.md` defines the layout, the
+`_discovery/` disposition and the write contract, and is the file to trust if this README ever
+falls behind it.
 
 ## Status model (exception-only)
 
 Accepted knowledge is unmarked. Only exceptions are flagged — `[unchecked]`, `[unverified]`,
 `[assumption]`, `[outdated]`, `[contradicted]` — so the reader's attention goes straight to what
-still needs resolving. The two easily confused: `[unchecked]` means a claim from an existing doc
-that nobody has compared with the code yet; `[unverified]` means somebody looked, and it's a
-person's sign-off that's missing.
-
-In `code-only` mode the caveat is stated once in each document's header rather than stamped on
-every line, so the flags keep their signal.
+still needs resolving, and in `code-only` mode the caveat is stated once per document rather than
+stamped on every line. `references/provenance-and-status.md` defines the model.
 
 ## Layout of this skill
 
@@ -115,7 +112,9 @@ codebase-discovery/               # (this skill, under skills/ in the repo)
 │   ├── question-bank.md
 │   ├── recon-heuristics.md
 │   ├── provenance-and-status.md
-│   └── output-conventions.md
+│   ├── output-conventions.md
+│   ├── code-intelligence.md      # optional LSP navigation setup
+│   └── lsp-mcp/                  # example configs for that setup
 └── templates/
     ├── project-readme.md
     ├── business-requirements.md

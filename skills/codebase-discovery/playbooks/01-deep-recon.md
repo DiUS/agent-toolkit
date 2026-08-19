@@ -148,8 +148,9 @@ Output a structured, cited set of hypotheses that seeds the interview — organi
 target doc areas: architecture, domain model, business rules, workflows, glossary terms,
 requirements. Each hypothesis carries evidence (`path:line`) and a confidence (High/Med/Low).
 
-Update `recon-manifest.md` with the source files read (path + hash/timestamp) so future runs
-can detect staleness.
+Update `recon-manifest.md` so future runs can detect staleness: the commit recon ran against and
+whether the tree was clean, the areas covered, and the files actually read. See the freshness-check
+mechanism in `SKILL.md` — record the commit, not timestamps.
 
 ---
 

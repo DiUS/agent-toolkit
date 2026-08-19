@@ -1,9 +1,8 @@
 # <System name>
 
-<!-- The project's front door AND the onboarding index. When a root README already exists,
-MERGE these sections into it rather than replacing it — preserve the existing content, structure
-and voice. Keep discovery metadata (the Last updated / Mode / Status header block and
-[assumption]-style flags) OUT of this file; it's the project's own README, not a docs/ file. -->
+<!-- The project's front door AND the onboarding index. Follow the "Project-root README.md" rules
+in the skill's synthesis playbook before writing: merge conservatively into an existing README,
+get sign-off, and keep discovery metadata out of this file. Delete these guidance comments. -->
 
 <!-- 2–3 sentences: what the system is, who it's for, what it does. This is the first thing
 a new team member or AI harness reads. Keep it tight. -->
@@ -37,5 +36,3 @@ Onboarding docs live under [`docs/`](./docs/):
 
 - <top assumption/risk> — see [docs/_discovery/assumptions-register.md](./docs/_discovery/assumptions-register.md)
 
-<!-- docs/_discovery/ holds provenance and working state. It is not onboarding material and
-should not be linked from CLAUDE.md / AGENTS.md. -->

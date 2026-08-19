@@ -56,6 +56,33 @@ repo. Use `${CLAUDE_PLUGIN_ROOT}/…` or invoke the skill by name.
    a consumer copies it into their own project.
 3. Run the verification gate; any `hooks/**/hooks.json` must be valid JSON.
 
+## State each rule once
+
+Skills are read by an agent that follows whatever it's told, so the same instruction in two files
+is a latent contradiction: someone relaxes one copy, the other still says the old thing, and which
+one wins depends on reading order. Copies also drift silently — nothing fails.
+
+So, within a skill:
+
+| Kind of content | Where it lives |
+|---|---|
+| **Rules** — what must always be true of the output | one reference file, marked as the only statement of it |
+| **Procedure** — how to carry out a phase | that phase's playbook |
+| **Facts** — what was decided or found this run | the working-state file |
+| **Checks** — verify a rule was followed | the verification playbook, phrased as a check that *points at* the rule |
+
+Everything else links. A playbook that needs a rule says "apply the X in `references/y.md`" rather
+than repeating it — and a reference that owns a rule says so in its heading, so the next editor
+knows not to fork it.
+
+Two exceptions, both deliberate:
+
+- **Subagents** (`agents/*.md`) can't resolve a path into a skill, so they carry standalone copies.
+  Where the wording matters, pin it with a check under `scripts/checks/` so the copies can't
+  diverge.
+- **Templates** get rendered into someone else's repo, so a terse in-place reminder is fine —
+  but keep the rule itself in the reference and point at it.
+
 ## Editing the `codebase-discovery` skill
 
 - Behaviour lives in `skills/codebase-discovery/playbooks/*.md`. Preserve the five-phase flow

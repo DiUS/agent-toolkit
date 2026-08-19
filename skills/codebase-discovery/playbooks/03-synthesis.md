@@ -7,88 +7,44 @@ team member (human or AI) productive, and no more.
 
 ---
 
-## The onboarding test
+## Read these first
 
-Before writing each document, and before keeping each paragraph, ask:
+This phase writes files, so two references govern it. Read both before starting; neither is
+restated here.
 
-> *Does this help a new joiner (or an AI harness) become productive?*
+- [`../references/output-conventions.md`](../references/output-conventions.md) — the **write
+  contract** (output root, what may be overwritten, published-site decision), the folder layout and
+  which docs exist, the required header block and how to date it, length ceilings, formatting, and
+  the `_discovery/` disposition.
+- [`../references/provenance-and-status.md`](../references/provenance-and-status.md) — the flag
+  vocabulary and when to use it inline, how citations stay out of the prose, and **no invention**.
 
-If it doesn't, cut it. These are **onboarding docs, not a knowledge base.** Favour the
-load-bearing entities, rules and workflows over exhaustive catalogues. Keep each document
-lean enough to link from `CLAUDE.md` / `AGENTS.md` without wrecking the context budget. See
-[`../references/output-conventions.md`](../references/output-conventions.md) for structure,
-naming, length ceilings and the required header block.
+Phase 0 recorded the output root, the docs-site decision and the pre-existing files in
+`discovery-state.md` — read them there. If the output root was never settled, stop and agree it
+with the user rather than assuming `docs/`.
 
 ---
 
 ## What to write
 
-Create only the documents the system warrants (skip ones with nothing meaningful to say).
+The set of documents and where they go is defined in output-conventions. Two judgements are
+this phase's own:
+
+- **Create only what the system warrants.** Skip any document with nothing meaningful to say; an
+  empty scaffold costs a reader's trust and gains nothing.
+- **Apply the onboarding test to every document, section and paragraph** — *does this help a new
+  joiner (or an AI harness) become productive?* If not, cut it. Favour the load-bearing entities,
+  rules and workflows over exhaustive catalogues.
+
 Use the matching file in `../templates/`.
-
-```
-docs/
-├── business/
-│   ├── business-requirements.md  # functional + non-functional
-│   ├── user-personas.md          # users & stakeholders
-│   └── workflows.md              # business/process workflows (+ Mermaid)
-├── domain/
-│   ├── domain-model.md           # entities, relationships, lifecycles (+ Mermaid)
-│   ├── domain-glossary.md        # business language
-│   └── business-rules.md         # rules, each with provenance
-└── tech/
-    ├── current-architecture.md   # as-is architecture (+ Mermaid)
-    └── integrations.md           # external systems, dependencies, data feeds
-```
-
-The **project-root `README.md`** is the onboarding index / entry point for this set — **not** a
-file under `docs/`, and **there is no `docs/README.md`**. See
-[Project-root README.md](#project-root-readmemd--the-entry-point) below.
-
-`docs/_discovery/` (assumptions register, traceability index, discovery state, recon
-manifest) is maintained throughout — none of it is an onboarding doc, and none of it is linked
-from the agent file. The root `README.md` may link the assumptions register from its open-risks
-section; see the `_discovery/` disposition in
-[`../references/output-conventions.md`](../references/output-conventions.md) for what's committed.
-
----
-
-## Before writing anything
-
-Apply the **write contract** in
-[`../references/output-conventions.md`](../references/output-conventions.md) — the output root,
-what may be overwritten, and the published-site decision. Phase 0 recorded all three in
-`discovery-state.md`; read them there. If Phase 0 didn't settle the output root, stop and agree it
-with the user now rather than assuming `docs/`.
-
----
-
-## Rules for every document
-
-1. **Header block, every file.** Start with the standard block including
-   `Last updated: YYYY-MM-DD` (use the real current date), the mode used, and a one-line
-   scope. See output-conventions.
-2. **Exception-only flags.** Accepted knowledge is written plainly and unmarked. Only
-   `[unverified]`, `[assumption]`, `[outdated]`, `[contradicted]` appear inline, sparingly,
-   where a reader must know something isn't settled.
-3. **Provenance without clutter.** Don't inline citations into prose. Keep the
-   claim→evidence mapping in `docs/_discovery/traceability-index.md`; reference it if needed.
-4. **Diagrams where they earn their place.** Use Mermaid for the domain model, key workflows,
-   and the architecture context — a diagram often replaces paragraphs.
-5. **Progressive disclosure.** The project-root `README.md` is the essential summary and
-   index; deeper detail lives in the specific `docs/` file, not the index. Don't duplicate
-   content across files.
-6. **No invention.** If it isn't in the code or confirmed by a stakeholder, either flag it as
-   an assumption or leave it out. Never invent business rules.
 
 ---
 
 ## Project-root README.md — the entry point
 
 The onboarding set has **one entry point: the project-root `README.md`** — the front door for
-humans and agents landing on the repo, and the one file the agent onboarding file links.
-**There is no `docs/README.md`;** the index that used to live there now lives in the root
-README. In a page or so it must:
+humans and agents landing on the repo, and the one file the agent onboarding file links. In a page
+or so it must:
 
 - Say what the system is and who it's for (2–3 sentences).
 - Link out to each `docs/` doc with a one-line description of what's inside (paths relative to
@@ -111,24 +67,22 @@ Produce it from the findings using
     door. Documentation drifts over time — record the discrepancy in
     `docs/_discovery/assumptions-register.md` and raise it, rather than overwriting it with an
     unverified correction.
-  - **No invention.** Anything not grounded in the code or confirmed by a stakeholder stays
-    out, or is flagged for the interview — never invent capabilities or instructions.
   - **Confirm before writing.** Because it's an existing, outward-facing file the skill didn't
     author, summarise the proposed changes for the user and get sign-off before applying them.
+  - No invention here either — and it bites harder on a front door than anywhere else.
 
-- **Keep discovery metadata off the README.** Unlike the `docs/` set, do **not** stamp it with
-  the `Last updated / Mode / Status` header block or inline `[assumption]`-style flags — it's
-  the project's own README, not a `docs/` file. Provenance stays in the traceability index.
+- **Keep discovery metadata off the README.** Unlike the `docs/` set, it carries no header block
+  and no inline flags — it's the project's own README, not a `docs/` file.
 
 ---
 
 ## Exit criteria
 
 - Write contract honoured (root, overwrites, published-site decision).
-- Relevant detail docs written under `docs/`, each with a dated header block.
-- Accepted knowledge unmarked; only genuine exceptions flagged inline.
+- Only warranted docs written, each conforming to output-conventions; each passes the onboarding
+  test.
 - Project-root `README.md` is the entry point: created (if it was missing) or conservatively
-  merged with sign-off, indexing the `docs/` set; **no `docs/README.md` is produced.**
-  Conflicts with existing README content are logged, not overwritten.
+  merged with sign-off, indexing the `docs/` set. Conflicts with existing README content are
+  logged, not overwritten.
 - Traceability index maps claims to evidence; assumptions register is current.
 - Ready for verification.

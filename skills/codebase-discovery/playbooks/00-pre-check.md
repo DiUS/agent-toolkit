@@ -15,12 +15,17 @@ Check for prior state and resume if present:
 
 - If `docs/_discovery/discovery-state.md` exists, read it and continue from where the last
   session left off.
-- If `docs/_discovery/recon-manifest.md` exists, run the **freshness check**: compare the
-  recorded file hashes/timestamps against the current tree. Note any drift and mark affected
-  areas for re-recon.
+- If `docs/_discovery/recon-manifest.md` exists, run the **freshness check** using the mechanism
+  in `SKILL.md` (commit-based, not timestamps). If there's drift, report it and put the choice to
+  the user as set out there — don't silently re-recon, and don't silently trust stale docs. Record
+  their decision in the manifest's freshness-check log.
 
 If neither exists, create `docs/_discovery/` and initialise both files from the templates
 (`templates/discovery-state.md`, `templates/recon-manifest.md`).
+
+Get today's real date from the environment now (`date +%F`) and reuse it for every `Last updated`
+stamp this run — see the header-block rule in
+[`../references/output-conventions.md`](../references/output-conventions.md).
 
 ---
 

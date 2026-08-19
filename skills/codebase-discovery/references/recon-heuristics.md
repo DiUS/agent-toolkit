@@ -86,6 +86,7 @@ Record confidence with every hypothesis; Low/Medium items are prime interview ma
 
 ## Reconstructing the "why" it can't show
 
-Code shows *what* and *how*, rarely *why*. When you hit a rule with no evident rationale
-(a magic threshold, a special-case branch, a hard-coded exception), don't guess — log it as
-an `[assumption]` with the evidence and make it an interview question.
+Code shows *what* and *how*, rarely *why*. When you hit a rule with no evident rationale (a magic
+threshold, a special-case branch, a hard-coded exception), that's interview material: log it as an
+`[assumption]` with the evidence and the question. Guessing the rationale is the failure mode the
+no-invention rule in [`provenance-and-status.md`](provenance-and-status.md) exists to prevent.

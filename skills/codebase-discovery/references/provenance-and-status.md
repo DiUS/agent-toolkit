@@ -115,6 +115,18 @@ is the first thing to resolve before relying on the docs for a change.
 
 ---
 
+## No invention (the rule — stated only here)
+
+If a statement isn't in the code and hasn't been confirmed by a person, it either carries a flag
+or it doesn't get written. **Never invent a business rule**, a threshold, an actor, an SLA or a
+rationale to fill a gap in the story — a plausible-sounding rule is worse than an admitted gap,
+because the next reader acts on it and nothing in the repo contradicts them.
+
+Where the code shows *what* but not *why*, that's an `[assumption]` with the evidence and the
+question, not a guess dressed as a finding.
+
+---
+
 ## Confidence
 
 Where useful, annotate High/Med/Low alongside a flag — especially on `[assumption]` items —

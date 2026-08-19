@@ -74,20 +74,31 @@ to match the servers you installed. Keep only the languages you need.
 
 ### 4. Register the bridge with your agent
 
-**Claude Code** — add to `~/.claude/settings.json` (see
-[`lsp-mcp/claude-code.mcp.json`](lsp-mcp/claude-code.mcp.json)); replace the placeholder paths
-with the **absolute** paths to your built binary and config:
+**Claude Code** — easiest is the CLI, which writes the config for you:
+
+```bash
+claude mcp add --scope user lsp -- /absolute/path/to/lsp-mcp/bin/lsp-mcp \
+  -config /absolute/path/to/lsp-mcp/config.yaml
+```
+
+Or register it for one project by creating `.mcp.json` in that project's root — see
+[`lsp-mcp/claude-code.mcp.json`](lsp-mcp/claude-code.mcp.json) for the shape, and replace both
+placeholder paths with **absolute** ones:
 
 ```json
 {
   "mcpServers": {
     "lsp": {
       "command": "/absolute/path/to/lsp-mcp/bin/lsp-mcp",
-      "args": ["-config", "/absolute/path/to/lsp-mcp/config/config.yaml"]
+      "args": ["-config", "/absolute/path/to/lsp-mcp/config.yaml"]
     }
   }
 }
 ```
+
+> `settings.json` is **not** the place for this — it holds permissions and hooks, not
+> `mcpServers`. A server declared there simply won't appear, which looks exactly like the
+> "language server isn't running" failure and wastes an hour.
 
 **Cursor / Windsurf / any MCP client** — point your MCP config at the same binary with the
 `-config` flag, following the same shape.

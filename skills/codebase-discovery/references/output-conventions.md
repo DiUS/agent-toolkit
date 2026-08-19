@@ -118,8 +118,14 @@ Start every file with:
 > **Status:** <pick per mode — see below> — see docs/_discovery/assumptions-register.md
 ```
 
-The `Last updated` date is mandatory — it's how staleness is judged at a glance, alongside
-the recon manifest.
+The `Last updated` date is mandatory — it's how staleness is judged at a glance, alongside the
+recon manifest.
+
+**Get the date from the environment; never write one from memory.** Run `date +%F` (or read it
+from whatever the host provides) once at the start of the run and reuse that value for every file
+you stamp, including the working-state files. A guessed date is worse than none: the freshness
+check and every reader treat this field as fact, and a wrong one makes fresh docs look stale or
+stale docs look current.
 
 The `Status` line carries the document-wide provenance caveat, so it has to match the mode:
 
@@ -170,10 +176,11 @@ tells the reader the docs were generated and abandoned, which costs more trust t
 ## Formatting
 
 - Prefer prose and small tables over deep bullet nesting.
-- Use Mermaid for the domain model, key workflows and the architecture context diagram.
-- Keep exception flags (`[unverified]` etc.) inline and sparing; keep citations in the
-  traceability index, not the prose.
+- Use Mermaid for the domain model, key workflows and the architecture context diagram — a
+  diagram often replaces paragraphs.
 - Terminology must match the glossary across every doc.
+- Flags and citations follow `provenance-and-status.md`: flags inline and sparing, citations in the
+  traceability index rather than the prose.
 
 ---
 

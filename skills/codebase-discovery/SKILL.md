@@ -129,8 +129,8 @@ sessions:
 - `docs/_discovery/discovery-state.md` — the evolving memory: facts, assumptions,
   unknowns, decisions, glossary-in-progress. **Read it at the start of every session and
   rewrite it as understanding changes.**
-- `docs/_discovery/recon-manifest.md` — which source files (with hashes/timestamps) and
-  which existing docs fed the recon, so later runs can detect staleness.
+- `docs/_discovery/recon-manifest.md` — the commit recon ran against, which areas and files were
+  read, and which existing docs fed it, so later runs can detect staleness (below).
 
 On invocation: if these exist, read them first and resume; do not restart from zero.
 
@@ -142,12 +142,47 @@ restate it.
 
 ---
 
-## Freshness check (staleness detection, no hooks)
+## Freshness check (staleness detection — the mechanism, stated only here)
 
-If `docs/_discovery/recon-manifest.md` exists from a previous run, compare the recorded
-file hashes/timestamps against the current tree before trusting prior findings. Report any
-drift ("N source files changed since last recon") and re-recon the affected areas rather
-than assuming the existing docs are still accurate.
+Prior findings are only trustworthy if the code hasn't moved. The check is **commit-based**, not
+timestamp-based:
+
+- **Recording (Phase 1).** Put the recon's commit in the manifest: `git rev-parse HEAD`, plus
+  whether the working tree was clean (`git status --porcelain`). A dirty tree means the SHA
+  doesn't fully describe what was read — say so.
+- **Comparing (Phase 0 of a later run).** `git diff --name-only <recorded-sha> HEAD` gives the
+  changed files exactly; add `git status --porcelain` for uncommitted work. Intersect that with
+  the areas the manifest recorded and re-recon only those.
+- **Never compare mtimes.** A fresh clone rewrites every file's timestamp, so a timestamp check
+  reports the whole tree as drifted on any machine that didn't run the original recon — which is
+  most of them. This is a trap; don't "fix" the check back to timestamps.
+- **No git available?** Fall back to hashing just the files the manifest lists as read — a bounded
+  set, since recon reads the high-signal subset, not the repo. If hashing isn't possible either,
+  record that staleness can't be detected and re-recon the load-bearing areas rather than
+  assuming the docs still hold.
+
+### Reporting drift, and what the user can do about it
+
+Report it plainly and usefully — *"12 files changed in the billing area since the last recon at
+`a1b2c3d`; `docs/domain/business-rules.md` and `docs/business/workflows.md` draw on that area"* —
+naming the **areas** and the **documents that depend on them**, not just a file count. Then offer
+the choice, with a recommendation:
+
+- **Re-recon the affected areas** (the default, and what to recommend for most drift) — targeted,
+  cheap, and only the affected docs get rewritten.
+- **Re-run recon from scratch** — recommend this instead when the drift spans most areas or the
+  paths themselves moved, since patching area by area costs more than a clean pass.
+- **Proceed as-is** — reasonable when the drift is in areas irrelevant to what the user is doing
+  now. Not free: see the flag rule below.
+- **Report only** — produce the drift list as a to-do and change nothing. Same flag rule.
+
+If the user declines to re-recon, the affected claims no longer have verified backing: revert them
+to `[unchecked]` and log them in the assumptions register, exactly as if they'd come from someone
+else's stale documentation — which, as of now, they have. Never leave a claim reading as accepted
+when the code beneath it has moved.
+
+Record the decision in the manifest's freshness-check log, so the next session knows this was
+chosen rather than missed.
 
 ---
 
@@ -170,26 +205,17 @@ Do not skip phases. In code-only mode, skip only Phase 2.
 
 ## Status / provenance model (exception-only)
 
-Do **not** stamp settled knowledge as "confirmed" — accepted knowledge is unmarked. Only
-flag exceptions inline, and track them in `docs/_discovery/assumptions-register.md`:
+Do **not** stamp settled knowledge as "confirmed" — accepted knowledge is unmarked, and a flag
+means "attention needed here". Exceptions are flagged inline and tracked in
+`docs/_discovery/assumptions-register.md`; every substantive claim links to its evidence in
+`docs/_discovery/traceability-index.md`.
 
-- `[unchecked]` — harvested from an existing doc, not yet compared with the code. Phase 0's
-  default; Phase 1 resolves it, or leaves it flagged and logged when the area was out of scope.
-- `[unverified]` — not validated by a person: the code supports it but nobody has signed it off,
-  or the code can't speak to it at all.
-- `[assumption]` — inferred, not directly evidenced; record why and the impact if wrong.
-- `[outdated]` — an existing doc/claim the code contradicts as no longer true.
-- `[contradicted]` — two sources disagree and it is unresolved.
+The vocabulary is exactly five flags — `[unchecked]`, `[unverified]`, `[assumption]`, `[outdated]`,
+`[contradicted]` — and inventing a sixth fails the repo's verification gate.
 
-These five are the whole vocabulary — don't invent a sixth.
-
-In **code-only** mode nothing has been human-validated, so stamping every line `[unverified]`
-would destroy the signal: state it once in each document's `Status` header line and reserve
-inline flags for load-bearing uncertainty. The register stays the complete list either way.
-
-Every substantive claim links to its evidence in
-`docs/_discovery/traceability-index.md` (code path / stakeholder). See
-[`references/provenance-and-status.md`](./references/provenance-and-status.md).
+[`references/provenance-and-status.md`](./references/provenance-and-status.md) defines what each
+one means, the lifecycle a claim moves through, how flagging works in `code-only` mode, and the
+no-invention rule. Follow it; don't restate it.
 
 ---
 
@@ -226,6 +252,7 @@ When done, report:
   **refreshed** from a previous run's output, and which pre-existing files you were given sign-off
   to change.
 - Doc-drift findings (existing docs vs code).
+- On a re-run: code drift since the last recon, and what the user chose to do about it.
 - Open `[assumption]` / `[unverified]` / `[contradicted]` items and their impact.
 - Coverage gaps: any claim still `[unchecked]` because its area was outside recon scope.
 - Whether a `CLAUDE.md` / `AGENTS.md` was created or proposed.
