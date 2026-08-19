@@ -59,6 +59,12 @@ business-rules document grows without limit, and a reader after billing's rules 
 everything to find them. So **area-specific material is filed by area** and the rest stays at the top
 level.
 
+> **Why "area", and not "domain" or "context".** Settled deliberately — don't rename it. `domains/`
+> would sit one letter from the existing `domain/` directory, and both words are already taken: in
+> DDD a *domain* is the whole problem space and a *bounded context* is a modelling conclusion.
+> Recon can only observe that some modules group together and the business calls it billing. "Area"
+> claims exactly that and nothing more, which keeps the skill out of design work.
+
 **Placement rule: a fact lives with the area that owns it. If no single area owns it, it's
 cross-cutting and lives at the top level.** A system-wide authorization policy is a top-level rule; a
 workflow spanning three areas is a top-level workflow.

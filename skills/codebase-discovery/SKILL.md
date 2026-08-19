@@ -2,13 +2,13 @@
 name: "codebase-discovery"
 description: "Extract domain, architecture, business rules, workflows and a business glossary from an existing (often poorly-documented) codebase, then validate the findings with a senior BA/Product Owner one question at a time. Produces onboarding-grade docs under docs/ that give a new team member — human or AI — enough context to be productive, ready for harness engineering / Spec Kit. Use when onboarding onto an unfamiliar codebase, reverse-engineering business knowledge, reconstructing lost documentation, or preparing a repo for spec-driven development."
 argument-hint: "<path> full|code-only --scope <paths> --areas <names> --exclude <globs> --output <dir> --fresh --on-drift <action> --interview --dry-run — all optional, or just say what you want in plain words"
-compatibility: "Host-agnostic. Runs as a Claude Code skill, or as plain Markdown any capable coding agent can follow. No hooks/MCP/plugin required."
-metadata:
-  author: "Bryan Signey"
-  purpose: "Reverse-engineer business & domain knowledge from existing code for harness engineering"
 user-invocable: true
 disable-model-invocation: false
 ---
+
+<!-- Host-agnostic: runs as a Claude Code skill, or as plain Markdown any capable coding agent can
+follow. No hooks, MCP servers or plugin format required. Authored by Bryan Signey for DiUS. -->
+
 
 ## User Input
 
@@ -254,9 +254,7 @@ When done, report:
   highest-impact items named, with a pointer to the register for the rest.
 - Whether a `CLAUDE.md` / `AGENTS.md` was created or proposed.
 - **`docs/_discovery/` disposition** per output-conventions: which files you're recommending be
-  git-ignored, and that the audit files (assumptions register, traceability index) are committed
-  because the docs they back are. Warn that deleting the state files makes the next run
-  **start cold** — no resume, no staleness detection.
+  git-ignored, which are committed and why, and the cold-start cost of deleting the state files.
 - Readiness for harness engineering / Spec Kit.
 
 ---

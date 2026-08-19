@@ -59,8 +59,12 @@ function loadJson(p) {
 function checkPlugin() {
   const plugin = loadJson(path.join(ROOT, ".claude-plugin", "plugin.json"));
   if (!plugin) return;
-  for (const key of ["name", "description"]) {
+  for (const key of ["name", "description", "version"]) {
     if (!plugin[key]) err(`.claude-plugin/plugin.json: missing "${key}"`);
+  }
+  // Marketplace installs and updates key off the version, so a malformed one is worse than absent.
+  if (plugin.version && !/^\d+\.\d+\.\d+(-[0-9A-Za-z.-]+)?$/.test(plugin.version)) {
+    err(`.claude-plugin/plugin.json: version "${plugin.version}" is not semver (x.y.z)`);
   }
   const skillsRel = plugin.skills || "./skills";
   if (!isDir(path.join(ROOT, skillsRel))) {
