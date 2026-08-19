@@ -15,8 +15,9 @@ for what to look for and where.
 
 On large repos, keep the main context lean:
 
-- **Locate, don't read.** Use search (grep, or LSP symbol lookup — see Navigation mode) to find the
-  small, high-signal subset of files that carry meaning before opening anything.
+- **Locate, don't read.** Use the source ladder in
+  [`../references/navigation.md`](../references/navigation.md) to find the small, high-signal subset
+  of files that carry meaning before opening anything.
 - **Delegate reading to sub-agents where available.** Dispatch isolated workers to read
   excerpts and return only distilled, cited findings — the raw file dumps stay out of the
   main context. On Claude Code, dispatch the **`codebase-recon-scout`** subagent (one per
@@ -28,6 +29,9 @@ On large repos, keep the main context lean:
   `references/recon-heuristics.md` itself. The bundled `codebase-recon-scout` already carries the
   secrets rule; when using a generic sub-agent instead, paste that rule from `SKILL.md` into the
   prompt verbatim.
+- **Reconcile what comes back against the declared graph.** A scout searches text, so it caps its
+  structural findings at Medium. Raise them to High where the module graph from Tier A/B confirms the
+  relationship — otherwise the declared-graph work never reaches the findings that need it.
 - **Tiered, not exhaustive.** Do the cheap structural map first and get approval before
   spending budget on deep dives.
 - **Cite as you go.** Every finding records `path:line` (or symbol) so it can be verified

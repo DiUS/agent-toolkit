@@ -90,12 +90,12 @@ Adopt the role that fits the phase:
 
 ## Modes
 
-Determine the mode from the user input (default to **full** and confirm):
+Determine the mode from the user input (default to **full** and confirm). The phase sequence is in
+the Phases table below; what differs is Phase 2:
 
-- **full** — Pre-check → Recon → Interview → Synthesis → Verify. Requires a stakeholder
-  (senior BA / Product Owner / SME) to validate findings.
-- **code-only** — Pre-check → Recon → Synthesis → Verify, with **no interview**.
-  Everything that would need human confirmation is emitted as `[assumption]` /
+- **full** — runs the interview. Requires a stakeholder (senior BA / Product Owner / SME) to
+  validate findings.
+- **code-only** — skips it. Everything that would need human confirmation stays `[assumption]` /
   `[unverified]` for later validation. Use when no SME is available yet.
 
 State the chosen mode before starting.

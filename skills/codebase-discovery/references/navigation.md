@@ -113,8 +113,9 @@ reference what it never uses, and DI or reflection couples things no import show
 
 So:
 
-- **Note the tier that produced each area of the map** in `recon-manifest.md`, alongside the
-  navigation mode. Falling back is fine; falling back silently is not.
+- **Note the tier that produced each area of the map** in `recon-manifest.md` — the
+  **Navigation tiers used** line and the `Source tier` column on the areas table. Falling back is
+  fine; falling back silently is not.
 - **Let the tier set confidence** — see the confidence section in
   [`provenance-and-status.md`](provenance-and-status.md). Declared and symbol-resolved sources are
   High; text-inferred structure is Medium at best, and an `[assumption]` where the claim is
