@@ -73,6 +73,18 @@ Generated code, vendored dependencies, lockfiles, build output, boilerplate scaf
 UI styling — unless a specific question sends you there. Don't read the whole test suite;
 sample the tests around the business-logic hotspots.
 
+**Exclusions layer, highest priority last:**
+
+1. **`.gitignore`** — honoured implicitly. It already encodes generated and vendored paths, so respect
+   it rather than re-deriving the same list.
+2. **The defaults above.**
+3. **`--exclude` from the user** — gitignore syntax, `!` negation included. No new format to learn.
+
+Record the exclusions in the recon manifest's run info, because they outlive the run: a resumed
+session applies them without being told again, and **the freshness check ignores drift in excluded
+paths** — otherwise a churning generated directory reports the docs as stale forever. A team wanting
+permanent exclusions edits that line.
+
 ---
 
 ## Confidence

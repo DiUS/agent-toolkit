@@ -11,6 +11,8 @@
 - **Recon commit:** <git rev-parse HEAD> · **working tree:** clean | dirty (uncommitted changes
   were read, so the commit alone doesn't describe what recon saw)
 - **Available inputs:** git for freshness (yes/no) · sub-agents (yes/no) · stakeholder (yes/no)
+- **Exclusions in force:** <gitignore-syntax patterns from --exclude, beyond .gitignore and the
+  defaults. Applied on resume, and drift in these paths is ignored by the freshness check.>
 - **Navigation tiers used:** <which of declared manifests / repo toolchain / text search / AST search
   / LSP were actually available and used — and which answered the structural map. A graph from a
   manifest is fact; one inferred from imports is not.>

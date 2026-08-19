@@ -20,6 +20,7 @@ it's growing, you're appending where you should be rewriting. Compact as you go:
 
 - **Target:** <repo / subsystem>
 - **Mode:** full | code-only
+- **Options as resolved:** <the invocation options, however they were phrased — reused on resume>
 - **Available inputs:** git (freshness)? sub-agents? stakeholder? — navigation tiers are in the recon
   manifest
 <!-- The three write-target facts below bind every phase — see the write contract in the skill's

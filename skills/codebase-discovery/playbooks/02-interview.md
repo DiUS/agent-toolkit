@@ -7,6 +7,9 @@ intent, business rules, edge cases, and domain language — through a real conve
 *Skipped in code-only mode.* In code-only mode, everything that would be confirmed here stays
 `[unverified]` / `[assumption]`.
 
+Entered directly by `--interview` when continuing a stopped queue, subject to that option's limits in
+`SKILL.md`.
+
 ---
 
 ## Conversation rules (non-negotiable)

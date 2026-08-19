@@ -84,6 +84,7 @@ which the interview then confirms.
 
 Where a system has more than one area, you won't cover them all at once. Choose the order:
 
+0. **`--areas`, if given.** That's the answer; move on.
 1. **Ask the user.** They have a reason for doing this now, and it beats any heuristic.
 2. **Fan-in from the declared graph.** The most-depended-upon modules are the shared kernel; getting
    those wrong poisons every other area's docs. This is a fact from the graph, not an inference.

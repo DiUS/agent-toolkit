@@ -1,7 +1,7 @@
 ---
 name: "codebase-discovery"
 description: "Extract domain, architecture, business rules, workflows and a business glossary from an existing (often poorly-documented) codebase, then validate the findings with a senior BA/Product Owner one question at a time. Produces onboarding-grade docs under docs/ that give a new team member — human or AI — enough context to be productive, ready for harness engineering / Spec Kit. Use when onboarding onto an unfamiliar codebase, reverse-engineering business knowledge, reconstructing lost documentation, or preparing a repo for spec-driven development."
-argument-hint: "Point at the repo (or subsystem) you want to understand; optionally name the mode: full | code-only"
+argument-hint: "<path> full|code-only --scope <paths> --areas <names> --exclude <globs> --output <dir> --fresh --on-drift <action> --interview --dry-run — all optional, or just say what you want in plain words"
 compatibility: "Host-agnostic. Runs as a Claude Code skill, or as plain Markdown any capable coding agent can follow. No hooks/MCP/plugin required."
 metadata:
   author: "Bryan Signey"
@@ -16,8 +16,43 @@ disable-model-invocation: false
 $ARGUMENTS
 ```
 
-You **MUST** consider the user input before proceeding (if not empty). It identifies the
-codebase (or subsystem) to analyse and, optionally, the mode.
+You **MUST** consider the user input before proceeding (if not empty). It says what to analyse and
+how, either in plain words or with the options below.
+
+### Options
+
+Each one pre-answers a question this skill would otherwise ask, or overrides something it would
+infer. All optional; absent means work it out as usual.
+
+| Argument | Effect |
+|---|---|
+| `<path>` | analyse that directory instead of the working directory |
+| `full` \| `code-only` | the mode (see Modes) |
+| `--scope <paths>` | limit recon to these paths |
+| `--areas <names>` | cover only these areas this run |
+| `--exclude <globs>` | additional exclusions, gitignore syntax — see recon-heuristics |
+| `--output <dir>` | the output root, instead of agreeing it in Phase 0 |
+| `--fresh` | ignore existing working state and start cold. **Deletes nothing** — the audit files stay |
+| `--on-drift <recon\|full-recon\|proceed\|report>` | pre-answer the freshness check's question |
+| `--interview` | enter at Phase 2 and continue the interview queue |
+| `--dry-run` | report the plan and every file you would write, then stop |
+
+### How to read them
+
+- **Resolve the request, however it's phrased.** These are a shorthand, not the interface: *"look at
+  just billing, skip the test projects, don't touch the docs site"* must land on the same settings as
+  the equivalent flags. Extract from prose, flags, or a mix.
+- **Echo the resolved set back in one line before starting** — *"code-only · scope `src/Billing` ·
+  excluding `tests/*` · output `docs/discovery/` · drift → recon"*. There's no parser; the user needs
+  to see what was understood.
+- **Report anything you couldn't resolve; never guess.** A silently dropped `--exclude` means reading
+  a tree the user told you to leave alone, and "skip the old stuff" needs a question, not a decision.
+- **An option means don't ask that question** — state the value you were given and move on.
+- **Record the resolved options** in `discovery-state.md`, so a resumed run reuses them.
+
+`--interview` has three limits: it does **not** override the drift rule stated with the resume table
+below; with no recon state it says so and offers recon rather than interviewing unseeded; and combined
+with `code-only` it's contradictory, so report it instead of picking one.
 
 ---
 

@@ -13,9 +13,13 @@ Do not write onboarding docs in this phase. Only gather and set up state.
 
 Check for prior state and resume if present:
 
+- **Resolve the invocation options first**, per `SKILL.md`. Several of them pre-answer questions in
+  this phase — `--scope`, `--output`, `--fresh`, `--on-drift`, `--areas`, `--exclude`, `--interview` —
+  so state the given value and skip the question rather than asking anyway.
 - If `docs/_discovery/discovery-state.md` exists, read it and continue from where the last
   session left off rather than redoing finished work. Decide which phase to re-enter using the
-  resume table in `SKILL.md`, and tell the user which one and why.
+  resume table in `SKILL.md`, and tell the user which one and why. `--fresh` and `--interview` decide
+  it for you.
 - If the state records an interview that was stopped with items still open, rebuild the top 5 from
   the register and offer to continue it — say what the last session covered first. See the
   interview playbook.
@@ -87,7 +91,8 @@ human-authored until proven otherwise.
 
 **c. Agree the output root with the user.** The default is `docs/`. Where `docs/` is a published
 site, or is already occupied, propose an alternative — `docs/discovery/` is the usual choice — and
-let the user decide. If the docs do belong in the published site, ask explicitly whether they
+let the user decide. If `--output` was given, that's the decision; still report what you found, since
+a published site is worth knowing about either way. If the docs do belong in the published site, ask explicitly whether they
 should be registered in its nav/sidebar or deliberately left out of it.
 
 Record all three outcomes — root, tooling + nav decision, and the pre-existing files — in

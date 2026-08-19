@@ -19,6 +19,10 @@ read — say so.
 `git status --porcelain` for uncommitted work. Intersect that with the areas the manifest recorded
 and re-recon only those.
 
+**Drop excluded paths from the changed set** before reporting anything — the manifest records the
+exclusions in force, and drift in a directory the user told you to ignore is not drift. Otherwise a
+churning generated tree reports the docs stale on every run.
+
 ## Never compare mtimes
 
 A fresh clone rewrites every file's timestamp, so a timestamp check reports the whole tree as
@@ -39,7 +43,8 @@ Report it plainly and usefully — *"12 files changed in the billing area since 
 `a1b2c3d`; `areas/billing/rules-refund-eligibility.md` and `areas/billing/workflow-invoice-run.md`
 draw on that area"* —
 naming the **areas** and the **documents that depend on them**, not just a file count. Then offer
-the choice, with a recommendation:
+the choice, with a recommendation — unless `--on-drift` already answered it, in which case say which
+action you're taking and why it was chosen for you:
 
 - **Re-recon the affected areas** (the default, and what to recommend for most drift) — targeted,
   cheap, and only the affected docs get rewritten.
