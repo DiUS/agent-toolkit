@@ -2,7 +2,8 @@
 
 > **Last updated:** YYYY-MM-DD (rewrite this each session)
 > **Purpose:** The evolving working memory for this extraction. Read at the start of every
-> session; rewrite as understanding changes. NOT an onboarding doc.
+> session; rewrite as understanding changes. NOT an onboarding doc — local process state, so
+> git-ignoring this file is recommended.
 
 ## Scope & mode
 

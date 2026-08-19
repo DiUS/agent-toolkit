@@ -33,19 +33,45 @@ docs/
 ├── tech/
 │   ├── current-architecture.md
 │   └── integrations.md
-└── _discovery/                   # provenance & working state — NOT onboarding, never linked
-    ├── assumptions-register.md
-    ├── traceability-index.md
-    ├── discovery-state.md
-    └── recon-manifest.md
+└── _discovery/                   # NOT onboarding docs — see disposition below
+    ├── assumptions-register.md   #   audit trail — commit
+    ├── traceability-index.md     #   audit trail — commit
+    ├── discovery-state.md        #   local process state — recommend git-ignore
+    └── recon-manifest.md         #   local process state — recommend git-ignore
 ```
 
 Only create a doc if the system gives it real content. Do not create empty placeholders.
 
-`docs/_discovery/` is the skill's working state (provenance + resume/staleness memory), not an
-onboarding deliverable. At finish, recommend the user git-ignore it (add `docs/_discovery/` to
-`.gitignore`) rather than doing so automatically. It's safe to delete, but deleting it makes
-the next run start cold — no resume, no staleness detection, no cached traceability.
+---
+
+## `docs/_discovery/` disposition (the rule — stated only here)
+
+Nothing in `_discovery/` is an onboarding document, but the four files split into two kinds with
+different fates:
+
+| File | Kind | Disposition |
+|---|---|---|
+| `assumptions-register.md` | Audit trail for the committed docs | **Commit.** It's the open-items list the whole team resolves from. |
+| `traceability-index.md` | Audit trail for the committed docs | **Commit.** Without it nobody else can check a claim's provenance, and Phase 4 can't re-verify on a fresh clone. |
+| `discovery-state.md` | This run's working memory | Recommend git-ignoring. |
+| `recon-manifest.md` | Resume + staleness memory | Recommend git-ignoring. |
+
+- The two audit files are committed because the docs they back are committed — provenance that
+  only exists on the machine that ran the skill isn't provenance. The root `README.md` may link
+  `assumptions-register.md` from its open-risks section, and that link stays valid for every
+  clone.
+- The two state files are this run's scratch memory. **Recommend** adding them to `.gitignore` —
+  never do it automatically:
+
+  ```gitignore
+  docs/_discovery/discovery-state.md
+  docs/_discovery/recon-manifest.md
+  ```
+
+- Deleting the state files is safe but makes the next run **start cold**: no resume, no staleness
+  detection.
+- Neither kind is ever linked from `CLAUDE.md` / `AGENTS.md` — the agent file links onboarding
+  material only.
 
 ---
 
@@ -95,6 +121,15 @@ Aim for onboarding density, not completeness:
 
 If a doc wants to grow past this, push the detail into a clearly-marked appendix section that
 isn't loaded by default — don't bloat the linked doc.
+
+---
+
+## Strip the template scaffolding
+
+Every file in `templates/` carries `<!-- … -->` guidance comments and `<placeholder>` markers.
+**Delete both when you write the real file** — they're instructions to you, not content for the
+target repo. A leftover `<!-- Keep to ~1–2 pages -->` or an unfilled `<name>` in a committed doc
+tells the reader the docs were generated and abandoned, which costs more trust than the doc earns.
 
 ---
 

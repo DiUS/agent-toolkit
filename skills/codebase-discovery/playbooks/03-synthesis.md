@@ -46,8 +46,10 @@ file under `docs/`, and **there is no `docs/README.md`**. See
 [Project-root README.md](#project-root-readmemd--the-entry-point) below.
 
 `docs/_discovery/` (assumptions register, traceability index, discovery state, recon
-manifest) is maintained throughout — it is **not** an onboarding doc and must not be linked
-from the agent file.
+manifest) is maintained throughout — none of it is an onboarding doc, and none of it is linked
+from the agent file. The root `README.md` may link the assumptions register from its open-risks
+section; see the `_discovery/` disposition in
+[`../references/output-conventions.md`](../references/output-conventions.md) for what's committed.
 
 ---
 

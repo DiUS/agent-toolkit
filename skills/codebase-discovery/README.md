@@ -72,17 +72,18 @@ docs/
 ├── tech/
 │   ├── current-architecture.md   # as-is architecture (+ Mermaid), dated
 │   └── integrations.md           # external systems, dependencies, data feeds
-└── _discovery/                   # provenance & working state — NOT onboarding docs, not linked
-    ├── assumptions-register.md
-    ├── traceability-index.md
-    ├── discovery-state.md
-    └── recon-manifest.md
+└── _discovery/                   # provenance & working state — NOT onboarding docs
+    ├── assumptions-register.md   #   audit trail — committed
+    ├── traceability-index.md     #   audit trail — committed
+    ├── discovery-state.md        #   local state — git-ignore recommended
+    └── recon-manifest.md         #   local state — git-ignore recommended
 ```
 
-`_discovery/` is deliberately kept out of the onboarding set and should not be linked from
-`CLAUDE.md` / `AGENTS.md` — it holds provenance and process state, not onboarding material.
-Git-ignoring it is recommended at finish (so it isn't committed); it's the skill's
-resume/staleness memory, safe to delete, but deleting it makes the next run start cold.
+`_discovery/` is deliberately kept out of the onboarding set and is never linked from
+`CLAUDE.md` / `AGENTS.md`. The two audit files are committed, because provenance for committed
+docs has to be there for everyone; the two state files are one run's scratch memory, so
+git-ignoring them is recommended at finish — safe to delete, at the cost of a cold start next
+run. The full rule lives in `references/output-conventions.md`.
 
 ## Status model (exception-only)
 

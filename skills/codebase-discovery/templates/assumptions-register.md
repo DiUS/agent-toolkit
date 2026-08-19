@@ -1,8 +1,9 @@
 # Assumptions Register
 
 > **Last updated:** YYYY-MM-DD
-> **Purpose:** Single list of everything still needing attention. NOT an onboarding doc — do
-> not link from CLAUDE.md / AGENTS.md.
+> **Purpose:** Single list of everything still needing attention. NOT an onboarding doc — never
+> linked from CLAUDE.md / AGENTS.md, though the root README may link it from open risks.
+> Committed: it's the audit trail for docs that are themselves committed.
 
 <!-- Every open item: assumptions, unverified claims, contradictions, outdated docs. Resolve
 the high-impact ones before relying on the docs for a change. -->

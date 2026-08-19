@@ -33,9 +33,10 @@ path to `references/output-conventions.md`.
    and that every known `[outdated]` / `[contradicted]` item is either resolved or clearly
    flagged in both the doc and the assumptions register.
 
-5. **Onboarding-lean.** Flag bloat: content that fails the "does this make a new joiner
-   productive?" test, duplicated content across files, or docs exceeding the length ceilings
-   in output-conventions.
+5. **Onboarding-lean, and scaffolding stripped.** Flag bloat: content that fails the "does this
+   make a new joiner productive?" test, duplicated content across files, or docs exceeding the
+   length ceilings in output-conventions. Also flag any leftover template scaffolding — `<!-- -->`
+   guidance comments or unfilled `<placeholder>` markers.
 
 6. **Freshness & consistency.** Every doc has a `Last updated` date; the recon manifest
    reflects the files actually read; terminology matches the glossary across all docs.

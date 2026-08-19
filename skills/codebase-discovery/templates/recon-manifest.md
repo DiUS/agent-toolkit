@@ -2,7 +2,7 @@
 
 > **Last updated:** YYYY-MM-DD
 > **Purpose:** Records what fed the recon so later runs can detect staleness. NOT an
-> onboarding doc.
+> onboarding doc — local process state, so git-ignoring this file is recommended.
 
 ## Run info
 

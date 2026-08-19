@@ -29,6 +29,8 @@ it traces to evidence.
   guidance given in your assignment (the dispatching prompt carries the ceilings, or an
   **absolute** path to the skill's `references/output-conventions.md` — a skill-relative path
   won't resolve from here).
+- **Scaffolding stripped.** Flag any leftover template scaffolding in the published docs:
+  `<!-- -->` guidance comments, or unfilled `<placeholder>` markers.
 - **Freshness & consistency.** Every doc has a `Last updated` date; terminology matches the
   glossary across docs; the recon manifest reflects the files actually read.
 

@@ -125,6 +125,12 @@ sessions:
 
 On invocation: if these exist, read them first and resume; do not restart from zero.
 
+`_discovery/` also holds the two audit files (`assumptions-register.md`,
+`traceability-index.md`), which are committed alongside the docs they back. What's committed and
+what's git-ignored is set out in
+[`references/output-conventions.md`](./references/output-conventions.md) — follow it; don't
+restate it.
+
 ---
 
 ## Freshness check (staleness detection, no hooks)
@@ -185,10 +191,10 @@ When Phases 0–4 are complete:
      and note anything that no longer matches the current code. Ask before writing.
    - Keep it lean; link the project-root `README.md` as the entry point. See
      [`templates/agent-onboarding-file.md`](./templates/agent-onboarding-file.md).
-4. **Working state (`docs/_discovery/`).** Leave it in place — it's the skill's resume and
-   staleness memory. **Recommend** (don't automatically apply) that the user add
-   `docs/_discovery/` to the target repo's `.gitignore` so it isn't committed, and explain its
-   disposition in the completion report (below).
+4. **Working state (`docs/_discovery/`).** Leave the whole directory in place, then apply the
+   disposition in [`references/output-conventions.md`](./references/output-conventions.md): the
+   two audit files stay committed; **recommend** (never automatically apply) git-ignoring the two
+   state files. Explain it in the completion report (below).
 
 ---
 
@@ -202,10 +208,10 @@ When done, report:
 - Doc-drift findings (existing docs vs code).
 - Open `[assumption]` / `[unverified]` / `[contradicted]` items and their impact.
 - Whether a `CLAUDE.md` / `AGENTS.md` was created or proposed.
-- **`docs/_discovery/` disposition.** It holds provenance + resume/staleness state (not
-  onboarding material). Recommend the user git-ignore it (add `docs/_discovery/` to
-  `.gitignore`) so it isn't committed. It's safe to delete — but **warn that deleting it makes
-  the next run start cold**: no resume, no staleness detection, no cached traceability.
+- **`docs/_discovery/` disposition** per output-conventions: which files you're recommending be
+  git-ignored, and that the audit files (assumptions register, traceability index) are committed
+  because the docs they back are. Warn that deleting the state files makes the next run
+  **start cold** — no resume, no staleness detection.
 - Readiness for harness engineering / Spec Kit.
 
 ---
@@ -221,5 +227,5 @@ When done, report:
 - [ ] Verification pass complete; unsupported claims flagged
 - [ ] Assumptions register and traceability index populated
 - [ ] CLAUDE.md / AGENTS.md created or proposed
-- [ ] docs/_discovery/ disposition explained: git-ignore recommended, and the cold-start cost of deleting it flagged
+- [ ] docs/_discovery/ disposition explained per output-conventions (audit files committed, state files git-ignore recommended, cold-start cost flagged)
 - [ ] Ready for harness engineering / Spec Kit

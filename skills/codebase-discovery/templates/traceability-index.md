@@ -2,7 +2,8 @@
 
 > **Last updated:** YYYY-MM-DD
 > **Purpose:** Maps each substantive claim in the docs to its evidence. Keeps citations out of
-> the onboarding prose while preserving the audit trail. NOT an onboarding doc.
+> the onboarding prose while preserving the audit trail. NOT an onboarding doc, but committed —
+> provenance nobody else can check isn't provenance.
 
 | Claim ID | Claim (short) | Evidence (path:line / symbol / stakeholder) | Confidence | Used in doc |
 |---|---|---|---|---|

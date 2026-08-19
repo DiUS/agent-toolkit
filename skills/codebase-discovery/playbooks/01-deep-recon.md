@@ -114,7 +114,8 @@ set its status:
 - **`[outdated]`** — the code shows it is no longer true → record the claim, the code
   evidence, and a **suggested corrected statement derived from the code**.
 - **`[contradicted]`** — sources disagree and it's unresolved → record both sides.
-- **`[unverifiable]`** — can't be settled from code alone → carry into the interview.
+- **`[unverified]`** — can't be settled from code alone → stays flagged and carries into the
+  interview.
 
 Log outdated/contradicted items in `assumptions-register.md`; they become interview
 questions and feed the doc-drift summary.
@@ -148,7 +149,7 @@ can detect staleness.
 ## Exit criteria
 
 - Tier 0 map approved; targeted dives complete for data model, contracts, hotspots, tests.
-- Every Phase 0 claim re-statused (accepted / outdated / contradicted / unverifiable).
+- Every Phase 0 claim re-statused (accepted / outdated / contradicted / still unverified).
 - Cited hypotheses produced for each doc area.
 - Assumptions register and traceability index updated; recon manifest records sources.
 - Ready for the interview (full mode) or synthesis (code-only mode).
