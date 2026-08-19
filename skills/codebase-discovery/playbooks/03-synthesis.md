@@ -53,6 +53,16 @@ section; see the `_discovery/` disposition in
 
 ---
 
+## Before writing anything
+
+Apply the **write contract** in
+[`../references/output-conventions.md`](../references/output-conventions.md) — the output root,
+what may be overwritten, and the published-site decision. Phase 0 recorded all three in
+`discovery-state.md`; read them there. If Phase 0 didn't settle the output root, stop and agree it
+with the user now rather than assuming `docs/`.
+
+---
+
 ## Rules for every document
 
 1. **Header block, every file.** Start with the standard block including
@@ -114,6 +124,7 @@ Produce it from the findings using
 
 ## Exit criteria
 
+- Write contract honoured (root, overwrites, published-site decision).
 - Relevant detail docs written under `docs/`, each with a dated header block.
 - Accepted knowledge unmarked; only genuine exceptions flagged inline.
 - Project-root `README.md` is the entry point: created (if it was missing) or conservatively

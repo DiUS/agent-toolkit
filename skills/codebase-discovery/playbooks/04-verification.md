@@ -45,7 +45,11 @@ path to `references/output-conventions.md`.
 6. **Freshness & consistency.** Every doc has a `Last updated` date; the recon manifest
    reflects the files actually read; terminology matches the glossary across all docs.
 
-7. **Drift captured.** The doc-drift summary lists every place existing docs
+7. **Write contract honoured.** Check the output against the write contract in
+   [`../references/output-conventions.md`](../references/output-conventions.md), using the root,
+   nav decision and pre-existing-file list Phase 0 recorded in `discovery-state.md`.
+
+8. **Drift captured.** The doc-drift summary lists every place existing docs
    (README/CLAUDE.md/AGENTS.md) contradicted the code, each with a corrected statement.
 
 ---

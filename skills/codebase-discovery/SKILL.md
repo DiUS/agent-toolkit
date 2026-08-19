@@ -67,6 +67,15 @@ those copies drift from the wording above.
 
 ---
 
+## Writing into the target repo
+
+The output lands in a repository this skill doesn't own, so the destination is **agreed, not
+assumed** — Phase 0 settles it, and every later phase is bound by the **write contract** in
+[`references/output-conventions.md`](./references/output-conventions.md). Follow it; don't
+restate it.
+
+---
+
 ## Roles
 
 Adopt the role that fits the phase:
@@ -148,7 +157,7 @@ Run in order. Each has a playbook — read it when you enter the phase.
 
 | Phase | Playbook | Outcome |
 |---|---|---|
-| 0. Pre-check | [`playbooks/00-pre-check.md`](./playbooks/00-pre-check.md) | Read existing README/CLAUDE.md/AGENTS.md/docs; capture what they state, to verify against the code; set up working state. |
+| 0. Pre-check | [`playbooks/00-pre-check.md`](./playbooks/00-pre-check.md) | Read existing README/CLAUDE.md/AGENTS.md/docs; capture what they state, to verify against the code; set up working state; survey the write target and agree the output root. |
 | 1. Deep recon | [`playbooks/01-deep-recon.md`](./playbooks/01-deep-recon.md) | Tiered, evidence-cited analysis of structure, data model, contracts and business-logic hotspots; verify the Phase 0 statements against code. |
 | 2. Interview | [`playbooks/02-interview.md`](./playbooks/02-interview.md) | One-question-at-a-time conversation with the BA/PO, seeded by recon hypotheses; reconcile contradictions with code-based suggestions. (Skipped in code-only mode.) |
 | 3. Synthesis | [`playbooks/03-synthesis.md`](./playbooks/03-synthesis.md) | Write the lean onboarding docs under `docs/`, each dated and provenance-flagged. |
@@ -213,7 +222,9 @@ When done, report:
 
 - Mode used (full / code-only) and what optional inputs were available.
 - The system in two or three sentences (what it does, for whom).
-- Documents created or updated under `docs/`.
+- Documents created or updated under the output root — say which were **created**, which were
+  **refreshed** from a previous run's output, and which pre-existing files you were given sign-off
+  to change.
 - Doc-drift findings (existing docs vs code).
 - Open `[assumption]` / `[unverified]` / `[contradicted]` items and their impact.
 - Coverage gaps: any claim still `[unchecked]` because its area was outside recon scope.
@@ -229,6 +240,8 @@ When done, report:
 ## Done when
 
 - [ ] Mode and available inputs established
+- [ ] Write target surveyed and output root agreed with the user (docs-site tooling and existing
+      files at the target paths identified)
 - [ ] Existing docs read and their statements captured for verification
 - [ ] Recon complete: structure, data model, contracts, business-logic hotspots
 - [ ] Existing-doc statements verified against code (any drift identified)

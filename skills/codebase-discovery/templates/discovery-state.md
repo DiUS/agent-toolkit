@@ -10,6 +10,13 @@
 - **Target:** <repo / subsystem>
 - **Mode:** full | code-only
 - **Available inputs:** git history? code-intelligence? sub-agents? stakeholder?
+<!-- The three write-target facts below bind every phase — see the write contract in the skill's
+references/output-conventions.md. -->
+
+- **Output root (agreed with user):** <docs/ | docs/discovery/ | ...>
+- **Docs-site tooling detected:** <none | mkdocs / docusaurus / sphinx / ...> — nav/sidebar
+  decision: <register the new docs | keep them out of the published nav | n/a>
+- **Pre-existing files at target paths:** <none | list>
 
 ## Facts (accepted, unmarked)
 

@@ -58,6 +58,10 @@ The project-root `README.md` is the onboarding entry point (created if missing, 
 conservatively); the detail docs are written under `docs/`, grouped and kept onboarding-lean.
 There is no `docs/README.md`.
 
+The destination is agreed rather than assumed. Because the output lands in a repo the skill
+doesn't own, Phase 0 surveys the write target — is `docs/` a published site, is anything already
+there? — and settles the **output root** with the user before a byte is written.
+
 ```
 README.md                         # project-root: onboarding index / entry point — the file CLAUDE.md/AGENTS.md links
 docs/
