@@ -84,7 +84,11 @@ which the interview then confirms.
 
 Where a system has more than one area, you won't cover them all at once. Choose the order:
 
-0. **`--areas`, if given.** That's the answer; move on.
+0. **`--areas`, if given.** Match the given names against the areas you just named. Where one
+   doesn't match, say so and ask — a business word the user chose and a grouping you derived won't
+   always line up, and picking the nearest module is the guess this skill doesn't make. Note that
+   Tier 0 still maps the whole declared graph either way: that's what produces the names to match
+   against, and `--areas` narrows the deep dives below, not the map.
 1. **Ask the user.** They have a reason for doing this now, and it beats any heuristic.
 2. **Fan-in from the declared graph.** The most-depended-upon modules are the shared kernel; getting
    those wrong poisons every other area's docs. This is a fact from the graph, not an inference.

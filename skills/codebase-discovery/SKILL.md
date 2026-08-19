@@ -55,6 +55,9 @@ infer. All optional; absent means work it out as usual.
 below; with no recon state it says so and offers recon rather than interviewing unseeded; and combined
 with `code-only` it's contradictory, so report it instead of picking one.
 
+`--scope` and `--areas` are different axes — paths and names. Given both, scope bounds what's read
+and areas selects within it; if they don't overlap, say so rather than silently honouring one.
+
 ---
 
 ## Purpose
