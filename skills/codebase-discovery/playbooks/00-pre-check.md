@@ -32,6 +32,20 @@ Check for prior state and resume if present:
 If neither exists, create `docs/_discovery/` and initialise both files from the templates
 (`templates/discovery-state.md`, `templates/recon-manifest.md`).
 
+**With `--fresh` over a previous run, confirm before wiping.** State exists, so there's work to
+lose. Report what the previous run got to — areas reconned, how far the interview got — then offer
+**resume** or **clean run**, and be specific about the cost rather than saying "this is destructive":
+
+- `discovery-state.md` and `recon-manifest.md` hold the interview progress and the recon memory, and
+  the disposition recommends git-ignoring them, so **wiping those is unrecoverable**.
+- `assumptions-register.md` and `traceability-index.md` are committed, so those are recoverable from
+  git.
+
+On the user's confirmation, delete all four and start cold. Wipe `_discovery/` only — any docs a
+previous run wrote stay where they are, for this run to refresh in place. Half-measures are worse
+than either choice: keeping the register while discarding the state leaves the new run appending to
+another run's open items with no way to tell them apart.
+
 Get today's real date from the environment now (`date +%F`) and reuse it for every `Last updated`
 stamp this run — see the header-block rule in
 [`../references/output-conventions.md`](../references/output-conventions.md).

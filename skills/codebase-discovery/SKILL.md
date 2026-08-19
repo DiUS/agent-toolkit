@@ -1,7 +1,7 @@
 ---
 name: "codebase-discovery"
 description: "Extract domain, architecture, business rules, workflows and a business glossary from an existing (often poorly-documented) codebase, then validate the findings with a senior BA/Product Owner one question at a time. Produces onboarding-grade docs under docs/ that give a new team member — human or AI — enough context to be productive, ready for harness engineering / Spec Kit. Use when onboarding onto an unfamiliar codebase, reverse-engineering business knowledge, reconstructing lost documentation, or preparing a repo for spec-driven development."
-argument-hint: "<path> full|code-only --scope <paths> --areas <names> --exclude <globs> --output <dir> --fresh --on-drift <action> --interview --dry-run — all optional, or just say what you want in plain words"
+argument-hint: "<path> full|code-only --scope <paths> --areas <names> --exclude <globs> --output <dir> --fresh --on-drift <action> --interview — all optional, or just say what you want in plain words"
 user-invocable: true
 disable-model-invocation: false
 ---
@@ -32,10 +32,9 @@ infer. All optional; absent means work it out as usual.
 | `--areas <names>` | cover only these areas this run |
 | `--exclude <globs>` | additional exclusions, gitignore syntax — see recon-heuristics |
 | `--output <dir>` | the output root, instead of agreeing it in Phase 0 |
-| `--fresh` | ignore existing working state and start cold. **Deletes nothing** — the audit files stay |
+| `--fresh` | start cold instead of resuming. Where a previous run exists, Phase 0 confirms first — a clean run **discards** its `_discovery/` files (see Phase 0) |
 | `--on-drift <recon\|full-recon\|proceed\|report>` | pre-answer the freshness check's question |
 | `--interview` | enter at Phase 2 and continue the interview queue |
-| `--dry-run` | report the plan and every onboarding file you would write, then stop. Working state under `_discovery/` **is** still written — it's the skill's own scratch space, and keeping it means the dry run can be resumed |
 
 ### How to read them
 
@@ -48,6 +47,8 @@ infer. All optional; absent means work it out as usual.
 - **Report anything you couldn't resolve; never guess.** A silently dropped `--exclude` means reading
   a tree the user told you to leave alone, and "skip the old stuff" needs a question, not a decision.
 - **An option means don't ask that question** — state the value you were given and move on.
+- **But no option authorises discarding existing work.** It pre-answers a choice, not a deletion, so
+  `--fresh` over a previous run still needs sign-off — see Phase 0.
 - **Record the resolved options** in `discovery-state.md`, so a resumed run reuses them.
 
 `--interview` has three limits: it does **not** override the drift rule stated with the resume table
@@ -204,8 +205,8 @@ Run in order. Each has a playbook — read it when you enter the phase.
 On a first run, do not skip phases. In code-only mode, skip only Phase 2.
 
 **On a resume, Phase 0 chooses where to re-enter** — repeating finished work wastes the budget the
-skill exists to protect. Phases 0, 4 and 5 always run; the phases between them are entered
-according to what the working state records:
+skill exists to protect. Phases 0, 4 and 5 always run; the phases
+between them are entered according to what the working state records:
 
 | Recorded state | Re-enter at |
 |---|---|
@@ -249,7 +250,7 @@ When done, report:
 - Doc-drift findings (existing docs vs code).
 - On a re-run: code drift since the last recon, and what the user chose to do about it.
 - Open `[assumption]` / `[unverified]` / `[contradicted]` items and their impact.
-- Coverage gaps: any claim still `[unchecked]` because its area was outside recon scope.
+- Coverage gaps: any claim still `[unchecked]`, and why it is.
 - (full mode) Interview coverage: how far the queue got, and what's parked as *needs SME* —
   highest-impact items named, with a pointer to the register for the rest.
 - Whether a `CLAUDE.md` / `AGENTS.md` was created or proposed.

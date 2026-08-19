@@ -31,9 +31,9 @@ path to `references/output-conventions.md`.
 
 4. **Exception flags are honest.** Ensure accepted (unmarked) statements really are settled, and
    that every known `[outdated]` / `[contradicted]` item is either resolved or clearly flagged in
-   both the doc and the assumptions register. Check the flags are the right ones: `[unchecked]`
-   only where an area genuinely wasn't assessed (and logged as out-of-scope), `[unverified]` where
-   it was. No flag outside the five in provenance-and-status.
+   both the doc and the assumptions register. Check each flag against what it means in
+   [`../references/provenance-and-status.md`](../references/provenance-and-status.md) — that file
+   lists the causes, so don't judge them from a shorter list. No flag outside the five it defines.
    In `code-only` mode, confirm the caveat is in each `Status` header line rather than stamped
    over every sentence.
 
@@ -75,7 +75,7 @@ Produce a short verification report:
 - Claims checked; count supported vs demoted/removed.
 - Any invented or unsupported statements found and how they were handled.
 - Open `[assumption]` / `[unverified]` / `[contradicted]` items and their impact, plus any
-  `[unchecked]` claims left because their area was out of recon scope.
+  `[unchecked]` claims and why each is still unchecked.
 - Bloat or duplication trimmed.
 - Go / no-go for harness engineering / Spec Kit, with any caveats.
 
@@ -91,8 +91,8 @@ Produce a short verification report:
 - a leaked credential value (check 3)
 - a write-contract breach — written outside the agreed root, or a file overwritten without sign-off
 - a load-bearing claim (rule, threshold, permission, SLA) with no traceability entry
-- a flag that misrepresents reality — `[unchecked]` on something that was checked, or nothing where
-  the code has moved on
+- a flag that misrepresents reality — a claim reading as accepted where the code has moved on, or a
+  flag whose meaning doesn't match why it's there
 
 **Not material — fix in place and carry on.** Bloat, duplication, a missing `Last updated`,
 terminology drifting from the glossary, leftover scaffolding, a dead link. Edits, not grounds for a

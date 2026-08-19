@@ -15,7 +15,7 @@ These five flags exist, and no others:
 
 | Flag | Meaning | Where it lives |
 |---|---|---|
-| `[unchecked]` | Harvested from an existing doc, not yet compared with the code | discovery state; register if it persists |
+| `[unchecked]` | No current code check behind it — harvested from a doc and not yet compared, or the code has moved since it was | discovery state; register if it persists |
 | `[unverified]` | Not validated by a person — code-derived, or a doc claim the code can't settle | inline + assumptions register |
 | `[assumption]` | Inferred, not directly evidenced; record why + impact if wrong | inline + assumptions register |
 | `[outdated]` | An existing doc/claim the code shows is no longer true | assumptions register + doc-drift summary |
@@ -38,9 +38,10 @@ something:
 Only the second is safe to act on with care; the first tells you nothing has been assessed. If
 they shared a flag a reader couldn't tell "untested" from "tested but unconfirmed".
 
-### When an `[unchecked]` claim can't be checked
+### When a claim legitimately carries `[unchecked]`
 
-Phase 1 re-statuses every `[unchecked]` claim it can. Two ways it legitimately can't:
+Phase 1 re-statuses every `[unchecked]` claim it can. Two ways it legitimately can't — and one way
+the flag comes back later:
 
 - **The code can't settle it** — the claim is about intent, rationale, policy or ownership. It
   becomes `[unverified]` and goes to the interview; a person is the only thing that can resolve
@@ -49,10 +50,13 @@ Phase 1 re-statuses every `[unchecked]` claim it can. Two ways it legitimately c
   that was deferred. It **stays `[unchecked]`**: pretending otherwise would claim an assessment
   that didn't happen. Record it in `assumptions-register.md` as *unresolved — outside recon
   scope*, with the area it belongs to, and name it in the completion report.
+- **The code moved under it** — a later run's freshness check found drift and the user chose not to
+  re-recon, so a claim that *was* verified no longer has a current code check behind it. It goes
+  **back** to `[unchecked]`; the mechanism is in [`freshness.md`](freshness.md).
 
-A persisting `[unchecked]` claim is a scope statement, not a finding. Prefer leaving that
-statement out of the onboarding docs entirely; publish it only if a reader genuinely needs it,
-flagged, so nobody mistakes an unexamined doc claim for something the code was checked against.
+A persisting `[unchecked]` claim is a statement about what's been checked, not a finding. Prefer
+leaving that statement out of the onboarding docs entirely; publish it only if a reader genuinely
+needs it, flagged, so nobody mistakes it for something the code was checked against.
 
 ---
 
@@ -70,6 +74,7 @@ Phase 1: checked against code
 Phase 2: stakeholder confirms/corrects        → accepted (unmarked), source = stakeholder
             stakeholder can't confirm          → stays [assumption]/[unverified]
 Phase 4: any accepted claim without evidence   → demoted back to [assumption] or removed
+Later run: drift, user declines re-recon      → accepted claim reverts to [unchecked]
 ```
 
 Accepted knowledge always has a backing entry in the traceability index — either a code location

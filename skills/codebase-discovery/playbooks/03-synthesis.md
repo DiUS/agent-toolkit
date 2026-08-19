@@ -24,11 +24,6 @@ Phase 0 recorded the output root, the docs-site decision and the pre-existing fi
 `discovery-state.md` — read them there. If the output root was never settled, stop and agree it
 with the user rather than assuming `docs/`.
 
-**If `--dry-run` was given, stop before writing** and report the write set instead: the output root,
-every file you would create, every one you would refresh from a previous run's output, and every
-pre-existing file you would need sign-off to change. Seeing that list before a repo is touched is the
-whole point of the flag.
-
 ---
 
 ## What to write
