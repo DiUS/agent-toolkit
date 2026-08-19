@@ -23,14 +23,24 @@ the conclusions.
 - **Code is the source of truth; flag the unknowns.** Where intent or the "why" isn't evident
   from the code, say so and mark it as an assumption for the interview — never invent business
   rules.
+- **The secrets rule.** Report a credential **by name and location, never the value** — not
+  truncated, not partial, and never a URL with credentials embedded. Don't open or quote `.env*`,
+  key files, credential JSON, keystores or tfstate; the names a config loader expects come from
+  the loader, not the secret file. A live-looking secret hard-coded in the source is a
+  **security finding to report by location for rotation**, not a documentation finding.
+  <!-- Synced copy of the normative rule in skills/codebase-discovery/SKILL.md; a subagent can't
+  resolve a path into the skill. Change both together — scripts/validate.js enforces it. -->
 
 ## What to extract (per assignment)
 
 Depending on the assignment: domain entities and relationships; state/lifecycle transitions;
 business rules (validation, conditionals on domain fields, permission checks, calculations);
 workflows (routes, events, jobs, orchestration); integrations (external clients, queues,
-webhooks); and domain language (enum values, constants, error/validation messages). See the
-skill's `references/recon-heuristics.md` for patterns and where they hide.
+webhooks); and domain language (enum values, constants, error/validation messages).
+
+Your assignment should carry the patterns to look for. Where it gives an **absolute** path to
+the skill's `references/recon-heuristics.md`, read that for the full field guide — a
+skill-relative path won't resolve from here, since you don't know where the skill is installed.
 
 ## Report format
 

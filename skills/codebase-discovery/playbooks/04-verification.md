@@ -9,6 +9,10 @@ Run this as an **isolated pass** — a sub-agent where available — so the chec
 of the work that produced the docs. On Claude Code, dispatch the **`codebase-doc-verifier`**
 subagent; on other hosts use any generic sub-agent, or run the checks directly.
 
+A sub-agent doesn't know where this skill is installed, so skill-relative paths mean nothing to
+it: state the checks and the length ceilings in the dispatch prompt, or pass an **absolute**
+path to `references/output-conventions.md`.
+
 ---
 
 ## Checks
@@ -21,18 +25,22 @@ subagent; on other hosts use any generic sub-agent, or run the checks directly.
    confirmation must be demoted to `[assumption]` / `[unverified]` or removed. In particular,
    check that no business rule was invented.
 
-3. **Exception flags are honest.** Ensure accepted (unmarked) statements really are settled,
+3. **No leaked secrets.** Check the `docs/` set against the secrets rule in
+   [`../SKILL.md`](../SKILL.md). Any breach is **blocking**: strip it from the docs and raise it
+   with the user for rotation.
+
+4. **Exception flags are honest.** Ensure accepted (unmarked) statements really are settled,
    and that every known `[outdated]` / `[contradicted]` item is either resolved or clearly
    flagged in both the doc and the assumptions register.
 
-4. **Onboarding-lean.** Flag bloat: content that fails the "does this make a new joiner
+5. **Onboarding-lean.** Flag bloat: content that fails the "does this make a new joiner
    productive?" test, duplicated content across files, or docs exceeding the length ceilings
    in output-conventions.
 
-5. **Freshness & consistency.** Every doc has a `Last updated` date; the recon manifest
+6. **Freshness & consistency.** Every doc has a `Last updated` date; the recon manifest
    reflects the files actually read; terminology matches the glossary across all docs.
 
-6. **Drift captured.** The doc-drift summary lists every place existing docs
+7. **Drift captured.** The doc-drift summary lists every place existing docs
    (README/CLAUDE.md/AGENTS.md) contradicted the code, each with a corrected statement.
 
 ---
@@ -56,5 +64,6 @@ docs built on unresolved assumptions.
 
 - Every published claim is supported or explicitly flagged.
 - No invented business rules remain.
+- No credential values appear anywhere in the docs.
 - Drift summary complete; assumptions register reconciled.
 - Verification report written. Ready for the finish step (doc-drift + agent file).

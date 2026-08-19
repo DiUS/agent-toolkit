@@ -22,6 +22,12 @@ On large repos, keep the main context lean:
   main context. On Claude Code, dispatch the **`codebase-recon-scout`** subagent (one per
   scoped area, in parallel where possible). On other hosts use any generic sub-agent; if none
   is available, read sequentially and excerpt-only.
+- **Give sub-agents everything they need in the prompt.** A sub-agent doesn't know where this
+  skill is installed, so skill-relative paths mean nothing to it. Put the scoped area and the
+  report format in the prompt, and pass an **absolute** path if you want it to read
+  `references/recon-heuristics.md` itself. The bundled `codebase-recon-scout` already carries the
+  secrets rule; when using a generic sub-agent instead, paste that rule from `SKILL.md` into the
+  prompt verbatim.
 - **Tiered, not exhaustive.** Do the cheap structural map first and get approval before
   spending budget on deep dives.
 - **Cite as you go.** Every finding records `path:line` (or symbol) so it can be verified

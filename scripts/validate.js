@@ -12,6 +12,7 @@
  *   - every path referenced by plugin.json (skills dir, commands dir, agent files) exists
  *   - every commands/*.md (except README.md) has `name` + `description` frontmatter
  *   - if any hooks.json exists anywhere under hooks/, it is valid JSON
+ *   - the codebase-discovery secrets rule is worded identically everywhere it must be restated
  *
  * Exit code 0 = all good, 1 = one or more problems.
  */
@@ -145,9 +146,37 @@ function checkHooks() {
   }
 }
 
+/* The codebase-discovery secrets rule is normative in one place: the skill's SKILL.md. The
+ * bundled subagents can't resolve a path into the skill, so they carry a standalone copy — the
+ * only permitted restatements. This asserts all three still say the same thing, so relaxing one
+ * copy can't silently leave the others behind. Anywhere else must link the rule, not restate it. */
+const SECRETS_RULE = "by name and location, never the value";
+const SECRETS_RULE_FILES = [
+  "skills/codebase-discovery/SKILL.md",
+  "agents/codebase-recon-scout.md",
+  "agents/codebase-doc-verifier.md",
+];
+
+function checkSecretsRule() {
+  for (const f of SECRETS_RULE_FILES) {
+    const p = path.join(ROOT, f);
+    if (!isFile(p)) { err(`secrets rule: expected file not found: ${f}`); continue; }
+    // Whitespace-normalised so re-wrapping a paragraph doesn't fail the gate — only rewording does.
+    if (!read(p).replace(/\s+/g, " ").includes(SECRETS_RULE)) {
+      err(
+        `${f}: missing the canonical secrets-rule wording "${SECRETS_RULE}". ` +
+        `The rule is normative in skills/codebase-discovery/SKILL.md and restated only in the ` +
+        `bundled subagents — if you reworded or relaxed it, update all of: ` +
+        SECRETS_RULE_FILES.join(", ")
+      );
+    }
+  }
+}
+
 function main() {
   checkPlugin();
   checkMarketplace();
+  checkSecretsRule();
 
   const skills = skillFiles();
   if (skills.length === 0) err("no skills/*/SKILL.md found");

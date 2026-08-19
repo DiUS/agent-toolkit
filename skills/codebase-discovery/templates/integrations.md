@@ -5,13 +5,17 @@
 > **Mode:** full | code-only
 > **Status:** accepted knowledge unless flagged — see ../_discovery/assumptions-register.md
 
-<!-- What this system talks to, why, and which direction data flows. A table is usually enough. -->
+<!-- What this system talks to, why, and which direction data flows. A table is usually enough.
+
+SECRETS: this file is committed. Auth and endpoint details are exactly where credentials leak —
+re-read the secrets rule you were given before writing the auth/notes column. Delete these
+guidance comments when you write the real file. -->
 
 ## External systems
 
 | System | Purpose | Direction | Protocol / mechanism | Notes |
 |---|---|---|---|---|
-| <name> | <why we integrate> | inbound / outbound / both | REST / queue / webhook / DB | <auth, criticality> |
+| <name> | <why we integrate> | inbound / outbound / both | REST / queue / webhook / DB | <auth mechanism + config key name; criticality> |
 
 ## Key dependencies
 

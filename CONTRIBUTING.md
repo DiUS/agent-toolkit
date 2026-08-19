@@ -30,11 +30,15 @@ each component type.
 ## Adding a command
 
 1. Create `commands/<name>.md` with `name` + `description` frontmatter — see
-   [commands/README.md](commands/README.md) for the convention and
-   [commands/codebase-discovery.md](commands/codebase-discovery.md) for a worked example.
+   [commands/README.md](commands/README.md) for the convention.
 2. It ships automatically via the `commands` path already registered in
    `.claude-plugin/plugin.json`.
 3. Run the verification gate.
+
+Don't add a command that only wraps a skill: a `user-invocable` skill already provides
+`/<skill-name>`, and a same-named command collides with it. Commands must also never reference
+repo files by repo-relative path — once installed, the working directory is the consumer's
+repo. Use `${CLAUDE_PLUGIN_ROOT}/…` or invoke the skill by name.
 
 ## Adding an agent
 
@@ -59,6 +63,11 @@ each component type.
   `[contradicted]`; accepted knowledge is unmarked).
 - Discovery/output conventions live in `skills/codebase-discovery/references/`.
 - Output scaffolds live in `skills/codebase-discovery/templates/`.
+- The **secrets rule** is normative in `SKILL.md` only; playbooks, references and templates link
+  it rather than restating it. The two bundled subagents keep a standalone copy because they
+  can't resolve a path into the skill — change the rule in `SKILL.md`,
+  `agents/codebase-recon-scout.md` and `agents/codebase-doc-verifier.md` together, or the
+  verification gate fails.
 
 ## Verification gate (run before every commit)
 
@@ -68,8 +77,9 @@ node scripts/validate.js
 
 It checks that the manifests are valid JSON with required keys, that every `SKILL.md`,
 `agents/*.md` and `commands/*.md` (except its README) has `name` + `description` frontmatter,
-that every path referenced by `plugin.json` exists, and that any `hooks/**/hooks.json` is valid
-JSON. CI runs the same check on push and PR; a failing gate blocks merge.
+that every path referenced by `plugin.json` exists, that any `hooks/**/hooks.json` is valid JSON,
+and that the codebase-discovery secrets rule is worded identically in every file that must
+restate it. CI runs the same check on push and PR; a failing gate blocks merge.
 
 Optional smoke tests:
 

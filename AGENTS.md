@@ -68,8 +68,9 @@ node scripts/validate.js
 
 It checks that the manifests are valid JSON with required keys, that every `SKILL.md`,
 `agents/*.md` and `commands/*.md` (except its README) has `name` + `description` frontmatter,
-that every path referenced by `plugin.json` exists, and that any `hooks/**/hooks.json` is valid
-JSON. CI runs the same script on every push and PR — a red gate blocks merge.
+that every path referenced by `plugin.json` exists, that any `hooks/**/hooks.json` is valid JSON,
+and that the codebase-discovery secrets rule is worded identically in every file that must
+restate it. CI runs the same script on every push and PR — a red gate blocks merge.
 
 ## Do not
 

@@ -30,7 +30,7 @@ and extract domain, rules, workflows and language from it — without reading ev
 - **Workflows / edges:** route definitions, `@app.route`/controllers, `subscribe`/`publish`,
   `@EventListener`, queue consumers, `cron`, scheduler registrations.
 - **Integrations:** `http`, `client`, `sdk`, base URLs, `webhook`, `apiKey`, connection strings,
-  env var names.
+  env var names — subject to the secrets rule (see below).
 - **Domain language:** enum values, constant names, error/validation message strings, event
   and command names — these are literally the ubiquitous language.
 
@@ -38,6 +38,16 @@ and extract domain, rules, workflows and language from it — without reading ev
 > these via symbols where it helps — find-references to see where a rule or entity is used,
 > call hierarchy to trace a workflow — and keep grep for literal strings such as enum values
 > and messages. The two modes complement each other.
+
+---
+
+## Secrets & credentials
+
+Several of the patterns above (`apiKey`, connection strings, config keys, env var names)
+deliberately lead towards credential-shaped code, and recon findings end up in documents that
+get committed — permanently, with a git history. Before recording anything from config, clients
+or environment handling, apply **the secrets rule in [`../SKILL.md`](../SKILL.md)**. It is
+normative and stated only there; nothing in this file relaxes or extends it.
 
 ---
 

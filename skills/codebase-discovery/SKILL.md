@@ -48,6 +48,25 @@ truth** — everything is verified against it before being relied on.
 
 ---
 
+## The secrets rule (normative — applies to every phase)
+
+Recon deliberately looks at config, clients and credential keys, and the docs this skill writes
+are usually committed. So:
+
+> Record a credential **by name and location, never the value** — not truncated, not partial,
+> and never a URL with credentials embedded. Don't open or quote `.env*`, key files, credential
+> JSON, keystores or tfstate; the names a config loader expects come from the loader, not the
+> secret file. Write `<redacted>` if in doubt. A live-looking secret hard-coded in the source is
+> a **security finding to raise with the user for rotation**, not documentation.
+
+**This block is the single source of truth for the rule.** The playbooks, references and
+templates point here rather than restating it. The two bundled subagents
+(`codebase-recon-scout`, `codebase-doc-verifier`) carry a deliberate standalone copy because a
+subagent can't resolve a path into this skill — `scripts/validate.js` fails the build if those
+copies drift from the wording above.
+
+---
+
 ## Roles
 
 Adopt the role that fits the phase:
