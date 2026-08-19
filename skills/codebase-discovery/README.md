@@ -87,9 +87,14 @@ run. The full rule lives in `references/output-conventions.md`.
 
 ## Status model (exception-only)
 
-Accepted knowledge is unmarked. Only exceptions are flagged: `[unverified]`,
-`[assumption]`, `[outdated]`, `[contradicted]` — so the reader's attention goes straight to
-what still needs resolving.
+Accepted knowledge is unmarked. Only exceptions are flagged — `[unchecked]`, `[unverified]`,
+`[assumption]`, `[outdated]`, `[contradicted]` — so the reader's attention goes straight to what
+still needs resolving. The two easily confused: `[unchecked]` means a claim from an existing doc
+that nobody has compared with the code yet; `[unverified]` means somebody looked, and it's a
+person's sign-off that's missing.
+
+In `code-only` mode the caveat is stated once in each document's header rather than stamped on
+every line, so the flags keep their signal.
 
 ## Layout of this skill
 

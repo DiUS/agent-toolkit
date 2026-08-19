@@ -3,7 +3,7 @@
 > **Last updated:** YYYY-MM-DD
 > **Scope:** Rules enforced (or expected) by <system>
 > **Mode:** full | code-only
-> **Status:** accepted knowledge unless flagged — see ../_discovery/assumptions-register.md
+> **Status:** <full: accepted knowledge unless flagged | code-only: code-derived, not validated by a person> — see ../_discovery/assumptions-register.md
 
 <!-- The load-bearing rules a new joiner must know — grouped by area. NOT every conditional in
 the code. Each rule: what it is, when it applies, exceptions, and why (if known). Keep

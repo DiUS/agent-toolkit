@@ -92,11 +92,22 @@ Start every file with:
 > **Last updated:** YYYY-MM-DD (use the real current date)
 > **Scope:** <one line — what this covers>
 > **Mode:** full | code-only
-> **Status:** accepted knowledge unless flagged — see docs/_discovery/assumptions-register.md
+> **Status:** <pick per mode — see below> — see docs/_discovery/assumptions-register.md
 ```
 
 The `Last updated` date is mandatory — it's how staleness is judged at a glance, alongside
 the recon manifest.
+
+The `Status` line carries the document-wide provenance caveat, so it has to match the mode:
+
+| Mode | Status line reads |
+|---|---|
+| `full` | `accepted knowledge unless flagged` |
+| `code-only` | `code-derived, not validated by a person` |
+
+This is what lets `code-only` runs stop stamping `[unverified]` on every sentence — the caveat is
+stated once, up front, and inline flags are reserved for load-bearing uncertainty. See the skill's
+`references/provenance-and-status.md`.
 
 The project-root `README.md` is the exception: it's the project's own front door, not a
 `docs/` file, so it carries **no** discovery header block and no inline flags. Keep that

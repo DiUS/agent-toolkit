@@ -10,7 +10,7 @@ the high-impact ones before relying on the docs for a change. -->
 
 | ID | Item | Flag | Confidence | Impact if wrong | Source | Resolution / next step |
 |---|---|---|---|---|---|---|
-| A-1 | <statement> | [assumption] / [unverified] / [outdated] / [contradicted] | H/M/L | <what breaks> | <path:line / doc / stakeholder> | <interview / confirm with X> |
+| A-1 | <statement> | [assumption] / [unverified] / [outdated] / [contradicted] / [unchecked] | H/M/L | <what breaks> | <path:line / doc / stakeholder> | <interview / confirm with X / recon <area> (out of scope this run)> |
 
 ## Resolved
 

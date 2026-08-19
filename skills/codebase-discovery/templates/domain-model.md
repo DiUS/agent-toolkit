@@ -3,7 +3,7 @@
 > **Last updated:** YYYY-MM-DD
 > **Scope:** Core domain entities and relationships of <system>
 > **Mode:** full | code-only
-> **Status:** accepted knowledge unless flagged — see ../_discovery/assumptions-register.md
+> **Status:** <full: accepted knowledge unless flagged | code-only: code-derived, not validated by a person> — see ../_discovery/assumptions-register.md
 
 <!-- The business entities and how they relate — not the raw DB schema. ~1–2 pages + a diagram. -->
 

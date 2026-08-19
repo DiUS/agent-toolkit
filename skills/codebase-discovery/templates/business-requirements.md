@@ -3,7 +3,7 @@
 > **Last updated:** YYYY-MM-DD
 > **Scope:** Functional + non-functional requirements of <system>, reconstructed from code and validated where possible
 > **Mode:** full | code-only
-> **Status:** accepted knowledge unless flagged — see ../_discovery/assumptions-register.md
+> **Status:** <full: accepted knowledge unless flagged | code-only: code-derived, not validated by a person> — see ../_discovery/assumptions-register.md
 
 <!-- Reconstructed requirements: the outcomes the system must deliver, not a feature dump.
 Keep to ~1–2 pages. -->

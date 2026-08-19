@@ -106,7 +106,7 @@ as strong (but still code-level) evidence.
 
 ## Validate the Phase 0 claims
 
-For every `[unverified]` claim harvested in Phase 0, check it against what recon found and
+For every `[unchecked]` claim harvested in Phase 0, check it against what recon found and
 set its status:
 
 - **Accepted** — matches the code → remove the flag (accepted knowledge is unmarked). Record
@@ -114,11 +114,18 @@ set its status:
 - **`[outdated]`** — the code shows it is no longer true → record the claim, the code
   evidence, and a **suggested corrected statement derived from the code**.
 - **`[contradicted]`** — sources disagree and it's unresolved → record both sides.
-- **`[unverified]`** — can't be settled from code alone → stays flagged and carries into the
-  interview.
+- **`[unverified]`** — the code can't settle it (intent, rationale, policy, ownership) → carries
+  into the interview, where a person is the only thing that can resolve it.
+- **stays `[unchecked]`** — the claim's area was **outside this run's recon scope**, so it wasn't
+  assessed at all. Don't dress that up as a verdict: leave the flag, and record it in
+  `assumptions-register.md` as *unresolved — outside recon scope*, naming the area. It goes in
+  the completion report as a coverage gap, and prefer keeping the statement out of the onboarding
+  docs rather than publishing an unexamined claim.
 
 Log outdated/contradicted items in `assumptions-register.md`; they become interview
-questions and feed the doc-drift summary.
+questions and feed the doc-drift summary. See
+[`../references/provenance-and-status.md`](../references/provenance-and-status.md) for the full
+flag model.
 
 ---
 
@@ -149,7 +156,8 @@ can detect staleness.
 ## Exit criteria
 
 - Tier 0 map approved; targeted dives complete for data model, contracts, hotspots, tests.
-- Every Phase 0 claim re-statused (accepted / outdated / contradicted / still unverified).
+- Every Phase 0 claim re-statused (accepted / `[outdated]` / `[contradicted]` / `[unverified]`),
+  or left `[unchecked]` and logged as outside recon scope.
 - Cited hypotheses produced for each doc area.
 - Assumptions register and traceability index updated; recon manifest records sources.
 - Ready for the interview (full mode) or synthesis (code-only mode).

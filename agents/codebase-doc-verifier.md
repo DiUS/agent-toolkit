@@ -24,7 +24,10 @@ it traces to evidence.
   resolve a path into the skill. Change both together — scripts/validate.js enforces it. -->
 - **Honest flags.** Verify that unflagged (accepted) statements really are settled, and that
   every known `[outdated]` / `[contradicted]` item is either resolved or clearly flagged in
-  both the doc and the assumptions register.
+  both the doc and the assumptions register. The vocabulary is closed to five flags —
+  `[unchecked]` (a doc claim nobody compared with the code, only legitimate where the area was
+  out of recon scope and logged as such), `[unverified]` (looked at, but unconfirmed by a person),
+  `[assumption]`, `[outdated]`, `[contradicted]`. Flag anything outside that set.
 - **Onboarding-lean.** Flag bloat, duplication across docs, and any doc exceeding the length
   guidance given in your assignment (the dispatching prompt carries the ceilings, or an
   **absolute** path to the skill's `references/output-conventions.md` — a skill-relative path

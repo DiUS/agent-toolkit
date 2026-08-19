@@ -29,9 +29,13 @@ path to `references/output-conventions.md`.
    [`../SKILL.md`](../SKILL.md). Any breach is **blocking**: strip it from the docs and raise it
    with the user for rotation.
 
-4. **Exception flags are honest.** Ensure accepted (unmarked) statements really are settled,
-   and that every known `[outdated]` / `[contradicted]` item is either resolved or clearly
-   flagged in both the doc and the assumptions register.
+4. **Exception flags are honest.** Ensure accepted (unmarked) statements really are settled, and
+   that every known `[outdated]` / `[contradicted]` item is either resolved or clearly flagged in
+   both the doc and the assumptions register. Check the flags are the right ones: `[unchecked]`
+   only where an area genuinely wasn't assessed (and logged as out-of-scope), `[unverified]` where
+   it was. No flag outside the five in provenance-and-status.
+   In `code-only` mode, confirm the caveat is in each `Status` header line rather than stamped
+   over every sentence.
 
 5. **Onboarding-lean, and scaffolding stripped.** Flag bloat: content that fails the "does this
    make a new joiner productive?" test, duplicated content across files, or docs exceeding the
@@ -52,7 +56,8 @@ Produce a short verification report:
 
 - Claims checked; count supported vs demoted/removed.
 - Any invented or unsupported statements found and how they were handled.
-- Open `[assumption]` / `[unverified]` / `[contradicted]` items and their impact.
+- Open `[assumption]` / `[unverified]` / `[contradicted]` items and their impact, plus any
+  `[unchecked]` claims left because their area was out of recon scope.
 - Bloat or duplication trimmed.
 - Go / no-go for harness engineering / Spec Kit, with any caveats.
 

@@ -62,8 +62,8 @@ are usually committed. So:
 **This block is the single source of truth for the rule.** The playbooks, references and
 templates point here rather than restating it. The two bundled subagents
 (`codebase-recon-scout`, `codebase-doc-verifier`) carry a deliberate standalone copy because a
-subagent can't resolve a path into this skill — `scripts/validate.js` fails the build if those
-copies drift from the wording above.
+subagent can't resolve a path into this skill — the repo's verification gate fails the build if
+those copies drift from the wording above.
 
 ---
 
@@ -164,10 +164,19 @@ Do not skip phases. In code-only mode, skip only Phase 2.
 Do **not** stamp settled knowledge as "confirmed" — accepted knowledge is unmarked. Only
 flag exceptions inline, and track them in `docs/_discovery/assumptions-register.md`:
 
-- `[unverified]` — derived from code but not yet validated by a person.
+- `[unchecked]` — harvested from an existing doc, not yet compared with the code. Phase 0's
+  default; Phase 1 resolves it, or leaves it flagged and logged when the area was out of scope.
+- `[unverified]` — not validated by a person: the code supports it but nobody has signed it off,
+  or the code can't speak to it at all.
 - `[assumption]` — inferred, not directly evidenced; record why and the impact if wrong.
 - `[outdated]` — an existing doc/claim the code contradicts as no longer true.
 - `[contradicted]` — two sources disagree and it is unresolved.
+
+These five are the whole vocabulary — don't invent a sixth.
+
+In **code-only** mode nothing has been human-validated, so stamping every line `[unverified]`
+would destroy the signal: state it once in each document's `Status` header line and reserve
+inline flags for load-bearing uncertainty. The register stays the complete list either way.
 
 Every substantive claim links to its evidence in
 `docs/_discovery/traceability-index.md` (code path / stakeholder). See
@@ -207,6 +216,7 @@ When done, report:
 - Documents created or updated under `docs/`.
 - Doc-drift findings (existing docs vs code).
 - Open `[assumption]` / `[unverified]` / `[contradicted]` items and their impact.
+- Coverage gaps: any claim still `[unchecked]` because its area was outside recon scope.
 - Whether a `CLAUDE.md` / `AGENTS.md` was created or proposed.
 - **`docs/_discovery/` disposition** per output-conventions: which files you're recommending be
   git-ignored, and that the audit files (assumptions register, traceability index) are committed

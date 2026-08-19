@@ -11,36 +11,88 @@ exceptions are flagged so a reader knows what not to trust yet.
 noise to every line. A reader should be able to assume that unflagged statements are accepted
 current-state knowledge, and that **any flag means "attention needed here."**
 
-Only these flags appear, and only where they apply:
+These five flags exist, and no others:
 
 | Flag | Meaning | Where it lives |
 |---|---|---|
-| `[unverified]` | Derived from code but not yet validated by a person | inline + assumptions register |
+| `[unchecked]` | Harvested from an existing doc, not yet compared with the code | discovery state; register if it persists |
+| `[unverified]` | Not validated by a person — code-derived, or a doc claim the code can't settle | inline + assumptions register |
 | `[assumption]` | Inferred, not directly evidenced; record why + impact if wrong | inline + assumptions register |
 | `[outdated]` | An existing doc/claim the code shows is no longer true | assumptions register + doc-drift summary |
 | `[contradicted]` | Two sources disagree, unresolved | assumptions register |
 
-There is intentionally **no `confirmed` flag.** In `code-only` mode, expect many
-`[unverified]` / `[assumption]` flags because nothing has been validated by a human yet.
+There is intentionally **no `confirmed` flag**, and no others may be invented — a flag the
+reader hasn't been taught is just noise.
+
+### `[unchecked]` vs `[unverified]`
+
+These are the two easiest to conflate, and keeping them apart is what makes `[unverified]` mean
+something:
+
+- `[unchecked]` — **nobody has looked at the code yet.** It's what an existing doc asserts,
+  captured verbatim in Phase 0 so Phase 1 can test it.
+- `[unverified]` — **somebody has looked**, and the claim is unconfirmed by a *person* rather
+  than untested. Either the code supports it and no stakeholder has signed it off, or the code
+  can't speak to it at all (intent, policy, ownership) and only a person could settle it.
+
+Only the second is safe to act on with care; the first tells you nothing has been assessed. If
+they shared a flag a reader couldn't tell "untested" from "tested but unconfirmed".
+
+### When an `[unchecked]` claim can't be checked
+
+Phase 1 re-statuses every `[unchecked]` claim it can. Two ways it legitimately can't:
+
+- **The code can't settle it** — the claim is about intent, rationale, policy or ownership. It
+  becomes `[unverified]` and goes to the interview; a person is the only thing that can resolve
+  it. This is the normal outcome, not an exception.
+- **Recon never reached it** — the claim concerns an area outside the run's scope, or a deep dive
+  that was deferred. It **stays `[unchecked]`**: pretending otherwise would claim an assessment
+  that didn't happen. Record it in `assumptions-register.md` as *unresolved — outside recon
+  scope*, with the area it belongs to, and name it in the completion report.
+
+A persisting `[unchecked]` claim is a scope statement, not a finding. Prefer leaving that
+statement out of the onboarding docs entirely; publish it only if a reader genuinely needs it,
+flagged, so nobody mistakes an unexamined doc claim for something the code was checked against.
 
 ---
 
 ## Lifecycle of a claim
 
 ```
-Phase 0: harvested from existing docs        → [unverified]
+Phase 0: harvested from existing docs        → [unchecked]
 Phase 1: checked against code
             matches code                      → accepted (unmarked) + evidence recorded
             code says otherwise               → [outdated] (+ code-derived suggestion)
             sources disagree                  → [contradicted]
-            can't tell from code              → [unverified], carried to interview
+            code can't settle it              → [unverified], carried to interview
+            area outside recon scope           → stays [unchecked], logged as out-of-scope
+         found in the code (no prior doc)     → [unverified]
 Phase 2: stakeholder confirms/corrects        → accepted (unmarked), source = stakeholder
             stakeholder can't confirm          → stays [assumption]/[unverified]
 Phase 4: any accepted claim without evidence   → demoted back to [assumption] or removed
 ```
 
-Accepted knowledge always has a backing entry in the traceability index — either a code
-location or a named stakeholder (or both).
+Accepted knowledge always has a backing entry in the traceability index — either a code location
+or a named stakeholder (or both).
+
+---
+
+## Flagging in `code-only` mode
+
+In `code-only` mode nothing has been validated by a person, so a literal reading of the model
+would flag `[unverified]` on virtually every sentence — which destroys the signal the
+exception-only rule exists to create. Instead:
+
+- **Say it once, in the header.** The document's `Status` line carries the caveat for the whole
+  file: *code-derived, not validated by a person.* The reader learns it before the first
+  sentence and doesn't need reminding per line.
+- **Reserve inline flags for load-bearing uncertainty** — a claim where a reader who acted on it
+  could get it materially wrong (a business rule, a threshold, a permission, an SLA). Not
+  descriptive statements the code plainly supports.
+- **The register stays complete.** Nothing is lost by not stamping inline: every open item is in
+  `assumptions-register.md` either way, and that's the list to work through.
+
+The same judgement applies in `full` mode to anything the stakeholder couldn't confirm.
 
 ---
 

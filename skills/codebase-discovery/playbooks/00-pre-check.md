@@ -58,12 +58,14 @@ service owns refunds". For each, record in `docs/_discovery/discovery-state.md`:
 
 - The statement, plainly.
 - Its source (file + location).
-- Status: `[unverified]` — meaning simply "not yet checked against the code", the default for
-  everything captured here.
+- Status: `[unchecked]` — "not yet compared with the code", the default for everything captured
+  here. Not `[unverified]`: that means the code has been read and supports the claim, which is
+  exactly what hasn't happened yet.
 
-**Do not** promote any of these to accepted knowledge yet. Phase 1 verifies each against the
-code; only then does the status change (to accepted-and-unmarked, or `[outdated]` /
-`[contradicted]` where the code has since moved on).
+**Do not** promote any of these to accepted knowledge yet, and don't publish them. Phase 1
+checks each against the code; only then does the status change — to accepted-and-unmarked, or
+`[outdated]` / `[contradicted]` where the code has moved on, or `[unverified]` where the code
+can't settle it. No `[unchecked]` item should survive Phase 1.
 
 ---
 
@@ -81,5 +83,5 @@ Update `docs/_discovery/recon-manifest.md`:
 
 - Working state initialised or resumed; freshness check run if applicable.
 - Scope, mode and available inputs confirmed with the user.
-- All existing docs found and their statements logged as `[unverified]` (not yet checked).
+- All existing docs found and their statements logged as `[unchecked]`.
 - Ready to begin deep recon.

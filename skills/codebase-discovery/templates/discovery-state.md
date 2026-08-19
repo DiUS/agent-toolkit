@@ -41,4 +41,4 @@
 
 | Claim | Source doc | Status after recon |
 |---|---|---|
-| <claim> | README / CLAUDE.md / ... | [unverified] / accepted / [outdated] / [contradicted] |
+| <claim> | README / CLAUDE.md / ... | accepted / [outdated] / [contradicted] / [unverified] / [unchecked] (+ why still unchecked) |

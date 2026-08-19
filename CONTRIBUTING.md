@@ -59,8 +59,10 @@ repo. Use `${CLAUDE_PLUGIN_ROOT}/…` or invoke the skill by name.
 ## Editing the `codebase-discovery` skill
 
 - Behaviour lives in `skills/codebase-discovery/playbooks/*.md`. Preserve the five-phase flow
-  and the exception-only status model (`[unverified]` / `[assumption]` / `[outdated]` /
-  `[contradicted]`; accepted knowledge is unmarked).
+  and the exception-only status model (`[unchecked]` / `[unverified]` / `[assumption]` /
+  `[outdated]` / `[contradicted]`; accepted knowledge is unmarked). The flag vocabulary is closed
+  — `references/provenance-and-status.md` defines it, and `scripts/checks/codebase-discovery.js`
+  enforces the set.
 - Discovery/output conventions live in `skills/codebase-discovery/references/`.
 - Output scaffolds live in `skills/codebase-discovery/templates/`.
 - The **secrets rule** is normative in `SKILL.md` only; playbooks, references and templates link
@@ -77,9 +79,12 @@ node scripts/validate.js
 
 It checks that the manifests are valid JSON with required keys, that every `SKILL.md`,
 `agents/*.md` and `commands/*.md` (except its README) has `name` + `description` frontmatter,
-that every path referenced by `plugin.json` exists, that any `hooks/**/hooks.json` is valid JSON,
-and that the codebase-discovery secrets rule is worded identically in every file that must
-restate it. CI runs the same check on push and PR; a failing gate blocks merge.
+that every path referenced by `plugin.json` exists, and that any `hooks/**/hooks.json` is valid
+JSON. CI runs the same check on push and PR; a failing gate blocks merge.
+
+Keep `validate.js` component-agnostic: it validates format, not any one component's content. If
+your component needs its own invariants enforced, add `scripts/checks/<component>.js` — the gate
+loads it automatically. See [scripts/checks/README.md](scripts/checks/README.md).
 
 Optional smoke tests:
 

@@ -12,7 +12,10 @@
  *   - every path referenced by plugin.json (skills dir, commands dir, agent files) exists
  *   - every commands/*.md (except README.md) has `name` + `description` frontmatter
  *   - if any hooks.json exists anywhere under hooks/, it is valid JSON
- *   - the codebase-discovery secrets rule is worded identically everywhere it must be restated
+ *
+ * This file stays component-agnostic: it knows about the repo's *format*, never about any one
+ * skill's content. A component that needs its own content rules enforced drops a module into
+ * scripts/checks/ and this runner picks it up — see scripts/checks/README.md.
  *
  * Exit code 0 = all good, 1 = one or more problems.
  */
@@ -120,24 +123,9 @@ function commandFiles() {
     .map((name) => path.join(dir, name));
 }
 
-/** Recursively find all files named `hooks.json` under a directory. */
-function findHooksJson(dir) {
-  if (!isDir(dir)) return [];
-  const results = [];
-  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-    const p = path.join(dir, entry.name);
-    if (entry.isDirectory()) {
-      results.push(...findHooksJson(p));
-    } else if (entry.isFile() && entry.name === "hooks.json") {
-      results.push(p);
-    }
-  }
-  return results;
-}
-
 function checkHooks() {
   const dir = path.join(ROOT, "hooks");
-  for (const p of findHooksJson(dir)) {
+  for (const p of walkFiles(dir, (p) => path.basename(p) === "hooks.json")) {
     try {
       JSON.parse(read(p));
     } catch (e) {
@@ -146,37 +134,43 @@ function checkHooks() {
   }
 }
 
-/* The codebase-discovery secrets rule is normative in one place: the skill's SKILL.md. The
- * bundled subagents can't resolve a path into the skill, so they carry a standalone copy — the
- * only permitted restatements. This asserts all three still say the same thing, so relaxing one
- * copy can't silently leave the others behind. Anywhere else must link the rule, not restate it. */
-const SECRETS_RULE = "by name and location, never the value";
-const SECRETS_RULE_FILES = [
-  "skills/codebase-discovery/SKILL.md",
-  "agents/codebase-recon-scout.md",
-  "agents/codebase-doc-verifier.md",
-];
+/** Recursively collect files matching a predicate. */
+function walkFiles(dir, predicate) {
+  if (!isDir(dir)) return [];
+  const out = [];
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    const p = path.join(dir, entry.name);
+    if (entry.isDirectory()) out.push(...walkFiles(p, predicate));
+    else if (predicate(p)) out.push(p);
+  }
+  return out;
+}
 
-function checkSecretsRule() {
-  for (const f of SECRETS_RULE_FILES) {
-    const p = path.join(ROOT, f);
-    if (!isFile(p)) { err(`secrets rule: expected file not found: ${f}`); continue; }
-    // Whitespace-normalised so re-wrapping a paragraph doesn't fail the gate — only rewording does.
-    if (!read(p).replace(/\s+/g, " ").includes(SECRETS_RULE)) {
-      err(
-        `${f}: missing the canonical secrets-rule wording "${SECRETS_RULE}". ` +
-        `The rule is normative in skills/codebase-discovery/SKILL.md and restated only in the ` +
-        `bundled subagents — if you reworded or relaxed it, update all of: ` +
-        SECRETS_RULE_FILES.join(", ")
-      );
+/* Component-specific content rules live in their own module under scripts/checks/. This runner
+ * knows nothing about any of them — it loads each and hands over the shared helpers, so the
+ * format checks above stay generic and a component's rules ship with the component's PR. */
+function runContentChecks() {
+  const dir = path.join(__dirname, "checks");
+  if (!isDir(dir)) return;
+  const ctx = { ROOT, err, rel, read, isFile, isDir, walkFiles };
+  for (const p of fs.readdirSync(dir).filter((n) => n.endsWith(".js")).sort()) {
+    const mod = require(path.join(dir, p));
+    if (typeof mod.run !== "function") {
+      err(`scripts/checks/${p}: must export a run(ctx) function`);
+      continue;
+    }
+    try {
+      mod.run(ctx);
+    } catch (e) {
+      err(`scripts/checks/${p}: threw — ${e.message}`);
     }
   }
 }
 
 function main() {
+  // Format: the repo's own shape, component-agnostic.
   checkPlugin();
   checkMarketplace();
-  checkSecretsRule();
 
   const skills = skillFiles();
   if (skills.length === 0) err("no skills/*/SKILL.md found");
@@ -184,6 +178,9 @@ function main() {
   checkFrontmatterFiles(agentFiles());
   checkFrontmatterFiles(commandFiles());
   checkHooks();
+
+  // Content: per-component rules, each owned by its own module in scripts/checks/.
+  runContentChecks();
 
   if (errors.length) {
     console.log(`VALIDATION FAILED (${errors.length} problem(s)):`);
