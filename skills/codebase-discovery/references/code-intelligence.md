@@ -1,41 +1,61 @@
 # Enabling code-intelligence / LSP navigation
 
-The recon phase can navigate a codebase in one of two ways: **grep + sub-agents** (the default,
-no setup) or **code-intelligence / LSP** (symbol-level: go-to-definition, find-references,
-hover). This guide sets up the LSP option using **[lsp-mcp](https://github.com/mickeyinfoshan/lsp-mcp)**,
-a lightweight bridge between MCP and the Language Server Protocol.
+Recon can navigate a codebase two ways: **grep + sub-agents** (the default, no setup) or
+**code-intelligence / LSP** — symbol-level navigation: go-to-definition, find-references, call
+hierarchy, type information. This guide covers what the second option needs and how to tell whether
+you have it.
+
+It deliberately doesn't document any one bridge's configuration. That belongs in that project's own
+README, changes without notice, and would rot here silently.
+
+> ## Status: untested
+>
+> **Grep + sub-agents is the path this skill is exercised with.** No full discovery has been run
+> end-to-end through an LSP bridge, so treat this as a promising option rather than a supported one:
+> the bridges are third-party, their tool names and config vary, and the guidance below is derived
+> from their documentation rather than from a run we've done.
+>
+> The downside is bounded by design — if the symbol tools aren't there, recon uses grep and the run
+> proceeds. But don't plan around LSP being available, and don't spend long fighting the setup on a
+> deadline.
+>
+> If you do get it working, record which bridge, version and language in the recon manifest and tell
+> the toolkit maintainers, so this can stop being untested.
 
 > ## ⚠️ A language server must be installed **and running** for this option to work
 >
-> The LSP navigation mode is only actually available when **all** of the following are true:
+> LSP navigation is only actually available when **all** of the following are true:
 >
 > 1. A **language server** for your repo's language is installed (e.g. `gopls`,
 >    `typescript-language-server`, `pylsp`).
-> 2. The **lsp-mcp bridge** is built and registered with your agent, and it can launch that
->    language server.
-> 3. The language server can **start and index your project** (the bridge runs it as a child
->    process on the first tool call).
+> 2. An **MCP bridge** that speaks LSP is built and registered with your agent, and it can launch
+>    that language server.
+> 3. The language server can **start and index your project**.
 >
-> If any of these isn't in place, the `lsp_*` tools won't be present, so the skill will report
-> that LSP isn't available and **fall back to grep**. LSP is an opt-in enhancement, never a
-> requirement — the skill runs fine without it.
+> If any of these isn't in place, the symbol tools won't be present, so the skill will report that
+> LSP isn't available and **fall back to grep**. LSP is an opt-in enhancement, never a requirement —
+> the skill runs fine without it.
 
 ---
 
 ## What it gives the skill
 
-lsp-mcp exposes these tools; recon uses them for precise structure and relationship tracing
-instead of text search:
+Whatever the bridge calls them, recon wants four capabilities, and uses them for precise structure
+and relationship tracing instead of text search:
 
-| Tool | Use in recon |
+| Capability | Use in recon |
 |---|---|
-| `lsp_definition` | Resolve where a symbol is defined |
-| `lsp_references` | Find everywhere a rule/entity/service is used (workflow tracing, impact) |
-| `lsp_hover` | Type/signature/doc for a symbol |
-| `lsp_completion` | Enumerate members/API surface |
+| Go to definition | Resolve where a symbol is defined |
+| Find references | Everywhere a rule/entity/service is used (workflow tracing, impact) |
+| Hover / signature | Type, signature and doc for a symbol |
+| Document or workspace symbols | Enumerate an API surface or a module's members |
 
-Text patterns (enum values, error/validation message strings) are still best found with grep,
-so the two modes complement each other.
+**Don't assume specific tool names.** Bridges expose these under their own names — an `lsp_`-prefixed
+set is common, but it's a convention, not a contract. Enumerate the tools the server actually
+registers and map them to the capabilities above.
+
+Text patterns (enum values, error and validation message strings) are still best found with grep, so
+the two modes complement each other rather than competing.
 
 ---
 
@@ -56,58 +76,56 @@ npm install -g typescript-language-server typescript
 pip install python-lsp-server
 ```
 
-Verify each is on your `PATH` (e.g. `gopls version`). **If the language server isn't installed
-and runnable, the LSP option cannot work** — this is the most common cause of "LSP unavailable".
+Verify each is on your `PATH` (e.g. `gopls version`). **If the language server isn't installed and
+runnable, the LSP option cannot work** — this is the most common cause of "LSP unavailable".
 
-### 2. Build the lsp-mcp bridge
+### 2. Pick an LSP-backed MCP bridge
+
+Two that are known to work, both third-party:
+
+| Bridge | Shape |
+|---|---|
+| [lsp-mcp](https://github.com/mickeyinfoshan/lsp-mcp) | Small and transparent; you build it and point a config file at the language servers you installed |
+| [Serena](https://github.com/oraios/serena) | Batteries-included, ~40 languages, manages language servers for you; more setup surface, less per-language wiring |
+
+Follow that project's own README for building and configuring it — including which languages it
+launches and how. Pin to a release or a known commit rather than tracking `main`: you're about to
+grant this process tool access inside your agent, on whatever codebase you point it at. On client
+work, check that's acceptable before you do.
+
+### 3. Register it with your agent
+
+**Claude Code** — easiest is the CLI:
 
 ```bash
-git clone https://github.com/mickeyinfoshan/lsp-mcp.git
-cd lsp-mcp
-make build          # binary -> ./bin/lsp-mcp
+claude mcp add --scope user lsp -- /absolute/path/to/the/bridge [its flags]
 ```
 
-### 3. Configure which language servers the bridge launches
-
-Copy the example next to this doc, [`lsp-mcp/config.yaml`](lsp-mcp/config.yaml), and adjust it
-to match the servers you installed. Keep only the languages you need.
-
-### 4. Register the bridge with your agent
-
-**Claude Code** — easiest is the CLI, which writes the config for you:
-
-```bash
-claude mcp add --scope user lsp -- /absolute/path/to/lsp-mcp/bin/lsp-mcp \
-  -config /absolute/path/to/lsp-mcp/config.yaml
-```
-
-Or register it for one project by creating `.mcp.json` in that project's root — see
-[`lsp-mcp/claude-code.mcp.json`](lsp-mcp/claude-code.mcp.json) for the shape, and replace both
-placeholder paths with **absolute** ones:
+Or register it for one project by creating `.mcp.json` in that project's root:
 
 ```json
 {
   "mcpServers": {
     "lsp": {
-      "command": "/absolute/path/to/lsp-mcp/bin/lsp-mcp",
-      "args": ["-config", "/absolute/path/to/lsp-mcp/config.yaml"]
+      "command": "/absolute/path/to/the/bridge",
+      "args": ["--whatever", "flags", "the", "bridge", "documents"]
     }
   }
 }
 ```
 
-> `settings.json` is **not** the place for this — it holds permissions and hooks, not
-> `mcpServers`. A server declared there simply won't appear, which looks exactly like the
-> "language server isn't running" failure and wastes an hour.
+> `settings.json` is **not** the place for this — it holds permissions and hooks, not `mcpServers`.
+> A server declared there simply won't appear, which looks exactly like the "language server isn't
+> running" failure and wastes an hour.
 
-**Cursor / Windsurf / any MCP client** — point your MCP config at the same binary with the
-`-config` flag, following the same shape.
+**Cursor / Windsurf / any MCP client** — point your MCP config at the same command, following that
+client's own format.
 
-### 5. Confirm it's live
+### 4. Confirm it's live
 
-Restart the agent and check the `lsp` MCP server is connected and the `lsp_*` tools are
-listed. If they're missing, the language server or the bridge isn't running — the skill will
-use grep until that's fixed.
+Restart the agent and check the server is connected and its tools are listed. Match them against the
+four capabilities above. If they're missing, the language server or the bridge isn't running — the
+skill will use grep until that's fixed.
 
 ---
 
@@ -115,28 +133,18 @@ use grep until that's fixed.
 
 At the start of recon the skill asks how to navigate. If you choose LSP:
 
-- It checks that the `lsp_*` tools are actually present. If not, it tells you and falls back to
-  grep rather than stalling.
-- It records the chosen mode (and that lsp-mcp was used) in `docs/_discovery/recon-manifest.md`
-  so the provenance trail reflects how findings were obtained.
-- It can still use grep for literal-string lookups where that's faster.
-
----
-
-## Heavier alternative
-
-If you want a more batteries-included, multi-language option that manages language servers for
-you, **[Serena](https://github.com/oraios/serena)** is an LSP-backed MCP covering ~40
-languages. Same principle and the same running-language-server requirement; more setup surface,
-less per-language wiring. lsp-mcp is featured here for being small and transparent.
+- It checks the symbol tools are actually present. If not, it says so and falls back to grep rather
+  than stalling.
+- It records the chosen mode and which server was used in `docs/_discovery/recon-manifest.md`, so the
+  provenance trail reflects how findings were obtained.
+- It still uses grep for literal-string lookups where that's faster.
 
 ---
 
 ## Troubleshooting
 
-- **`lsp_*` tools not showing:** the bridge isn't registered or failed to start — check the
-  agent's MCP server list and the bridge logs (`./logs/lsp-mcp.log`).
-- **Empty definition/references:** point `line`/`character` at the symbol itself; ensure the
-  project's build config (e.g. `tsconfig.json`, Go module) is present so the server can index.
-- **Language server won't start:** run the command manually to confirm it's installed and on
-  `PATH`.
+- **No symbol tools showing:** the bridge isn't registered or failed to start — check the agent's
+  MCP server list, then the bridge's own logs (location is up to that project).
+- **Empty definition/references results:** point the position at the symbol itself, and make sure the
+  project's build config (e.g. `tsconfig.json`, a Go module) is present so the server can index.
+- **Language server won't start:** run its command manually to confirm it's installed and on `PATH`.

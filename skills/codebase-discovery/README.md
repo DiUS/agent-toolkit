@@ -113,8 +113,7 @@ codebase-discovery/               # (this skill, under skills/ in the repo)
 │   ├── recon-heuristics.md
 │   ├── provenance-and-status.md
 │   ├── output-conventions.md
-│   ├── code-intelligence.md      # optional LSP navigation setup
-│   └── lsp-mcp/                  # example configs for that setup
+│   └── code-intelligence.md      # optional LSP navigation setup
 └── templates/
     ├── project-readme.md
     ├── business-requirements.md

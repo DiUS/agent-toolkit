@@ -43,15 +43,22 @@ in `docs/_discovery/recon-manifest.md`:
 - **grep + sub-agents** *(default, zero setup)* — pattern search plus isolated readers. Works
   on any repo and any host with no dependencies. Slightly less precise at tracing call graphs
   and resolving symbols on very large codebases.
-- **Code-intelligence / LSP** — a language-server / code-intelligence MCP for symbol-level
-  navigation: go-to-definition, find-references, call hierarchy, type information. More
-  precise and cheaper for tracing relationships on large or unfamiliar codebases. **Only
-  available when a language server is installed and running and an MCP bridge (e.g. lsp-mcp)
-  is registered with the agent** — verify the `lsp_*` (or equivalent) tools are actually
-  present before choosing this. Setup: [`../references/code-intelligence.md`](../references/code-intelligence.md).
+- **Code-intelligence / LSP** *(untested — see below)* — a language-server / code-intelligence MCP
+  for symbol-level navigation: go-to-definition, find-references, call hierarchy, type information.
+  More precise and cheaper for tracing relationships on large or unfamiliar codebases in principle.
+  **Only available when a language server is installed and running and an LSP-backed MCP bridge is
+  registered with the agent** — verify the symbol tools are actually present before choosing this,
+  whatever the bridge names them. Setup:
+  [`../references/code-intelligence.md`](../references/code-intelligence.md).
 
-Ask plainly, for example: *"How should I navigate the code — grep + sub-agents (no setup), or
-a code-intelligence / LSP server if you have one configured? Grep is the default."*
+**Tell the user the LSP path is untested** when you offer it — grep is what this skill is exercised
+with, and nobody has run a discovery end-to-end through a bridge. It's an informed choice, not a
+warning to bury in a reference file.
+
+Ask plainly, for example: *"How should I navigate the code — grep + sub-agents (the default, no
+setup), or a code-intelligence / LSP server if you have one configured? Fair warning: the LSP path is
+untested, so grep is the safer choice, and I'll fall back to it if the tools turn out not to be
+there."*
 
 Rules:
 
