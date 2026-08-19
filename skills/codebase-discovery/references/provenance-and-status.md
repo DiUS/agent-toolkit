@@ -127,7 +127,31 @@ question, not a guess dressed as a finding.
 
 ---
 
-## Confidence
+## Confidence (the calibration — stated only here)
 
-Where useful, annotate High/Med/Low alongside a flag — especially on `[assumption]` items —
-so the highest-impact, lowest-confidence items get validated first.
+Annotate High/Med/Low alongside a flag — especially on `[assumption]` items — so the
+highest-impact, lowest-confidence items get validated first. It's also what the interview queue
+sorts on.
+
+Two things set it, and the lower of the two wins.
+
+**How clearly the code states it:**
+
+- **High** — behaviour is explicit and centralised: a single validation, a clear state machine, a
+  documented enum.
+- **Medium** — behaviour is spread across several places, or inferred from naming.
+- **Low** — inferred from a comment or an ambiguous name, with nothing corroborating it.
+
+**How the finding was obtained** (see the tier ladder in [`navigation.md`](navigation.md)):
+
+- **High** — a declared source or a resolved symbol: a manifest, the repo's own toolchain, an LSP or
+  AST query. The build system saying two modules are related is a fact.
+- **Medium at best** — structure inferred from text patterns. Grepping imports can be wrong in both
+  directions: a project can reference what it never uses, and DI or reflection couples things no
+  import shows.
+- Where a text-inferred claim is **load-bearing** — a boundary, a rule, a permission — it's an
+  `[assumption]`, not a Medium-confidence fact.
+
+Recording the tier in the recon manifest is what makes this auditable later; a doc reads identically
+whether its boundaries came from the build graph or from pattern-matching, and that difference
+matters more than the sentence.

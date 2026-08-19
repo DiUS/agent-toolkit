@@ -10,8 +10,10 @@
 - **Scope:** <repo / subsystem>
 - **Recon commit:** <git rev-parse HEAD> · **working tree:** clean | dirty (uncommitted changes
   were read, so the commit alone doesn't describe what recon saw)
-- **Available inputs:** git history (yes/no) · code-intelligence/LSP server (yes/no) · sub-agents (yes/no) · stakeholder (yes/no)
-- **Navigation mode chosen:** grep + sub-agents | code-intelligence/LSP (server: <name>)
+- **Available inputs:** git for freshness (yes/no) · sub-agents (yes/no) · stakeholder (yes/no)
+- **Navigation tiers used:** <which of declared manifests / repo toolchain / text search / AST search
+  / LSP were actually available and used — and which answered the structural map. A graph from a
+  manifest is fact; one inferred from imports is not.>
 
 ## Existing docs read (Phase 0)
 
@@ -24,10 +26,10 @@
 <!-- The unit the freshness check works in: the next run diffs the recon commit against HEAD and
 re-recons the areas whose paths changed. Keep this to areas, not one row per file. -->
 
-| Area | Paths | Depth reached |
-|---|---|---|
-| data model | src/models/, db/migrations/ | full |
-| billing rules | src/billing/ | hotspots only |
+| Area | Paths | Depth reached | Source tier |
+|---|---|---|---|
+| data model | src/models/, db/migrations/ | full | declared + text search |
+| billing rules | src/billing/ | hotspots only | text search (inferred) |
 
 ## Files actually read (Phase 1)
 

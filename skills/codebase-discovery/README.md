@@ -28,7 +28,8 @@ truth) before it's relied on.
    capture what they state, to verify against the code.
 1. **Deep recon** — tiered, evidence-cited code analysis (structure → data model →
    contracts/edges → business-logic hotspots), token-efficient via sub-agents where
-   available. Validates the Phase 0 claims against the code and records drift.
+   available. Reads the structure the repo **declares** — build manifests, workspace files, runtime
+   topology — before inferring anything from patterns. Validates the Phase 0 claims and records drift.
 2. **Interview** — one-question-at-a-time conversation with the BA/PO, each question seeded
    by a recon hypothesis; contradictions raised with a code-based suggested fix. *(Skipped
    in code-only mode.)*
@@ -49,8 +50,8 @@ truth) before it's relied on.
 
 No hooks, MCP servers or plugin format are required. Working memory and staleness detection
 use plain files (`docs/_discovery/`), so the skill resumes across sessions and runs on any
-capable agent. Optional inputs (git history, code-intelligence MCP, sub-agents, a live SME)
-are used when present and skipped cleanly when not.
+capable agent. Optional inputs (the repo's own toolchain, AST/LSP tooling, sub-agents, a live SME)
+are used when present and skipped cleanly when not — text search is the floor that always works.
 
 ## Output
 
@@ -114,6 +115,7 @@ codebase-discovery/               # (this skill, under skills/ in the repo)
 │   ├── recon-heuristics.md
 │   ├── provenance-and-status.md
 │   ├── output-conventions.md
+│   ├── navigation.md             # the source ladder recon works
 │   ├── freshness.md              # staleness detection + drift options
 │   └── code-intelligence.md      # optional LSP navigation setup
 └── templates/

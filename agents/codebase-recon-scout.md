@@ -12,7 +12,8 @@ the conclusions.
 ## Operating rules
 
 - **Read-only** — and enforced, not promised: you have no shell and no write tools. Investigate
-  and report. Anything needing git history or a command belongs to the caller.
+  and report. Anything needing a command belongs to the caller, which builds the structural map
+  before assigning you a scope.
 - **Locate before reading.** Use Glob/Grep to find the high-signal files for your assignment
   before opening them. Don't read entire large files when a region will do.
 - **Cite everything.** Every finding carries evidence as `path:line` (or a symbol/path). A

@@ -35,54 +35,41 @@ On large repos, keep the main context lean:
 
 ---
 
-## Navigation mode — ask the user to choose
+## How to navigate
 
-Before the deep dives, ask the user how recon should navigate the code, and record the choice
-in `docs/_discovery/recon-manifest.md`:
+Work the source ladder in [`../references/navigation.md`](../references/navigation.md): read what the
+repo **declares**, ask its own **toolchain**, then **search** — and record which tier answered what.
+Text search is the floor and always works; everything above it is used when present and skipped
+cleanly when not.
 
-- **grep + sub-agents** *(default, zero setup)* — pattern search plus isolated readers. Works
-  on any repo and any host with no dependencies. Slightly less precise at tracing call graphs
-  and resolving symbols on very large codebases.
-- **Code-intelligence / LSP** *(untested — see below)* — a language-server / code-intelligence MCP
-  for symbol-level navigation: go-to-definition, find-references, call hierarchy, type information.
-  More precise and cheaper for tracing relationships on large or unfamiliar codebases in principle.
-  **Only available when a language server is installed and running and an LSP-backed MCP bridge is
-  registered with the agent** — verify the symbol tools are actually present before choosing this,
-  whatever the bridge names them. Setup:
-  [`../references/code-intelligence.md`](../references/code-intelligence.md).
+Two things need saying to the user rather than deciding silently:
 
-**Tell the user the LSP path is untested** when you offer it — grep is what this skill is exercised
-with, and nobody has run a discovery end-to-end through a bridge. It's an informed choice, not a
-warning to bury in a reference file.
-
-Ask plainly, for example: *"How should I navigate the code — grep + sub-agents (the default, no
-setup), or a code-intelligence / LSP server if you have one configured? Fair warning: the LSP path is
-untested, so grep is the safer choice, and I'll fall back to it if the tools turn out not to be
-there."*
-
-Rules:
-
-- If the user picks **LSP** but no server is available or configured, say so and **fall back
-  to grep** rather than stalling.
-- The two are **not exclusive** — you may lead with LSP for structure and relationships and
-  still use grep for text patterns (enum values, message strings). Use whichever fits each
-  lookup.
-- Record the chosen mode (and any LSP server used) in the recon manifest so later runs and the
-  provenance trail reflect how findings were obtained.
+- **The LSP tier is untested.** If you offer it, say so — nobody has run a discovery end-to-end
+  through a bridge, and text search is what this skill is exercised with. An informed choice, not a
+  warning buried in a reference file. If the symbol tools turn out to be absent, say so and carry on
+  down the ladder rather than stalling.
+- **Never ask the user to install anything**, and never run a command that would restore, fetch or
+  build without asking first.
 
 ---
 
 ## Tier 0 — Structural map (cheap, get approval)
 
-Produce a quick orientation, then pause for the user to approve deeper spend:
+Produce a quick orientation, then pause for the user to approve deeper spend.
 
-- Directory/module layout and apparent boundaries.
-- Language(s), frameworks, build/dependency manifests.
+**Start from the declared structure, not the directory tree.** The manifests and the repo's own
+toolchain state the module graph outright — read that first (Tier A/B of the ladder), and only use
+folder layout and import patterns where nothing is declared. Then add:
+
+- Language(s), frameworks, and what the build produces.
 - Entry points (main/app bootstrap, HTTP servers, CLI, workers, scheduled jobs).
-- Rough size (file/line counts) so the cost of deep dives is visible.
+- Runtime topology where it's declared — compose services, k8s workloads, IaC modules. It often
+  differs from the code layout, and where it does, that's a finding.
+- Rough size (module count, file/line counts) so the cost of deep dives is visible.
 
-Record the map in `discovery-state.md`. Ask the user to confirm scope of deep dives before
-continuing (especially on large repos).
+Record the map in `discovery-state.md`, and note in `recon-manifest.md` which tier produced it — a
+graph from a manifest is fact; one inferred from imports is not. Ask the user to confirm the scope of
+deep dives before continuing (especially on large repos).
 
 ---
 
@@ -133,19 +120,6 @@ Log outdated/contradicted items in `assumptions-register.md`; they become interv
 questions and feed the doc-drift summary. See
 [`../references/provenance-and-status.md`](../references/provenance-and-status.md) for the full
 flag model.
-
----
-
-## Optional: git history (low-weight)
-
-If git tooling is available, mine it **selectively**, not wholesale — most commit messages
-carry no domain language:
-
-- Commits referencing tickets/issues; merge/PR descriptions (usually richer than commits).
-- History on a **specific** business-logic hotspot ("when did this threshold change, why").
-
-Anything found is tagged `[assumption]` at low confidence and goes to the interview — never
-straight into a business rule. If git tooling is unavailable, skip and note it.
 
 ---
 

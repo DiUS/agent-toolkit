@@ -106,12 +106,14 @@ State the chosen mode before starting.
 
 At the start of each phase, check what is available and adapt — never hard-fail:
 
-- **Git history** — if a git tool is available, mine it selectively (see recon playbook)
-  as a low-weight, low-confidence signal. If not, skip and note it in the recon manifest.
-- **Navigation mode (user choice)** — at the start of recon, ask the user whether to
-  navigate with grep + sub-agents (default, no setup) or a code-intelligence / LSP server
-  (more precise on large repos, needs a configured server). If LSP is chosen but unavailable,
-  fall back to grep. The two can be combined. See the recon playbook.
+- **Git** — used for the **freshness check only** (which commit recon ran against), never as a
+  source of knowledge: commit messages don't reliably carry domain language, don't cover everything
+  a commit changed, and decay as history lengthens. The *why* comes from a person, not a log. If git
+  isn't available, see [`references/freshness.md`](./references/freshness.md).
+- **Navigation** — recon works a ladder of sources: what the repo declares (manifests), its own
+  toolchain, text search, then optional AST/LSP tooling. Text search is the floor and always works;
+  the rest are used when present and skipped cleanly when not. See
+  [`references/navigation.md`](./references/navigation.md).
 - **Sub-agents** — if the host can run isolated sub-agents, fan out recon reading to keep
   the main context lean. On Claude Code this skill ships two purpose-built subagents —
   **`codebase-recon-scout`** (recon) and **`codebase-doc-verifier`** (verification) — use them

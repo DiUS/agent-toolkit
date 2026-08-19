@@ -20,7 +20,8 @@ it's growing, you're appending where you should be rewriting. Compact as you go:
 
 - **Target:** <repo / subsystem>
 - **Mode:** full | code-only
-- **Available inputs:** git history? code-intelligence? sub-agents? stakeholder?
+- **Available inputs:** git (freshness)? sub-agents? stakeholder? — navigation tiers are in the recon
+  manifest
 <!-- The three write-target facts below bind every phase — see the write contract in the skill's
 references/output-conventions.md. -->
 

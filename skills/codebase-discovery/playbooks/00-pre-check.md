@@ -38,10 +38,11 @@ stamp this run — see the header-block rule in
 
 - Confirm the target: whole repo, or a named subsystem/module.
 - Confirm the mode: **full** (a BA/PO/SME is available) or **code-only** (none yet).
-- Confirm whether optional inputs are available (git tooling, code-intelligence / LSP server,
-  sub-agents). Record what is and isn't available in the recon manifest. The **navigation
-  mode** (grep + sub-agents vs code-intelligence / LSP) is offered to the user at the start of
-  recon — note here whether an LSP server exists so that choice is informed.
+- Confirm whether optional inputs are available (git for the freshness check, sub-agents, the
+  toolchain and search tools in the navigation ladder). Record what is and isn't available in the
+  recon manifest — Phase 1 works the ladder in
+  [`../references/navigation.md`](../references/navigation.md), so noting what exists here makes that
+  cheaper.
 
 State the scope, mode and available inputs back to the user before proceeding.
 

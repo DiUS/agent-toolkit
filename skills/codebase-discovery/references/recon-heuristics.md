@@ -35,10 +35,11 @@ language from them, without reading everything.
 - **Domain language:** enum values, constant names, error/validation message strings, event
   and command names — these are literally the ubiquitous language.
 
-> Using the **code-intelligence / LSP** navigation mode (see the recon playbook)? Resolve
-> these via symbols where it helps — find-references to see where a rule or entity is used,
-> call hierarchy to trace a workflow — and keep grep for literal strings such as enum values
-> and messages. The two modes complement each other.
+> These are *what* to look for; how to find it is the ladder in
+> [`navigation.md`](navigation.md). Text search owns the literals — enum values, messages, config
+> keys. The structural ones (what implements this, conditionals on a domain field, annotated
+> handlers) are found more reliably by AST search or symbol resolution when either is available, and
+> approximated by scoped multiline patterns when not.
 
 ---
 
@@ -54,7 +55,7 @@ normative and stated only there; nothing in this file relaxes or extends it.
 
 ## Reading order (cheap → expensive)
 
-1. Dependency manifest + directory tree → stack and boundaries.
+1. Declared module graph (manifests, or the repo's own toolchain) → stack and real boundaries.
 2. Entry points → how the system is driven (web, jobs, CLI, events).
 3. Data model (entities + migrations) → the domain skeleton.
 4. Contracts (routes/events/clients) → use cases and integration edges.
@@ -74,14 +75,12 @@ sample the tests around the business-logic hotspots.
 
 ---
 
-## Confidence calibration
+## Confidence
 
-- **High** — behaviour is explicit and centralised (a single validation, a clear state
-  machine, a documented enum).
-- **Medium** — behaviour is spread across several places or inferred from naming.
-- **Low** — inferred from a comment, a commit message, or an ambiguous name.
-
-Record confidence with every hypothesis; Low/Medium items are prime interview material.
+Record confidence with every hypothesis — Low/Medium items are prime interview material, and the
+interview queue sorts on it. Both how clearly the code states a thing and how the finding was
+obtained set it; the calibration is in
+[`provenance-and-status.md`](provenance-and-status.md).
 
 ---
 
