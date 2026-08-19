@@ -31,7 +31,7 @@ The output is a small, lean set of **onboarding documents** under `docs/`, not a
 comprehensive knowledge base. Each document is written so it can be linked from a
 `CLAUDE.md` / `AGENTS.md` without consuming an unreasonable amount of context.
 
-This skill is the orchestrator. It runs five phases, each defined in its own playbook
+This skill is the orchestrator. It runs six phases, each defined in its own playbook
 under `playbooks/`. Read and follow the relevant playbook at each phase.
 
 ---
@@ -132,18 +132,9 @@ sessions:
 - `docs/_discovery/recon-manifest.md` — the commit recon ran against, which areas and files were
   read, and which existing docs fed it, so later runs can detect staleness (below).
 
-On invocation: if these exist, read them first and resume; do not restart from zero.
-
-**Keep the state file small — it's a working set, not a log.** It's the one file loaded on every
-session, so aim for **two pages**; if it's growing, you're appending where you should be rewriting.
-Compact it as you go:
-
-- Once a fact is written into a `docs/` file, it lives there — **drop it from the state**. Don't
-  keep a second copy ageing in parallel.
-- Open items belong in `assumptions-register.md` and evidence in `traceability-index.md`; the state
-  file doesn't duplicate either. Keep the interview queue to its five rows.
-- What earns its place: scope and mode, the write-target facts, open threads, decisions and where
-  you stopped. Everything else has somewhere better to be.
+On invocation: if these exist, read them first and resume; do not restart from zero. Keep
+`discovery-state.md` compact — it's a working set, not a log, and its own header carries the ceiling
+and the compaction rules.
 
 `_discovery/` also holds the two audit files (`assumptions-register.md`,
 `traceability-index.md`), which are committed alongside the docs they back. What's committed and
@@ -153,47 +144,11 @@ restate it.
 
 ---
 
-## Freshness check (staleness detection — the mechanism, stated only here)
+## Freshness check (staleness detection, no hooks)
 
-Prior findings are only trustworthy if the code hasn't moved. The check is **commit-based**, not
-timestamp-based:
-
-- **Recording (Phase 1).** Put the recon's commit in the manifest: `git rev-parse HEAD`, plus
-  whether the working tree was clean (`git status --porcelain`). A dirty tree means the SHA
-  doesn't fully describe what was read — say so.
-- **Comparing (Phase 0 of a later run).** `git diff --name-only <recorded-sha> HEAD` gives the
-  changed files exactly; add `git status --porcelain` for uncommitted work. Intersect that with
-  the areas the manifest recorded and re-recon only those.
-- **Never compare mtimes.** A fresh clone rewrites every file's timestamp, so a timestamp check
-  reports the whole tree as drifted on any machine that didn't run the original recon — which is
-  most of them. This is a trap; don't "fix" the check back to timestamps.
-- **No git available?** Fall back to hashing just the files the manifest lists as read — a bounded
-  set, since recon reads the high-signal subset, not the repo. If hashing isn't possible either,
-  record that staleness can't be detected and re-recon the load-bearing areas rather than
-  assuming the docs still hold.
-
-### Reporting drift, and what the user can do about it
-
-Report it plainly and usefully — *"12 files changed in the billing area since the last recon at
-`a1b2c3d`; `docs/domain/business-rules.md` and `docs/business/workflows.md` draw on that area"* —
-naming the **areas** and the **documents that depend on them**, not just a file count. Then offer
-the choice, with a recommendation:
-
-- **Re-recon the affected areas** (the default, and what to recommend for most drift) — targeted,
-  cheap, and only the affected docs get rewritten.
-- **Re-run recon from scratch** — recommend this instead when the drift spans most areas or the
-  paths themselves moved, since patching area by area costs more than a clean pass.
-- **Proceed as-is** — reasonable when the drift is in areas irrelevant to what the user is doing
-  now. Not free: see the flag rule below.
-- **Report only** — produce the drift list as a to-do and change nothing. Same flag rule.
-
-If the user declines to re-recon, the affected claims no longer have verified backing: revert them
-to `[unchecked]` and log them in the assumptions register, exactly as if they'd come from someone
-else's stale documentation — which, as of now, they have. Never leave a claim reading as accepted
-when the code beneath it has moved.
-
-Record the decision in the manifest's freshness-check log, so the next session knows this was
-chosen rather than missed.
+If `docs/_discovery/recon-manifest.md` exists from a previous run, the code may have moved since.
+The mechanism is commit-based, and the choices to put to the user when it has drifted are in
+[`references/freshness.md`](./references/freshness.md) — Phase 1 records, Phase 0 compares.
 
 ---
 
@@ -208,12 +163,12 @@ Run in order. Each has a playbook — read it when you enter the phase.
 | 2. Interview | [`playbooks/02-interview.md`](./playbooks/02-interview.md) | One-question-at-a-time conversation with the BA/PO, worked in impact order from the register; reconcile contradictions with code-based suggestions. The stakeholder can stop at any point; the remainder is parked and resumable. (Skipped in code-only mode.) |
 | 3. Synthesis | [`playbooks/03-synthesis.md`](./playbooks/03-synthesis.md) | Write the lean onboarding docs under `docs/`, each dated and provenance-flagged. |
 | 4. Verification | [`playbooks/04-verification.md`](./playbooks/04-verification.md) | Adversarial check that every claim traces to code or a named stakeholder; flag anything unsupported. |
-| Finish | (this file) | Doc-drift summary + optionally generate/augment CLAUDE.md/AGENTS.md. |
+| 5. Finish | [`playbooks/05-finish.md`](./playbooks/05-finish.md) | Doc-drift summary, contradictions reconciled with the user, optional CLAUDE.md/AGENTS.md, `_discovery/` disposition. |
 
 On a first run, do not skip phases. In code-only mode, skip only Phase 2.
 
 **On a resume, Phase 0 chooses where to re-enter** — repeating finished work wastes the budget the
-skill exists to protect. Phase 0 and Phase 4 always run; the phases between them are entered
+skill exists to protect. Phases 0, 4 and 5 always run; the phases between them are entered
 according to what the working state records:
 
 | Recorded state | Re-enter at |
@@ -243,27 +198,6 @@ one means, the lifecycle a claim moves through, how flagging works in `code-only
 no-invention rule. Follow it; don't restate it.
 
 ---
-
-## Finish: doc-drift + agent file
-
-When Phases 0–4 are complete:
-
-1. **Doc-drift summary.** In the completion report, list where existing docs
-   (README/CLAUDE.md/AGENTS.md) have drifted from the current code, with the updated statement.
-2. **Reconcile contradictions with the user.** For every `[contradicted]` / `[outdated]`
-   item, ask the user — one at a time — to confirm the correct version, **including a
-   suggested wording derived from the code**. Do not silently pick a version.
-3. **Agent file (optional).** Offer to create or augment an agent onboarding file:
-   - **Detect and match** whatever already exists (`CLAUDE.md` or `AGENTS.md`).
-   - If **neither** exists, offer **both**.
-   - Never overwrite an existing file — propose additions (links to the new `docs/`),
-     and note anything that no longer matches the current code. Ask before writing.
-   - Keep it lean; link the project-root `README.md` as the entry point. See
-     [`templates/agent-onboarding-file.md`](./templates/agent-onboarding-file.md).
-4. **Working state (`docs/_discovery/`).** Leave the whole directory in place, then apply the
-   disposition in [`references/output-conventions.md`](./references/output-conventions.md): the
-   two audit files stay committed; **recommend** (never automatically apply) git-ignoring the two
-   state files. Explain it in the completion report (below).
 
 ---
 

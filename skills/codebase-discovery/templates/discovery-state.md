@@ -3,8 +3,18 @@
 > **Last updated:** YYYY-MM-DD (rewrite this each session)
 > **Purpose:** The evolving working memory for this extraction. Read at the start of every
 > session; **rewrite** as understanding changes rather than appending. NOT an onboarding doc — local
-> process state, so git-ignoring this file is recommended. Keep it to ~2 pages: once a fact reaches
-> a `docs/` file, drop it from here (see the working-state rules in the skill's SKILL.md).
+> process state, so git-ignoring this file is recommended.
+
+<!-- KEEP THIS FILE TO ~2 PAGES. It's loaded every session, so it's a working set, not a log — if
+it's growing, you're appending where you should be rewriting. Compact as you go:
+
+- Once a fact is written into a docs/ file, it lives there — DROP IT FROM HERE. Don't keep a second
+  copy ageing in parallel.
+- Open items belong in assumptions-register.md and evidence in traceability-index.md; this file
+  duplicates neither. Keep the interview queue to its five rows.
+- What earns its place: scope and mode, the write-target facts, open threads, decisions, and where
+  you stopped. Everything else has somewhere better to be. -->
+
 
 ## Scope & mode
 

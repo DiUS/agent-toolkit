@@ -22,7 +22,7 @@ judgement, not on re-deriving mechanics the code already states. Existing docs a
 starting point, and everything drawn from them is **verified against the code** (the source of
 truth) before it's relied on.
 
-## How it works — five phases
+## How it works — six phases
 
 0. **Pre-check** — read any existing `README` / `CLAUDE.md` / `AGENTS.md` / `docs`, and
    capture what they state, to verify against the code.
@@ -35,9 +35,9 @@ truth) before it's relied on.
 3. **Synthesis** — write the lean onboarding docs, each dated and provenance-flagged.
 4. **Verify** — adversarial check that every claim traces to code evidence or a named
    stakeholder.
-
-Then: a **doc-drift summary**, and an optional **CLAUDE.md / AGENTS.md** generated or
-augmented (detect-and-match; offer both if neither exists).
+5. **Finish** — a **doc-drift summary**, contradictions reconciled with the user one at a time,
+   and an optional **CLAUDE.md / AGENTS.md** generated or augmented (detect-and-match; offer both
+   if neither exists).
 
 ## Modes
 
@@ -107,12 +107,14 @@ codebase-discovery/               # (this skill, under skills/ in the repo)
 │   ├── 01-deep-recon.md
 │   ├── 02-interview.md
 │   ├── 03-synthesis.md
-│   └── 04-verification.md
+│   ├── 04-verification.md
+│   └── 05-finish.md
 ├── references/
 │   ├── question-bank.md
 │   ├── recon-heuristics.md
 │   ├── provenance-and-status.md
 │   ├── output-conventions.md
+│   ├── freshness.md              # staleness detection + drift options
 │   └── code-intelligence.md      # optional LSP navigation setup
 └── templates/
     ├── project-readme.md

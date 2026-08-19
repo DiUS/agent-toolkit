@@ -1,7 +1,7 @@
 <!--
 Template for a generated CLAUDE.md / AGENTS.md.
 
-Rules (see SKILL.md "Finish"):
+Rules (see the skill's Phase 5 finish playbook):
 - Detect and match whatever already exists (CLAUDE.md or AGENTS.md). If neither exists, offer
   both.
 - Never overwrite an existing file — propose additions and note any content that no longer matches the code.
