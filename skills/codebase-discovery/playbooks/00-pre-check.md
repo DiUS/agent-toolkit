@@ -14,7 +14,11 @@ Do not write onboarding docs in this phase. Only gather and set up state.
 Check for prior state and resume if present:
 
 - If `docs/_discovery/discovery-state.md` exists, read it and continue from where the last
-  session left off.
+  session left off rather than redoing finished work. Decide which phase to re-enter using the
+  resume table in `SKILL.md`, and tell the user which one and why.
+- If the state records an interview that was stopped with items still open, rebuild the top 5 from
+  the register and offer to continue it — say what the last session covered first. See the
+  interview playbook.
 - If `docs/_discovery/recon-manifest.md` exists, run the **freshness check** using the mechanism
   in `SKILL.md` (commit-based, not timestamps). If there's drift, report it and put the choice to
   the user as set out there — don't silently re-recon, and don't silently trust stale docs. Record

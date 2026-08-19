@@ -13,6 +13,8 @@ a new team member or AI harness reads. Keep it tight. -->
 
 ## Documentation
 
+<!-- Delete any row below whose document wasn't written — index only what exists. -->
+
 Onboarding docs live under [`docs/`](./docs/):
 
 | Doc | What's inside |

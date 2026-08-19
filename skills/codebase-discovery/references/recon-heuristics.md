@@ -1,7 +1,8 @@
 # Recon heuristics — where knowledge hides in code
 
-A field guide for Phase 1. The point is to reach the high-signal ~10–15% of a codebase fast
-and extract domain, rules, workflows and language from it — without reading everything.
+A field guide for Phase 1. The point is to reach the high-signal parts of a codebase fast — a small
+fraction of the files, wherever they turn out to be — and extract domain, rules, workflows and
+language from them, without reading everything.
 
 ---
 

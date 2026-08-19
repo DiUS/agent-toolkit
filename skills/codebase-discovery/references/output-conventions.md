@@ -42,6 +42,10 @@ docs/
 
 Only create a doc if the system gives it real content. Do not create empty placeholders.
 
+**Index only what exists.** Because some documents get skipped, the project-root `README.md` and the
+agent onboarding file must link only the ones actually written — delete the rest of the rows. A dead
+link in the front door misleads the reader it was written for, and costs an agent a wasted turn.
+
 ---
 
 ## The write contract (the rule — stated only here)

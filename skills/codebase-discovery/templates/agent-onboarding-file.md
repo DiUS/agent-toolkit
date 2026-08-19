@@ -22,7 +22,8 @@ Rules (see SKILL.md "Finish"):
 
 Start with the onboarding index: **[README.md](./README.md)**.
 
-Key entry points for context (load as needed — don't pull everything at once):
+Key entry points for context (load as needed — don't pull everything at once). Delete any line
+whose document wasn't written — index only what exists:
 
 - Architecture: [docs/tech/current-architecture.md](./docs/tech/current-architecture.md)
 - Domain model & language: [docs/domain/domain-model.md](./docs/domain/domain-model.md), [docs/domain/domain-glossary.md](./docs/domain/domain-glossary.md)

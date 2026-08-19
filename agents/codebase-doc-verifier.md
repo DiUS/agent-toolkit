@@ -34,6 +34,8 @@ it traces to evidence.
   won't resolve from here).
 - **Scaffolding stripped.** Flag any leftover template scaffolding in the published docs:
   `<!-- -->` guidance comments, or unfilled `<placeholder>` markers.
+- **Links resolve.** Check every link in the docs set, the project-root `README.md` and the agent
+  file points at a file that exists — documents that were skipped are the usual culprit.
 - **Freshness & consistency.** Every doc has a `Last updated` date; terminology matches the
   glossary across docs; the recon manifest reflects the files actually read.
 
@@ -47,5 +49,7 @@ Return a short verification report:
 4. Bloat/duplication to trim.
 5. Go / no-go for harness engineering / Spec Kit, with caveats.
 
-If material problems exist, recommend returning to synthesis or the interview rather than
-shipping docs built on unresolved assumptions.
+Mark each finding **blocking** (the docs shouldn't ship like this — an invented or unevidenced
+claim, a leaked credential, a load-bearing claim with no traceability) or **fix-in-place** (bloat,
+duplication, a dead link, a missing date). Don't decide whether to rework: report, and let the
+caller apply its own threshold and iteration limit.

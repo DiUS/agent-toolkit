@@ -45,6 +45,10 @@ path to `references/output-conventions.md`.
 6. **Freshness & consistency.** Every doc has a `Last updated` date; the recon manifest
    reflects the files actually read; terminology matches the glossary across all docs.
 
+   **Every link resolves.** Check each link in the `docs/` set, the project-root `README.md` and the
+   agent file points at a file that exists — skipped documents are the usual culprit, since the
+   index templates list the full set.
+
 7. **Write contract honoured.** Check the output against the write contract in
    [`../references/output-conventions.md`](../references/output-conventions.md), using the root,
    nav decision and pre-existing-file list Phase 0 recorded in `discovery-state.md`.
@@ -65,8 +69,30 @@ Produce a short verification report:
 - Bloat or duplication trimmed.
 - Go / no-go for harness engineering / Spec Kit, with any caveats.
 
-If material problems are found, return to synthesis (or the interview) rather than shipping
-docs built on unresolved assumptions.
+---
+
+## What counts as material, and what to do about it
+
+"Send it back" needs a threshold, or verification either waves real problems through or loops.
+
+**Material — the docs must not ship as they are:**
+
+- an invented claim, or an accepted (unmarked) statement with no evidence behind it
+- a leaked credential value (check 3)
+- a write-contract breach — written outside the agreed root, or a file overwritten without sign-off
+- a load-bearing claim (rule, threshold, permission, SLA) with no traceability entry
+- a flag that misrepresents reality — `[unchecked]` on something that was checked, or nothing where
+  the code has moved on
+
+**Not material — fix in place and carry on.** Bloat, duplication, a missing `Last updated`,
+terminology drifting from the glossary, leftover scaffolding, a dead link. Edits, not grounds for a
+round trip.
+
+**One rework cycle, then stop.** Route material problems to where they can be fixed — synthesis for
+anything the code can settle, the interview only where it genuinely needs a person — and re-verify
+**only the affected documents**, not the whole set. If a second pass still finds material problems,
+stop and report **no-go** with the specific unresolved items rather than starting a third lap. An
+honest no-go is a useful result; an endless loop isn't.
 
 ---
 

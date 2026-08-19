@@ -15,8 +15,8 @@ for what to look for and where.
 
 On large repos, keep the main context lean:
 
-- **Locate, don't read.** Use search (grep, or LSP symbol lookup — see Navigation mode) to
-  find the ~10–15% of files that carry meaning before opening anything.
+- **Locate, don't read.** Use search (grep, or LSP symbol lookup — see Navigation mode) to find the
+  small, high-signal subset of files that carry meaning before opening anything.
 - **Delegate reading to sub-agents where available.** Dispatch isolated workers to read
   excerpts and return only distilled, cited findings — the raw file dumps stay out of the
   main context. On Claude Code, dispatch the **`codebase-recon-scout`** subagent (one per
@@ -147,6 +147,11 @@ straight into a business rule. If git tooling is unavailable, skip and note it.
 Output a structured, cited set of hypotheses that seeds the interview — organised by the
 target doc areas: architecture, domain model, business rules, workflows, glossary terms,
 requirements. Each hypothesis carries evidence (`path:line`) and a confidence (High/Med/Low).
+
+**Log every hypothesis that needs a human to settle it into `assumptions-register.md`**, with its
+confidence and its impact if wrong — not just the outdated/contradicted ones. The interview works
+from that register, ranked by impact and confidence, so a hypothesis left out of it is a question
+that never gets asked.
 
 Update `recon-manifest.md` so future runs can detect staleness: the commit recon ran against and
 whether the tree was clean, the areas covered, and the files actually read. See the freshness-check

@@ -134,6 +134,17 @@ sessions:
 
 On invocation: if these exist, read them first and resume; do not restart from zero.
 
+**Keep the state file small — it's a working set, not a log.** It's the one file loaded on every
+session, so aim for **two pages**; if it's growing, you're appending where you should be rewriting.
+Compact it as you go:
+
+- Once a fact is written into a `docs/` file, it lives there — **drop it from the state**. Don't
+  keep a second copy ageing in parallel.
+- Open items belong in `assumptions-register.md` and evidence in `traceability-index.md`; the state
+  file doesn't duplicate either. Keep the interview queue to its five rows.
+- What earns its place: scope and mode, the write-target facts, open threads, decisions and where
+  you stopped. Everything else has somewhere better to be.
+
 `_discovery/` also holds the two audit files (`assumptions-register.md`,
 `traceability-index.md`), which are committed alongside the docs they back. What's committed and
 what's git-ignored is set out in
@@ -194,12 +205,26 @@ Run in order. Each has a playbook — read it when you enter the phase.
 |---|---|---|
 | 0. Pre-check | [`playbooks/00-pre-check.md`](./playbooks/00-pre-check.md) | Read existing README/CLAUDE.md/AGENTS.md/docs; capture what they state, to verify against the code; set up working state; survey the write target and agree the output root. |
 | 1. Deep recon | [`playbooks/01-deep-recon.md`](./playbooks/01-deep-recon.md) | Tiered, evidence-cited analysis of structure, data model, contracts and business-logic hotspots; verify the Phase 0 statements against code. |
-| 2. Interview | [`playbooks/02-interview.md`](./playbooks/02-interview.md) | One-question-at-a-time conversation with the BA/PO, seeded by recon hypotheses; reconcile contradictions with code-based suggestions. (Skipped in code-only mode.) |
+| 2. Interview | [`playbooks/02-interview.md`](./playbooks/02-interview.md) | One-question-at-a-time conversation with the BA/PO, worked in impact order from the register; reconcile contradictions with code-based suggestions. The stakeholder can stop at any point; the remainder is parked and resumable. (Skipped in code-only mode.) |
 | 3. Synthesis | [`playbooks/03-synthesis.md`](./playbooks/03-synthesis.md) | Write the lean onboarding docs under `docs/`, each dated and provenance-flagged. |
 | 4. Verification | [`playbooks/04-verification.md`](./playbooks/04-verification.md) | Adversarial check that every claim traces to code or a named stakeholder; flag anything unsupported. |
 | Finish | (this file) | Doc-drift summary + optionally generate/augment CLAUDE.md/AGENTS.md. |
 
-Do not skip phases. In code-only mode, skip only Phase 2.
+On a first run, do not skip phases. In code-only mode, skip only Phase 2.
+
+**On a resume, Phase 0 chooses where to re-enter** — repeating finished work wastes the budget the
+skill exists to protect. Phase 0 and Phase 4 always run; the phases between them are entered
+according to what the working state records:
+
+| Recorded state | Re-enter at |
+|---|---|
+| Nothing (first run) | Phase 1 |
+| Recon done, interview stopped with items open, **no drift** | Phase 2 — continue the queue |
+| Recon done, interview stopped, **drift in the affected areas** | Phase 1 scoped to those areas, then Phase 2 |
+| Interview done, docs written, drift since | whatever the user chose in the freshness check |
+
+Never interview about a rule whose code has changed since recon — re-recon that area first, or the
+question is built on a stale premise. Say which phase you're entering and why before you start.
 
 ---
 
@@ -255,6 +280,8 @@ When done, report:
 - On a re-run: code drift since the last recon, and what the user chose to do about it.
 - Open `[assumption]` / `[unverified]` / `[contradicted]` items and their impact.
 - Coverage gaps: any claim still `[unchecked]` because its area was outside recon scope.
+- (full mode) Interview coverage: how far the queue got, and what's parked as *needs SME* —
+  highest-impact items named, with a pointer to the register for the rest.
 - Whether a `CLAUDE.md` / `AGENTS.md` was created or proposed.
 - **`docs/_discovery/` disposition** per output-conventions: which files you're recommending be
   git-ignored, and that the audit files (assumptions register, traceability index) are committed
@@ -272,7 +299,8 @@ When done, report:
 - [ ] Existing docs read and their statements captured for verification
 - [ ] Recon complete: structure, data model, contracts, business-logic hotspots
 - [ ] Existing-doc statements verified against code (any drift identified)
-- [ ] (full mode) Interview complete; contradictions reconciled with the user
+- [ ] (full mode) Interview queue worked in impact order — complete, or stopped by the stakeholder
+      with the remainder parked as *needs SME*; contradictions reconciled or parked
 - [ ] Onboarding docs written under `docs/`, dated and provenance-flagged
 - [ ] Verification pass complete; unsupported claims flagged
 - [ ] Assumptions register and traceability index populated

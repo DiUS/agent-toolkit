@@ -2,8 +2,9 @@
 
 > **Last updated:** YYYY-MM-DD (rewrite this each session)
 > **Purpose:** The evolving working memory for this extraction. Read at the start of every
-> session; rewrite as understanding changes. NOT an onboarding doc — local process state, so
-> git-ignoring this file is recommended.
+> session; **rewrite** as understanding changes rather than appending. NOT an onboarding doc — local
+> process state, so git-ignoring this file is recommended. Keep it to ~2 pages: once a fact reaches
+> a `docs/` file, drop it from here (see the working-state rules in the skill's SKILL.md).
 
 ## Scope & mode
 
@@ -20,7 +21,8 @@ references/output-conventions.md. -->
 
 ## Facts (accepted, unmarked)
 
-<!-- Settled knowledge, with source (code path or stakeholder). -->
+<!-- Settled knowledge not yet written into a docs/ file, with source (code path or stakeholder).
+Once it lands in a doc, delete the entry here — the doc plus the traceability index carry it. -->
 
 - <fact> — source: <path:line / stakeholder>
 
@@ -33,6 +35,19 @@ references/output-conventions.md. -->
 <!-- Prioritised: business impact, user impact, compliance, delivery risk. -->
 
 1. <question> — priority: <H/M/L>
+
+## Interview queue (top 5)
+
+<!-- The working view of the assumptions register, sorted by impact desc then confidence asc.
+Exactly five rows — the register is the full backlog. Refresh after every item is resolved or
+parked so the next one surfaces. -->
+
+- **Progress:** <n> addressed · <n> open · last session <date> · <in progress | stopped by
+  stakeholder | complete>
+
+| # | Item | Impact | Confidence | Evidence | Why it matters |
+|---|---|---|---|---|---|
+| 1 | <statement> | H | L | <path:line> | <what goes wrong if we're wrong> |
 
 ## Decisions
 
