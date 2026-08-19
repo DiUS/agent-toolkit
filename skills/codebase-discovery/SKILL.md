@@ -35,7 +35,7 @@ infer. All optional; absent means work it out as usual.
 | `--fresh` | ignore existing working state and start cold. **Deletes nothing** — the audit files stay |
 | `--on-drift <recon\|full-recon\|proceed\|report>` | pre-answer the freshness check's question |
 | `--interview` | enter at Phase 2 and continue the interview queue |
-| `--dry-run` | report the plan and every file you would write, then stop |
+| `--dry-run` | report the plan and every onboarding file you would write, then stop. Working state under `_discovery/` **is** still written — it's the skill's own scratch space, and keeping it means the dry run can be resumed |
 
 ### How to read them
 
@@ -106,8 +106,7 @@ those copies drift from the wording above.
 
 The output lands in a repository this skill doesn't own, so the destination is **agreed, not
 assumed** — Phase 0 settles it, and every later phase is bound by the **write contract** in
-[`references/output-conventions.md`](./references/output-conventions.md). Follow it; don't
-restate it.
+[`references/write-contract.md`](./references/write-contract.md). Follow it; don't restate it.
 
 ---
 

@@ -106,8 +106,9 @@ node scripts/validate.js
 
 It checks that the manifests are valid JSON with required keys, that every `SKILL.md`,
 `agents/*.md` and `commands/*.md` (except its README) has `name` + `description` frontmatter,
-that every path referenced by `plugin.json` exists, and that any `hooks/**/hooks.json` is valid
-JSON. CI runs the same check on push and PR; a failing gate blocks merge.
+that every path referenced by `plugin.json` exists, that relative markdown links resolve and a
+skill's links stay inside that skill, and that any `hooks/**/hooks.json` is valid JSON. CI runs the
+same check on push and PR; a failing gate blocks merge.
 
 Keep `validate.js` component-agnostic: it validates format, not any one component's content. If
 your component needs its own invariants enforced, add `scripts/checks/<component>.js` — the gate

@@ -59,9 +59,9 @@ path to `references/output-conventions.md`.
    `[unverified]`. An invented carve-up is worse than a technical one — it becomes the structure
    everyone inherits.
 
-7. **Write contract honoured.** Check the output against the write contract in
-   [`../references/output-conventions.md`](../references/output-conventions.md), using the root,
-   nav decision and pre-existing-file list Phase 0 recorded in `discovery-state.md`.
+7. **Write contract honoured.** Check the output against
+   [`../references/write-contract.md`](../references/write-contract.md), using the root, nav decision
+   and pre-existing-file list Phase 0 recorded in `discovery-state.md`.
 
 8. **Drift captured.** The doc-drift summary lists every place existing docs
    (README/CLAUDE.md/AGENTS.md) contradicted the code, each with a corrected statement.

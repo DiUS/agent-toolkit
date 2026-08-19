@@ -99,7 +99,7 @@ docs/
 `CLAUDE.md` / `AGENTS.md`. Its two audit files are committed and its two state files are not.
 
 The tree above is illustrative — `references/output-conventions.md` defines the layout, the
-`_discovery/` disposition and the write contract, and is the file to trust if this README ever
+`_discovery/` disposition, and is the file to trust if this README ever
 falls behind it.
 
 ## Status model (exception-only)
@@ -127,6 +127,7 @@ codebase-discovery/               # (this skill, under skills/ in the repo)
 │   ├── provenance-and-status.md
 │   ├── output-conventions.md
 │   ├── navigation.md             # the source ladder recon works
+│   ├── write-contract.md         # where it may write, and what it may replace
 │   ├── freshness.md              # staleness detection + drift options
 │   └── code-intelligence.md      # optional LSP navigation setup
 └── templates/

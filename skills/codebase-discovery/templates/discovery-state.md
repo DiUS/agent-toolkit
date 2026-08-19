@@ -23,8 +23,8 @@ it's growing, you're appending where you should be rewriting. Compact as you go:
 - **Options as resolved:** <the invocation options, however they were phrased — reused on resume>
 - **Available inputs:** git (freshness)? sub-agents? stakeholder? — navigation tiers are in the recon
   manifest
-<!-- The three write-target facts below bind every phase — see the write contract in the skill's
-references/output-conventions.md. -->
+<!-- The three write-target facts below bind every phase — see the skill's
+references/write-contract.md. -->
 
 - **Output root (agreed with user):** <docs/ | docs/discovery/ | ...>
 - **Docs-site tooling detected:** <none | mkdocs / docusaurus / sphinx / ...> — nav/sidebar

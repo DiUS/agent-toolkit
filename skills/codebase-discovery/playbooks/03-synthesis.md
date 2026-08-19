@@ -9,13 +9,14 @@ team member (human or AI) productive, and no more.
 
 ## Read these first
 
-This phase writes files, so two references govern it. Read both before starting; neither is
-restated here.
+This phase writes files, so three references govern it. Read them before starting; none is restated
+here.
 
-- [`../references/output-conventions.md`](../references/output-conventions.md) — the **write
-  contract** (output root, what may be overwritten, published-site decision), the folder layout and
-  which docs exist, the required header block and how to date it, length ceilings, formatting, and
-  the `_discovery/` disposition.
+- [`../references/write-contract.md`](../references/write-contract.md) — where you may write, what
+  may be overwritten, and the published-site decision.
+- [`../references/output-conventions.md`](../references/output-conventions.md) — the folder layout,
+  which docs exist and how they're named, the required header block and how to date it, length
+  ceilings, formatting, and the `_discovery/` disposition.
 - [`../references/provenance-and-status.md`](../references/provenance-and-status.md) — the flag
   vocabulary and when to use it inline, how citations stay out of the prose, and **no invention**.
 

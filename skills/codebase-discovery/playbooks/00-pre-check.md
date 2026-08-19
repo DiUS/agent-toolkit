@@ -96,8 +96,8 @@ a published site is worth knowing about either way. If the docs do belong in the
 should be registered in its nav/sidebar or deliberately left out of it.
 
 Record all three outcomes — root, tooling + nav decision, and the pre-existing files — in
-`docs/_discovery/discovery-state.md`. They bind every later phase via the write contract in
-[`../references/output-conventions.md`](../references/output-conventions.md).
+`docs/_discovery/discovery-state.md`. They bind every later phase via the
+[write contract](../references/write-contract.md).
 
 ---
 
