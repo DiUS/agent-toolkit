@@ -49,9 +49,15 @@ path to `references/output-conventions.md`.
    agent file points at a file that exists — skipped documents are the usual culprit, since the
    index templates list the full set.
 
-   **Names use the agreed language.** Area directories and area filenames are glossary terms, not
+   **Names use the agreed language.** Area directories and concept filenames are glossary terms, not
    namespaces or codenames, with no catch-alls (`misc`, `other`, `general`). A file that couldn't be
-   named specifically usually means the split was wrong.
+   named specifically usually means the split was wrong. No output file is named `business-rules.md`
+   or `workflows.md` — those are template names, and finding one means the split was skipped.
+
+   **Groupings are evidenced, not invented.** A cluster named in business language must trace to a
+   stakeholder who confirmed it; otherwise it should be named after the code unit and flagged
+   `[unverified]`. An invented carve-up is worse than a technical one — it becomes the structure
+   everyone inherits.
 
 7. **Write contract honoured.** Check the output against the write contract in
    [`../references/output-conventions.md`](../references/output-conventions.md), using the root,

@@ -24,10 +24,12 @@ README.md                         # project-root: onboarding index / entry point
 docs/
 ├── business/                     # cross-cutting only
 │   ├── business-requirements.md
-│   └── user-personas.md
+│   ├── user-personas.md
+│   └── workflow-<concept>.md     #   cross-area flows only
 ├── domain/                       # system-wide domain
 │   ├── domain-glossary.md        #   single file, always
-│   └── domain-model.md           #   aggregates + cross-area relationships
+│   ├── domain-model.md           #   aggregates + cross-area relationships
+│   └── rules-<concept>.md        #   system-wide rules only
 ├── tech/
 │   ├── current-architecture.md   #   the system map; names the areas
 │   └── integrations.md
@@ -77,6 +79,45 @@ Which artefacts split, and which must not:
 **When to split: content shape, not repo size.** One area's worth of material → keep the flat layout
 and no `areas/` directory at all. Material for more than one area → areas appear. There's no size
 threshold to judge, because the trigger is whether the content has an area dimension.
+
+### The grouping is a finding, not filing
+
+How rules and workflows cluster — "these five belong together and it's called authorization" — is a
+judgement about the business, and **the code can't settle it.** Code shows you files, classes,
+namespaces and where conditionals sit; it does not tell you that scattered conditionals constitute a
+concept the business would recognise. Invent a carve-up and it becomes the doc structure, which is
+stickier than any sentence in it: every later reader inherits it.
+
+So the grouping comes from one of two places, never from invention:
+
+1. **An observed code unit.** The policy class, module or namespace the rules already live in —
+   `rules-invoice-policy.md` from `Billing/Policies/InvoicePolicy.cs`. Traceable, and honest even when
+   the name is technical rather than business language.
+2. **A stakeholder.** Grouping is a *meaning* question, so a person is the only thing that can settle
+   it. It's a grounded interview question, not a guess: *"the code keeps these five rules together in
+   `InvoicePolicy` — is that how the business thinks about them?"*
+
+Until someone confirms it, **the grouping itself carries `[unverified]`** — say so in the file's scope
+line. In `code-only` mode it stays that way: group strictly by code location and don't reach for
+business-sounding cluster names nobody has agreed.
+
+**Requirements are the exception: keep them in one file.** They're mostly cross-cutting and there's no
+observable code unit to group them by, so `business-requirements.md` stays whole.
+
+**When a stakeholder regroups, rename.** That's the expected outcome of confirming a carve-up, not
+churn — so it overrides the stable-names rule below: rename or merge the files to match the agreed
+grouping, update the file references in the traceability index, and don't leave the superseded file
+behind beside the new one.
+
+**The concept-file convention applies at both levels.** `rules-` and `workflow-` files live at the top
+level when the material is cross-cutting or the system has only one area, and inside
+`areas/<area>/` when an area owns it. So a single-area system still gets its rules and workflows —
+they simply sit under `domain/` and `business/` rather than in an area directory.
+
+One consequence: **`business-rules.md` and `workflows.md` are template names, not output names.** The
+templates keep those filenames, but what they produce is always `rules-<concept>.md` /
+`workflow-<concept>.md`. A file called `business-rules.md` in the output is a sign the split was
+skipped.
 
 The area files use the same `templates/` as their unsplit equivalents — written per concept rather
 than per repo. **No per-area index files:** logical names make a directory listing self-describing,
@@ -158,7 +199,11 @@ because a name is the cheapest signal a reader or an agent has about whether to 
   specifically is a sign the split is wrong, and catch-alls are exactly where bloat accumulates.
 - **No dates, no versions, no `v2`.** The header block carries `Last updated`.
 - **Stable across runs.** If a file already covers a concept, update it — never create a
-  near-duplicate name beside it. The write contract's never-overwrite rule then applies per file.
+  near-duplicate name beside it. The write contract's never-overwrite rule then applies per file. The
+  one exception is a stakeholder correcting the grouping: then you rename, as set out above.
+- **Name from the code unit until someone agrees otherwise.** A cluster's name starts as the code's
+  (`rules-invoice-policy.md`) and becomes the glossary's once confirmed
+  (`rules-refund-eligibility.md`). Don't skip the first form to get to the second.
 
 ---
 
@@ -213,9 +258,9 @@ Aim for onboarding density, not completeness:
 | domain/domain-glossary.md | one line per term |
 | business/business-requirements.md | ~1–2 pages, functional + NFR |
 | tech/integrations.md | a table of systems + purpose + direction |
-| areas/…/model-*.md | one concept: its entities, attributes and lifecycle |
-| areas/…/rules-*.md | one rule cluster, each rule with condition, exceptions and rationale |
-| areas/…/workflow-*.md | one flow + its diagram |
+| model-*.md | one concept: its entities, attributes and lifecycle |
+| rules-*.md | one rule cluster, each rule with condition, exceptions and rationale |
+| workflow-*.md | one flow + its diagram |
 
 **If a doc wants to grow past this, split it — don't hide it.** Area-shaped material becomes another
 area file with its own logical name; anything else fails the onboarding test and gets cut. Pushing the

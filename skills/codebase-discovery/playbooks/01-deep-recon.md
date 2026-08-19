@@ -109,6 +109,12 @@ API routes/controllers, GraphQL schema, event/queue producers & consumers, exter
 clients, scheduled jobs. These reveal use cases, actors, triggers and integration points.
 
 ### c. Business-logic hotspots — the rules live here
+
+Record **where the code keeps each rule**, not just the rule. That code unit — the policy class,
+module or namespace — is the only grouping you can honestly claim, and it becomes the docs' shape in
+Phase 3. Don't reach for a business-sounding cluster name nobody has agreed; it's an interview
+question, and until it's answered the grouping is `[unverified]`.
+
 Service/domain layer, validation, conditionals on domain fields, state transitions,
 permission/authorization checks, calculations, and **enums / constants / error & validation
 messages** (these often carry the literal business language and rules). See recon-heuristics

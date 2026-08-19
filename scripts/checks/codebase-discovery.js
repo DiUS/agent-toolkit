@@ -85,7 +85,60 @@ function checkStatusFlags({ ROOT, err, rel, read, isDir, walkFiles }) {
   }
 }
 
+/* ---------------------------------------------------------------------------------------------
+ * 3. The output layout is stated in three places; they must agree.
+ *
+ * references/output-conventions.md is canonical. The skill README shows the same tree as a shop
+ * window, and templates/project-readme.md indexes it for the target repo. Every layout revision has
+ * needed all three edited, and missing one ships a doc that points at a path the skill never writes.
+ * So: any docs/ path mentioned in the README or the project-readme template must appear in the
+ * canonical tree.
+ * ------------------------------------------------------------------------------------------- */
+const LAYOUT_CANONICAL = "skills/codebase-discovery/references/output-conventions.md";
+const LAYOUT_FOLLOWERS = [
+  "skills/codebase-discovery/README.md",
+  "skills/codebase-discovery/templates/project-readme.md",
+];
+
+/** Collect docs/-relative paths, normalising the placeholder forms the trees use. */
+function layoutPaths(text) {
+  const found = new Set();
+  for (const m of text.matchAll(/docs\/[A-Za-z0-9_<>&;./-]*\.md/g)) {
+    let p = m[0]
+      .replace(/&lt;/g, "<").replace(/&gt;/g, ">")  // markdown tables escape the placeholders
+      .replace(/<[^>]*>/g, "<x>")                   // <area>, <concept> → one placeholder token
+      .replace(/^docs\//, "");
+    found.add(p);
+  }
+  return found;
+}
+
+function checkLayoutConsistency({ ROOT, err, read, isFile }) {
+  const canonicalPath = path.join(ROOT, LAYOUT_CANONICAL);
+  if (!isFile(canonicalPath)) return; // skill not installed in this tree
+  const canonical = layoutPaths(read(canonicalPath));
+  // The canonical file lists bare filenames in its tree, not full paths — add those too.
+  for (const m of read(canonicalPath).matchAll(/^[│├└─\s]*([a-z0-9<>_-]+\.md)/gm)) {
+    canonical.add(m[1].replace(/<[^>]*>/g, "<x>"));
+  }
+  for (const f of LAYOUT_FOLLOWERS) {
+    const p = path.join(ROOT, f);
+    if (!isFile(p)) { err(`layout check: expected file not found: ${f}`); continue; }
+    for (const ref of layoutPaths(read(p))) {
+      const base = ref.split("/").pop();
+      if (!canonical.has(ref) && !canonical.has(base)) {
+        err(
+          `${f}: references docs path "${ref}", which is not in the canonical layout in ` +
+          `${LAYOUT_CANONICAL}. Update the layout there, or fix this reference — the three ` +
+          `layout statements must agree.`
+        );
+      }
+    }
+  }
+}
+
 exports.run = (ctx) => {
   checkSecretsRule(ctx);
   checkStatusFlags(ctx);
+  checkLayoutConsistency(ctx);
 };

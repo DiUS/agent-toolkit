@@ -63,21 +63,24 @@ The destination is agreed rather than assumed. Because the output lands in a rep
 doesn't own, Phase 0 surveys the write target — is `docs/` a published site, is anything already
 there? — and settles the **output root** with the user before a byte is written.
 
-**Area-specific material is filed by area, under names drawn from the domain language** — so an agent
-working on billing loads `areas/billing/`, not every rule in the system. What no single area owns
-stays at the top level, and the glossary is always one file: it's the shared vocabulary, and splitting
-it would defeat the point. A single-area system keeps the flat layout with no `areas/` at all — the
-trigger is whether the content has an area dimension, not how big the repo is.
+**Material is filed one concept per file, under names drawn from the domain language** — so an agent
+working on billing loads `areas/billing/`, not every rule in the system. Area-specific material lives
+in its area; what no single area owns stays at the top level; and the glossary is always one file,
+because it's the shared vocabulary and splitting it would defeat the point. A single-area system keeps
+the flat layout with no `areas/` at all — the trigger is whether the content has an area dimension,
+not how big the repo is.
 
 ```
 README.md                         # project-root: onboarding index / entry point — the file CLAUDE.md/AGENTS.md links
 docs/
 ├── business/                     # cross-cutting only
 │   ├── business-requirements.md  # functional + non-functional
-│   └── user-personas.md          # users & stakeholders
+│   ├── user-personas.md          # users & stakeholders
+│   └── workflow-<concept>.md     # flows that cross areas
 ├── domain/                       # system-wide domain
 │   ├── domain-glossary.md        # business language — always a single file
-│   └── domain-model.md           # aggregates + cross-area relationships (+ Mermaid)
+│   ├── domain-model.md           # aggregates + cross-area relationships (+ Mermaid)
+│   └── rules-<concept>.md        # rules that apply system-wide
 ├── tech/
 │   ├── current-architecture.md   # as-is architecture (+ Mermaid), names the areas
 │   └── integrations.md           # external systems, dependencies, data feeds

@@ -72,7 +72,7 @@ evidence recorded. Do not silently pick a version.
 
 ## Coverage checklist — not a running order
 
-Six things to have touched by the end, used to spot what the queue never reached. The **queue**
+Seven things to have touched by the end, used to spot what the queue never reached. The **queue**
 decides what gets asked and when; this list only tells you where the gaps are.
 
 1. **Business context & purpose** — why the system exists, what problem it solves, for whom.
@@ -81,9 +81,14 @@ decides what gets asked and when; this list only tells you where the gaps are.
    error messages). Resolve synonyms and conflicts; capture agreed definitions.
 4. **Business rules** — validate the rules recon inferred; surface the ones code can't show
    (policy, regulation, "we always do X because…"), and the exceptions.
-5. **Workflows** — walk the key end-to-end flows: actors, triggers, states, decision points,
+5. **How rules and flows group** — recon can only group them the way the code does, and that carve-up
+   becomes the shape of the docs, so it's worth confirming explicitly: *"the code keeps these five
+   rules together in `InvoicePolicy` — is that how the business thinks about them, or do some belong
+   elsewhere?"* A confirmed grouping gets renamed to the agreed term; an unconfirmed one stays
+   `[unverified]`.
+6. **Workflows** — walk the key end-to-end flows: actors, triggers, states, decision points,
    exceptions/edge cases, hand-offs, SLAs.
-6. **Requirements & constraints** — the outcomes the system must deliver, plus
+7. **Requirements & constraints** — the outcomes the system must deliver, plus
    non-functional and compliance constraints (performance, availability, security,
    auditability, data handling, regulatory).
 

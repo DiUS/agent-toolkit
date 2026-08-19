@@ -23,6 +23,8 @@ Onboarding docs live under [`docs/`](./docs/):
 | [docs/tech/integrations.md](./docs/tech/integrations.md) | External systems and dependencies |
 | [docs/domain/domain-model.md](./docs/domain/domain-model.md) | Core entities and cross-area relationships |
 | [docs/domain/domain-glossary.md](./docs/domain/domain-glossary.md) | Business language |
+| [docs/domain/rules-&lt;concept&gt;.md](./docs/domain/) | Rules that apply system-wide — one row per file |
+| [docs/business/workflow-&lt;concept&gt;.md](./docs/business/) | Flows that cross areas — one row per file |
 | [docs/business/business-requirements.md](./docs/business/business-requirements.md) | Functional + non-functional requirements |
 | [docs/business/user-personas.md](./docs/business/user-personas.md) | Who uses it |
 
