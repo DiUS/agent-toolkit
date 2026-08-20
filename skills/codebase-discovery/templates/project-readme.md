@@ -13,7 +13,7 @@ a new team member or AI harness reads. Keep it tight. -->
 
 ## Documentation
 
-<!-- Delete any row below whose document wasn't written — index only what exists. -->
+<!-- Delete any row below whose document wasn't written, so this indexes only what exists. -->
 
 Onboarding docs live under [`docs/`](./docs/):
 
@@ -28,7 +28,7 @@ Onboarding docs live under [`docs/`](./docs/):
 | [docs/business/business-requirements.md](./docs/business/business-requirements.md) | Functional + non-functional requirements |
 | [docs/business/user-personas.md](./docs/business/user-personas.md) | Who uses it |
 
-<!-- If the system has areas, list them here — one line each, linking the directory, not every file
+<!-- If the system has areas, list them here, one line each, linking the directory, not every file
 inside it. Omit this section entirely on a single-area system. List EVERY area, including any
 discovery hasn't documented yet, so a reader can see the edge of what's covered; drop the link on a
 pending one, since there's nothing to link to. -->
@@ -42,11 +42,10 @@ pending one, since there's nothing to link to. -->
 
 ## Getting started
 
-<!-- Only where the code reveals it: how to install / run / test. Omit if unknown — don't invent. -->
+<!-- Only where the code reveals it: how to install / run / test. Omit if unknown; don't invent. -->
 
 ## Open questions & risks
 
 <!-- The few highest-impact unresolved items. Link the register for the full list. -->
 
 - <top assumption/risk> — see [docs/_discovery/assumptions-register.md](./docs/_discovery/assumptions-register.md)
-

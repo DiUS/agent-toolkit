@@ -4,7 +4,7 @@ Template for a generated CLAUDE.md / AGENTS.md.
 Rules (see the skill's Phase 5 finish playbook):
 - Detect and match whatever already exists (CLAUDE.md or AGENTS.md). If neither exists, offer
   both.
-- Never overwrite an existing file — propose additions and note any content that no longer matches the code.
+- Never overwrite an existing file. Propose additions and note any content that no longer matches the code.
 - Keep it lean. Link the project-root README.md as the entry point; do NOT link docs/_discovery/.
 - Fill the placeholders; delete guidance comments before writing.
 -->
@@ -22,18 +22,18 @@ Rules (see the skill's Phase 5 finish playbook):
 
 Start with the onboarding index: **[README.md](./README.md)**.
 
-Key entry points for context (load as needed — don't pull everything at once). Delete any line
-whose document wasn't written — index only what exists:
+Key entry points for context (load as needed; don't pull everything at once). Delete any line
+whose document wasn't written, so this indexes only what exists:
 
 - Architecture: [docs/tech/current-architecture.md](./docs/tech/current-architecture.md)
 - Domain model & language: [docs/domain/domain-model.md](./docs/domain/domain-model.md), [docs/domain/domain-glossary.md](./docs/domain/domain-glossary.md)
-- Area detail — rules, workflows and models for the part you're working in:
+- Area detail (rules, workflows and models for the part you're working in):
   [docs/areas/](./docs/areas/). Load the one area you need, not the directory.
 
 ## Working conventions
 
 <Anything the extraction confirmed about how to work here: build/test commands, structure,
-constraints. Keep to what's verified — flag [assumption] otherwise.>
+constraints. Keep to what's verified; flag [assumption] otherwise.>
 
 ## Known caveats
 

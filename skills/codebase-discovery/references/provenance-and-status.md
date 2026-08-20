@@ -1,13 +1,13 @@
-# Provenance & status model
+# Provenance and status model
 
-How claims are tracked from "found in code" to "accepted onboarding knowledge" — and how the
+How claims are tracked from "found in code" to "accepted onboarding knowledge", and how the
 exceptions are flagged so a reader knows what not to trust yet.
 
 ---
 
 ## The rule: exception-only flagging
 
-**Accepted knowledge is unmarked.** Do not stamp settled facts as "confirmed" — that just adds
+**Accepted knowledge is unmarked.** Do not stamp settled facts as "confirmed", which just adds
 noise to every line. A reader should be able to assume that unflagged statements are accepted
 current-state knowledge, and that **any flag means "attention needed here."**
 
@@ -21,7 +21,7 @@ These five flags exist, and no others:
 | `[outdated]` | An existing doc/claim the code shows is no longer true | assumptions register + doc-drift summary |
 | `[contradicted]` | Two sources disagree, unresolved | assumptions register |
 
-There is intentionally **no `confirmed` flag**, and no others may be invented — a flag the
+There is intentionally **no `confirmed` flag**, and no others may be invented, because a flag the
 reader hasn't been taught is just noise.
 
 ### `[unchecked]` vs `[unverified]`
@@ -29,9 +29,9 @@ reader hasn't been taught is just noise.
 These are the two easiest to conflate, and keeping them apart is what makes `[unverified]` mean
 something:
 
-- `[unchecked]` — **no current code check.** Either nobody has compared it yet — what an existing
-  doc asserts, captured verbatim in Phase 0 so Phase 1 can test it — or the check it once had is
-  stale because the code moved.
+- `[unchecked]` — **no current code check.** Either nobody has compared it yet (what an existing
+  doc asserts, captured word for word in Phase 0 so Phase 1 can test it), or the check it once had
+  is stale because the code moved.
 - `[unverified]` — **somebody has looked**, and the claim is unconfirmed by a *person* rather
   than untested. Either the code supports it and no stakeholder has signed it off, or the code
   can't speak to it at all (intent, policy, ownership) and only a person could settle it.
@@ -42,7 +42,7 @@ a person".
 
 ### When a claim legitimately carries `[unchecked]`
 
-Phase 1 re-statuses every `[unchecked]` claim it can. Two ways it legitimately can't — and one way
+Phase 1 re-statuses every `[unchecked]` claim it can. Two ways it legitimately can't, and one way
 the flag comes back later:
 
 - **The code can't settle it** — the claim is about intent, rationale, policy or ownership. It
@@ -50,7 +50,7 @@ the flag comes back later:
   it. This is the normal outcome, not an exception.
 - **Recon hasn't reached it yet** — its area is still pending in the coverage ledger, or a deep dive
   was deferred to a later session. It **stays `[unchecked]`**: pretending otherwise would claim an
-  assessment that didn't happen. Record it in `assumptions-register.md` as *unresolved — area not yet
+  assessment that didn't happen. Record it in `assumptions-register.md` as *unresolved, area not yet
   covered*, with the area it belongs to, and name it in the completion report.
 - **The code moved under it** — a later run's freshness check found drift and the user chose not to
   re-recon, so a claim that *was* verified no longer has a current code check behind it. It goes
@@ -79,7 +79,7 @@ Phase 4: any accepted claim without evidence   → demoted back to [assumption] 
 Later run: drift, user declines re-recon      → accepted claim reverts to [unchecked]
 ```
 
-Accepted knowledge always has a backing entry in the traceability index — either a code location
+Accepted knowledge always has a backing entry in the traceability index: either a code location
 or a named stakeholder (or both).
 
 ---
@@ -87,14 +87,14 @@ or a named stakeholder (or both).
 ## Flagging in `code-only` mode
 
 In `code-only` mode nothing has been validated by a person, so a literal reading of the model
-would flag `[unverified]` on virtually every sentence — which destroys the signal the
+would flag `[unverified]` on virtually every sentence, which destroys the signal the
 exception-only rule exists to create. Instead:
 
 - **Say it once, in the header.** The document's `Status` line carries the caveat for the whole
   file: *code-derived, not validated by a person.* The reader learns it before the first
   sentence and doesn't need reminding per line.
-- **Reserve inline flags for load-bearing uncertainty** — a claim where a reader who acted on it
-  could get it materially wrong (a business rule, a threshold, a permission, an SLA). Not
+- **Reserve inline flags for uncertainty that carries weight:** a claim where a reader who acted on
+  it could get it materially wrong (a business rule, a threshold, a permission, an SLA). Not
   descriptive statements the code plainly supports.
 - **The register stays complete.** Nothing is lost by not stamping inline: every open item is in
   `assumptions-register.md` either way, and that's the list to work through.
@@ -112,14 +112,14 @@ trail. Reference it by claim ID from a doc only when a reader is likely to want 
 Recommended row: `claim-id | claim (short) | source (path:line / stakeholder) | confidence`.
 
 **A claim gets its row as it's written, not reconstructed afterwards.** Whoever writes a claim into a
-doc adds the row at that moment, while the evidence is in front of them — a batch reconstructed from
-memory at the end is provenance that only looks like provenance, and it's the failure Phase 4's
-first check exists to catch. IDs run sequentially and stay stable across runs, so a doc that cites
-one keeps pointing at the same claim.
+doc adds the row at that moment, while the evidence is in front of them. A batch reconstructed from
+memory at the end produces rows nobody can check, and it's the failure Phase 4's first check exists
+to catch. IDs run sequentially and stay stable across runs, so a doc that cites one keeps pointing
+at the same claim.
 
-Substantive claims get a row as the norm. For a **load-bearing** claim — a rule, threshold,
-permission, SLA or ownership statement — it isn't optional: Phase 4 treats a missing entry there as
-material.
+Substantive claims get a row as the norm. For a claim that **carries real weight** (a rule,
+threshold, permission, SLA or ownership statement) it isn't optional: Phase 4 treats a missing entry
+there as material.
 
 ---
 
@@ -132,11 +132,11 @@ is the first thing to resolve before relying on the docs for a change.
 
 ---
 
-## No invention (the rule — stated only here)
+## No invention (the rule, stated only here)
 
 If a statement isn't in the code and hasn't been confirmed by a person, it either carries a flag
 or it doesn't get written. **Never invent a business rule**, a threshold, an actor, an SLA or a
-rationale to fill a gap in the story — a plausible-sounding rule is worse than an admitted gap,
+rationale to fill a gap in the story. A plausible-sounding rule is worse than an admitted gap,
 because the next reader acts on it and nothing in the repo contradicts them.
 
 Where the code shows *what* but not *why*, that's an `[assumption]` with the evidence and the
@@ -144,9 +144,9 @@ question, not a guess dressed as a finding.
 
 ---
 
-## Confidence (the calibration — stated only here)
+## Confidence (the calibration, stated only here)
 
-Annotate High/Med/Low alongside a flag — especially on `[assumption]` items — so the
+Annotate High/Med/Low alongside a flag, especially on `[assumption]` items, so the
 highest-impact, lowest-confidence items get validated first. It's also what the interview queue
 sorts on.
 
@@ -166,9 +166,9 @@ Two things set it, and the lower of the two wins.
 - **Medium at best** — structure inferred from text patterns. Grepping imports can be wrong in both
   directions: a project can reference what it never uses, and DI or reflection couples things no
   import shows.
-- Where a text-inferred claim is **load-bearing** — a boundary, a rule, a permission — it's an
+- Where a text-inferred claim **carries real weight** (a boundary, a rule, a permission) it's an
   `[assumption]`, not a Medium-confidence fact.
 
-Recording the tier in the recon manifest is what makes this auditable later; a doc reads identically
-whether its boundaries came from the build graph or from pattern-matching, and that difference
-matters more than the sentence.
+Recording the tier in the recon manifest is what makes this auditable later: a doc reads identically
+whether its boundaries came from the build graph or from pattern-matching, so the manifest is the
+only place that difference survives.

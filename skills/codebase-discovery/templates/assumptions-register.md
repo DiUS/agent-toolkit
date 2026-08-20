@@ -1,7 +1,7 @@
 # Assumptions Register
 
 > **Last updated:** YYYY-MM-DD
-> **Purpose:** Single list of everything still needing attention. NOT an onboarding doc — never
+> **Purpose:** Single list of everything still needing attention. NOT an onboarding doc, and never
 > linked from CLAUDE.md / AGENTS.md, though the root README may link it from open risks.
 > Committed: it's the audit trail for docs that are themselves committed.
 

@@ -2,7 +2,7 @@
 
 > **Last updated:** YYYY-MM-DD
 > **Purpose:** Records what fed the recon so later runs can detect staleness. NOT an
-> onboarding doc — local process state, so git-ignoring this file is recommended.
+> onboarding doc, but local process state, so git-ignoring this file is recommended.
 
 ## Run info
 
@@ -13,7 +13,7 @@
 - **Exclusions in force:** <gitignore-syntax patterns from --exclude, beyond .gitignore and the
   defaults. Applied on resume, and drift in these paths is ignored by the freshness check.>
 - **Navigation tiers used:** <which of declared manifests / repo toolchain / text search / AST search
-  / LSP were actually available and used — and which answered the structural map. A graph from a
+  / LSP were actually available and used, and which answered the structural map. A graph from a
   manifest is fact; one inferred from imports is not.>
 
 ## Existing docs read (Phase 0)
@@ -24,7 +24,7 @@
 
 ## Coverage ledger (Phase 1 onward)
 
-<!-- Every area, including the ones not yet reached — an area missing from this table is an invisible
+<!-- Every area, including the ones not yet reached. An area missing from this table is an invisible
 gap; one listed as pending is a known one. Also the unit the freshness check works in: the next run
 diffs the recon commit against HEAD and re-recons the areas whose paths changed. Areas, never one row
 per file. -->
@@ -38,7 +38,7 @@ per file. -->
 
 ## Files actually read (Phase 1)
 
-<!-- The high-signal subset recon opened — bounded by design, not a listing of the repo. Only
+<!-- The high-signal subset recon opened: bounded by design, not a listing of the repo. Only
 needed for the no-git fallback, where these are hashed instead of diffed. -->
 
 | Path | Area | Hash (no-git fallback only) |

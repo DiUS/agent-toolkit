@@ -23,7 +23,7 @@ graph LR
 
 ## Components
 
-<!-- The load-bearing parts only. What each is responsible for. A small table is ideal. -->
+<!-- The parts a change would have to touch. What each is responsible for. A small table is ideal. -->
 
 | Component | Responsibility | Key tech |
 |---|---|---|
@@ -39,7 +39,7 @@ graph LR
 
 ## Cross-cutting concerns
 
-<Auth, logging/audit, error handling, config/secrets, caching — briefly, as-is.>
+<Auth, logging/audit, error handling, config/secrets, caching: briefly, as-is.>
 
 ## Notable constraints & risks
 

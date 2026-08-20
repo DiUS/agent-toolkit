@@ -1,8 +1,8 @@
 # Enabling code-intelligence / LSP navigation
 
-**Tier E of the source ladder in [`navigation.md`](navigation.md)** — symbol-level navigation:
+**Tier E of the source ladder in [`navigation.md`](navigation.md)** covers symbol-level navigation:
 go-to-definition, find-references, call hierarchy, type information. That file says where LSP sits
-among the tiers and when recon reaches for it; this one covers only what the tier needs in order to
+among the tiers and when recon reaches for it; this one covers only what the tier needs to
 exist, and how to tell whether you have it.
 
 It deliberately doesn't document any one bridge's configuration. That belongs in that project's own
@@ -15,14 +15,14 @@ README, changes without notice, and would rot here silently.
 > the bridges are third-party, their tool names and config vary, and the guidance below is derived
 > from their documentation rather than from a run we've done.
 >
-> The downside is bounded by design — if the symbol tools aren't there, recon uses grep and the run
+> The downside is bounded by design: if the symbol tools aren't there, recon uses grep and the run
 > proceeds. But don't plan around LSP being available, and don't spend long fighting the setup on a
 > deadline.
 >
 > If you do get it working, name the bridge, version and language on the recon manifest's
 > **Navigation tiers used** line and tell the toolkit maintainers, so this can stop being untested.
 
-> ## ⚠️ A language server must be installed **and running** for this option to work
+> ## A language server must be installed **and running** for this option to work
 >
 > LSP navigation is only actually available when **all** of the following are true:
 >
@@ -33,8 +33,8 @@ README, changes without notice, and would rot here silently.
 > 3. The language server can **start and index your project**.
 >
 > If any of these isn't in place, the symbol tools won't be present, so the skill will report that
-> LSP isn't available and **fall back to grep**. LSP is an opt-in enhancement, never a requirement —
-> the skill runs fine without it.
+> LSP isn't available and **fall back to grep**. LSP is opt-in, never a requirement, and the skill
+> runs fine without it.
 
 ---
 
@@ -50,7 +50,7 @@ and relationship tracing instead of text search:
 | Hover / signature | Type, signature and doc for a symbol |
 | Document or workspace symbols | Enumerate an API surface or a module's members |
 
-**Don't assume specific tool names.** Bridges expose these under their own names — an `lsp_`-prefixed
+**Don't assume specific tool names.** Bridges expose these under their own names. An `lsp_`-prefixed
 set is common, but it's a convention, not a contract. Enumerate the tools the server actually
 registers and map them to the capabilities above.
 
@@ -63,21 +63,14 @@ the two modes complement each other rather than competing.
 
 ### 1. Install the language server(s) for your repo
 
-Install only what your target codebase needs. Examples:
+Install only what your target codebase needs, one of these rather than all:
 
-```bash
-# Go
-go install golang.org/x/tools/gopls@latest
-
-# TypeScript / JavaScript
-npm install -g typescript-language-server typescript
-
-# Python
-pip install python-lsp-server
-```
+- **Go** — `go install golang.org/x/tools/gopls@latest`
+- **TypeScript / JavaScript** — `npm install -g typescript-language-server typescript`
+- **Python** — `pip install python-lsp-server`
 
 Verify each is on your `PATH` (e.g. `gopls version`). **If the language server isn't installed and
-runnable, the LSP option cannot work** — this is the most common cause of "LSP unavailable".
+runnable, the LSP option cannot work**, and that's the most common cause of "LSP unavailable".
 
 ### 2. Pick an LSP-backed MCP bridge
 
@@ -88,14 +81,14 @@ Two that are known to work, both third-party:
 | [lsp-mcp](https://github.com/mickeyinfoshan/lsp-mcp) | Small and transparent; you build it and point a config file at the language servers you installed |
 | [Serena](https://github.com/oraios/serena) | Batteries-included, ~40 languages, manages language servers for you; more setup surface, less per-language wiring |
 
-Follow that project's own README for building and configuring it — including which languages it
+Follow that project's own README for building and configuring it, including which languages it
 launches and how. Pin to a release or a known commit rather than tracking `main`: you're about to
 grant this process tool access inside your agent, on whatever codebase you point it at. On client
 work, check that's acceptable before you do.
 
 ### 3. Register it with your agent
 
-**Claude Code** — easiest is the CLI:
+**Claude Code.** The easiest route is the CLI:
 
 ```bash
 claude mcp add --scope user lsp -- /absolute/path/to/the/bridge [its flags]
@@ -118,20 +111,20 @@ Or register it for one project by creating `.mcp.json` in that project's root:
 > A server declared there simply won't appear, which looks exactly like the "language server isn't
 > running" failure and wastes an hour.
 
-**Cursor / Windsurf / any MCP client** — point your MCP config at the same command, following that
+**Cursor / Windsurf / any MCP client.** Point your MCP config at the same command, following that
 client's own format.
 
 ### 4. Confirm it's live
 
 Restart the agent and check the server is connected and its tools are listed. Match them against the
-four capabilities above. If they're missing, the language server or the bridge isn't running — the
-skill will use grep until that's fixed.
+four capabilities above. If they're missing, the language server or the bridge isn't running, and
+the skill will use grep until that's fixed.
 
 ---
 
 ## Troubleshooting
 
-- **No symbol tools showing:** the bridge isn't registered or failed to start — check the agent's
+- **No symbol tools showing:** the bridge isn't registered or failed to start. Check the agent's
   MCP server list, then the bridge's own logs (location is up to that project).
 - **Empty definition/references results:** point the position at the symbol itself, and make sure the
   project's build config (e.g. `tsconfig.json`, a Go module) is present so the server can index.

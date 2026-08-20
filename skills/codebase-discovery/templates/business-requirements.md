@@ -9,7 +9,7 @@
 Keep to ~1–2 pages.
 
 No Status or Source column on either table below: a flag goes inline in the requirement's own text
-where it's load-bearing, sparingly, and the evidence goes in the traceability index — keyed by the
+where it carries weight, sparingly, and the evidence goes in the traceability index, keyed by the
 requirement's own ID (FR-1, NFR-1), not a second C-n minted for the same claim. -->
 
 ## Purpose & outcomes
