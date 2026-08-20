@@ -24,6 +24,12 @@ Phase 0 recorded the output root, the docs-site decision and the pre-existing fi
 `discovery-state.md` — read them there. If the output root was never settled, stop and agree it
 with the user rather than assuming `docs/`.
 
+**Where the content comes from.** The references above govern *how* to write; the material is
+already recorded — Phase 1's cited hypotheses, and `discovery-state.md`'s **Facts**, **Glossary in
+progress** and **Decisions**, which the interview kept current. Open items are in
+`assumptions-register.md`. Read those before writing, and don't re-derive from the code what an
+earlier phase already established.
+
 ---
 
 ## What to write
@@ -49,6 +55,11 @@ judgements are this phase's own, plus two rules — one about coverage, one abou
   `docs/_discovery/traceability-index.md` per claim, added while the evidence is in front of you —
   see the traceability rule in provenance-and-status. Phase 4 checks these, and a load-bearing claim
   without one is a blocking finding.
+
+**Write the glossary first.** Area directories and concept filenames are glossary terms, so the
+glossary has to exist before anything can be named from it — draft it from the confirmed terms
+before naming anything else. Naming a file for a concept that isn't in it yet is what
+output-conventions' add-it-first rule is about.
 
 Use the matching file in `../templates/`; the area files use the same templates as their unsplit
 equivalents, written per concept rather than per repo.
