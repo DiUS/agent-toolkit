@@ -11,29 +11,13 @@ Do not write onboarding docs in this phase. Only gather and set up state.
 
 ## 1. Resume or initialise working state
 
-Check for prior state and resume if present:
+**Resolve the invocation options first**, per `SKILL.md`. Several of them pre-answer questions in
+this phase — `--scope`, `--output`, `--fresh`, `--on-drift`, `--areas`, `--exclude`, `--interview` —
+so state the given value and skip the question rather than asking anyway.
 
-- **Resolve the invocation options first**, per `SKILL.md`. Several of them pre-answer questions in
-  this phase — `--scope`, `--output`, `--fresh`, `--on-drift`, `--areas`, `--exclude`, `--interview` —
-  so state the given value and skip the question rather than asking anyway.
-- If `docs/_discovery/discovery-state.md` exists, read it and continue from where the last
-  session left off rather than redoing finished work. Decide which phase to re-enter using the
-  resume table in `SKILL.md`, and tell the user which one and why. `--fresh` and `--interview` decide
-  it for you.
-- If the state records an interview that was stopped with items still open, rebuild the top 5 from
-  the register and offer to continue it — say what the last session covered first. See the
-  interview playbook.
-- If `docs/_discovery/recon-manifest.md` exists, run the **freshness check** per
-  [`../references/freshness.md`](../references/freshness.md) (commit-based, not timestamps). If
-  there's drift, report it and put the choice to the user as set out there — don't silently
-  re-recon, and don't silently trust stale docs. Record their decision in the manifest's
-  freshness-check log.
-
-If neither exists, create `docs/_discovery/` and initialise both files from the templates
-(`templates/discovery-state.md`, `templates/recon-manifest.md`).
-
-**With `--fresh` over a previous run, confirm before wiping.** State exists, so there's work to
-lose. Report what the previous run got to — areas reconned, how far the interview got — then offer
+**With `--fresh`, confirm before wiping.** Where `docs/_discovery/` already exists there's work to
+lose, so this comes before anything resumes from that state or writes over it. Read the state to
+report what the previous run got to — areas reconned, how far the interview got — then offer
 **resume** or **clean run**, and be specific about the cost rather than saying "this is destructive":
 
 - `discovery-state.md` and `recon-manifest.md` hold the interview progress and the recon memory, and
@@ -45,6 +29,24 @@ On the user's confirmation, delete all four and start cold. Wipe `_discovery/` o
 previous run wrote stay where they are, for this run to refresh in place. Half-measures are worse
 than either choice: keeping the register while discarding the state leaves the new run appending to
 another run's open items with no way to tell them apart.
+
+Then check for prior state and resume if present:
+
+- If `docs/_discovery/discovery-state.md` exists, read it and continue from where the last
+  session left off rather than redoing finished work. Decide which phase to re-enter using the
+  resume table in `SKILL.md`, and tell the user which one and why. `--interview` decides it for you,
+  and so does `--fresh` once the clean run above is confirmed.
+- If the state records an interview that was stopped with items still open, rebuild the top 5 from
+  the register and offer to continue it — say what the last session covered first. See the
+  interview playbook.
+- If `docs/_discovery/recon-manifest.md` exists, run the **freshness check** per
+  [`../references/freshness.md`](../references/freshness.md) (commit-based, not timestamps). If
+  there's drift, report it and put the choice to the user as set out there — don't silently
+  re-recon, and don't silently trust stale docs. Record their decision in the manifest's
+  freshness-check log.
+
+If neither exists, create `docs/_discovery/` and initialise both files from the templates
+(`templates/discovery-state.md`, `templates/recon-manifest.md`).
 
 Get today's real date from the environment now and reuse it for every `Last updated` stamp this run,
 per the header-block rule in
