@@ -12,7 +12,7 @@ Do not write onboarding docs in this phase. Only gather and set up state.
 ## 1. Resume or initialise working state
 
 **Resolve the invocation options first**, per `SKILL.md`. Several of them pre-answer questions in
-this phase — `--scope`, `--output`, `--fresh`, `--on-drift`, `--areas`, `--exclude`, `--interview` —
+this phase — `--output`, `--fresh`, `--on-drift`, `--exclude`, `--interview` —
 so state the given value and skip the question rather than asking anyway.
 
 **With `--fresh`, confirm before wiping.** Where `docs/_discovery/` already exists there's work to
@@ -54,9 +54,8 @@ per the header-block rule in
 
 ---
 
-## 2. Confirm scope and mode
+## 2. Confirm mode and available inputs
 
-- Confirm the target: whole repo, or a named subsystem/module.
 - Confirm the mode: **full** (a BA/PO/SME is available) or **code-only** (none yet).
 - Confirm whether optional inputs are available (git for the freshness check, sub-agents, the
   toolchain and search tools in the navigation ladder). Record what is and isn't available in the
@@ -64,7 +63,7 @@ per the header-block rule in
   [`../references/navigation.md`](../references/navigation.md), so noting what exists here makes that
   cheaper.
 
-State the scope, mode and available inputs back to the user before proceeding.
+State the mode and the available inputs back to the user before proceeding.
 
 ---
 
@@ -148,7 +147,7 @@ where the flag legitimately persists.
 Update `docs/_discovery/recon-manifest.md`:
 
 - List the existing docs read (path + last-modified).
-- Note the mode, scope, and available optional inputs.
+- Note the mode, the exclusions in force, and the available optional inputs.
 - Leave the source-file hash list for Phase 1 to populate as it reads.
 
 ---
@@ -156,7 +155,7 @@ Update `docs/_discovery/recon-manifest.md`:
 ## Exit criteria
 
 - Working state initialised or resumed; freshness check run if applicable.
-- Scope, mode and available inputs confirmed with the user.
+- Mode and available inputs confirmed with the user.
 - All existing docs found and their statements logged as `[unchecked]`.
 - Write target surveyed: docs-site tooling detected, existing files at the target paths listed,
   and the **output root agreed with the user** and recorded in the discovery state.

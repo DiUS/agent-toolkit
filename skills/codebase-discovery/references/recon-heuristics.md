@@ -80,6 +80,12 @@ sample the tests around the business-logic hotspots.
 2. **The defaults above.**
 3. **`--exclude` from the user** — gitignore syntax, `!` negation included. No new format to learn.
 
+**An excluded path stays on the Tier 0 map, marked excluded; it just gets no deep dive.** The
+declared graph is a fact about the repo, so dropping a module from the map would misrepresent what
+the system is — but nothing may be claimed about code nobody read. That's what lets
+`current-architecture.md` honestly say "five services; this run covered one", and it's how you narrow
+a monorepo to a single service without the result reading as the whole system.
+
 Record the exclusions in the recon manifest's run info, because they outlive the run: a resumed
 session applies them without being told again, and **the freshness check ignores drift in excluded
 paths** — otherwise a churning generated directory reports the docs as stale forever. A team wanting

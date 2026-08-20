@@ -48,10 +48,10 @@ the flag comes back later:
 - **The code can't settle it** — the claim is about intent, rationale, policy or ownership. It
   becomes `[unverified]` and goes to the interview; a person is the only thing that can resolve
   it. This is the normal outcome, not an exception.
-- **Recon never reached it** — the claim concerns an area outside the run's scope, or a deep dive
-  that was deferred. It **stays `[unchecked]`**: pretending otherwise would claim an assessment
-  that didn't happen. Record it in `assumptions-register.md` as *unresolved — outside recon
-  scope*, with the area it belongs to, and name it in the completion report.
+- **Recon hasn't reached it yet** — its area is still pending in the coverage ledger, or a deep dive
+  was deferred to a later session. It **stays `[unchecked]`**: pretending otherwise would claim an
+  assessment that didn't happen. Record it in `assumptions-register.md` as *unresolved — area not yet
+  covered*, with the area it belongs to, and name it in the completion report.
 - **The code moved under it** — a later run's freshness check found drift and the user chose not to
   re-recon, so a claim that *was* verified no longer has a current code check behind it. It goes
   **back** to `[unchecked]`; the mechanism is in [`freshness.md`](freshness.md).
@@ -71,7 +71,7 @@ Phase 1: checked against code
             code says otherwise               → [outdated] (+ code-derived suggestion)
             sources disagree                  → [contradicted]
             code can't settle it              → [unverified], carried to interview
-            area outside recon scope           → stays [unchecked], logged as out-of-scope
+            area not yet covered               → stays [unchecked], logged as pending
          found in the code (no prior doc)     → [unverified]
 Phase 2: stakeholder confirms/corrects        → accepted (unmarked), source = stakeholder
             stakeholder can't confirm          → stays [assumption]/[unverified]

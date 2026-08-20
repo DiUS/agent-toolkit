@@ -1,7 +1,7 @@
 ---
 name: "codebase-discovery"
 description: "Extract domain, architecture, business rules, workflows and a business glossary from an existing (often poorly-documented) codebase, then validate the findings with a senior BA/Product Owner one question at a time. Produces onboarding-grade docs under docs/ that give a new team member — human or AI — enough context to be productive, ready for harness engineering / Spec Kit. Use when onboarding onto an unfamiliar codebase, reverse-engineering business knowledge, reconstructing lost documentation, or preparing a repo for spec-driven development."
-argument-hint: "<path> full|code-only --scope <paths> --areas <names> --exclude <globs> --output <dir> --fresh --on-drift <action> --interview — all optional, or just say what you want in plain words"
+argument-hint: "full|code-only --exclude <globs> --output <dir> --fresh --on-drift <action> --interview — all optional, or just say what you want in plain words"
 user-invocable: true
 disable-model-invocation: false
 ---
@@ -26,11 +26,8 @@ infer. All optional; absent means work it out as usual.
 
 | Argument | Effect |
 |---|---|
-| `<path>` | analyse that directory instead of the working directory. Narrows what's **read**; output still lands at the project root — see the write contract |
 | `full` \| `code-only` | the mode (see Modes) |
-| `--scope <paths>` | limit recon to these paths |
-| `--areas <names>` | cover only these areas this run |
-| `--exclude <globs>` | additional exclusions, gitignore syntax — see recon-heuristics |
+| `--exclude <globs>` | additional exclusions, gitignore syntax — see recon-heuristics. Also how you narrow a monorepo to one service |
 | `--output <dir>` | the output root, instead of agreeing it in Phase 0 |
 | `--fresh` | start cold instead of resuming. Where a previous run exists, Phase 0 confirms first — a clean run **discards** its `_discovery/` files (see Phase 0) |
 | `--on-drift <recon\|full-recon\|proceed\|report>` | pre-answer the freshness check's question |
@@ -41,7 +38,7 @@ infer. All optional; absent means work it out as usual.
 - **Resolve the request, however it's phrased.** These are a shorthand, not the interface: *"look at
   just billing, skip the test projects, don't touch the docs site"* must land on the same settings as
   the equivalent flags. Extract from prose, flags, or a mix.
-- **Echo the resolved set back in one line before starting** — *"code-only · scope `src/Billing` ·
+- **Echo the resolved set back in one line before starting** — *"code-only ·
   excluding `tests/*` · output `docs/discovery/` · drift → recon"*. There's no parser; the user needs
   to see what was understood.
 - **Report anything you couldn't resolve; never guess.** A silently dropped `--exclude` means reading
@@ -54,9 +51,6 @@ infer. All optional; absent means work it out as usual.
 `--interview` has three limits: it does **not** override the drift rule stated with the resume table
 below; with no recon state it says so and offers recon rather than interviewing unseeded; and combined
 with `code-only` it's contradictory, so report it instead of picking one.
-
-`--scope` and `--areas` are different axes — paths and names. Given both, scope bounds what's read
-and areas selects within it; if they don't overlap, say so rather than silently honouring one.
 
 ---
 
@@ -214,6 +208,7 @@ between them are entered according to what the working state records:
 | Recorded state | Re-enter at |
 |---|---|
 | Nothing (first run) | Phase 1 |
+| Recon incomplete — areas still pending in the ledger, **no drift** | Phase 1, continuing with those areas |
 | Recon done, interview stopped with items open, **no drift** | Phase 2 — continue the queue |
 | Recon done, interview stopped, **drift in the affected areas** | Phase 1 scoped to those areas, then Phase 2 |
 | Interview done, docs written, drift since | whatever the user chose in the freshness check |
@@ -251,7 +246,7 @@ When done, report:
 - Doc-drift findings (existing docs vs code).
 - On a re-run: code drift since the last recon, and what the user chose to do about it.
 - Open `[assumption]` / `[unverified]` / `[contradicted]` items and their impact.
-- Coverage gaps: any claim still `[unchecked]`, and why it is.
+- Coverage: any area still pending in the ledger, and any claim still `[unchecked]` with why.
 - (full mode) Interview coverage: how far the queue got, and what's parked as *needs SME* —
   highest-impact items named, with a pointer to the register for the rest.
 - Whether a `CLAUDE.md` / `AGENTS.md` was created or proposed.

@@ -7,7 +7,6 @@
 ## Run info
 
 - **Mode:** full | code-only
-- **Scope:** <repo / subsystem>
 - **Recon commit:** <git rev-parse HEAD> · **working tree:** clean | dirty (uncommitted changes
   were read, so the commit alone doesn't describe what recon saw)
 - **Available inputs:** git for freshness (yes/no) · sub-agents (yes/no) · stakeholder (yes/no)
@@ -25,8 +24,8 @@
 
 ## Coverage ledger (Phase 1 onward)
 
-<!-- Every area, including the ones NOT covered — an area missing from this table is an invisible
-gap; one listed as uncovered is a known one. Also the unit the freshness check works in: the next run
+<!-- Every area, including the ones not yet reached — an area missing from this table is an invisible
+gap; one listed as pending is a known one. Also the unit the freshness check works in: the next run
 diffs the recon commit against HEAD and re-recons the areas whose paths changed. Areas, never one row
 per file. -->
 
@@ -34,7 +33,7 @@ per file. -->
 |---|---|---|---|---|---|
 | billing | src/Billing/, src/Invoicing/ | full | declared + text search | done (A. Patel) | areas/billing/* |
 | identity | src/Identity/ | hotspots only | text search (inferred) | queued | — |
-| reporting | src/Reporting/ | **not covered** — out of scope this run | — | — | — |
+| reporting | src/Reporting/ | **pending** — not yet reached | — | — | — |
 
 ## Files actually read (Phase 1)
 

@@ -13,7 +13,7 @@ useless without naming which one. It's also how the interview queue groups quest
 
 | ID | Item | Flag | Confidence | Impact if wrong | Source | Who can confirm | Resolution / next step |
 |---|---|---|---|---|---|---|---|
-| A-1 | <statement> | [assumption] / [unverified] / [outdated] / [contradicted] / [unchecked] | H/M/L | <what breaks> | <path:line / doc / stakeholder> | <role / name, or area owner> | <interview / recon <area> (out of scope this run)> |
+| A-1 | <statement> | [assumption] / [unverified] / [outdated] / [contradicted] / [unchecked] | H/M/L | <what breaks> | <path:line / doc / stakeholder> | <role / name, or area owner> | <interview / recon <area> (not yet covered)> |
 
 ## Resolved
 

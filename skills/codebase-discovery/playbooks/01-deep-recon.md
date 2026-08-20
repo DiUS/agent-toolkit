@@ -5,7 +5,7 @@ not designing changes).
 **Goal:** Build an evidence-backed understanding of the codebase — structure, data model,
 contracts, and where the business logic lives — and validate the Phase 0 claims against it.
 
-"Deep" means **thorough coverage of the high-signal areas, reached selectively** — not
+"Deep" means **every area covered, but only the high-signal files within each one read** — not
 reading every file. See [`../references/recon-heuristics.md`](../references/recon-heuristics.md)
 for what to look for and where.
 
@@ -32,7 +32,7 @@ On large repos, keep the main context lean:
 - **Reconcile what comes back against the declared graph.** A scout searches text, so it caps its
   structural findings at Medium. Raise them to High where the module graph from Tier A/B confirms the
   relationship — otherwise the declared-graph work never reaches the findings that need it.
-- **Tiered, not exhaustive.** Do the cheap structural map first and get approval before
+- **Tiered.** Do the cheap structural map first and get approval before
   spending budget on deep dives.
 - **Cite as you go.** Every finding records `path:line` (or symbol) so it can be verified
   later without re-reading.
@@ -82,28 +82,33 @@ the docs get filed under (see the area layout in
 areas and name each one from the domain language, not the namespace — a candidate glossary term,
 which the interview then confirms.
 
-Where a system has more than one area, you won't cover them all at once. Choose the order:
+What's left to decide is the **order** you work through them:
 
-0. **`--areas`, if given.** Match the given names against the areas you just named. Where one
-   doesn't match, say so and ask — a business word the user chose and a grouping you derived won't
-   always line up, and picking the nearest module is the guess this skill doesn't make. Note that
-   Tier 0 still maps the whole declared graph either way: that's what produces the names to match
-   against, and `--areas` narrows the deep dives below, not the map.
-1. **Ask the user.** They have a reason for doing this now, and it beats any heuristic.
-2. **Fan-in from the declared graph.** The most-depended-upon modules are the shared kernel; getting
-   those wrong poisons every other area's docs. This is a fact from the graph, not an inference.
+1. **Ask the user, and give them the graph facts to decide with.** Which area matters most is a
+   business judgement — the code can't make it, and neither can you. Show the area list, say which
+   are the shared kernel everything else depends on and which are leaves, and let them choose.
+2. **Fan-in from the declared graph** — the fallback when nobody's answering. The most-depended-upon
+   modules are the shared kernel; understanding those wrong colours every dependent area's docs.
+   This is a fact from the graph, not an inference.
 3. **Entry points.** User-facing areas first when nothing else decides it.
 
-Record every area in the manifest's coverage ledger — including the ones you aren't covering, with
-why. An area missing from the ledger is an invisible gap; an area listed as uncovered is a known one.
+Record every area in the manifest's coverage ledger, including the ones not yet reached. An area
+missing from the ledger is an invisible gap; an area listed as pending is a known one.
 
-Ask the user to confirm the scope of deep dives before continuing (especially on large repos).
+**On a large repo, work across sessions rather than trimming.** Tier 0 has just priced the job — the
+area list and the rough size — so put that in front of the user before spending it, and let them say
+where to start. The ledger and the working state carry the rest to the next session; the answer to a
+big repo is more sessions, not less coverage.
 
 ---
 
 ## Tier 1 — Targeted deep dives
 
 Dive only where knowledge concentrates. For each, capture findings with citations.
+
+**The four concerns below run within each area, not across the repo.** One scout per area covers all
+four for that area, which is why the ledger records recon depth per area and why findings come back
+already shaped for the docs they'll become.
 
 ### a. Data model — the domain falls out here
 ORM entities/models, DB migrations, schema files, DTOs. Extract entities, key attributes,
@@ -144,11 +149,11 @@ set its status:
 - **`[contradicted]`** — sources disagree and it's unresolved → record both sides.
 - **`[unverified]`** — the code can't settle it (intent, rationale, policy, ownership) → carries
   into the interview, where a person is the only thing that can resolve it.
-- **stays `[unchecked]`** — the claim's area was **outside this run's recon scope**, so it wasn't
-  assessed at all. Don't dress that up as a verdict: leave the flag, and record it in
-  `assumptions-register.md` as *unresolved — outside recon scope*, naming the area. It goes in
-  the completion report as a coverage gap, and prefer keeping the statement out of the onboarding
-  docs rather than publishing an unexamined claim.
+- **stays `[unchecked]`** — recon hasn't reached the claim's area yet, so it wasn't assessed at all.
+  Don't dress that up as a verdict: leave the flag, and record it in `assumptions-register.md` as
+  *unresolved — area not yet covered*, naming the area. It goes in the completion report as
+  outstanding coverage, and prefer keeping the statement out of the onboarding docs rather than
+  publishing an unexamined claim.
 
 Log outdated/contradicted items in `assumptions-register.md`; they become interview
 questions and feed the doc-drift summary. See
@@ -180,7 +185,7 @@ timestamps.
 
 - Tier 0 map approved; targeted dives complete for data model, contracts, hotspots, tests.
 - Every Phase 0 claim re-statused (accepted / `[outdated]` / `[contradicted]` / `[unverified]`),
-  or left `[unchecked]` and logged as outside recon scope.
+  or left `[unchecked]` and logged as belonging to an area not yet covered.
 - Cited hypotheses produced for each doc area.
 - Assumptions register and traceability index updated; recon manifest records sources.
 - Ready for the interview (full mode) or synthesis (code-only mode).

@@ -10,9 +10,8 @@ later phase is bound by it.
    *underneath* the root never changes, so relative links between the output files are unaffected
    by which root was chosen.
 2. **The root sits at the project root**, alongside `.git` and `.claude/` — not in the current
-   directory when that's somewhere below it, and never inside the path being analysed. `<path>` and
-   `--scope` narrow what recon **reads**; they never move where output **lands**. "Project root"
-   throughout this skill means that directory, so the project-root `README.md` is its README.
+   directory when that's somewhere below it. "Project root" throughout this skill means that
+   directory, so the project-root `README.md` is its README.
    `--output` names the root and is read relative to it; where the path given would land outside the
    project root, say so and confirm rather than writing there on the strength of a flag.
 3. **Write nothing outside that root.** The one exception is the project-root `README.md`, which

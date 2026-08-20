@@ -12,13 +12,11 @@ it's growing, you're appending where you should be rewriting. Compact as you go:
   copy ageing in parallel.
 - Open items belong in assumptions-register.md and evidence in traceability-index.md; this file
   duplicates neither. Keep the interview queue to its five rows.
-- What earns its place: scope and mode, the write-target facts, open threads, decisions, and where
+- What earns its place: mode and options, the write-target facts, open threads, decisions, and where
   you stopped. Everything else has somewhere better to be. -->
 
+## Run
 
-## Scope & mode
-
-- **Target:** <repo / subsystem>
 - **Mode:** full | code-only
 - **Options as resolved:** <the invocation options, however they were phrased — reused on resume>
 - **Available inputs:** git (freshness)? sub-agents? stakeholder? — navigation tiers are in the recon
