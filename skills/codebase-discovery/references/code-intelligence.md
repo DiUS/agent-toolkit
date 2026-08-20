@@ -1,9 +1,9 @@
 # Enabling code-intelligence / LSP navigation
 
-Recon can navigate a codebase two ways: **grep + sub-agents** (the default, no setup) or
-**code-intelligence / LSP** — symbol-level navigation: go-to-definition, find-references, call
-hierarchy, type information. This guide covers what the second option needs and how to tell whether
-you have it.
+**Tier E of the source ladder in [`navigation.md`](navigation.md)** — symbol-level navigation:
+go-to-definition, find-references, call hierarchy, type information. That file says where LSP sits
+among the tiers and when recon reaches for it; this one covers only what the tier needs in order to
+exist, and how to tell whether you have it.
 
 It deliberately doesn't document any one bridge's configuration. That belongs in that project's own
 README, changes without notice, and would rot here silently.
@@ -19,8 +19,8 @@ README, changes without notice, and would rot here silently.
 > proceeds. But don't plan around LSP being available, and don't spend long fighting the setup on a
 > deadline.
 >
-> If you do get it working, record which bridge, version and language in the recon manifest and tell
-> the toolkit maintainers, so this can stop being untested.
+> If you do get it working, name the bridge, version and language on the recon manifest's
+> **Navigation tiers used** line and tell the toolkit maintainers, so this can stop being untested.
 
 > ## ⚠️ A language server must be installed **and running** for this option to work
 >
@@ -126,18 +126,6 @@ client's own format.
 Restart the agent and check the server is connected and its tools are listed. Match them against the
 four capabilities above. If they're missing, the language server or the bridge isn't running — the
 skill will use grep until that's fixed.
-
----
-
-## How the skill uses it
-
-At the start of recon the skill asks how to navigate. If you choose LSP:
-
-- It checks the symbol tools are actually present. If not, it says so and falls back to grep rather
-  than stalling.
-- It records the chosen mode and which server was used in `docs/_discovery/recon-manifest.md`, so the
-  provenance trail reflects how findings were obtained.
-- It still uses grep for literal-string lookups where that's faster.
 
 ---
 

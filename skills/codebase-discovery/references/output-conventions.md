@@ -196,7 +196,7 @@ because a name is the cheapest signal a reader or an agent has about whether to 
 
 ---
 
-## Required header block (every doc)
+## Required header block (every onboarding doc)
 
 Start every file with:
 
@@ -251,6 +251,7 @@ Aim for onboarding density, not completeness:
 | domain/domain-model.md | ~1–2 pages + 1 diagram — aggregates and cross-area relationships only |
 | domain/domain-glossary.md | one line per term |
 | business/business-requirements.md | ~1–2 pages, functional + NFR |
+| business/user-personas.md | a table of personas + a table of stakeholders |
 | tech/integrations.md | a table of systems + purpose + direction |
 | model-*.md | one concept: its entities, attributes and lifecycle |
 | rules-*.md | one rule cluster, each rule with condition, exceptions and rationale |

@@ -239,8 +239,6 @@ no-invention rule. Follow it; don't restate it.
 
 ---
 
----
-
 ## Completion report
 
 When done, report:

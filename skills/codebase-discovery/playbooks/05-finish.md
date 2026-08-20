@@ -17,12 +17,17 @@ payload of the whole exercise for a team that thought its docs were fine.
 
 ## 2. Reconcile contradictions with the user
 
-For every `[contradicted]` / `[outdated]` item, ask the user — **one at a time** — to confirm the
-correct version, always including a **suggested wording derived from the code**. Do not silently
-pick a version.
+For every `[contradicted]` / `[outdated]` item **still flagged** after recon and the interview, ask
+the user — **one at a time** — to confirm the correct version, always including a **suggested wording
+derived from the code**. Do not silently pick a version. Items Phase 2 already reconciled are
+settled; don't re-walk them.
 
-On confirmation the item becomes accepted knowledge (unmarked), with the evidence recorded. Anything
-the user can't settle now stays flagged and stays in the register.
+On confirmation a doc-vs-code item becomes accepted knowledge (unmarked), with the evidence recorded
+— the code is what settles it, so whoever is here can. An item that turns on intent, policy or
+ownership is a different matter: unless the person confirming owns it, it stays flagged and stays in
+the register as *needs SME*, per
+[`../references/provenance-and-status.md`](../references/provenance-and-status.md). This is the usual
+case in `code-only` mode.
 
 ## 3. Agent file (optional)
 

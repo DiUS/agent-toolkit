@@ -46,8 +46,8 @@ previous run wrote stay where they are, for this run to refresh in place. Half-m
 than either choice: keeping the register while discarding the state leaves the new run appending to
 another run's open items with no way to tell them apart.
 
-Get today's real date from the environment now (`date +%F`) and reuse it for every `Last updated`
-stamp this run — see the header-block rule in
+Get today's real date from the environment now and reuse it for every `Last updated` stamp this run,
+per the header-block rule in
 [`../references/output-conventions.md`](../references/output-conventions.md).
 
 ---
