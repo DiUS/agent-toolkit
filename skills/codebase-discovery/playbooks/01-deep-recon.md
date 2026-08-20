@@ -183,7 +183,8 @@ timestamps.
 
 ## Exit criteria
 
-- Tier 0 map approved; targeted dives complete for data model, contracts, hotspots, tests.
+- Tier 0 map approved; for every area covered this session, the dives are complete for data
+  model, contracts, hotspots and tests. Areas not yet reached are recorded as pending in the ledger.
 - Every Phase 0 claim re-statused (accepted / `[outdated]` / `[contradicted]` / `[unverified]`),
   or left `[unchecked]` and logged as belonging to an area not yet covered.
 - Cited hypotheses produced for each doc area.

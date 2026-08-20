@@ -29,7 +29,7 @@ with the user rather than assuming `docs/`.
 ## What to write
 
 The set of documents, where they go, and how they're named is defined in output-conventions. Three
-judgements are this phase's own:
+judgements are this phase's own, plus one rule about coverage:
 
 - **Create only what the system warrants.** Skip any document with nothing meaningful to say; an
   empty scaffold costs a reader's trust and gains nothing.
@@ -40,6 +40,11 @@ judgements are this phase's own:
   logical name; anything no single area owns is cross-cutting and belongs at the top level. Getting
   this wrong is what turns one document into an unreadable pile — and the glossary in particular
   stays a single file whatever the system's size.
+- **Partial recon still publishes, provided the gaps are declared.** Where recon covered some areas
+  and left others pending, write what's covered rather than withholding everything — but the entry
+  point must say which areas are documented and which aren't (see the README bullet below), and a
+  claim about an uncovered area stays `[unchecked]` and unpublished. A partial doc set a reader can
+  see the edges of is useful; one that reads as complete is the failure this guards against.
 
 Use the matching file in `../templates/`; the area files use the same templates as their unsplit
 equivalents, written per concept rather than per repo.
@@ -57,6 +62,9 @@ or so it must:
   the root, e.g. `docs/tech/current-architecture.md`).
 - List the top open assumptions/risks, linking `docs/_discovery/assumptions-register.md` for
   the full list.
+- Where recon left areas pending, name them — which areas are documented and which aren't. A
+  reader, human or harness, must be able to see the edge of what's covered without reading the
+  ledger.
 - Where the code reveals it, a short "how to run / get started".
 
 Produce it from the findings using

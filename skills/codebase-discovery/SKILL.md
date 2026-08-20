@@ -35,9 +35,9 @@ infer. All optional; absent means work it out as usual.
 
 ### How to read them
 
-- **Resolve the request, however it's phrased.** These are a shorthand, not the interface: *"look at
-  just billing, skip the test projects, don't touch the docs site"* must land on the same settings as
-  the equivalent flags. Extract from prose, flags, or a mix.
+- **Resolve the request, however it's phrased.** These are a shorthand, not the interface: *"skip the
+  test projects, don't touch the docs site, and there's nobody to interview yet"* must land on the
+  same settings as the equivalent flags. Extract from prose, flags, or a mix.
 - **Echo the resolved set back in one line before starting** — *"code-only ·
   excluding `tests/*` · output `docs/discovery/` · drift → recon"*. There's no parser; the user needs
   to see what was understood.
@@ -262,7 +262,8 @@ When done, report:
 - [ ] Write target surveyed and output root agreed with the user (docs-site tooling and existing
       files at the target paths identified)
 - [ ] Existing docs read and their statements captured for verification
-- [ ] Recon complete: structure, data model, contracts, business-logic hotspots
+- [ ] Recon complete for every area covered: structure, data model, contracts, business-logic
+      hotspots; any area not reached is pending in the ledger
 - [ ] Existing-doc statements verified against code (any drift identified)
 - [ ] (full mode) Interview queue worked in impact order — complete, or stopped by the stakeholder
       with the remainder parked as *needs SME*; contradictions reconciled or parked
