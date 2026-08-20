@@ -8,7 +8,7 @@
 <!-- What this system talks to, why, and which direction data flows. A table is usually enough.
 
 SECRETS: this file is committed. Auth and endpoint details are exactly where credentials leak —
-re-read the secrets rule you were given before writing the auth/notes column. -->
+re-read the secrets rule in `SKILL.md` before writing the auth/notes column. -->
 
 ## External systems
 

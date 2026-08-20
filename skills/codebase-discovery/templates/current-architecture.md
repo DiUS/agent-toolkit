@@ -31,7 +31,7 @@ graph LR
 
 ## Data & persistence
 
-<Datastores, what lives where. Point to domain-model.md for the entities.>
+<Datastores, what lives where. Point to `../domain/domain-model.md` for the entities.>
 
 ## Entry points & runtime
 

@@ -52,6 +52,11 @@ infer. All optional; absent means work it out as usual.
 below; with no recon state it says so and offers recon rather than interviewing unseeded; and combined
 with `code-only` it's contradictory, so report it instead of picking one.
 
+`--fresh` and `--on-drift full-recon` sound alike and aren't. `full-recon` re-recons every area and
+keeps the working state and the register; `--fresh` discards `_discovery/` and needs sign-off
+(Phase 0). Where the request is prose — "start over", "redo it" — ask which, because one of them is
+destructive.
+
 ---
 
 ## Purpose
