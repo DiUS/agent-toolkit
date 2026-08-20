@@ -102,17 +102,18 @@ warn or publish them unlinked. Discovery output is internal working material; it
 a public page because of where it landed.
 
 **b. What already occupies the target paths?** List any existing file at the paths this skill
-would write (`business/`, `domain/`, `tech/`, `_discovery/` under the output root). These are
-human-authored until proven otherwise.
+would write (`business/`, `domain/`, `tech/`, `areas/`, `_discovery/` under the output root). These
+are human-authored until proven otherwise.
 
-**c. Agree the output root with the user.** The default is `docs/` at the **project root** — locate
-that with `git rev-parse --show-toplevel`, falling back to the session's working directory, and say
-which directory you settled on if you're working from somewhere below it. Where `docs/` is a
-published site, or is already occupied, propose an alternative — `docs/discovery/` is the usual
-choice — and let the user decide. If `--output` was given, that's the decision; still report what you
-found, since a published site is worth knowing about either way. If the docs do belong in the
-published site, ask explicitly whether they should be registered in its nav/sidebar or deliberately
-left out of it.
+**c. Agree the output root with the user.** Where the root may sit, and how `--output` resolves
+against it, is the [write contract](../references/write-contract.md) — follow it rather than
+re-deriving it here. This phase's job is to settle it in practice: locate the project root
+(`git rev-parse --show-toplevel`, falling back to the session's working directory) and say which
+directory you settled on. Where `docs/` is a published site, or is already occupied, propose an
+alternative — `docs/discovery/` is the usual choice — and let the user decide. Report what you found
+even when `--output` was given, since a published site is worth knowing about either way. If the docs
+do belong in the published site, ask explicitly whether they should be registered in its nav/sidebar
+or deliberately left out of it.
 
 Record all three outcomes — root, tooling + nav decision, and the pre-existing files — in
 `docs/_discovery/discovery-state.md`. They bind every later phase via the

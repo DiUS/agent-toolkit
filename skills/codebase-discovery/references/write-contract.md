@@ -13,6 +13,8 @@ later phase is bound by it.
    directory when that's somewhere below it, and never inside the path being analysed. `<path>` and
    `--scope` narrow what recon **reads**; they never move where output **lands**. "Project root"
    throughout this skill means that directory, so the project-root `README.md` is its README.
+   `--output` names the root and is read relative to it; where the path given would land outside the
+   project root, say so and confirm rather than writing there on the strength of a flag.
 3. **Write nothing outside that root.** The one exception is the project-root `README.md`, which
    has its own rules in the synthesis playbook.
 4. **Never overwrite a file you didn't write.** If something already occupies a target path, read
