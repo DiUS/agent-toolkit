@@ -57,6 +57,12 @@ person in front of you, keep the rest for whoever owns it, and record in `discov
 SME covered which area so a later session doesn't re-ask them. The register's *who can confirm* column
 is what makes this possible — an item with nobody against it doesn't get actioned.
 
+**Offer an off-ramp at a seam the queue produces.** Two of them: when the top 5 has fully turned
+over — every item from the last agenda resolved or parked — and when the person in front of you has
+no items left. At either, say what's been covered, show the refreshed top 5, and ask whether to carry
+on now or pick it up later. Don't ask more often than that — the refreshed list already shows the
+stakeholder what's left, and repeatedly checking in reads as reluctance.
+
 ---
 
 ## Reconcile contradictions (important)
@@ -68,8 +74,9 @@ For every `[outdated]` or `[contradicted]` item from recon/pre-check, raise it w
 > through `payments/refunds/*` (`payments/refunds/handler.py:20`). I'd suggest the correct
 > statement is: *refunds are owned by the Payments service*. Confirm, or adjust?"
 
-On the user's confirmation, the item becomes accepted knowledge (unmarked) with the code
-evidence recorded. Do not silently pick a version.
+On the user's confirmation, the item becomes accepted knowledge (unmarked) — record it in
+`discovery-state.md` like any other fact, with the evidence and who confirmed it. Its traceability
+row follows in Phase 3, when the claim reaches a doc. Do not silently pick a version.
 
 ---
 
@@ -94,11 +101,6 @@ decides what gets asked and when; this list only tells you where the gaps are.
 7. **Requirements & constraints** — the outcomes the system must deliver, plus
    non-functional and compliance constraints (performance, availability, security,
    auditability, data handling, regulatory).
-
-**Offer an off-ramp when you move between areas.** A seam in the conversation is the one place a
-prompt is welcome rather than nagging: say what's been covered, show the refreshed top 5, and ask
-whether to carry on now or pick it up later. Don't ask more often than that — the refreshed list
-already shows the stakeholder what's left, and repeatedly checking in reads as reluctance.
 
 ---
 
