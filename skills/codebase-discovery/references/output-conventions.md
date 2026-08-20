@@ -231,8 +231,8 @@ The `Status` line carries the document-wide provenance caveat, so it has to matc
 | `code-only` | `code-derived, not validated by a person` |
 
 This is what lets `code-only` runs stop stamping `[unverified]` on every sentence — the caveat is
-stated once, up front, and inline flags are reserved for load-bearing uncertainty. See the skill's
-`references/provenance-and-status.md`.
+stated once, up front, and inline flags are reserved for load-bearing uncertainty. See
+[`provenance-and-status.md`](provenance-and-status.md).
 
 The project-root `README.md` is the exception: it's the project's own front door, not a
 `docs/` file, so it carries **no** discovery header block and no inline flags. Keep that

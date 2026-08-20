@@ -98,8 +98,8 @@ docs/
 `_discovery/` is deliberately kept out of the onboarding set and is never linked from
 `CLAUDE.md` / `AGENTS.md`. Its two audit files are committed and its two state files are not.
 
-The tree above is illustrative — `references/output-conventions.md` defines the layout, the
-`_discovery/` disposition, and is the file to trust if this README ever
+The tree above is illustrative — [`references/output-conventions.md`](references/output-conventions.md)
+defines the layout and the `_discovery/` disposition, and is the file to trust if this README ever
 falls behind it.
 
 ## Status model (exception-only)
@@ -107,7 +107,8 @@ falls behind it.
 Accepted knowledge is unmarked. Only exceptions are flagged — `[unchecked]`, `[unverified]`,
 `[assumption]`, `[outdated]`, `[contradicted]` — so the reader's attention goes straight to what
 still needs resolving, and in `code-only` mode the caveat is stated once per document rather than
-stamped on every line. `references/provenance-and-status.md` defines the model.
+stamped on every line.
+[`references/provenance-and-status.md`](references/provenance-and-status.md) defines the model.
 
 ## Layout of this skill
 

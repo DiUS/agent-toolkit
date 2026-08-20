@@ -202,8 +202,8 @@ Run in order. Each has a playbook — read it when you enter the phase.
 On a first run, do not skip phases. In code-only mode, skip only Phase 2.
 
 **On a resume, Phase 0 chooses where to re-enter** — repeating finished work wastes the budget the
-skill exists to protect. Phases 0, 4 and 5 always run; the phases
-between them are entered according to what the working state records:
+skill exists to protect. Phases 0, 4 and 5 always run; the phases between them are entered
+according to what the working state records:
 
 | Recorded state | Re-enter at |
 |---|---|
