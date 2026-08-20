@@ -29,14 +29,16 @@ reader hasn't been taught is just noise.
 These are the two easiest to conflate, and keeping them apart is what makes `[unverified]` mean
 something:
 
-- `[unchecked]` — **nobody has looked at the code yet.** It's what an existing doc asserts,
-  captured verbatim in Phase 0 so Phase 1 can test it.
+- `[unchecked]` — **no current code check.** Either nobody has compared it yet — what an existing
+  doc asserts, captured verbatim in Phase 0 so Phase 1 can test it — or the check it once had is
+  stale because the code moved.
 - `[unverified]` — **somebody has looked**, and the claim is unconfirmed by a *person* rather
   than untested. Either the code supports it and no stakeholder has signed it off, or the code
   can't speak to it at all (intent, policy, ownership) and only a person could settle it.
 
-Only the second is safe to act on with care; the first tells you nothing has been assessed. If
-they shared a flag a reader couldn't tell "untested" from "tested but unconfirmed".
+Only the second is safe to act on with care; the first tells you nothing currently backs it. If
+they shared a flag a reader couldn't tell "no current code check" from "checked, but unconfirmed by
+a person".
 
 ### When a claim legitimately carries `[unchecked]`
 

@@ -133,7 +133,10 @@ service owns refunds". For each, record in `docs/_discovery/discovery-state.md`:
 **Do not** promote any of these to accepted knowledge yet, and don't publish them. Phase 1
 checks each against the code; only then does the status change — to accepted-and-unmarked, or
 `[outdated]` / `[contradicted]` where the code has moved on, or `[unverified]` where the code
-can't settle it. No `[unchecked]` item should survive Phase 1.
+can't settle it. No `[unchecked]` item should survive Phase 1 **unaccounted for** — it's either
+re-statused or explicitly logged;
+[`../references/provenance-and-status.md`](../references/provenance-and-status.md) names the cases
+where the flag legitimately persists.
 
 ---
 
