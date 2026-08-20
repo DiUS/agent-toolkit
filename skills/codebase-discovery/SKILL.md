@@ -250,8 +250,8 @@ When done, report:
 - (full mode) Interview coverage: how far the queue got, and what's parked as *needs SME* —
   highest-impact items named, with a pointer to the register for the rest.
 - Whether a `CLAUDE.md` / `AGENTS.md` was created or proposed.
-- **`docs/_discovery/` disposition** per output-conventions: which files you're recommending be
-  git-ignored, which are committed and why, and the cold-start cost of deleting the state files.
+- **`docs/_discovery/` disposition** per
+  [`references/output-conventions.md`](./references/output-conventions.md).
 - Readiness for harness engineering / Spec Kit.
 
 ---
@@ -271,5 +271,5 @@ When done, report:
 - [ ] Verification pass complete; unsupported claims flagged
 - [ ] Assumptions register and traceability index populated
 - [ ] CLAUDE.md / AGENTS.md created or proposed
-- [ ] docs/_discovery/ disposition explained per output-conventions (audit files committed, state files git-ignore recommended, cold-start cost flagged)
+- [ ] docs/_discovery/ disposition explained per output-conventions
 - [ ] Ready for harness engineering / Spec Kit

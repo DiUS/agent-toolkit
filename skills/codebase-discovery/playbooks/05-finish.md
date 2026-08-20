@@ -42,10 +42,9 @@ Offer to create or augment an agent onboarding file:
 
 ## 4. Working state disposition
 
-Leave the whole `_discovery/` directory in place, then apply the disposition in
-[`../references/output-conventions.md`](../references/output-conventions.md): the two audit files
-stay committed; **recommend** (never automatically apply) git-ignoring the two state files. Explain
-it in the completion report.
+Leave the whole `_discovery/` directory in place, then follow the disposition in
+[`../references/output-conventions.md`](../references/output-conventions.md) as written. Explain the
+outcome in the completion report.
 
 ---
 
