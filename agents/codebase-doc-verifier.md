@@ -38,6 +38,17 @@ it traces to evidence.
   file points at a file that exists — documents that were skipped are the usual culprit.
 - **Freshness & consistency.** Every doc has a `Last updated` date; terminology matches the
   glossary across docs; the recon manifest reflects the files actually read.
+- **Names use the agreed language.** Area directories and concept filenames should be glossary
+  terms, not namespaces or codenames, and there should be no catch-alls (`misc`, `other`,
+  `general`). Your assignment carries the naming rules, or an absolute path to the skill's
+  `references/output-conventions.md`.
+- **Groupings are evidenced.** A cluster named in business language must trace to a stakeholder who
+  confirmed it — check the register and traceability index. Otherwise it should be named after the
+  code unit it came from and flagged `[unverified]`.
+- **Writes landed inside the agreed root.** Phase 0 records the output root, the docs-site nav
+  decision and the pre-existing files at the target paths in `docs/_discovery/discovery-state.md`;
+  check the output against them. **You cannot verify sign-off** — an overwrite is approved in
+  conversation, not in a file — so report placement, not consent, and let the caller judge.
 
 ## Report format
 

@@ -9,9 +9,13 @@ Run this as an **isolated pass** — a sub-agent where available — so the chec
 of the work that produced the docs. On Claude Code, dispatch the **`codebase-doc-verifier`**
 subagent; on other hosts use any generic sub-agent, or run the checks directly.
 
-A sub-agent doesn't know where this skill is installed, so skill-relative paths mean nothing to
-it: state the checks and the length ceilings in the dispatch prompt, or pass an **absolute**
-path to `references/output-conventions.md`.
+A sub-agent doesn't know where this skill is installed, so skill-relative paths mean nothing to it.
+State the checks in the dispatch prompt, and for each one that leans on a file in this skill, either
+pass an **absolute** path or put the substance in the prompt — the checks below reach for
+`references/output-conventions.md` (layout, naming, ceilings), `references/provenance-and-status.md`
+(the flags) and `references/write-contract.md`. The secrets rule is the exception: the bundled
+`codebase-doc-verifier` carries a synced copy, so only a generic sub-agent needs it pasted from
+`SKILL.md` verbatim.
 
 ---
 
@@ -63,8 +67,10 @@ path to `references/output-conventions.md`.
    [`../references/write-contract.md`](../references/write-contract.md), using the root, nav decision
    and pre-existing-file list Phase 0 recorded in `discovery-state.md`.
 
-8. **Drift captured.** The doc-drift summary lists every place existing docs
-   (README/CLAUDE.md/AGENTS.md) contradicted the code, each with a corrected statement.
+8. **Drift captured.** Every place existing docs (README/CLAUDE.md/AGENTS.md) contradicted the code
+   is recorded in `docs/_discovery/assumptions-register.md` with a code-derived corrected statement.
+   That register is what Phase 5 turns into the doc-drift summary, so it's the artefact to check
+   here — the summary itself doesn't exist yet.
 
 ---
 
@@ -111,5 +117,5 @@ honest no-go is a useful result; an endless loop isn't.
 - Every published claim is supported or explicitly flagged.
 - No invented business rules remain.
 - No credential values appear anywhere in the docs.
-- Drift summary complete; assumptions register reconciled.
+- Every drift item captured in the register with a corrected statement; register reconciled.
 - Verification report written. Ready for the finish step (doc-drift + agent file).
