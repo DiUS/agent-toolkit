@@ -12,8 +12,8 @@ Do not write onboarding docs in this phase. Only gather and set up state.
 ## 1. Resume or initialise working state
 
 **Resolve the invocation options first**, per `SKILL.md`. Several of them pre-answer questions in
-this phase — `--output`, `--fresh`, `--on-drift`, `--exclude`, `--interview` —
-so state the given value and skip the question rather than asking anyway.
+this phase — `--output`, `--fresh`, `--on-drift`, `--exclude`, `--interview` — so state the given
+value and skip the question rather than asking anyway.
 
 **With `--fresh`, confirm before wiping.** Where `docs/_discovery/` already exists there's work to
 lose, so this comes before anything resumes from that state or writes over it. Read the state to
@@ -148,7 +148,7 @@ Update `docs/_discovery/recon-manifest.md`:
 
 - List the existing docs read (path + last-modified).
 - Note the mode, the exclusions in force, and the available optional inputs.
-- Leave the source-file hash list for Phase 1 to populate as it reads.
+- Leave the files-read list for Phase 1 to populate as it reads.
 
 ---
 

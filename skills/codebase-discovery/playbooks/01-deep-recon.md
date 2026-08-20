@@ -32,8 +32,8 @@ On large repos, keep the main context lean:
 - **Reconcile what comes back against the declared graph.** A scout searches text, so it caps its
   structural findings at Medium. Raise them to High where the module graph from Tier A/B confirms the
   relationship — otherwise the declared-graph work never reaches the findings that need it.
-- **Tiered.** Do the cheap structural map first and get approval before
-  spending budget on deep dives.
+- **Tiered.** Do the cheap structural map first and get approval before spending budget on deep
+  dives.
 - **Cite as you go.** Every finding records `path:line` (or symbol) so it can be verified
   later without re-reading.
 
@@ -41,10 +41,9 @@ On large repos, keep the main context lean:
 
 ## How to navigate
 
-Work the source ladder in [`../references/navigation.md`](../references/navigation.md): read what the
-repo **declares**, ask its own **toolchain**, then **search** — and record which tier answered what.
-Text search is the floor and always works; everything above it is used when present and skipped
-cleanly when not.
+Work the source ladder in [`../references/navigation.md`](../references/navigation.md) as it's
+written there, and **record which tier answered what** — that's this phase's part, and it's what
+later confidence calls depend on.
 
 Two things need saying to the user rather than deciding silently:
 

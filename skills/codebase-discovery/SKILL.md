@@ -27,7 +27,7 @@ infer. All optional; absent means work it out as usual.
 | Argument | Effect |
 |---|---|
 | `full` \| `code-only` | the mode (see Modes) |
-| `--exclude <globs>` | additional exclusions, gitignore syntax — see recon-heuristics. Also how you narrow a monorepo to one service |
+| `--exclude <globs>` | additional exclusions, gitignore syntax — see recon-heuristics |
 | `--output <dir>` | the output root, instead of agreeing it in Phase 0 |
 | `--fresh` | start cold instead of resuming. Where a previous run exists, Phase 0 confirms first — a clean run **discards** its `_discovery/` files (see Phase 0) |
 | `--on-drift <recon\|full-recon\|proceed\|report>` | pre-answer the freshness check's question |
@@ -142,10 +142,9 @@ At the start of each phase, check what is available and adapt — never hard-fai
   source of knowledge: commit messages don't reliably carry domain language, don't cover everything
   a commit changed, and decay as history lengthens. The *why* comes from a person, not a log. If git
   isn't available, see [`references/freshness.md`](./references/freshness.md).
-- **Navigation** — recon works a ladder of sources: what the repo declares (manifests), its own
-  toolchain, text search, then optional AST/LSP tooling. Text search is the floor and always works;
-  the rest are used when present and skipped cleanly when not. See
-  [`references/navigation.md`](./references/navigation.md).
+- **Navigation** — recon works a ladder of sources, from what the repo declares down to text
+  search, which always works. Everything above that floor is used when present and skipped cleanly
+  when not. See [`references/navigation.md`](./references/navigation.md).
 - **Sub-agents** — if the host can run isolated sub-agents, fan out recon reading to keep
   the main context lean. On Claude Code this skill ships two purpose-built subagents —
   **`codebase-recon-scout`** (recon) and **`codebase-doc-verifier`** (verification) — use them
@@ -209,6 +208,7 @@ according to what the working state records:
 |---|---|
 | Nothing (first run) | Phase 1 |
 | Recon incomplete — areas still pending in the ledger, **no drift** | Phase 1, continuing with those areas |
+| Recon incomplete, **drift in areas already covered** | Phase 1 — re-recon the drifted areas, then continue with the pending ones |
 | Recon done, interview stopped with items open, **no drift** | Phase 2 — continue the queue |
 | Recon done, interview stopped, **drift in the affected areas** | Phase 1 scoped to those areas, then Phase 2 |
 | Interview done, docs written, drift since | whatever the user chose in the freshness check |
