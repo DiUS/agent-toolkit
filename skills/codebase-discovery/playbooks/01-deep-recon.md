@@ -73,6 +73,14 @@ folder layout and import patterns where nothing is declared. Then add:
 Record the map in `discovery-state.md`, and note in `recon-manifest.md` which tier produced it — a
 graph from a manifest is fact; one inferred from imports is not.
 
+**Say so if the map shows the deep dives aren't warranted.** This gate exists to prevent wasted
+spend, so recommending against the expensive part is one of the answers it can give. Where the map
+shows a handful of files with no domain or service layer, or a repo that is configuration and
+infrastructure rather than business logic, Tier 1 will find little the map hasn't already shown —
+say that plainly, and offer to write the architecture note and glossary straight from the map
+instead. Nothing else changes: the phase sequence runs as normal, the ledger records the depth as
+**map only**, and the user decides. They invoked the skill deliberately, so recommend, don't refuse.
+
 ### Name the areas, then choose an order
 
 The declared graph gives you modules; **areas** are what the business calls them, and they're what
@@ -182,8 +190,9 @@ timestamps.
 
 ## Exit criteria
 
-- Tier 0 map approved; for every area covered this session, the dives are complete for data
-  model, contracts, hotspots and tests. Areas not yet reached are recorded as pending in the ledger.
+- Tier 0 map approved; every area covered this session is dived to the depth the ledger records —
+  data model, contracts, hotspots and tests for a full dive, nothing below the map where the user
+  took **map only**. Areas not yet reached are recorded as pending.
 - Every Phase 0 claim re-statused (accepted / `[outdated]` / `[contradicted]` / `[unverified]`),
   or left `[unchecked]` and logged as belonging to an area not yet covered.
 - Cited hypotheses produced for each doc area.

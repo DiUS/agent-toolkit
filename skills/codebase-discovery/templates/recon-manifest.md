@@ -33,6 +33,7 @@ per file. -->
 |---|---|---|---|---|---|
 | billing | src/Billing/, src/Invoicing/ | full | declared + text search | done (A. Patel) | areas/billing/* |
 | identity | src/Identity/ | hotspots only | text search (inferred) | queued | — |
+| tooling | infra/ | map only — dives not warranted | declared | n/a | tech/current-architecture.md |
 | reporting | src/Reporting/ | **pending** — not yet reached | — | — | — |
 
 ## Files actually read (Phase 1)

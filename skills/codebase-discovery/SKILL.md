@@ -262,8 +262,8 @@ When done, report:
 - [ ] Write target surveyed and output root agreed with the user (docs-site tooling and existing
       files at the target paths identified)
 - [ ] Existing docs read and their statements captured for verification
-- [ ] Recon complete for every area covered: structure, data model, contracts, business-logic
-      hotspots; any area not reached is pending in the ledger
+- [ ] Recon complete for every area covered, to the depth the ledger records; any area not reached
+      is pending there
 - [ ] Existing-doc statements verified against code (any drift identified)
 - [ ] (full mode) Interview queue worked in impact order — complete, or stopped by the stakeholder
       with the remainder parked as *needs SME*; contradictions reconciled or parked
