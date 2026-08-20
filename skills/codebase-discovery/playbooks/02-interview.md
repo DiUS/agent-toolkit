@@ -25,7 +25,7 @@ Entered directly by `--interview` when continuing a stopped queue, subject to th
 - **Capture, don't assume.** If something isn't confirmed, it stays flagged.
 
 Use [`../references/question-bank.md`](../references/question-bank.md) for seed questions per
-area and per initiative type — but adapt to what recon actually found.
+area — but adapt to what recon actually found.
 
 ---
 

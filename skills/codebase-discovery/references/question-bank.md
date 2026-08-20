@@ -54,21 +54,6 @@ override?"
 
 ---
 
-## Adapt to the initiative type
-
-Onboarding onto an existing system is the default, but tune emphasis if the user's goal is:
-
-- **Enhancement** — baseline the current capability and its integration constraints; what
-  must *not* regress.
-- **Modernisation / replacement** — feature parity, why-now, legacy constraints, data
-  migration, cut-over and coexistence.
-- **Process improvement** — current metrics and bottlenecks; the measurable before/after
-  target.
-- **Bug/behaviour investigation** — the specific rule/workflow in question, and its intended
-  vs actual behaviour.
-
----
-
 ## Reconciliation prompts (for contradictions)
 
 When an existing doc disagrees with the code, use this shape — always with a code-derived
