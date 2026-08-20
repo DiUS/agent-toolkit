@@ -234,9 +234,10 @@ This is what lets `code-only` runs stop stamping `[unverified]` on every sentenc
 stated once, up front, and inline flags are reserved for load-bearing uncertainty. See
 [`provenance-and-status.md`](provenance-and-status.md).
 
-The project-root `README.md` is the exception: it's the project's own front door, not a
-`docs/` file, so it carries **no** discovery header block and no inline flags. Keep that
-metadata out of it — provenance lives in the traceability index.
+Two files are the exception, because neither is a `docs/` file: the project-root `README.md` — the
+project's own front door — and the agent onboarding file. They carry **no** discovery header block
+and no inline flags. Keep that metadata out of both; provenance lives in the traceability index. A
+verifier that finds no `Last updated` in either has found the intended state, not a defect.
 
 ---
 

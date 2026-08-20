@@ -36,8 +36,10 @@ it traces to evidence.
   `<!-- -->` guidance comments, or unfilled `<placeholder>` markers.
 - **Links resolve.** Check every link in the docs set, the project-root `README.md` and the agent
   file points at a file that exists — documents that were skipped are the usual culprit.
-- **Freshness & consistency.** Every doc has a `Last updated` date; terminology matches the
-  glossary across docs; the recon manifest reflects the files actually read.
+- **Freshness & consistency.** Every doc in the `docs/` set has a `Last updated` date; terminology
+  matches the glossary across docs; the recon manifest reflects the files actually read. The
+  project-root `README.md` and the agent onboarding file carry no discovery metadata by design —
+  finding no date there is the intended state, so don't report it.
 - **Names use the agreed language.** Area directories and concept filenames should be glossary
   terms, not namespaces or codenames, and there should be no catch-alls (`misc`, `other`,
   `general`). Your assignment carries the naming rules, or an absolute path to the skill's

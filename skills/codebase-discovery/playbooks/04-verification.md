@@ -46,8 +46,10 @@ pass an **absolute** path or put the substance in the prompt — the checks belo
    length ceilings in output-conventions. Also flag any leftover template scaffolding — `<!-- -->`
    guidance comments or unfilled `<placeholder>` markers.
 
-6. **Freshness & consistency.** Every doc has a `Last updated` date; the recon manifest
-   reflects the files actually read; terminology matches the glossary across all docs.
+6. **Freshness & consistency.** Every doc **in the `docs/` set** has a `Last updated` date; the
+   recon manifest reflects the files actually read; terminology matches the glossary across all
+   docs. The project-root `README.md` and the agent file are exempt by design — output-conventions
+   says why — so don't add one to either.
 
    **Every link resolves.** Check each link in the `docs/` set, the project-root `README.md` and the
    agent file points at a file that exists — skipped documents are the usual culprit, since the
