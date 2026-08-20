@@ -111,6 +111,16 @@ trail. Reference it by claim ID from a doc only when a reader is likely to want 
 
 Recommended row: `claim-id | claim (short) | source (path:line / stakeholder) | confidence`.
 
+**A claim gets its row as it's written, not reconstructed afterwards.** Whoever writes a claim into a
+doc adds the row at that moment, while the evidence is in front of them — a batch reconstructed from
+memory at the end is provenance that only looks like provenance, and it's the failure Phase 4's
+first check exists to catch. IDs run sequentially and stay stable across runs, so a doc that cites
+one keeps pointing at the same claim.
+
+Substantive claims get a row as the norm. For a **load-bearing** claim — a rule, threshold,
+permission, SLA or ownership statement — it isn't optional: Phase 4 treats a missing entry there as
+material.
+
 ---
 
 ## Assumptions register

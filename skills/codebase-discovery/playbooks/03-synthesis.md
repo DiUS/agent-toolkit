@@ -29,7 +29,7 @@ with the user rather than assuming `docs/`.
 ## What to write
 
 The set of documents, where they go, and how they're named is defined in output-conventions. Three
-judgements are this phase's own, plus one rule about coverage:
+judgements are this phase's own, plus two rules — one about coverage, one about evidence:
 
 - **Create only what the system warrants.** Skip any document with nothing meaningful to say; an
   empty scaffold costs a reader's trust and gains nothing.
@@ -45,6 +45,10 @@ judgements are this phase's own, plus one rule about coverage:
   point must say which areas are documented and which aren't (see the README bullet below), and a
   claim about an uncovered area stays `[unchecked]` and unpublished. A partial doc set a reader can
   see the edges of is useful; one that reads as complete is the failure this guards against.
+- **Record each claim's evidence as you write it.** A row in
+  `docs/_discovery/traceability-index.md` per claim, added while the evidence is in front of you —
+  see the traceability rule in provenance-and-status. Phase 4 checks these, and a load-bearing claim
+  without one is a blocking finding.
 
 Use the matching file in `../templates/`; the area files use the same templates as their unsplit
 equivalents, written per concept rather than per repo.
@@ -98,5 +102,5 @@ Produce it from the findings using
 - Project-root `README.md` is the entry point: created (if it was missing) or conservatively
   merged with sign-off, indexing the `docs/` set. Conflicts with existing README content are
   logged, not overwritten.
-- Traceability index maps claims to evidence; assumptions register is current.
+- Every published claim has a row in the traceability index; assumptions register is current.
 - Ready for verification.

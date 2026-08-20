@@ -45,8 +45,11 @@ Then check for prior state and resume if present:
   re-recon, and don't silently trust stale docs. Record their decision in the manifest's
   freshness-check log.
 
-If neither exists, create `docs/_discovery/` and initialise both files from the templates
-(`templates/discovery-state.md`, `templates/recon-manifest.md`).
+If neither exists, create `docs/_discovery/` and initialise all four files from their templates —
+`templates/discovery-state.md`, `templates/recon-manifest.md`, `templates/assumptions-register.md`
+and `templates/traceability-index.md`. Phase 1 writes to the last two in every run, and their column
+sets are load-bearing: the register's *who can confirm* column is what lets the interview group
+questions by owner.
 
 Get today's real date from the environment now and reuse it for every `Last updated` stamp this run,
 per the header-block rule in
