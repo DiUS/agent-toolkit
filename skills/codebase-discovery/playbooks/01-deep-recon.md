@@ -169,8 +169,10 @@ from that register, ranked by impact and confidence, so a hypothesis left out of
 that never gets asked.
 
 Update `recon-manifest.md` so future runs can detect staleness: the commit recon ran against and
-whether the tree was clean, the areas covered, and the files actually read. See
-[`../references/freshness.md`](../references/freshness.md) — record the commit, not timestamps.
+whether the tree was clean, the areas covered, and the files actually read. **Where git isn't
+available, hash those files as you record them** — that list is the only comparison a later run will
+have. See [`../references/freshness.md`](../references/freshness.md) — record the commit, not
+timestamps.
 
 ---
 
