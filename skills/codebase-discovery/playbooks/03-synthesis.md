@@ -16,7 +16,7 @@ here.
   may be overwritten, and the published-site decision.
 - [`../references/output-conventions.md`](../references/output-conventions.md) — the folder layout,
   which docs exist and how they're named, the required header block and how to date it, length
-  ceilings, formatting, and the `_discovery/` disposition.
+  ceilings and formatting.
 - [`../references/provenance-and-status.md`](../references/provenance-and-status.md) — the flag
   vocabulary and when to use it inline, how citations stay out of the prose, and **no invention**.
 

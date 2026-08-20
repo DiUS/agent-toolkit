@@ -42,9 +42,9 @@ Offer to create or augment an agent onboarding file:
 
 ## 4. Working state disposition
 
-Leave the whole `_discovery/` directory in place, then follow the disposition in
-[`../references/output-conventions.md`](../references/output-conventions.md) as written. Explain the
-outcome in the completion report.
+Leave the whole `_discovery/` directory in place, then follow
+[`../references/discovery-disposition.md`](../references/discovery-disposition.md) as written.
+Explain the outcome in the completion report.
 
 ---
 

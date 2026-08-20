@@ -172,7 +172,7 @@ and the compaction rules.
 `_discovery/` also holds the two audit files (`assumptions-register.md`,
 `traceability-index.md`), which are committed alongside the docs they back. What's committed and
 what's git-ignored is set out in
-[`references/output-conventions.md`](./references/output-conventions.md) — follow it; don't
+[`references/discovery-disposition.md`](./references/discovery-disposition.md) — follow it; don't
 restate it.
 
 ---
@@ -251,7 +251,7 @@ When done, report:
   highest-impact items named, with a pointer to the register for the rest.
 - Whether a `CLAUDE.md` / `AGENTS.md` was created or proposed.
 - **`docs/_discovery/` disposition** per
-  [`references/output-conventions.md`](./references/output-conventions.md).
+  [`references/discovery-disposition.md`](./references/discovery-disposition.md).
 - Readiness for harness engineering / Spec Kit.
 
 ---
@@ -271,5 +271,5 @@ When done, report:
 - [ ] Verification pass complete; unsupported claims flagged
 - [ ] Assumptions register and traceability index populated
 - [ ] CLAUDE.md / AGENTS.md created or proposed
-- [ ] docs/_discovery/ disposition explained per output-conventions
+- [ ] docs/_discovery/ disposition explained per discovery-disposition
 - [ ] Ready for harness engineering / Spec Kit
