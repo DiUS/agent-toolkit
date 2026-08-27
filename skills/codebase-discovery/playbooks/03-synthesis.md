@@ -5,6 +5,9 @@
 docs under `docs/`, indexed by the **project-root `README.md`**, and enough to get a new
 team member (human or AI) productive, and no more.
 
+> **Prediction rule** (`SKILL.md`): never write an inferred rationale as though it were the design.
+> That is the no-invention rule, and prediction is how you arrive at it.
+
 ---
 
 ## Read these first

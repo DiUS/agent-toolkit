@@ -9,6 +9,10 @@ contracts, and where the business logic lives) and validate the Phase 0 claims a
 reading every file. See [`../references/recon-heuristics.md`](../references/recon-heuristics.md)
 for what to look for and where.
 
+> **Prediction rule** (`SKILL.md`): don't assert structure, size or a boundary without reading what
+> declares it. And **never seed a sub-agent with the answer you expect** — give it the scope and the
+> question, not your hypothesis, or you get your own framing back instead of what the code says.
+
 ---
 
 ## Token discipline (read this first)

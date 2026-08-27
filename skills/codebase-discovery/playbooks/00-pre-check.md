@@ -7,6 +7,9 @@ from the code.
 
 Do not write onboarding docs in this phase. Only gather and set up state.
 
+> **Prediction rule** (`SKILL.md`): don't assume what an existing doc says, or what the mode should be.
+> Read it, and ask.
+
 ---
 
 ## 1. Resume or initialise working state

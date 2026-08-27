@@ -17,6 +17,9 @@ pass an **absolute** path or put the substance in the prompt. The checks below r
 `codebase-doc-verifier` carries a synced copy, so only a generic sub-agent needs it pasted from
 `SKILL.md` verbatim.
 
+> **Prediction rule** (`SKILL.md`): verify what the docs **claim**, not what you suspect is wrong.
+> Scoping the check to your own hypotheses is how a defect survives a passing verification.
+
 ---
 
 ## Checks
@@ -65,11 +68,17 @@ pass an **absolute** path or put the substance in the prompt. The checks below r
    `[unverified]`. An invented carve-up is worse than a technical one, because it becomes the
    structure everyone inherits.
 
-7. **Write contract honoured.** Check the output against
+7. **Output renders.** Read the files as rendered Markdown, not just as source. For every
+   table: no blank line between rows (a blank line ends a Markdown table, orphaning every row after
+   it as literal pipe text) and a header separator immediately below the header. Check that any
+   diagram parses. A register whose rows don't render as a table is unusable however accurate it is,
+   and no check that only reads content will catch it.
+
+8. **Write contract honoured.** Check the output against
    [`../references/write-contract.md`](../references/write-contract.md), using the root, nav decision
    and pre-existing-file list Phase 0 recorded in `discovery-state.md`.
 
-8. **Drift captured.** Every place existing docs (README/CLAUDE.md/AGENTS.md) contradicted the code
+9. **Drift captured.** Every place existing docs (README/CLAUDE.md/AGENTS.md) contradicted the code
    is recorded in `docs/_discovery/assumptions-register.md` with a code-derived corrected statement.
    That register is what Phase 5 turns into the doc-drift summary, so it's the artefact to check
    here; the summary itself doesn't exist yet.

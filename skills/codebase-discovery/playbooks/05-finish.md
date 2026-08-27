@@ -7,6 +7,9 @@ somewhere useful.
 
 Enter this once Phases 0–4 are complete. The completion report itself is specified in `SKILL.md`.
 
+> **Prediction rule** (`SKILL.md`): don't treat a step as discharged because a similar step was done.
+> Steps 1 and 2 below overlap in subject and differ in scope.
+
 ---
 
 ## 1. Doc-drift summary
@@ -16,6 +19,16 @@ drifted from the current code, each with the corrected statement derived from th
 payload of the whole exercise for a team that thought its docs were fine.
 
 ## 2. Reconcile contradictions with the user
+
+**This is not the doc-drift summary.** Step 1 covers only where *existing documentation* drifted from
+the code. This step covers **every** flagged contradiction, including code-vs-code ones the existing
+docs never mentioned. Completing step 1 does not discharge step 2, and the two lists are usually
+different sizes.
+
+**Enumerate before you ask.** List every still-flagged `[contradicted]` / `[outdated]` item by ID from
+the register, show that list to the user, and work it in order. At the end report how many were
+flagged, asked, confirmed, corrected, and parked as *needs SME*, with each SME named. A phase
+that reconciled some without stating the denominator has not done this step.
 
 For every `[contradicted]` / `[outdated]` item **still flagged** after recon and the interview, ask
 the user, **one at a time**, to confirm the correct version, always including a **suggested wording
@@ -52,8 +65,11 @@ Explain the outcome in the completion report.
 ## Exit criteria
 
 - Doc-drift summary produced, each item with a code-derived corrected statement.
-- Every `[contradicted]` / `[outdated]` item either confirmed by the user or left flagged, with none
-  silently resolved.
+- Every `[contradicted]` / `[outdated]` item accounted for **individually and by count**: put to the
+  user and confirmed or corrected, or recorded as *needs SME* **with the SME named**.
+  "Left flagged" is an outcome of asking, or of a needs-SME gap — never a default for items nobody
+  raised. State the denominator: *N flagged, A asked, C confirmed, R corrected, P parked as needs
+  SME*, where N = C + R + P.
 - Agent file created, augmented or offered; nothing overwritten without sign-off.
 - `_discovery/` left in place and its disposition explained.
 - Completion report delivered as specified in `SKILL.md`.

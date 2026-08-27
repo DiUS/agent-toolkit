@@ -44,6 +44,17 @@ its evidence and one line on why it matters. Then keep the list in
 `discovery-state.md` and refresh it every time an item is resolved or parked, so the next one
 surfaces.
 
+**Refill it from the register, not from memory.** After each item is resolved or parked,
+**re-derive** the list by ranking the register's open items again and topping the table back up to
+five. Never refresh it from your recollection of what's left: your impression of the queue drifts
+as the conversation goes, toward thinking it is emptier than it is.
+
+**"The queue is empty" is a counted claim, not an impression.** You may say a queue — or one
+owner's share of it — is exhausted **only** after re-deriving from the register and finding zero,
+and you must state that count when you say it. If fewer than five remain, show the ones that do.
+Saying "there's nothing else worth asking" without a count is how this phase ends early, and it is
+a form of the prediction rule (`SKILL.md`).
+
 > Showing the list is **not** asking five questions. It's the agenda, so the stakeholder can see
 > what you think matters and redirect you if they disagree. Then ask about **#1 only** and wait.
 > Every conversation rule above still applies.
@@ -59,9 +70,10 @@ is what makes this possible; an item with nobody against it doesn't get actioned
 
 **Offer an off-ramp at a seam the queue produces.** Two of them: when the top 5 has fully turned
 over (every item from the last agenda resolved or parked), and when the person in front of you has
-no items left. At either, say what's been covered, show the refreshed top 5, and ask whether to carry
-on now or pick it up later. Don't ask more often than that: the refreshed list already shows the
-stakeholder what's left, and repeatedly checking in reads as reluctance.
+no items left — the second established by a count, per the rule above, not by feel. At either, say
+what's been covered, show the **re-derived** top 5 (or the count, if fewer than five remain), and ask
+whether to carry on now or pick it up later. Don't ask more often than that: the refreshed list
+already shows the stakeholder what's left, and repeatedly checking in reads as reluctance.
 
 ---
 
@@ -128,14 +140,21 @@ mid-conversation, everything up to that point is already recorded.
 The interview ends when the queue is empty **or when the stakeholder decides it does.** Their time,
 their call.
 
+> **Prediction rule** (`SKILL.md`): **never characterise unasked items as predictable, low-value, or
+> not worth the stakeholder's time.** You cannot know what they will say, and a run of answers
+> following a pattern doesn't tell you the next one will. Present the ranked list and the count by
+> owner; the stakeholder decides what is worth asking. A recommendation to stop is permitted only at
+> the two seams above, and must be stated as *"N items remain, M answerable by you"* — never as a
+> qualitative dismissal of what is left.
+
 - **Say so once, up front**, before the first question: *"Stop whenever you like — say so and I'll
   record where we got to; we can pick this up in a later session."* Once is enough.
 - **Recognise a stop for what it is.** "That's enough for now", "I need to go", "park the rest",
   "let's finish tomorrow", or several "I don't know"s in a row are all stops. Never treat one as an
   answer to the pending question, never argue, and never squeeze in one more question.
 - **Park what's left, don't assume it.** Unasked items keep their flags and stay in
-  `assumptions-register.md` with *needs SME* as the next step. They are not downgraded to accepted
-  knowledge because nobody got to them.
+  `assumptions-register.md`, each with its *Why parked* value recorded and an SME named against any
+  that need one. They are not downgraded to accepted knowledge because nobody got to them.
 - **Hand off clearly** rather than just stopping: what was covered, what's parked (name the
   highest-impact ones), and where it's recorded. Then ask the one question that remains: **proceed
   to synthesis now with the gaps flagged, or end the session here?** Both are valid.
@@ -153,6 +172,11 @@ their call.
 
 - Queue worked in impact order, **or** the stakeholder stopped and the remainder is parked in the
   register as *needs SME*.
+- Coverage stated as a count, not a characterisation. Report the number of register items whose
+  next step is an interview, how many were asked, and how many remain — and for each remaining one,
+  its *Why parked* value, with a **named SME** wherever that value is *needs SME*.
+  "The rest are lower value" is not an outcome; a count is. Items whose next step is a **fix** are
+  not interview items and don't belong in this denominator.
 - Contradictions/outdated items reconciled with confirmed, code-grounded wording, or parked.
 - Coverage checklist reviewed: areas the queue never reached are named, not silently skipped.
 - Stopping point recorded in `discovery-state.md` so a later session resumes rather than restarts.

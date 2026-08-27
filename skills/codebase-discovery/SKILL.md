@@ -128,6 +128,38 @@ build if that copy drifts.
 
 ---
 
+## The prediction rule (normative: applies to every phase)
+
+The docs this skill writes are read as settled, and the checks are what make them so. So:
+
+> **Never substitute a prediction for a check, or for a question.** Where a fact is verifiable,
+> verify it. Where only a person can settle it, ask. A confident inference is not a finding, and a
+> predicted answer doesn't close a question.
+
+It looks different in each phase, and all of these are the same failure:
+
+- **Pre-check** — assuming what an existing doc says, or what the mode should be, instead of
+  reading and asking.
+- **Recon** — asserting structure, size or a boundary without reading what declares it. And
+  **never seed a sub-agent with the answer you expect**: give it the scope and the question, not
+  your hypothesis, or you get your own framing back instead of what the code says.
+- **Interview** — deciding a question isn't worth asking. You cannot know what a stakeholder will
+  say, and a run of answers following a pattern doesn't tell you the next one will.
+- **Synthesis** — writing an inferred rationale as though it were the design. That is the
+  no-invention rule; prediction is how you arrive at it.
+- **Verification** — scoping the check to what you expect to be wrong. Verify what the docs
+  *claim*, not what you suspect.
+- **Finish** — treating a step as discharged because a similar step was done.
+
+**The tell is a sentence beginning "this is probably", "presumably", or "I'd expect".** In prose
+it is either a flagged `[assumption]` carrying its evidence and impact, or it doesn't get written.
+In your own reasoning it is a prompt to go and check.
+
+**This block is the single source of truth for the rule.** The playbooks point here rather than
+restating it.
+
+---
+
 ## Writing into the target repo
 
 The output lands in a repository this skill doesn't own, so the destination is **agreed, not
@@ -275,8 +307,13 @@ When done, report:
 - On a re-run: code drift since the last recon, and what the user chose to do about it.
 - Open `[assumption]` / `[unverified]` / `[contradicted]` items and their impact.
 - Coverage: any area still pending in the ledger, and any claim still `[unchecked]` with why.
-- (full mode) Interview coverage: how far the queue got, and what's parked as *needs SME*, with the
-  highest-impact items named and a pointer to the register for the rest.
+- (full mode) Interview coverage, as counts: register items whose next step is an interview, how
+  many were asked, how many remain — and for each remaining one, its *Why parked* value from the
+  register, with the SME named wherever that value is *needs SME*. Name the highest-impact
+  remainders and point at the register for the rest. Without the denominator, the summary hides
+  the gap.
+- **Reconciliation coverage** (Phase 5 step 2), as counts: `[contradicted]` / `[outdated]` items
+  flagged, asked, confirmed, corrected, and parked as *needs SME*, with the SME named.
 - Whether a `CLAUDE.md` / `AGENTS.md` was created or proposed.
 - **`docs/_discovery/` disposition** per
   [`references/discovery-disposition.md`](./references/discovery-disposition.md).
