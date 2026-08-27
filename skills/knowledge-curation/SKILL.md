@@ -1,6 +1,13 @@
 ---
-name: knowledge-curation
-description: Process a source document (functional spec, technical doc, ADR, meeting notes, interview, workshop, glossary) into curated knowledge under /knowledge. Use when asked to curate, extract, decompose, or structure a business document, or when curation is mentioned alongside a file path or attachment or a non-document source (interview, workshop). A file or attachment alone, with no curation intent, does not activate this — e.g. a question about or summary of a document.
+name: "knowledge-curation"
+description: "Process a source document (functional spec, technical doc, ADR, meeting notes, interview, workshop, glossary) into curated knowledge under /knowledge. Use when asked to curate, extract, decompose, or structure a business document, or when curation is mentioned alongside a file path or attachment or a non-document source (interview, workshop). A file or attachment alone, with no curation intent, does not activate this — e.g. a question about or summary of a document."
+argument-hint: "Point at the source document to curate — a file path, attachment, or #file reference; optionally the domain/feature it belongs under"
+compatibility: "Host-agnostic. Runs as a Claude Code skill, or as plain Markdown any capable coding agent can follow. The optional hygiene checks under scripts/ need Bash + python3 (pyyaml for the frontmatter check). No hooks/MCP/plugin required."
+metadata:
+  author: "Aamer Sadiq"
+  purpose: "Curate source documents into a provenance-tagged, queryable knowledge base for BA and spec-driven work"
+user-invocable: true
+disable-model-invocation: false
 ---
 
 # Curating knowledge
