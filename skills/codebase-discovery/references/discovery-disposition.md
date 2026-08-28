@@ -29,6 +29,14 @@ different fates:
 - Neither kind is ever linked from `CLAUDE.md` / `AGENTS.md`; the agent file links onboarding
   material only.
 
+> **Why the docs link the register, when nothing here is an onboarding doc.** Settled deliberately.
+> Every file under the output root carries `see ../_discovery/assumptions-register.md` in its header
+> block, and the root `README.md` links it from open risks. That reads as a contradiction and isn't.
+> The register is committed, so the link resolves on every clone, and a reader who meets an
+> `[assumption]` needs one hop to reach what explains it. The ban above is the narrower one and the
+> one worth keeping: `CLAUDE.md` and `AGENTS.md` link onboarding material only, so the two state
+> files never load into an agent's session.
+
 ---
 
 What each onboarding file is *for*, meaning layout, naming, header block and length, is
