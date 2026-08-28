@@ -102,10 +102,15 @@ the state, so report what the previous run got to (areas reconned, how far the i
 offer **resume** or **clean run**, and be specific about the cost rather than saying "this is
 destructive":
 
-- `discovery-state.md` and `recon-manifest.md` hold the interview progress and the recon memory, and
-  the disposition recommends git-ignoring them, so **wiping those is unrecoverable**.
-- `assumptions-register.md` and `traceability-index.md` are committed, so those are recoverable from
-  git.
+- `discovery-state.md` and `recon-manifest.md` hold the interview progress and the recon memory;
+  `assumptions-register.md` and `traceability-index.md` are the audit trail for whatever docs the
+  previous run wrote.
+- **What git can give back is a check, not an assumption** (the prediction rule in `SKILL.md`). The
+  disposition recommends committing the two audit files and git-ignoring the two state files, but
+  that's advice about what to do, not a record of what this repo did. A first run has committed
+  nothing yet. Run `git ls-files --error-unmatch` over all four and name which are tracked.
+- Anything untracked is **gone for good**, and with no git available that's all four. Say so before
+  you ask.
 
 On the user's confirmation, delete all four and start cold. Wipe `_discovery/` only; any docs a
 previous run wrote stay where they are, for this run to refresh in place. Half-measures are worse
