@@ -10,7 +10,8 @@ plus one diagram. -->
 
 ## Overview
 
-<2–4 sentences: style (monolith/services/etc.), primary stack, how it's driven.>
+<2–4 sentences: style (monolith/services/etc.), primary stack, how it's driven, and the areas the
+system divides into.>
 
 ## Context diagram
 
@@ -23,11 +24,15 @@ graph LR
 
 ## Components
 
-<!-- The parts a change would have to touch. What each is responsible for. A small table is ideal. -->
+<!-- The parts a change would have to touch. What each is responsible for. A small table is ideal.
 
-| Component | Responsibility | Key tech |
-|---|---|---|
-| <name> | <what it does> | <framework/lib> |
+This file is where the component-to-area mapping is recorded, so the Area column is a glossary term,
+not a namespace or folder name. Nothing else holds this mapping: the root README lists the areas but
+not what's in them. Drop the column on a single-area system, which has no areas/ directory. -->
+
+| Component | Area | Responsibility | Key tech |
+|---|---|---|---|
+| <name> | <the area it belongs to> | <what it does> | <framework/lib> |
 
 ## Data & persistence
 
