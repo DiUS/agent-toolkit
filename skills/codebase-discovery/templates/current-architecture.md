@@ -44,6 +44,9 @@ not what's in them. Drop the column on a single-area system, which has no areas/
 
 ## Cross-cutting concerns
 
+<!-- SECRETS: this file is committed. Auth and config handling are exactly where credentials leak,
+so re-read the secrets rule in `SKILL.md` before writing this section. -->
+
 <Auth, logging/audit, error handling, config/secrets, caching: briefly, as-is.>
 
 ## Notable constraints & risks

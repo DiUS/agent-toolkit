@@ -53,12 +53,17 @@ action you're taking and why it was chosen for you:
   paths themselves moved, since patching area by area costs more than a clean pass.
 - **Proceed as-is** — reasonable when the drift is in areas irrelevant to what the user is doing
   now. Not free: see the flag rule below.
-- **Report only** — produce the drift list as a to-do and change nothing. Same flag rule.
+- **Report only** — produce the drift list as a to-do and add no new documentation. The flag rule
+  below still applies, so the affected claims are re-flagged where they stand.
 
 If the user declines to re-recon, the affected claims no longer have verified backing: revert them
 to `[unchecked]` and log them in the assumptions register, exactly as if they'd come from someone
 else's stale documentation, which, as of now, they have. Never leave a claim reading as accepted
 when the code beneath it has moved.
+
+Reverting a flag is a documentation edit, so it runs through Phase 3 like any other, and the docs and
+the register have to agree by the time it's done. That holds for all four options: the two that
+re-recon reach Phase 3 through Phase 1, and the two that don't reach it directly.
 
 Record the decision in the manifest's freshness-check log, so the next session knows this was
 chosen rather than missed.

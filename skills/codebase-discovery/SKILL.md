@@ -273,7 +273,7 @@ according to what the working state records:
 | Recon done, **code-only** (no interview to stop), docs not written | Phase 3 |
 | Recon done, interview stopped with items open, **no drift** | Phase 2 — continue the queue |
 | Recon done, interview stopped, **drift in the affected areas** | Phase 1 scoped to those areas, then Phase 2 |
-| Interview done, docs written, drift since | whatever the user chose in the freshness check |
+| Interview done, docs written, drift since | per the freshness check: Phase 1 then Phase 3 where the user re-recons, Phase 3 alone where they don't, to carry the reverted flags into the docs |
 
 Never interview about a rule whose code has changed since recon: re-recon that area first, or the
 question is built on a stale premise. Say which phase you're entering and why before you start.

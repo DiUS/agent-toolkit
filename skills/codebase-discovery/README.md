@@ -24,8 +24,9 @@ relied on.
 
 ## How it works: six phases
 
-0. **Pre-check** — read any existing `README` / `CLAUDE.md` / `AGENTS.md` / `docs`, and
-   capture what they state, to verify against the code.
+0. **Pre-check** — settle the output root with the user before anything is written, then read any
+   existing `README` / `CLAUDE.md` / `AGENTS.md` / `docs` and capture what they state, to verify
+   against the code.
 1. **Deep recon** — tiered, evidence-cited code analysis (structure → data model →
    contracts/edges → business-logic hotspots), token-efficient via sub-agents where
    available. Reads the structure the repo **declares** (build manifests, workspace files, runtime
@@ -43,8 +44,9 @@ relied on.
 ## Modes
 
 - **full** — with a stakeholder to validate findings.
-- **code-only** — no interview; everything needing confirmation is flagged
-  `[assumption]` / `[unverified]` for later. For when no SME is available yet.
+- **code-only** — no interview. The provenance caveat is stated once per document rather than on
+  every line, and everything still open is tracked in the assumptions register (see Status model
+  below). For when no SME is available yet.
 
 ## Host-agnostic by design
 
@@ -66,9 +68,14 @@ there?) and settles the **output root** with the user before a byte is written.
 **Material is filed one concept per file, under names drawn from the domain language**, so an agent
 working on billing loads `areas/billing/`, not every rule in the system. Area-specific material lives
 in its area; what no single area owns stays at the top level; and the glossary is always one file,
-because it's the shared vocabulary and splitting it would defeat the point. A single-area system keeps
-the flat layout with no `areas/` at all, because the trigger is whether the content has an area
-dimension, not how big the repo is.
+with an `Area` column carrying ownership, because one place to look a word up is also the only place
+a clash between two areas' meanings shows. A single-area system keeps the flat layout with no
+`areas/` at all, because the trigger is whether the content has an area dimension, not how big the
+repo is.
+
+Coverage travels with the docs. Each area reaches the entry point carrying its state, so a reader can
+see the edge of what was examined rather than assuming the set is complete.
+[`references/provenance-and-status.md`](references/provenance-and-status.md) defines the states.
 
 ```
 README.md                         # project-root: onboarding index / entry point — the file CLAUDE.md/AGENTS.md links
