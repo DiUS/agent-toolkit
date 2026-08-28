@@ -270,6 +270,7 @@ according to what the working state records:
 | Nothing (first run) | Phase 1 |
 | Recon incomplete — areas still pending in the ledger, **no drift** | Phase 1, continuing with those areas |
 | Recon incomplete, **drift in areas already covered** | Phase 1 — re-recon the drifted areas, then continue with the pending ones |
+| Recon done, **code-only** (no interview to stop), docs not written | Phase 3 |
 | Recon done, interview stopped with items open, **no drift** | Phase 2 — continue the queue |
 | Recon done, interview stopped, **drift in the affected areas** | Phase 1 scoped to those areas, then Phase 2 |
 | Interview done, docs written, drift since | whatever the user chose in the freshness check |
@@ -307,7 +308,8 @@ When done, report:
 - Doc-drift findings (existing docs vs code).
 - On a re-run: code drift since the last recon, and what the user chose to do about it.
 - Open `[assumption]` / `[unverified]` / `[contradicted]` items and their impact.
-- Coverage: any area still pending in the ledger, and any claim still `[unchecked]` with why.
+- Coverage: every area with its state from the ledger, not just the pending ones, and any claim
+  still `[unchecked]` with why.
 - (full mode) Interview coverage, as counts: register items whose next step is an interview, how
   many were asked, how many remain — and for each remaining one, its *Why parked* value from the
   register, with the SME named wherever that value is *needs SME*. Name the highest-impact

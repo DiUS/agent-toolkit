@@ -40,6 +40,10 @@ it traces to evidence.
   matches the glossary across docs; the recon manifest reflects the files actually read. The
   project-root `README.md` and the agent onboarding file carry no discovery metadata by design, so
   finding no date there is the intended state; don't report it.
+- **Coverage is declared.** The entry point's area list should match the coverage ledger in
+  `docs/_discovery/recon-manifest.md`: every area present, each carrying its state, and no area
+  reading as covered whose ledger state isn't `full`. An area named in the architecture doc with
+  nothing behind it is what this catches.
 - **One glossary, not several.** Exactly one `domain-glossary.md`, at `domain/`, with no per-area
   variant beside it, and every term carrying an area or `cross-cutting`. A second glossary hides the
   cross-area clashes the single file exists to surface.

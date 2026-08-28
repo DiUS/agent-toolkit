@@ -49,11 +49,11 @@ judgements are this phase's own, plus two rules: one about coverage, one about e
   logical name; anything no single area owns is cross-cutting and belongs at the top level. Getting
   this wrong is what turns one document into an unreadable pile, and the glossary in particular
   stays a single file whatever the system's size.
-- **Partial recon still publishes, provided the gaps are declared.** Where recon covered some areas
-  and left others pending, write what's covered rather than withholding everything. The entry
-  point must say which areas are documented and which aren't (see the README bullet below), and a
-  claim about an uncovered area stays `[unchecked]` and unpublished. A partial doc set a reader can
-  see the edges of is useful; one that reads as complete is the failure this guards against.
+- **Partial recon still publishes, provided the gaps are declared.** Write what's covered rather than
+  withholding everything. Each area reaches the entry point carrying its coverage state, per the
+  coverage states in provenance-and-status, and a claim about an area nobody read stays `[unchecked]`
+  and unpublished. A partial doc set a reader can see the edges of is useful; one that reads as
+  complete is the failure this guards against.
 - **Record each claim's evidence as you write it.** A row in
   `docs/_discovery/traceability-index.md` per claim, added while the evidence is in front of you.
   See the traceability rule in provenance-and-status. Phase 4 checks these, and a claim carrying

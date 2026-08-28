@@ -103,8 +103,11 @@ What's left to decide is the **order** you work through them:
    This is a fact from the graph, not an inference.
 3. **Entry points.** User-facing areas first when nothing else decides it.
 
-Record every area in the manifest's coverage ledger, including the ones not yet reached. An area
-missing from the ledger is an invisible gap; an area listed as pending is a known one.
+Record every area in the manifest's coverage ledger, including the ones not yet reached and the ones
+`--exclude` ruled out. An area missing from the ledger is an invisible gap; one listed as `pending`
+or `excluded` is a known one. The depths are a closed set, defined in
+[`../references/provenance-and-status.md`](../references/provenance-and-status.md), and every state
+but `full` is a gap Phase 3 has to declare at the entry point.
 
 **On a large repo, work across sessions rather than trimming.** Tier 0 has just priced the job (the
 area list and the rough size), so put that in front of the user before spending it, and let them say

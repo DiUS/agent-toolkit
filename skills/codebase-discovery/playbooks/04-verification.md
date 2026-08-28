@@ -58,6 +58,11 @@ pass an **absolute** path or put the substance in the prompt. The checks below r
    agent file points at a file that exists. Skipped documents are the usual culprit, since the
    index templates list the full set.
 
+   **Coverage is declared.** The entry point's area list matches the manifest's coverage ledger:
+   every area present, each carrying its state, and no area reading as covered whose ledger state
+   isn't `full`. An area named in the architecture doc with nothing behind it is what this catches,
+   and it's the one coverage claim a checker can settle mechanically.
+
    **The glossary is one file.** Exactly one `domain-glossary.md`, at `domain/`, with no per-area
    variant beside it, and every term carrying an area or `cross-cutting`. A second glossary hides
    the cross-area clashes the single file exists to surface.
@@ -119,8 +124,9 @@ Produce a short verification report:
 terminology drifting from the glossary, leftover scaffolding, a dead link. Edits, not grounds for a
 round trip.
 
-**One rework cycle, then stop.** Route material problems to where they can be fixed (synthesis for
-anything the code can settle, the interview only where it genuinely needs a person) and re-verify
+**One rework cycle, then stop.** Route material problems to where they can be fixed: synthesis for
+anything the code can settle, the interview only where it needs a person. In `code-only` mode there
+is no interview, so those park in the register as *needs SME* instead of blocking the run. Re-verify
 **only the affected documents**, not the whole set. If a second pass still finds material problems,
 stop and report **no-go** with the specific unresolved items rather than starting a third lap.
 
