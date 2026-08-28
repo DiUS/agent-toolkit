@@ -3,7 +3,7 @@
 > **Last updated:** YYYY-MM-DD
 > **Scope:** As-is architecture of <system>
 > **Mode:** full | code-only
-> **Status:** accepted knowledge unless flagged — see ../_discovery/assumptions-register.md
+> **Status:** <full: accepted knowledge unless flagged | code-only: code-derived, not validated by a person> — see ../_discovery/assumptions-register.md
 
 <!-- As-is only. Describe how the system IS built, not how it should be. Keep to ~1–2 pages
 plus one diagram. -->
@@ -23,7 +23,7 @@ graph LR
 
 ## Components
 
-<!-- The load-bearing parts only. What each is responsible for. A small table is ideal. -->
+<!-- The parts a change would have to touch. What each is responsible for. A small table is ideal. -->
 
 | Component | Responsibility | Key tech |
 |---|---|---|
@@ -31,7 +31,7 @@ graph LR
 
 ## Data & persistence
 
-<Datastores, what lives where. Point to domain-model.md for the entities.>
+<Datastores, what lives where. Point to `../domain/domain-model.md` for the entities.>
 
 ## Entry points & runtime
 
@@ -39,7 +39,7 @@ graph LR
 
 ## Cross-cutting concerns
 
-<Auth, logging/audit, error handling, config/secrets, caching — briefly, as-is.>
+<Auth, logging/audit, error handling, config/secrets, caching: briefly, as-is.>
 
 ## Notable constraints & risks
 

@@ -3,7 +3,7 @@
 > **Last updated:** YYYY-MM-DD
 > **Scope:** Business language used in <system>
 > **Mode:** full | code-only
-> **Status:** accepted knowledge unless flagged — see ../_discovery/assumptions-register.md
+> **Status:** <full: accepted knowledge unless flagged | code-only: code-derived, not validated by a person> — see ../_discovery/assumptions-register.md
 
 <!-- The ubiquitous language. One line per term. Pull terms from entities, enums, and
 error/validation messages in the code, then confirm meanings with the business. Note
