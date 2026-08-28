@@ -61,6 +61,11 @@ the two modes complement each other rather than competing.
 
 ## Setup
 
+**This is prep work, done before a run and by choice.** Don't raise any of it during a discovery:
+the recon playbook and Tier D of the ladder both say never ask the user to install anything mid-run,
+and that stands. If the symbol tools are absent when recon starts, note it and carry on down the
+ladder.
+
 ### 1. Install the language server(s) for your repo
 
 Install only what your target codebase needs, one of these rather than all:

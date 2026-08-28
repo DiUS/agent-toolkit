@@ -58,6 +58,10 @@ pass an **absolute** path or put the substance in the prompt. The checks below r
    agent file points at a file that exists. Skipped documents are the usual culprit, since the
    index templates list the full set.
 
+   **The glossary is one file.** Exactly one `domain-glossary.md`, at `domain/`, with no per-area
+   variant beside it, and every term carrying an area or `cross-cutting`. A second glossary hides
+   the cross-area clashes the single file exists to surface.
+
    **Names use the agreed language.** Area directories and concept filenames are glossary terms, not
    namespaces or codenames, with no catch-alls (`misc`, `other`, `general`). A file that couldn't be
    named specifically usually means the split was wrong. No output file is named `business-rules.md`
@@ -68,11 +72,11 @@ pass an **absolute** path or put the substance in the prompt. The checks below r
    `[unverified]`. An invented carve-up is worse than a technical one, because it becomes the
    structure everyone inherits.
 
-7. **Output renders.** Read the files as rendered Markdown, not just as source. For every
-   table: no blank line between rows (a blank line ends a Markdown table, orphaning every row after
-   it as literal pipe text) and a header separator immediately below the header. Check that any
-   diagram parses. A register whose rows don't render as a table is unusable however accurate it is,
-   and no check that only reads content will catch it.
+7. **Markdown structure holds.** Check the source of every table: a header separator row directly
+   below the header, and no blank line between rows. A blank line ends a Markdown table, so every
+   row after it renders as literal pipe text. Confirm fences are balanced and any diagram block is
+   well-formed. A register whose rows don't render is unusable however accurate it is, and no check
+   that only reads content will catch it.
 
 8. **Write contract honoured.** Check the output against
    [`../references/write-contract.md`](../references/write-contract.md), using the root, nav decision

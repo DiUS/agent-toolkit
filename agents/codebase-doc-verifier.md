@@ -40,6 +40,9 @@ it traces to evidence.
   matches the glossary across docs; the recon manifest reflects the files actually read. The
   project-root `README.md` and the agent onboarding file carry no discovery metadata by design, so
   finding no date there is the intended state; don't report it.
+- **One glossary, not several.** Exactly one `domain-glossary.md`, at `domain/`, with no per-area
+  variant beside it, and every term carrying an area or `cross-cutting`. A second glossary hides the
+  cross-area clashes the single file exists to surface.
 - **Names use the agreed language.** Area directories and concept filenames should be glossary
   terms, not namespaces or codenames, and there should be no catch-alls (`misc`, `other`,
   `general`). Your assignment carries the naming rules, or an absolute path to the skill's
