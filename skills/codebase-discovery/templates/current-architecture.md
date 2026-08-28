@@ -1,7 +1,7 @@
 # Current Architecture
 
 > **Last updated:** YYYY-MM-DD
-> **Scope:** As-is architecture of <system>
+> **Scope:** As-is architecture of <system>, and which parts of it this run examined
 > **Mode:** full | code-only
 > **Status:** <full: accepted knowledge unless flagged | code-only: code-derived, not validated by a person> — see ../_discovery/assumptions-register.md
 
@@ -28,7 +28,12 @@ graph LR
 
 This file is where the component-to-area mapping is recorded, so the Area column is a glossary term,
 not a namespace or folder name. Nothing else holds this mapping: the root README lists the areas but
-not what's in them. Drop the column on a single-area system, which has no areas/ directory. -->
+not what's in them. Drop the column on a single-area system, which has no areas/ directory.
+
+List every part the declared graph shows, read or not, since dropping one would misrepresent the
+system. Flag the rows recon never read with [unchecked]. Without that, five services formatted
+identically read as five services examined, and the one that was read is indistinguishable from the
+four that weren't. -->
 
 | Component | Area | Responsibility | Key tech |
 |---|---|---|---|

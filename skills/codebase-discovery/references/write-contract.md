@@ -26,10 +26,16 @@ later phase is bound by it.
    it, show the user what would change, and get sign-off first. A generated doc must not silently
    replace a human-authored one, however stale that one looks.
 6. **A previous run's own output may be refreshed in place**, recognisable by this skill's header
-   block.
-7. **Respect the published-site decision.** Where the root belongs to a docs generator, Phase 0
-   recorded whether these pages go in its nav/sidebar. Never add pages to a public site's
-   navigation without that decision.
+   block. Refreshed, never re-initialised: `assumptions-register.md` and `traceability-index.md` are
+   the committed audit trail for docs still in the repo, so they are updated and never replaced with
+   an empty template. Their presence is also evidence that a previous run happened, whatever the
+   git-ignored state files do or don't show. The one way past this is `--fresh`, which deletes them
+   outright and only on the user's confirmation, having said first what git can and cannot give back.
+7. **Respect the published-site decision, and never edit the nav yourself.** Where the root belongs
+   to a docs generator, Phase 0 recorded whether these pages belong in its nav or sidebar. That
+   config usually sits outside the output root, which rule 3 puts out of reach, so record the
+   decision and leave the edit to the team. Publishing pages to someone's site by editing its index
+   is not a write this skill makes.
 
 What each file is *for*, meaning the layout, naming, header block and length, is
 [`output-conventions.md`](output-conventions.md). This file is only about where you may write and

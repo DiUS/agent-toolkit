@@ -31,14 +31,19 @@ directory. Every path in this phase is relative to it.
 root may not be `docs/`, and the root it chose is recorded *inside* the state file, so looking only
 in `docs/_discovery/` finds nothing and reports a first run that isn't one. That silently throws away
 the resume and the staleness check, and nothing in the output shows it happened. Glob for
-`_discovery/discovery-state.md` at every level under the project root, honouring `.gitignore` and the
-default exclusions.
+`_discovery/discovery-state.md` at every level under the project root, and **include git-ignored
+paths**: the disposition recommends ignoring exactly this file, so a search that asks git what to
+skip can never find it on a repo that took the advice. Where the glob is noisy, skip vendored and
+generated trees by name instead.
 
 - **One hit** — read it. It carries that run's output root, mode and resolved options, and how far it
   got. Report what it reached (areas reconned, how far the interview got) before acting on it.
 - **More than one** — two runs have written here. Show the paths with their `Last updated` dates and
   ask which to continue. Don't pick, and don't merge them.
-- **None** — a first run. Say so.
+- **None** — don't conclude "first run" yet. Check whether `_discovery/assumptions-register.md` or
+  `traceability-index.md` is there: those are committed, so they survive where the state files
+  don't. Either one means a previous run happened and its working memory didn't travel. Say which
+  case you're in.
 
 ---
 
@@ -79,7 +84,9 @@ are human-authored until proven otherwise.
 site, or is already occupied, propose an alternative (`docs/discovery/` is the usual choice) and let
 the user decide. Report what you found even when `--output` was given, since a published site is
 worth knowing about either way. If the docs do belong in the published site, ask explicitly whether
-they should be registered in its nav/sidebar or deliberately left out of it.
+they want them in its nav or sidebar. Say that registering them is a manual step this skill doesn't
+take, since that config sits outside the output root, and record the answer either way so the
+decision is on record for whoever makes the edit.
 
 Carry all three outcomes (root, tooling + nav decision, and the pre-existing files) into §3, which
 records them in `discovery-state.md` as it initialises it. They bind every later phase via the
@@ -132,12 +139,19 @@ Then continue from what §1 found:
   re-recon, and don't silently trust stale docs. Record their decision in the manifest's
   freshness-check log.
 
-If §1 found none, create `_discovery/` under the agreed root and initialise all four files from
-their templates: `templates/discovery-state.md`, `templates/recon-manifest.md`,
-`templates/assumptions-register.md` and `templates/traceability-index.md`. Fill the state's **Run**
-block from §2: the agreed root, the docs-site tooling and nav decision, and the pre-existing files at
-the target paths. Phase 1 writes to the last two files in every run, and their column sets carry
-weight: the register's *who can confirm* column is what lets the interview group questions by owner.
+If §1 found no state, create `_discovery/` under the agreed root and initialise **only the files that
+aren't already there**, from `templates/discovery-state.md`, `templates/recon-manifest.md`,
+`templates/assumptions-register.md` and `templates/traceability-index.md`. The two committed files
+are protected by rule 6 of the [write contract](../references/write-contract.md).
+
+Where those two survived but the state files didn't, keep them and create the two state files fresh,
+then say so: this run can read the open items but not what the last one covered, so recon starts over
+and the freshness check has nothing to compare against.
+
+Fill the state's **Run** block from §2: the agreed root, the docs-site tooling and nav decision, and
+the pre-existing files at the target paths. Phase 1 writes to the last two files in every run, and
+their column sets carry weight: the register's *who can confirm* column is what lets the interview
+group questions by owner.
 
 ---
 

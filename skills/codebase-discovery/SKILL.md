@@ -276,6 +276,7 @@ according to what the working state records:
 | Recorded state | Re-enter at |
 |---|---|
 | Nothing (first run) | Phase 1 |
+| No state, but a committed register or traceability index is there | Phase 1 — the last run's coverage is unknown, so recon starts over; its open items still stand |
 | Recon incomplete — areas still pending in the ledger, **no drift** | Phase 1, continuing with those areas |
 | Recon incomplete, **drift in areas already covered** | Phase 1 — re-recon the drifted areas, then continue with the pending ones |
 | Recon done, **code-only** (no interview to stop), docs not written | Phase 3 |
