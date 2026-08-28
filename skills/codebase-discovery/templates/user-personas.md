@@ -3,7 +3,7 @@
 > **Last updated:** YYYY-MM-DD
 > **Scope:** Who uses and owns <system>
 > **Mode:** full | code-only
-> **Status:** accepted knowledge unless flagged — see ../_discovery/assumptions-register.md
+> **Status:** <full: accepted knowledge unless flagged | code-only: code-derived, not validated by a person> — see ../_discovery/assumptions-register.md
 
 <!-- Derive candidate roles from the auth/permission model in the code, then put real people
 and goals to them via the interview. Keep it brief. -->

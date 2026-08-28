@@ -3,7 +3,7 @@
 **DiUS's shared toolkit of skills, commands, agents and hooks for AI coding agents.**
 
 `agent-toolkit` is a monorepo where DiUS consultants publish and reuse the working pieces they
-build for AI coding agents — day-to-day tools, not one-off prompts. It's a growing collection,
+build for AI coding agents: day-to-day tools, not one-off prompts. It's a growing collection,
 installable as a whole or one component at a time, that stays **tool-agnostic** wherever
 possible and installs as a **Claude Code plugin** in one command.
 
@@ -12,10 +12,10 @@ possible and installs as a **Claude Code plugin** in one command.
 ## Install
 
 <details open>
-<summary><b>Any agent — <code>npx skills</code> (recommended)</b></summary>
+<summary><b>Any agent: <code>npx skills</code> (recommended)</b></summary>
 
 Installs skills into any of ~55 supported agents (Claude Code, Cursor, Codex, OpenCode,
-Gemini, Copilot…) straight from GitHub — the most tool-agnostic route:
+Gemini, Copilot…) straight from GitHub, the most tool-agnostic route:
 
 ```bash
 # interactive — detects your agents and prompts, installs the whole toolkit
@@ -31,7 +31,7 @@ npx skills add DiUS/agent-toolkit --list
 </details>
 
 <details>
-<summary><b>Claude Code (plugin — skills + commands + agents)</b></summary>
+<summary><b>Claude Code (plugin: skills + commands + agents)</b></summary>
 
 ```
 /plugin marketplace add DiUS/agent-toolkit
@@ -59,7 +59,7 @@ and any other agent).
 | [`codebase-discovery`](skills/codebase-discovery/) | Reverse-engineers domain, architecture, business rules, workflows and a business glossary from an existing codebase into lean onboarding docs — ready for harness engineering / Spec Kit. |
 | [`knowledge-curation`](skills/knowledge-curation/) | Processes a source document (functional spec, technical doc, ADR, meeting notes, interview, workshop, glossary) into curated, ID-referenced knowledge under `knowledge/` — decomposing rather than summarising, eliciting gaps rather than guessing. |
 
-New skills, commands, agents and hooks are added over time — see
+New skills, commands, agents and hooks are added over time; see
 [CONTRIBUTING.md](CONTRIBUTING.md) to add your own.
 
 ---
@@ -109,7 +109,7 @@ agent-toolkit/
 This repo is itself harness-ready: [AGENTS.md](AGENTS.md) gives any agent the context and
 guardrails to contribute (and [CLAUDE.md](CLAUDE.md) adds Claude Code specifics), while
 [CONTRIBUTING.md](CONTRIBUTING.md) covers the mechanics of adding a skill, command, agent or
-hook. Before committing, run the verification gate — also enforced in CI:
+hook. Before committing, run the verification gate, also enforced in CI:
 
 ```bash
 node scripts/validate.js
