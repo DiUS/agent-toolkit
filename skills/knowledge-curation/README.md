@@ -17,7 +17,7 @@ writes outside itself is the `knowledge/` corpus at the workspace root.
 | `references/conventions/` | the four always-load rule docs — see below |
 | `references/knowledge/` | the per-type file templates (one per curated file type) |
 | `references/registry-templates/` | templates for the platform registries and ADRs |
-| `scripts/` | the three hygiene checks — see below |
+| `scripts/` | the four hygiene checks — see below |
 | `assets/knowledge-base/` | the empty knowledge-base scaffold, laid down on first run |
 
 The two smaller sets below are stable, so they're named individually. The per-type
