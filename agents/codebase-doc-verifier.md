@@ -47,10 +47,19 @@ it traces to evidence.
 - **Groupings are evidenced.** A cluster named in business language must trace to a stakeholder who
   confirmed it; check the register and traceability index. Otherwise it should be named after the
   code unit it came from and flagged `[unverified]`.
+- **Markdown structure holds.** Check the source of every table: a header separator row directly
+  below the header, and no blank line between rows. A blank line ends a Markdown table, so every row
+  after it renders as literal pipe text. A register whose rows don't render is unusable however
+  accurate it is, and no check that only reads content will catch it. Confirm fences are balanced
+  and any diagram block is well-formed.
 - **Writes landed inside the agreed root.** Phase 0 records the output root, the docs-site nav
   decision and the pre-existing files at the target paths in `docs/_discovery/discovery-state.md`;
   check the output against them. **You cannot verify sign-off**, because an overwrite is approved
   in conversation, not in a file. Report placement, not consent, and let the caller judge.
+- **Drift is captured in the register.** Every place an existing doc (`README`, `CLAUDE.md`,
+  `AGENTS.md`) contradicted the code should appear in `docs/_discovery/assumptions-register.md` with
+  a corrected statement derived from the code. That register is the artefact to check; the doc-drift
+  summary it feeds doesn't exist yet when you run.
 
 ## Report format
 

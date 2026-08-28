@@ -15,11 +15,13 @@ different fates:
   `assumptions-register.md` from its open-risks section, and that link stays valid for every
   clone.
 - The two state files are this run's scratch memory. **Recommend** adding them to `.gitignore`, and
-  never do it automatically:
+  never do it automatically. Substitute the root Phase 0 agreed, per rule 1 of the
+  [write contract](write-contract.md): a snippet naming `docs/` in a repo whose root is
+  `docs/discovery/` ignores nothing.
 
   ```gitignore
-  docs/_discovery/discovery-state.md
-  docs/_discovery/recon-manifest.md
+  <output root>/_discovery/discovery-state.md
+  <output root>/_discovery/recon-manifest.md
   ```
 
 - Deleting the state files is safe but makes the next run **start cold**: no resume, no staleness
