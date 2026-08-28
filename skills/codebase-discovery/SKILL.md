@@ -225,9 +225,10 @@ sessions:
 - `docs/_discovery/recon-manifest.md` — the commit recon ran against, which areas and files were
   read, and which existing docs fed it, so later runs can detect staleness (below).
 
-On invocation: if these exist, read them first and resume; do not restart from zero. Keep
-`discovery-state.md` compact: it's a working set, not a log, and its own header carries the ceiling
-and the compaction rules.
+On invocation: if these exist, read them first and resume; do not restart from zero. They sit under
+whatever root the previous run agreed, which may not be `docs/`, so Phase 0 **searches** for them
+rather than checking one path. Keep `discovery-state.md` compact: it's a working set, not a log, and
+its own header carries the ceiling and the compaction rules.
 
 `_discovery/` also holds the two audit files (`assumptions-register.md`,
 `traceability-index.md`), which are committed alongside the docs they back. What's committed and
@@ -251,7 +252,7 @@ Run in order. Each has a playbook; read it when you enter the phase.
 
 | Phase | Playbook | Outcome |
 |---|---|---|
-| 0. Pre-check | [`playbooks/00-pre-check.md`](./playbooks/00-pre-check.md) | Read existing README/CLAUDE.md/AGENTS.md/docs; capture what they state, to verify against the code; set up working state; survey the write target and agree the output root. |
+| 0. Pre-check | [`playbooks/00-pre-check.md`](./playbooks/00-pre-check.md) | Locate any previous run's state; survey the write target and agree the output root **before writing anything**; set up working state under it; read existing README/CLAUDE.md/AGENTS.md/docs and capture what they state, to verify against the code. |
 | 1. Deep recon | [`playbooks/01-deep-recon.md`](./playbooks/01-deep-recon.md) | Tiered, evidence-cited analysis of structure, data model, contracts and business-logic hotspots; verify the Phase 0 statements against code. |
 | 2. Interview | [`playbooks/02-interview.md`](./playbooks/02-interview.md) | One-question-at-a-time conversation with the BA/PO, worked in impact order from the register; reconcile contradictions with code-based suggestions. The stakeholder can stop at any point; the remainder is parked and resumable. (Skipped in code-only mode.) |
 | 3. Synthesis | [`playbooks/03-synthesis.md`](./playbooks/03-synthesis.md) | Write the lean onboarding docs under `docs/`, each dated and provenance-flagged. |
