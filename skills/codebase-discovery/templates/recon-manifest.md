@@ -29,14 +29,14 @@ from this table is an invisible gap; one listed as pending or excluded is a know
 the freshness check works in: the next run diffs the recon commit against HEAD and re-recons the
 areas whose paths changed. Areas, never one row per file.
 
-Recon depth takes one of five values: full, hotspots only, map only, excluded, pending. The set is
+Recon depth takes one of four values: full, map only, excluded, pending. The set is
 closed; see the coverage states in provenance-and-status. Every state but full is a gap the entry
 point has to declare. -->
 
 | Area | Paths | Recon depth | Source tier | Interview | Docs written |
 |---|---|---|---|---|---|
 | billing | src/Billing/, src/Invoicing/ | full | declared + text search | done (A. Patel) | areas/billing/* |
-| identity | src/Identity/ | hotspots only | text search (inferred) | queued | — |
+| identity | src/Identity/ | full | text search (inferred) | queued | areas/identity/* |
 | tooling | infra/ | map only — dives not warranted | declared | n/a | tech/current-architecture.md |
 | vendor-portal | third-party/ | excluded — user's `--exclude` | declared | n/a | tech/current-architecture.md |
 | reporting | src/Reporting/ | **pending** — not yet reached | — | — | — |

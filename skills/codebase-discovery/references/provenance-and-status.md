@@ -74,7 +74,6 @@ terms as the flags:
 | State | Means | Area docs expected |
 |---|---|---|
 | `full` | data model, contracts, hotspots and tests all worked | yes |
-| `hotspots only` | business logic read, the rest not | partial, and say which |
 | `map only` | Tier 0 map only, dives judged not warranted | no; named in the architecture doc |
 | `excluded` | the user excluded these paths, so nothing was read | no; named in the architecture doc |
 | `pending` | not yet reached | no |

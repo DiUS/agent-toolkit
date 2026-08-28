@@ -62,7 +62,9 @@ Two things need saying to the user rather than deciding silently:
 
 ## Tier 0: structural map (cheap, get approval)
 
-Produce a quick orientation, then pause for the user to approve deeper spend.
+Produce a quick orientation and record it, then pause for the user to approve deeper spend.
+Recording before the pause is what makes a stall cheap. If nobody answers, the map and the area list
+survive, and the next session resumes from them rather than re-deriving them.
 
 **Start from the declared structure, not the directory tree.** The manifests and the repo's own
 toolchain state the module graph outright, so read that first (Tier A/B of the ladder), and only use

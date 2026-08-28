@@ -187,7 +187,7 @@ the Phases table below; what differs is Phase 2:
 
 - **full** — runs the interview. Requires a stakeholder (senior BA / Product Owner / SME) to
   validate findings.
-- **code-only** — skips it. Everything that would need human confirmation stays `[assumption]` /
+- **code-only** — skips it. Everything that would need SME confirmation stays `[assumption]` /
   `[unverified]` for later validation. Use when no SME is available yet.
 
 State the chosen mode before starting.
@@ -211,6 +211,14 @@ At the start of each phase, check what is available and adapt, never hard-fail:
   when available. On other hosts, use whatever generic sub-agent mechanism exists, or run the
   same steps sequentially with disciplined, excerpt-only reading.
 - **Stakeholder (SME)** — if none is available, drop from `full` to `code-only` mode.
+
+**One input is not optional: someone to answer.** Not the SME, whose absence `code-only` covers, but
+whoever gives consent. Options pre-answer **choices** (the output root, the drift response, what to
+exclude). They never pre-answer **consent**: sign-off before an existing README changes, Phase 5's
+reconciliations, writing an agent file. That is `--fresh`'s rule generalised, an option settles a
+choice and never an act that changes someone else's work. The prediction rule means you ask rather
+than guess, so an unattended run stalls at the first consent gate rather than improvising. Correct
+behaviour, and still a stall. Say so up front if nobody is available.
 
 ---
 
