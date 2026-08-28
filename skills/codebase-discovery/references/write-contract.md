@@ -14,8 +14,10 @@ later phase is bound by it.
    directory, so the project-root `README.md` is its README.
    `--output` names the root and is read relative to it; where the path given would land outside the
    project root, say so and confirm rather than writing there on the strength of a flag.
-3. **Write nothing outside that root.** The one exception is the project-root `README.md`, which
-   has its own rules in the synthesis playbook.
+3. **Write nothing outside that root.** Two files are the exceptions, both at the project root, each
+   with its own rules in the playbook that writes it: `README.md` (synthesis) and the agent
+   onboarding file, `CLAUDE.md` or `AGENTS.md` (finish). Rule 5 below governs both, so being an
+   exception to *where* buys no exception to *whether you may replace what's there*.
 4. **Write nothing, and delete nothing, before the root is settled.** This binds Phase 0's own
    `_discovery/` files too: creating them under an assumed root puts the record of the decision in
    the directory the decision rejected, and `--fresh` would wipe a directory nobody has agreed is

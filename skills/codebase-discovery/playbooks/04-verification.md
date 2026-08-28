@@ -9,6 +9,11 @@ Run this as an **isolated pass**, in a sub-agent where available, so the check i
 of the work that produced the docs. On Claude Code, dispatch the **`codebase-doc-verifier`**
 subagent; on other hosts use any generic sub-agent, or run the checks directly.
 
+**Running them directly costs the independence, so say in the report which way it ran.** The agent
+that wrote the docs is then marking its own work, and check 2 is where that hurts: invention is
+hardest to spot in your own prose. Still worth running, and worth the reader knowing how much the
+pass is worth.
+
 A sub-agent doesn't know where this skill is installed, so skill-relative paths mean nothing to it.
 State the checks in the dispatch prompt, and for each one that leans on a file in this skill, either
 pass an **absolute** path or put the substance in the prompt. The checks below reach for
@@ -51,8 +56,9 @@ pass an **absolute** path or put the substance in the prompt. The checks below r
 
 6. **Freshness & consistency.** Every doc **in the `docs/` set** has a `Last updated` date; the
    recon manifest reflects the files actually read; terminology matches the glossary across all
-   docs. The project-root `README.md` and the agent file are exempt by design (output-conventions
-   says why), so don't add one to either.
+   docs. A sub-agent can only confirm the listed paths still exist, since it has no record of what
+   recon opened; judging the list complete stays with you. The project-root `README.md` and the
+   agent file are exempt by design (output-conventions says why), so don't add one to either.
 
    **Every link resolves.** Check each link in the `docs/` set, the project-root `README.md` and the
    agent file points at a file that exists. Skipped documents are the usual culprit, since the

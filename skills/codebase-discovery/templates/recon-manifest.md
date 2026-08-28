@@ -29,9 +29,8 @@ from this table is an invisible gap; one listed as pending or excluded is a know
 the freshness check works in: the next run diffs the recon commit against HEAD and re-recons the
 areas whose paths changed. Areas, never one row per file.
 
-Recon depth takes one of four values: full, map only, excluded, pending. The set is
-closed; see the coverage states in provenance-and-status. Every state but full is a gap the entry
-point has to declare. -->
+Recon depth comes from the closed set in provenance-and-status, and the rows below show each value in
+use. Every state but full is a gap the entry point has to declare. -->
 
 | Area | Paths | Recon depth | Source tier | Interview | Docs written |
 |---|---|---|---|---|---|

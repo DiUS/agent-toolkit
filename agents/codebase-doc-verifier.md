@@ -37,7 +37,9 @@ it traces to evidence.
 - **Links resolve.** Check every link in the docs set, the project-root `README.md` and the agent
   file points at a file that exists; documents that were skipped are the usual culprit.
 - **Freshness and consistency.** Every doc in the `docs/` set has a `Last updated` date; terminology
-  matches the glossary across docs; the recon manifest reflects the files actually read. The
+  matches the glossary across docs; every path the recon manifest lists as read still exists. You
+  have no record of what recon opened, so report a path that has gone missing and leave whether the
+  list is complete to the caller, which does know. The
   project-root `README.md` and the agent onboarding file carry no discovery metadata by design, so
   finding no date there is the intended state; don't report it.
 - **Coverage is declared.** The entry point's area list should match the coverage ledger in
