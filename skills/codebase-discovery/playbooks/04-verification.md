@@ -105,6 +105,11 @@ Produce a short verification report:
 - Bloat or duplication trimmed.
 - Go / no-go for harness engineering / Spec Kit, with any caveats.
 
+**Record the verdict in `discovery-state.md` under Decisions**, with the unresolved items behind it.
+Phase 5 reads it there and gates the agent file on it. A verdict that lives only in this conversation
+is gone when the session ends, and the next run would offer an agent file over docs nobody
+re-checked.
+
 ---
 
 ## What counts as material, and what to do about it
