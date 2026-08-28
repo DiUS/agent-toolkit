@@ -117,6 +117,10 @@ memory at the end produces rows nobody can check, and it's the failure Phase 4's
 to catch. IDs run sequentially and stay stable across runs, so a doc that cites one keeps pointing
 at the same claim.
 
+**A claim that already carries an ID keeps it.** `C-n` is for claims this index mints. Requirements
+arrive with their own from `business-requirements.md`, so index them as `FR-n` / `NFR-n` rather than
+minting a second ID for the same statement, which would leave two rows nobody can reconcile.
+
 Substantive claims get a row as the norm. For a claim that **carries real weight** (a rule,
 threshold, permission, SLA or ownership statement) it isn't optional: Phase 4 treats a missing entry
 there as material.
