@@ -13,6 +13,12 @@ a new team member or AI harness reads. Keep it tight. -->
 
 ## Documentation
 
+<!-- COVERAGE: always present, areas or not. Use the recon manifest ledger's word for the run, and
+where it isn't `full`, add a clause saying what wasn't read. On a single-area system this line is the
+only place coverage is declared, since the Areas section below is omitted. -->
+
+**Coverage:** <ledger state, e.g. `full`, or `map only`: structure mapped, business logic not read>
+
 <!-- Delete any row below whose document wasn't written, so this indexes only what exists. -->
 
 Onboarding docs live under [`docs/`](./docs/):

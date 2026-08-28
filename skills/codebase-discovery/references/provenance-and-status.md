@@ -78,9 +78,12 @@ terms as the flags:
 | `excluded` | the user excluded these paths, so nothing was read | no; named in the architecture doc |
 | `pending` | not yet reached | no |
 
-**Every area reaches the reader carrying its state.** Anything but `full` is a declared gap, and it
-travels: the ledger, then the entry point's area list, then the completion report. Phase 4 checks
-the entry point against the ledger.
+**Coverage reaches the reader.** Anything but `full` is a declared gap, and it travels: the ledger,
+then the entry point, then the completion report. Phase 4 checks the entry point against the ledger.
+
+**The entry point states it on a line of its own, always**, and lists it per area where the system
+has areas. Both, not either. A single-area system has no area list, so a coverage rule that routed
+only through that list would say nothing in the case where the run is often shallowest.
 
 `pending` already travels, and it's the honest gap. `map only` and `excluded` are the ones that
 mislead, because the area is named in `current-architecture.md` and looks covered when nothing sits

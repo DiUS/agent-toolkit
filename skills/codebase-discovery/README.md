@@ -80,14 +80,14 @@ see the edge of what was examined rather than assuming the set is complete.
 ```
 README.md                         # project-root: onboarding index / entry point — the file CLAUDE.md/AGENTS.md links
 docs/
-├── business/                     # cross-cutting only
+├── business/                     # cross-cutting, or a single-area system's
 │   ├── business-requirements.md  # functional + non-functional
 │   ├── user-personas.md          # users & stakeholders
-│   └── workflow-<concept>.md     # flows that cross areas
+│   └── workflow-<concept>.md     # flows that cross areas, or the only area's
 ├── domain/                       # system-wide domain
 │   ├── domain-glossary.md        # business language — always a single file
 │   ├── domain-model.md           # aggregates + cross-area relationships (+ Mermaid)
-│   └── rules-<concept>.md        # rules that apply system-wide
+│   └── rules-<concept>.md        # rules that apply system-wide, or the only area's
 ├── tech/
 │   ├── current-architecture.md   # as-is architecture (+ Mermaid), names the areas
 │   └── integrations.md           # external systems, dependencies, data feeds

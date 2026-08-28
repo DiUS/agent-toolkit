@@ -281,10 +281,15 @@ according to what the working state records:
 | Recon done, **code-only** (no interview to stop), docs not written | Phase 3 |
 | Recon done, interview stopped with items open, **no drift** | Phase 2 — continue the queue |
 | Recon done, interview stopped, **drift in the affected areas** | Phase 1 scoped to those areas, then Phase 2 |
-| Interview done, docs written, drift since | per the freshness check: Phase 1 then Phase 3 where the user re-recons, Phase 3 alone where they don't, to carry the reverted flags into the docs |
+| Interview done, docs written, drift since | per the freshness check: Phase 1 then Phase 3 where the user re-recons, Phase 3 alone where they don't, to carry the reverted flags into the docs. Phase 2 in between where re-recon left open interview items |
 
 Never interview about a rule whose code has changed since recon: re-recon that area first, or the
-question is built on a stale premise. Say which phase you're entering and why before you start.
+question is built on a stale premise. And the converse: a finished interview is not permanently
+finished, so in `full` mode any route that re-runs Phase 1 passes back through Phase 2 where the
+register has open items whose next step is an interview. New code raises new questions, and whether
+the queue is empty is something the register answers, not something a past run settled.
+
+Say which phase you're entering and why before you start.
 
 ---
 
@@ -325,7 +330,7 @@ When done, report:
   the gap.
 - **Reconciliation coverage** (Phase 5 step 2), as counts: `[contradicted]` / `[outdated]` items
   flagged, asked, confirmed, corrected, and parked as *needs SME*, with the SME named.
-- Whether a `CLAUDE.md` / `AGENTS.md` was created or proposed.
+- Whether a `CLAUDE.md` / `AGENTS.md` was created, proposed, or withheld on a no-go.
 - **`docs/_discovery/` disposition** per
   [`references/discovery-disposition.md`](./references/discovery-disposition.md).
 - Readiness for harness engineering / Spec Kit.
@@ -346,6 +351,6 @@ When done, report:
 - [ ] Onboarding docs written under `docs/`, dated and provenance-flagged
 - [ ] Verification pass complete; unsupported claims flagged
 - [ ] Assumptions register and traceability index populated
-- [ ] CLAUDE.md / AGENTS.md created or proposed
+- [ ] CLAUDE.md / AGENTS.md created, proposed, or withheld on a no-go
 - [ ] docs/_discovery/ disposition explained per discovery-disposition
 - [ ] Ready for harness engineering / Spec Kit

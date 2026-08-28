@@ -22,14 +22,14 @@ there is **no `docs/README.md`**. The detail docs live under `docs/`:
 ```
 README.md                         # project-root: onboarding index / entry point — the only file the agent file links
 docs/
-├── business/                     # cross-cutting only
+├── business/                     # cross-cutting, or a single-area system's
 │   ├── business-requirements.md
 │   ├── user-personas.md
-│   └── workflow-<concept>.md     #   cross-area flows only
+│   └── workflow-<concept>.md     #   cross-area flows, or the only area's
 ├── domain/                       # system-wide domain
 │   ├── domain-glossary.md        #   single file, always
 │   ├── domain-model.md           #   aggregates + cross-area relationships
-│   └── rules-<concept>.md        #   system-wide rules only
+│   └── rules-<concept>.md        #   system-wide rules, or the only area's
 ├── tech/
 │   ├── current-architecture.md   #   the system map; names the areas
 │   └── integrations.md

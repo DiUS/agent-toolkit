@@ -64,10 +64,12 @@ pass an **absolute** path or put the substance in the prompt. The checks below r
    agent file points at a file that exists. Skipped documents are the usual culprit, since the
    index templates list the full set.
 
-   **Coverage is declared.** The entry point's area list matches the manifest's coverage ledger:
-   every area present, each carrying its state, and no area reading as covered whose ledger state
-   isn't `full`. An area named in the architecture doc with nothing behind it is what this catches,
-   and it's the one coverage claim a checker can settle mechanically.
+   **Coverage is declared.** A coverage line is present in the entry point whatever the layout, and
+   its absence is the finding. Where the system has areas, the area list matches the manifest's
+   ledger too: every area present with its state, none reading as covered whose ledger state isn't
+   `full`. A single-area system has no list, so the line carries it alone and skipping the check
+   there is how a shallow run reads as a thorough one. This is the one coverage claim a checker can
+   settle mechanically.
 
    **The glossary is one file.** Exactly one `domain-glossary.md`, at `domain/`, with no per-area
    variant beside it, and every term carrying an area or `cross-cutting`. A second glossary hides
@@ -115,6 +117,11 @@ Produce a short verification report:
 Phase 5 reads it there and gates the agent file on it. A verdict that lives only in this conversation
 is gone when the session ends, and the next run would offer an agent file over docs nobody
 re-checked.
+
+**On a no-go, record it in `assumptions-register.md` as well**, against the items behind it. The
+state file is the one the disposition recommends git-ignoring, so a verdict kept only there is
+invisible to everyone but the machine that ran the skill, while the docs it failed are committed.
+The register is the committed audit trail and already holds those items.
 
 ---
 

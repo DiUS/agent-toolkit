@@ -50,10 +50,10 @@ judgements are this phase's own, plus two rules: one about coverage, one about e
   this wrong is what turns one document into an unreadable pile, and the glossary in particular
   stays a single file whatever the system's size.
 - **Partial recon still publishes, provided the gaps are declared.** Write what's covered rather than
-  withholding everything. Each area reaches the entry point carrying its coverage state, per the
-  coverage states in provenance-and-status, and a claim about an area nobody read stays `[unchecked]`
-  and unpublished. A partial doc set a reader can see the edges of is useful; one that reads as
-  complete is the failure this guards against.
+  withholding everything. The entry point carries a coverage line whether or not the system has
+  areas, and an area list as well where it does, per the coverage states in provenance-and-status.
+  A claim about an area nobody read stays `[unchecked]` and unpublished. A partial doc set a reader
+  can see the edges of is useful; one that reads as complete is the failure this guards against.
 - **Record each claim's evidence as you write it.** A row in
   `docs/_discovery/traceability-index.md` per claim, added while the evidence is in front of you.
   See the traceability rule in provenance-and-status. Phase 4 checks these, and a claim carrying
@@ -85,9 +85,9 @@ or so it must:
   the root, e.g. `docs/tech/current-architecture.md`).
 - List the top open assumptions/risks, linking `docs/_discovery/assumptions-register.md` for
   the full list.
-- Where recon left areas pending, name them, saying which areas are documented and which aren't. A
-  reader, human or harness, must be able to see the edge of what's covered without reading the
-  ledger.
+- State the run's coverage on its own line, always. Where the system has areas, name each one and its
+  state as well. A reader, human or harness, must be able to see the edge of what's covered without
+  reading the ledger, and on a single-area system that line is the only place it gets said.
 - Where the code reveals it, a short "how to run / get started".
 
 Produce it from the findings using

@@ -42,10 +42,11 @@ it traces to evidence.
   list is complete to the caller, which does know. The
   project-root `README.md` and the agent onboarding file carry no discovery metadata by design, so
   finding no date there is the intended state; don't report it.
-- **Coverage is declared.** The entry point's area list should match the coverage ledger in
-  `docs/_discovery/recon-manifest.md`: every area present, each carrying its state, and no area
-  reading as covered whose ledger state isn't `full`. An area named in the architecture doc with
-  nothing behind it is what this catches.
+- **Coverage is declared.** A coverage line should be present in the entry point whatever the
+  layout, and its absence is a finding. Where the system has areas, the area list should also match
+  the coverage ledger in `docs/_discovery/recon-manifest.md`: every area present with its state,
+  none reading as covered whose ledger state isn't `full`. A single-area system has no area list, so
+  the line carries it alone; don't pass the check just because there's no list to compare.
 - **One glossary, not several.** Exactly one `domain-glossary.md`, at `domain/`, with no per-area
   variant beside it, and every term carrying an area or `cross-cutting`. A second glossary hides the
   cross-area clashes the single file exists to surface.
