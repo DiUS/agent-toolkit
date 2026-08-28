@@ -29,8 +29,8 @@ with the user rather than assuming `docs/`.
 
 **Where the content comes from.** The references above govern *how* to write; the material is
 already recorded in Phase 1's cited hypotheses, and in `discovery-state.md`'s **Facts**, **Glossary
-in progress** and **Decisions**, which the interview kept current. Open items are in
-`assumptions-register.md`. Read those before writing, and don't re-derive from the code what an
+in progress** and **Decisions**, which recon populated and the interview kept current. Open items
+are in `assumptions-register.md`. Read those before writing, and don't re-derive from the code what an
 earlier phase already established.
 
 ---
@@ -60,9 +60,14 @@ judgements are this phase's own, plus two rules: one about coverage, one about e
   real weight without one is a blocking finding.
 
 **Write the glossary first.** Area directories and concept filenames are glossary terms, so the
-glossary has to exist before anything can be named from it. Draft it from the confirmed terms
-before naming anything else. Naming a file for a concept that isn't in it yet is what
-output-conventions' add-it-first rule is about.
+glossary has to exist before anything can be named from it. Naming a file for a concept that isn't
+in it yet is what output-conventions' add-it-first rule is about.
+
+Its terms come from a different place in each mode. In `full` mode, draft from what the interview
+confirmed, in `discovery-state.md`'s **Glossary in progress**. In `code-only` mode nothing is
+confirmed, so draft from the code language the glossary template points at, and take each meaning
+from what that code does. Naming follows the same rule in both modes: the code unit's name until
+someone agrees a business one, per output-conventions.
 
 Use the matching file in `../templates/`; the area files use the same templates as their unsplit
 equivalents, written per concept rather than per repo.

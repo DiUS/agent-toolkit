@@ -37,5 +37,6 @@ constraints. Keep to what's verified; flag [assumption] otherwise.>
 
 ## Known caveats
 
-<Top open assumptions/risks a contributor must know. Link the assumptions register only if the
-team wants it visible; by default keep _discovery/ out of the linked context.>
+<Top open assumptions/risks a contributor must know. State them here; don't link the register.
+Per the rules above, _discovery/ stays out of the agent file, and the root README.md is where that
+link belongs.>
