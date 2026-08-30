@@ -1,4 +1,4 @@
-# curation — a Claude Code skill for building a knowledge base
+# knowledge-curation — a Claude Code skill for building a knowledge base
 
 Turns source documents (functional specs, technical docs, ADRs, meeting notes,
 interviews, glossaries) into structured, provenance-tagged knowledge under a
@@ -48,7 +48,7 @@ summaries" rule).
 
 - **One project:** copy this `knowledge-curation/` folder to `<project>/.claude/skills/knowledge-curation/`.
 - **All your projects:** copy it to `~/.claude/skills/knowledge-curation/` (Windows:
-  `C:\Users\<you>\.claude\skills\curation\`).
+  `C:\Users\<you>\.claude\skills\knowledge-curation\`).
 
 Restart / start a Claude Code session in the target project — skills load at session
 start. Confirm with `/knowledge-curation`.
