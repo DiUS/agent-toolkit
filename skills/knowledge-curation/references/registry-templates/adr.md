@@ -3,7 +3,7 @@ id: "ADR-{NNN}"
 status: draft              # draft | verified
 updated: "{YYYY-MM-DD} {your name}"
 related: []                # IDs only
-deciders: []
+deciders: []               # required — who made the call (names or roles)
 ---
 
 # ADR-<NNN>: <Title>

@@ -1,20 +1,22 @@
 #!/usr/bin/env bash
 # Validate front matter across the knowledge base.
-# Six fields, four enum values, two status values. If this passes, the corpus is
-# machine-readable; if it fails, the message tells you exactly what to change.
+# Checks the required id and the status/basis/coverage vocabularies, plus ADR-specific
+# shape (ADR- id, named deciders). If this passes, the corpus is machine-readable;
+# if it fails, the message tells you exactly what to change.
 set -uo pipefail
 # Run against a workspace root (default: current directory). The knowledge base is
 # expected at ./knowledge/. Pass the root as $1 if invoking from elsewhere.
 cd "${1:-$PWD}"
 python3 - <<'PY'
-import glob, sys
+import glob, re, sys
 try:
     import yaml
 except ImportError:
     print("  SKIP — pyyaml not installed (pip3 install pyyaml)"); sys.exit(0)
 
 BASIS    = ["documented", "stated", "inferred", "assumed"]
-STATUS   = ["draft", "verified", "open", "answered", "accepted", "proposed", "superseded"]
+# draft/verified: curated content and ADRs. open/answered/unresolvable: question lifecycle.
+STATUS   = ["draft", "verified", "open", "answered", "unresolvable"]
 COVERAGE = ["curated", "partial", "name-only", "unknown"]
 
 fail = 0
@@ -24,10 +26,12 @@ def bad(f, msg):
     fail = 1
 
 for f in sorted(glob.glob("knowledge/**/*.md", recursive=True)):
+    f = f.replace("\\", "/")  # normalise Windows separators so the path checks below match
     if "_templates" in f:
         continue
-    # sources/ and decisions/ are workspace staging/records, not curated corpus.
-    if "/sources/" in f or "/decisions/" in f:
+    # sources/ is a workspace register (the manifest), not curated corpus. decisions/
+    # (ADRs) ARE validated — they carry the same id/status front matter as content.
+    if "/sources/" in f:
         continue
     # README.md and AGENTS.md are folder explainers / the agent on-ramp, not curated content.
     if f.endswith("README.md") or f.endswith("AGENTS.md"):
@@ -63,6 +67,15 @@ for f in sorted(glob.glob("knowledge/**/*.md", recursive=True)):
     cov = fm.get("coverage")
     if cov is not None and cov not in COVERAGE:
         bad(f, f"coverage is {cov!r} — must be one of: {', '.join(COVERAGE)}")
+
+    # ADRs (knowledge/decisions/) are attributable decision records — hold them to
+    # their own shape: an ADR- id (per the ID conventions) and named deciders.
+    if "/decisions/" in f:
+        adr_id = str(fm.get("id") or "")
+        if adr_id and not re.fullmatch(r"ADR-\d+", adr_id):
+            bad(f, f"id is {adr_id!r} — an ADR id must look like 'ADR-001' (ADR- then a number)")
+        if not (fm.get("deciders") or []):
+            bad(f, "'deciders' is empty or missing — an ADR must record who made the decision")
 
 print("  OK — front matter is valid." if not fail else "")
 sys.exit(fail)
