@@ -187,7 +187,7 @@ the Phases table below; what differs is Phase 2:
 
 - **full** — runs the interview. Requires a stakeholder (senior BA / Product Owner / SME) to
   validate findings.
-- **code-only** — skips it. Everything that would need human confirmation stays `[assumption]` /
+- **code-only** — skips it. Everything that would need SME confirmation stays `[assumption]` /
   `[unverified]` for later validation. Use when no SME is available yet.
 
 State the chosen mode before starting.
@@ -212,6 +212,14 @@ At the start of each phase, check what is available and adapt, never hard-fail:
   same steps sequentially with disciplined, excerpt-only reading.
 - **Stakeholder (SME)** — if none is available, drop from `full` to `code-only` mode.
 
+**One input is not optional: someone to answer.** Not the SME, whose absence `code-only` covers, but
+whoever gives consent. Options pre-answer **choices** (the output root, the drift response, what to
+exclude). They never pre-answer **consent**: sign-off before an existing README changes, Phase 5's
+reconciliations, writing an agent file. That is `--fresh`'s rule generalised, an option settles a
+choice and never an act that changes someone else's work. The prediction rule means you ask rather
+than guess, so an unattended run stalls at the first consent gate rather than improvising. Correct
+behaviour, and still a stall. Say so up front if nobody is available.
+
 ---
 
 ## Working state (resumable, no hooks)
@@ -225,9 +233,10 @@ sessions:
 - `docs/_discovery/recon-manifest.md` — the commit recon ran against, which areas and files were
   read, and which existing docs fed it, so later runs can detect staleness (below).
 
-On invocation: if these exist, read them first and resume; do not restart from zero. Keep
-`discovery-state.md` compact: it's a working set, not a log, and its own header carries the ceiling
-and the compaction rules.
+On invocation: if these exist, read them first and resume; do not restart from zero. They sit under
+whatever root the previous run agreed, which may not be `docs/`, so Phase 0 **searches** for them
+rather than checking one path. Keep `discovery-state.md` compact: it's a working set, not a log, and
+its own header carries the ceiling and the compaction rules.
 
 `_discovery/` also holds the two audit files (`assumptions-register.md`,
 `traceability-index.md`), which are committed alongside the docs they back. What's committed and
@@ -251,7 +260,7 @@ Run in order. Each has a playbook; read it when you enter the phase.
 
 | Phase | Playbook | Outcome |
 |---|---|---|
-| 0. Pre-check | [`playbooks/00-pre-check.md`](./playbooks/00-pre-check.md) | Read existing README/CLAUDE.md/AGENTS.md/docs; capture what they state, to verify against the code; set up working state; survey the write target and agree the output root. |
+| 0. Pre-check | [`playbooks/00-pre-check.md`](./playbooks/00-pre-check.md) | Locate any previous run's state; survey the write target and agree the output root **before writing anything**; set up working state under it; read existing README/CLAUDE.md/AGENTS.md/docs and capture what they state, to verify against the code. |
 | 1. Deep recon | [`playbooks/01-deep-recon.md`](./playbooks/01-deep-recon.md) | Tiered, evidence-cited analysis of structure, data model, contracts and business-logic hotspots; verify the Phase 0 statements against code. |
 | 2. Interview | [`playbooks/02-interview.md`](./playbooks/02-interview.md) | One-question-at-a-time conversation with the BA/PO, worked in impact order from the register; reconcile contradictions with code-based suggestions. The stakeholder can stop at any point; the remainder is parked and resumable. (Skipped in code-only mode.) |
 | 3. Synthesis | [`playbooks/03-synthesis.md`](./playbooks/03-synthesis.md) | Write the lean onboarding docs under `docs/`, each dated and provenance-flagged. |
@@ -267,14 +276,21 @@ according to what the working state records:
 | Recorded state | Re-enter at |
 |---|---|
 | Nothing (first run) | Phase 1 |
+| No state, but a committed register or traceability index is there | Phase 1 — the last run's coverage is unknown, so recon starts over; its open items still stand |
 | Recon incomplete — areas still pending in the ledger, **no drift** | Phase 1, continuing with those areas |
 | Recon incomplete, **drift in areas already covered** | Phase 1 — re-recon the drifted areas, then continue with the pending ones |
+| Recon done, **code-only** (no interview to stop), docs not written | Phase 3 |
 | Recon done, interview stopped with items open, **no drift** | Phase 2 — continue the queue |
 | Recon done, interview stopped, **drift in the affected areas** | Phase 1 scoped to those areas, then Phase 2 |
-| Interview done, docs written, drift since | whatever the user chose in the freshness check |
+| Interview done, docs written, drift since | per the freshness check: Phase 1 then Phase 3 where the user re-recons, Phase 3 alone where they don't, to carry the reverted flags into the docs. Phase 2 in between where re-recon left open interview items |
 
 Never interview about a rule whose code has changed since recon: re-recon that area first, or the
-question is built on a stale premise. Say which phase you're entering and why before you start.
+question is built on a stale premise. And the converse: a finished interview is not permanently
+finished, so in `full` mode any route that re-runs Phase 1 passes back through Phase 2 where the
+register has open items whose next step is an interview. New code raises new questions, and whether
+the queue is empty is something the register answers, not something a past run settled.
+
+Say which phase you're entering and why before you start.
 
 ---
 
@@ -306,7 +322,8 @@ When done, report:
 - Doc-drift findings (existing docs vs code).
 - On a re-run: code drift since the last recon, and what the user chose to do about it.
 - Open `[assumption]` / `[unverified]` / `[contradicted]` items and their impact.
-- Coverage: any area still pending in the ledger, and any claim still `[unchecked]` with why.
+- Coverage: every area with its state from the ledger, not just the pending ones, and any claim
+  still `[unchecked]` with why.
 - (full mode) Interview coverage, as counts: register items whose next step is an interview, how
   many were asked, how many remain — and for each remaining one, its *Why parked* value from the
   register, with the SME named wherever that value is *needs SME*. Name the highest-impact
@@ -314,7 +331,7 @@ When done, report:
   the gap.
 - **Reconciliation coverage** (Phase 5 step 2), as counts: `[contradicted]` / `[outdated]` items
   flagged, asked, confirmed, corrected, and parked as *needs SME*, with the SME named.
-- Whether a `CLAUDE.md` / `AGENTS.md` was created or proposed.
+- Whether a `CLAUDE.md` / `AGENTS.md` was created, proposed, or withheld on a no-go.
 - **`docs/_discovery/` disposition** per
   [`references/discovery-disposition.md`](./references/discovery-disposition.md).
 - Readiness for harness engineering / Spec Kit.
@@ -335,6 +352,6 @@ When done, report:
 - [ ] Onboarding docs written under `docs/`, dated and provenance-flagged
 - [ ] Verification pass complete; unsupported claims flagged
 - [ ] Assumptions register and traceability index populated
-- [ ] CLAUDE.md / AGENTS.md created or proposed
+- [ ] CLAUDE.md / AGENTS.md created, proposed, or withheld on a no-go
 - [ ] docs/_discovery/ disposition explained per discovery-disposition
 - [ ] Ready for harness engineering / Spec Kit

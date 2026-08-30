@@ -29,8 +29,8 @@ with the user rather than assuming `docs/`.
 
 **Where the content comes from.** The references above govern *how* to write; the material is
 already recorded in Phase 1's cited hypotheses, and in `discovery-state.md`'s **Facts**, **Glossary
-in progress** and **Decisions**, which the interview kept current. Open items are in
-`assumptions-register.md`. Read those before writing, and don't re-derive from the code what an
+in progress** and **Decisions**, which recon populated and the interview kept current. Open items
+are in `assumptions-register.md`. Read those before writing, and don't re-derive from the code what an
 earlier phase already established.
 
 ---
@@ -49,20 +49,25 @@ judgements are this phase's own, plus two rules: one about coverage, one about e
   logical name; anything no single area owns is cross-cutting and belongs at the top level. Getting
   this wrong is what turns one document into an unreadable pile, and the glossary in particular
   stays a single file whatever the system's size.
-- **Partial recon still publishes, provided the gaps are declared.** Where recon covered some areas
-  and left others pending, write what's covered rather than withholding everything. The entry
-  point must say which areas are documented and which aren't (see the README bullet below), and a
-  claim about an uncovered area stays `[unchecked]` and unpublished. A partial doc set a reader can
-  see the edges of is useful; one that reads as complete is the failure this guards against.
+- **Partial recon still publishes, provided the gaps are declared.** Write what's covered rather than
+  withholding everything. The entry point carries a coverage line whether or not the system has
+  areas, and an area list as well where it does, per the coverage states in provenance-and-status.
+  A claim about an area nobody read stays `[unchecked]` and unpublished. A partial doc set a reader
+  can see the edges of is useful; one that reads as complete is the failure this guards against.
 - **Record each claim's evidence as you write it.** A row in
   `docs/_discovery/traceability-index.md` per claim, added while the evidence is in front of you.
   See the traceability rule in provenance-and-status. Phase 4 checks these, and a claim carrying
   real weight without one is a blocking finding.
 
 **Write the glossary first.** Area directories and concept filenames are glossary terms, so the
-glossary has to exist before anything can be named from it. Draft it from the confirmed terms
-before naming anything else. Naming a file for a concept that isn't in it yet is what
-output-conventions' add-it-first rule is about.
+glossary has to exist before anything can be named from it. Naming a file for a concept that isn't
+in it yet is what output-conventions' add-it-first rule is about.
+
+Its terms come from a different place in each mode. In `full` mode, draft from what the interview
+confirmed, in `discovery-state.md`'s **Glossary in progress**. In `code-only` mode nothing is
+confirmed, so draft from the code language the glossary template points at, and take each meaning
+from what that code does. Naming follows the same rule in both modes: the code unit's name until
+someone agrees a business one, per output-conventions.
 
 Use the matching file in `../templates/`; the area files use the same templates as their unsplit
 equivalents, written per concept rather than per repo.
@@ -80,9 +85,9 @@ or so it must:
   the root, e.g. `docs/tech/current-architecture.md`).
 - List the top open assumptions/risks, linking `docs/_discovery/assumptions-register.md` for
   the full list.
-- Where recon left areas pending, name them, saying which areas are documented and which aren't. A
-  reader, human or harness, must be able to see the edge of what's covered without reading the
-  ledger.
+- State the run's coverage on its own line, always. Where the system has areas, name each one and its
+  state as well. A reader, human or harness, must be able to see the edge of what's covered without
+  reading the ledger, and on a single-area system that line is the only place it gets said.
 - Where the code reveals it, a short "how to run / get started".
 
 Produce it from the findings using

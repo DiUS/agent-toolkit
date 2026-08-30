@@ -62,6 +62,35 @@ needs it, flagged, so nobody mistakes it for something the code was checked agai
 
 ---
 
+## Coverage states (the vocabulary, stated only here)
+
+A flag describes a claim. **A coverage state describes an area**, and the two interlock: a claim in
+an area recon never dived into has no current code check behind it, which is the second
+`[unchecked]` cause above.
+
+Phase 1 records one per area in the recon manifest's coverage ledger. The set is closed, on the same
+terms as the flags:
+
+| State | Means | Area docs expected |
+|---|---|---|
+| `full` | data model, contracts, hotspots and tests all worked | yes |
+| `map only` | Tier 0 map only, dives judged not warranted | no; named in the architecture doc |
+| `excluded` | the user excluded these paths, so nothing was read | no; named in the architecture doc |
+| `pending` | not yet reached | no |
+
+**Coverage reaches the reader.** Anything but `full` is a declared gap, and it travels: the ledger,
+then the entry point, then the completion report. Phase 4 checks the entry point against the ledger.
+
+**The entry point states it on a line of its own, always**, and lists it per area where the system
+has areas. Both, not either. A single-area system has no area list, so a coverage rule that routed
+only through that list would say nothing in the case where the run is often shallowest.
+
+`pending` already travels, and it's the honest gap. `map only` and `excluded` are the ones that
+mislead, because the area is named in `current-architecture.md` and looks covered when nothing sits
+behind it. That is the failure the synthesis playbook's partial-publish rule exists to stop.
+
+---
+
 ## Lifecycle of a claim
 
 ```
@@ -116,6 +145,10 @@ doc adds the row at that moment, while the evidence is in front of them. A batch
 memory at the end produces rows nobody can check, and it's the failure Phase 4's first check exists
 to catch. IDs run sequentially and stay stable across runs, so a doc that cites one keeps pointing
 at the same claim.
+
+**A claim that already carries an ID keeps it.** `C-n` is for claims this index mints. Requirements
+arrive with their own from `business-requirements.md`, so index them as `FR-n` / `NFR-n` rather than
+minting a second ID for the same statement, which would leave two rows nobody can reconcile.
 
 Substantive claims get a row as the norm. For a claim that **carries real weight** (a rule,
 threshold, permission, SLA or ownership statement) it isn't optional: Phase 4 treats a missing entry

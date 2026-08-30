@@ -24,16 +24,20 @@
 
 ## Coverage ledger (Phase 1 onward)
 
-<!-- Every area, including the ones not yet reached. An area missing from this table is an invisible
-gap; one listed as pending is a known one. Also the unit the freshness check works in: the next run
-diffs the recon commit against HEAD and re-recons the areas whose paths changed. Areas, never one row
-per file. -->
+<!-- Every area, including the ones not yet reached and the ones --exclude ruled out. An area missing
+from this table is an invisible gap; one listed as pending or excluded is a known one. Also the unit
+the freshness check works in: the next run diffs the recon commit against HEAD and re-recons the
+areas whose paths changed. Areas, never one row per file.
+
+Recon depth comes from the closed set in provenance-and-status, and the rows below show each value in
+use. Every state but full is a gap the entry point has to declare. -->
 
 | Area | Paths | Recon depth | Source tier | Interview | Docs written |
 |---|---|---|---|---|---|
 | billing | src/Billing/, src/Invoicing/ | full | declared + text search | done (A. Patel) | areas/billing/* |
-| identity | src/Identity/ | hotspots only | text search (inferred) | queued | — |
+| identity | src/Identity/ | full | text search (inferred) | queued | areas/identity/* |
 | tooling | infra/ | map only — dives not warranted | declared | n/a | tech/current-architecture.md |
+| vendor-portal | third-party/ | excluded — user's `--exclude` | declared | n/a | tech/current-architecture.md |
 | reporting | src/Reporting/ | **pending** — not yet reached | — | — | — |
 
 ## Files actually read (Phase 1)

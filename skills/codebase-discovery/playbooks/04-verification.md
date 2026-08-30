@@ -9,6 +9,11 @@ Run this as an **isolated pass**, in a sub-agent where available, so the check i
 of the work that produced the docs. On Claude Code, dispatch the **`codebase-doc-verifier`**
 subagent; on other hosts use any generic sub-agent, or run the checks directly.
 
+**Running them directly costs the independence, so say in the report which way it ran.** The agent
+that wrote the docs is then marking its own work, and check 2 is where that hurts: invention is
+hardest to spot in your own prose. Still worth running, and worth the reader knowing how much the
+pass is worth.
+
 A sub-agent doesn't know where this skill is installed, so skill-relative paths mean nothing to it.
 State the checks in the dispatch prompt, and for each one that leans on a file in this skill, either
 pass an **absolute** path or put the substance in the prompt. The checks below reach for
@@ -51,12 +56,24 @@ pass an **absolute** path or put the substance in the prompt. The checks below r
 
 6. **Freshness & consistency.** Every doc **in the `docs/` set** has a `Last updated` date; the
    recon manifest reflects the files actually read; terminology matches the glossary across all
-   docs. The project-root `README.md` and the agent file are exempt by design (output-conventions
-   says why), so don't add one to either.
+   docs. A sub-agent can only confirm the listed paths still exist, since it has no record of what
+   recon opened; judging the list complete stays with you. The project-root `README.md` and the
+   agent file are exempt by design (output-conventions says why), so don't add one to either.
 
    **Every link resolves.** Check each link in the `docs/` set, the project-root `README.md` and the
    agent file points at a file that exists. Skipped documents are the usual culprit, since the
    index templates list the full set.
+
+   **Coverage is declared.** A coverage line is present in the entry point whatever the layout, and
+   its absence is the finding. Where the system has areas, the area list matches the manifest's
+   ledger too: every area present with its state, none reading as covered whose ledger state isn't
+   `full`. A single-area system has no list, so the line carries it alone and skipping the check
+   there is how a shallow run reads as a thorough one. This is the one coverage claim a checker can
+   settle mechanically.
+
+   **The glossary is one file.** Exactly one `domain-glossary.md`, at `domain/`, with no per-area
+   variant beside it, and every term carrying an area or `cross-cutting`. A second glossary hides
+   the cross-area clashes the single file exists to surface.
 
    **Names use the agreed language.** Area directories and concept filenames are glossary terms, not
    namespaces or codenames, with no catch-alls (`misc`, `other`, `general`). A file that couldn't be
@@ -68,11 +85,11 @@ pass an **absolute** path or put the substance in the prompt. The checks below r
    `[unverified]`. An invented carve-up is worse than a technical one, because it becomes the
    structure everyone inherits.
 
-7. **Output renders.** Read the files as rendered Markdown, not just as source. For every
-   table: no blank line between rows (a blank line ends a Markdown table, orphaning every row after
-   it as literal pipe text) and a header separator immediately below the header. Check that any
-   diagram parses. A register whose rows don't render as a table is unusable however accurate it is,
-   and no check that only reads content will catch it.
+7. **Markdown structure holds.** Check the source of every table: a header separator row directly
+   below the header, and no blank line between rows. A blank line ends a Markdown table, so every
+   row after it renders as literal pipe text. Confirm fences are balanced and any diagram block is
+   well-formed. A register whose rows don't render is unusable however accurate it is, and no check
+   that only reads content will catch it.
 
 8. **Write contract honoured.** Check the output against
    [`../references/write-contract.md`](../references/write-contract.md), using the root, nav decision
@@ -96,6 +113,16 @@ Produce a short verification report:
 - Bloat or duplication trimmed.
 - Go / no-go for harness engineering / Spec Kit, with any caveats.
 
+**Record the verdict in `discovery-state.md` under Decisions**, with the unresolved items behind it.
+Phase 5 reads it there and gates the agent file on it. A verdict that lives only in this conversation
+is gone when the session ends, and the next run would offer an agent file over docs nobody
+re-checked.
+
+**On a no-go, record it in `assumptions-register.md` as well**, against the items behind it. The
+state file is the one the disposition recommends git-ignoring, so a verdict kept only there is
+invisible to everyone but the machine that ran the skill, while the docs it failed are committed.
+The register is the committed audit trail and already holds those items.
+
 ---
 
 ## What counts as material, and what to do about it
@@ -115,8 +142,9 @@ Produce a short verification report:
 terminology drifting from the glossary, leftover scaffolding, a dead link. Edits, not grounds for a
 round trip.
 
-**One rework cycle, then stop.** Route material problems to where they can be fixed (synthesis for
-anything the code can settle, the interview only where it genuinely needs a person) and re-verify
+**One rework cycle, then stop.** Route material problems to where they can be fixed: synthesis for
+anything the code can settle, the interview only where it needs a person. In `code-only` mode there
+is no interview, so those park in the register as *needs SME* instead of blocking the run. Re-verify
 **only the affected documents**, not the whole set. If a second pass still finds material problems,
 stop and report **no-go** with the specific unresolved items rather than starting a third lap.
 

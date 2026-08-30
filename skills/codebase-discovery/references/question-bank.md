@@ -28,6 +28,10 @@ override?"
 - The code uses the term `<term>` (e.g. an enum/entity). What does it mean to the business?
 - Are `<term A>` and `<term B>` the same thing or different? (surface synonyms/conflicts)
 - Is there a term the business uses that you *don't* see reflected in the system?
+- Which part of the business owns `<term>`, or is it used right across the system? (fills the
+  glossary's Area column)
+- Does `<term>` mean the same thing in `<area A>` as it does in `<area B>`? (two meanings get a row
+  each, so the clash is visible)
 
 ## Business rules
 
@@ -35,6 +39,15 @@ override?"
 - What are the exceptions to that rule, and who is allowed to override it?
 - Is that rule a policy decision, a regulatory requirement, or a technical constraint?
 - Are there rules you'd expect that the system *doesn't* enforce today?
+
+## How rules and flows group
+
+- The code keeps `<rule A>`, `<rule B>` and `<rule C>` together in `<code unit>` (`path:line`). Is
+  that how the business thinks about them, or do some belong elsewhere?
+- What would you call that group? (the agreed name becomes the filename, and the directory where
+  it's an area)
+- Is there a rule you'd expect in that group that sits somewhere else today?
+- Does `<workflow>` belong to one part of the business, or does it cross several?
 
 ## Workflows
 

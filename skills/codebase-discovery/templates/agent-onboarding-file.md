@@ -4,7 +4,8 @@ Template for a generated CLAUDE.md / AGENTS.md.
 Rules (see the skill's Phase 5 finish playbook):
 - Detect and match whatever already exists (CLAUDE.md or AGENTS.md). If neither exists, offer
   both.
-- Never overwrite an existing file. Propose additions and note any content that no longer matches the code.
+- Propose additions and note any content that no longer matches the code. Whether you may replace
+  what's already here is the skill's write contract, not this file's to decide.
 - Keep it lean. Link the project-root README.md as the entry point; do NOT link docs/_discovery/.
 - Fill the placeholders; delete guidance comments before writing.
 -->
@@ -37,5 +38,6 @@ constraints. Keep to what's verified; flag [assumption] otherwise.>
 
 ## Known caveats
 
-<Top open assumptions/risks a contributor must know. Link the assumptions register only if the
-team wants it visible; by default keep _discovery/ out of the linked context.>
+<Top open assumptions/risks a contributor must know. State them here; don't link the register.
+Per the rules above, _discovery/ stays out of the agent file, and the root README.md is where that
+link belongs.>

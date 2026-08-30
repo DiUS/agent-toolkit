@@ -15,6 +15,10 @@ it's growing, you're appending where you should be rewriting. Compact as you go:
 - What earns its place: mode and options, the write-target facts, open threads, decisions, and where
   you stopped. Everything else has somewhere better to be. -->
 
+<!-- SECRETS: git-ignoring this file is a recommendation the team can decline, so write it as though
+it will be committed. Recon reads config and credential keys, and what lands in Facts below feeds the
+published docs, so the secrets rule in `SKILL.md` governs these notes too. -->
+
 ## Run
 
 - **Mode:** full | code-only

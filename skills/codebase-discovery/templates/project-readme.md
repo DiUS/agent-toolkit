@@ -13,6 +13,12 @@ a new team member or AI harness reads. Keep it tight. -->
 
 ## Documentation
 
+<!-- COVERAGE: always present, areas or not. Use the recon manifest ledger's word for the run, and
+where it isn't `full`, add a clause saying what wasn't read. On a single-area system this line is the
+only place coverage is declared, since the Areas section below is omitted. -->
+
+**Coverage:** <ledger state, e.g. `full`, or `map only`: structure mapped, business logic not read>
+
 <!-- Delete any row below whose document wasn't written, so this indexes only what exists. -->
 
 Onboarding docs live under [`docs/`](./docs/):
@@ -29,16 +35,18 @@ Onboarding docs live under [`docs/`](./docs/):
 | [docs/business/user-personas.md](./docs/business/user-personas.md) | Who uses it |
 
 <!-- If the system has areas, list them here, one line each, linking the directory, not every file
-inside it. Omit this section entirely on a single-area system. List EVERY area, including any
-discovery hasn't documented yet, so a reader can see the edge of what's covered; drop the link on a
-pending one, since there's nothing to link to. -->
+inside it. Omit this section entirely on a single-area system. List EVERY area, so a reader can see
+the edge of what's covered; drop the link where there are no area docs to link to. The Coverage
+column takes the area's state from the recon manifest's ledger, unchanged, so the reader sees the
+same word the audit trail does. -->
 
 ### Areas
 
-| Area | What it covers | Documented |
+| Area | What it covers | Coverage |
 |---|---|---|
-| [docs/areas/<area>/](./docs/areas/<area>/) | <one line: what this part of the business does> | yes |
-| <area> | <one line> | not yet |
+| [docs/areas/<area>/](./docs/areas/<area>/) | <one line: what this part of the business does> | full |
+| <area> | <one line> | map only |
+| <area> | <one line> | pending |
 
 ## Getting started
 

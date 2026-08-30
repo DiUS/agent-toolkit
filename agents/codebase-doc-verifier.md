@@ -37,9 +37,19 @@ it traces to evidence.
 - **Links resolve.** Check every link in the docs set, the project-root `README.md` and the agent
   file points at a file that exists; documents that were skipped are the usual culprit.
 - **Freshness and consistency.** Every doc in the `docs/` set has a `Last updated` date; terminology
-  matches the glossary across docs; the recon manifest reflects the files actually read. The
+  matches the glossary across docs; every path the recon manifest lists as read still exists. You
+  have no record of what recon opened, so report a path that has gone missing and leave whether the
+  list is complete to the caller, which does know. The
   project-root `README.md` and the agent onboarding file carry no discovery metadata by design, so
   finding no date there is the intended state; don't report it.
+- **Coverage is declared.** A coverage line should be present in the entry point whatever the
+  layout, and its absence is a finding. Where the system has areas, the area list should also match
+  the coverage ledger in `docs/_discovery/recon-manifest.md`: every area present with its state,
+  none reading as covered whose ledger state isn't `full`. A single-area system has no area list, so
+  the line carries it alone; don't pass the check just because there's no list to compare.
+- **One glossary, not several.** Exactly one `domain-glossary.md`, at `domain/`, with no per-area
+  variant beside it, and every term carrying an area or `cross-cutting`. A second glossary hides the
+  cross-area clashes the single file exists to surface.
 - **Names use the agreed language.** Area directories and concept filenames should be glossary
   terms, not namespaces or codenames, and there should be no catch-alls (`misc`, `other`,
   `general`). Your assignment carries the naming rules, or an absolute path to the skill's
@@ -47,10 +57,19 @@ it traces to evidence.
 - **Groupings are evidenced.** A cluster named in business language must trace to a stakeholder who
   confirmed it; check the register and traceability index. Otherwise it should be named after the
   code unit it came from and flagged `[unverified]`.
+- **Markdown structure holds.** Check the source of every table: a header separator row directly
+  below the header, and no blank line between rows. A blank line ends a Markdown table, so every row
+  after it renders as literal pipe text. A register whose rows don't render is unusable however
+  accurate it is, and no check that only reads content will catch it. Confirm fences are balanced
+  and any diagram block is well-formed.
 - **Writes landed inside the agreed root.** Phase 0 records the output root, the docs-site nav
   decision and the pre-existing files at the target paths in `docs/_discovery/discovery-state.md`;
   check the output against them. **You cannot verify sign-off**, because an overwrite is approved
   in conversation, not in a file. Report placement, not consent, and let the caller judge.
+- **Drift is captured in the register.** Every place an existing doc (`README`, `CLAUDE.md`,
+  `AGENTS.md`) contradicted the code should appear in `docs/_discovery/assumptions-register.md` with
+  a corrected statement derived from the code. That register is the artefact to check; the doc-drift
+  summary it feeds doesn't exist yet when you run.
 
 ## Report format
 

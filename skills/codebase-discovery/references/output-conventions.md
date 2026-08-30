@@ -22,14 +22,14 @@ there is **no `docs/README.md`**. The detail docs live under `docs/`:
 ```
 README.md                         # project-root: onboarding index / entry point — the only file the agent file links
 docs/
-├── business/                     # cross-cutting only
+├── business/                     # cross-cutting, or a single-area system's
 │   ├── business-requirements.md
 │   ├── user-personas.md
-│   └── workflow-<concept>.md     #   cross-area flows only
+│   └── workflow-<concept>.md     #   cross-area flows, or the only area's
 ├── domain/                       # system-wide domain
 │   ├── domain-glossary.md        #   single file, always
 │   ├── domain-model.md           #   aggregates + cross-area relationships
-│   └── rules-<concept>.md        #   system-wide rules only
+│   └── rules-<concept>.md        #   system-wide rules, or the only area's
 ├── tech/
 │   ├── current-architecture.md   #   the system map; names the areas
 │   └── integrations.md
@@ -76,11 +76,19 @@ Which artefacts split, and which must not:
 | domain model | **yes**, as `model-<concept>.md` | entities cluster by area; `domain/domain-model.md` keeps the aggregates and cross-area relationships |
 | business rules | **yes**, as `rules-<concept>.md` | the clearest case — rules cluster by area and grow with the codebase |
 | workflows | **yes**, as `workflow-<concept>.md` | one flow per file; you rarely need all of them at once |
-| **domain glossary** | **never** | it's the shared vocabulary. Splitting it defeats the point that a term means one thing system-wide |
+| **domain glossary** | **never** | one place to look a word up; ownership is a column, not a file |
 | current architecture | no | it *is* the system view; the per-area detail is the area docs |
 | integrations | no | a table of external systems, inherently system-level |
 | user personas | no | global, and small |
 | business requirements | no | mostly cross-area; splitting scatters them along an axis they don't have |
+
+**The glossary never splits, and ownership goes in a column.** Area-specific terms are
+catalogued in the one file, with an `Area` column naming the area that owns each, or `cross-cutting`.
+Splitting by area breaks the lookup at the moment it's needed: you check a glossary precisely when
+you don't know which area owns the word. It also hides the clashes the glossary exists to surface.
+Billing's `Account` and identity's `Account` meaning different things is invisible across two files,
+because nobody diffs glossaries. Where a word does mean different things in two areas, that's one row
+per area, sitting adjacent.
 
 **When to split: content shape, not repo size.** One area's worth of material → keep the flat layout
 and no `areas/` directory at all. Material for more than one area → areas appear. There's no size
