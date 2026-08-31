@@ -24,7 +24,7 @@ while IFS= read -r f; do
     fail=1
   fi
 done < <(find . \
-  \( -path ./.git -o -path ./knowledge -o -name node_modules -o -name vendor -o -name knowledge-curation \) -prune \
+  \( -path ./.git -o -path ./knowledge -o -name node_modules -o -name knowledge-curation \) -prune \
   -o -type f -name '*.md' -print 2>/dev/null)
 
 # 2. Duplicate ID definitions anywhere
