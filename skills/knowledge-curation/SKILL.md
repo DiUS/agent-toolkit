@@ -194,6 +194,14 @@ then, not at 6.5 — that step is a safety net, not the elicitation moment.
 6. **Extract by type.** Route business vs. tech per
    `references/business-vs-tech-routing.md`.
 
+   **Re-anchor before you write.** The convention docs loaded at the top of the
+   run are now deep in context, behind the whole source read and the elicitation
+   turns. Before creating files, re-open `references/conventions/front-matter.md`
+   (the front-matter schema and `basis`/`status` vocabularies) and
+   `references/conventions/structure.md` (tier placement and ID form). Read them
+   again — don't reconstruct them from memory. On the chunked path, re-anchor
+   once per chunk.
+
    | Content | Template | Filed under |
    |---|---|---|
    | testable proposition about behaviour | `rule.md` | `features/<f>/rules/<topic>.md` |
@@ -238,6 +246,10 @@ then, not at 6.5 — that step is a safety net, not the elicitation moment.
 
 8. **Update registries** (append, never overwrite): `data-ownership.md`,
    `coverage.md`, `service-domains.md`, domain `index.md` if the feature is new.
+   **Re-anchor the placement rules first** — re-open
+   `references/conventions/structure.md` before touching the registries, so the
+   tier and ID conventions the registries depend on are fresh rather than
+   recalled from the start of the run.
 9. **Record gaps** in `coverage.md`.
 10. **Verify completeness, then run the hygiene checks.** Work the checklist at
    `references/completeness.md` against the source's ToC. Then run all four hygiene
