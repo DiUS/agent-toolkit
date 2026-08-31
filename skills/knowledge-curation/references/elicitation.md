@@ -30,8 +30,30 @@ Elicitation is a conversation, not a form. The turn structure is:
    - **Clear** → fold into the curated content (`basis: stated`), close or
      create the OQ as a record, move to the next gap.
    - **Vague, incomplete, surprising, or opens a new question** → ask ONE
-     follow-up. Repeat step 2.
-4. Move on only when the answer is usable. Then next question.
+     follow-up. Repeat step 2 — but see the depth limit below.
+4. Move on only when the answer is usable, **or the depth limit is hit.** Then
+   next question.
+
+### Termination budget (elicitation must be able to exit)
+
+Ask-immediately and never-defer are about *when* to ask, not licence for an
+unbounded loop. Three hard limits keep a run finite:
+
+- **Follow-up depth: at most 2 follow-ups on one gap.** If a third would be
+  needed — the answer is still vague, or every answer is "it depends" — stop
+  following up. Record what you have: set the curated entry `basis: assumed`
+  (or `inferred` if you're reasoning from stated facts), raise/keep the OQ at
+  `status: open`, note the residual ambiguity in the OQ Context, and move to
+  the next gap. This is the escape hatch — a gap that won't close is captured,
+  not chased.
+- **Per-run question budget: check in every 20 questions.** Count the questions
+  you've actually asked in chat this run. On hitting 20 (then 40, …), stop and
+  ask the user plainly: "We've covered 20 questions — want to keep going, or
+  park the rest as `status: open` and wrap up what we have?" Honour the answer.
+  Parked gaps become `status: open` OQs with `basis: assumed`/`inferred` on any
+  affected entry, exactly like the depth-limit escape.
+- **No re-asking a parked gap.** Once a gap is escaped or parked, it stays
+  `open` — step 6.5 records it, it does not reopen the same question.
 
 **What this looks like — a real exchange:**
 

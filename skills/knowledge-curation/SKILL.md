@@ -181,10 +181,19 @@ then, not at 6.5 — that step is a safety net, not the elicitation moment.
    **When a gap surfaces mid-extraction, ask immediately.** Answered →
    incorporate with `basis: stated`, `OQ-<NNN>` → `status: answered`.
    Unresolvable → `basis: inferred`/`assumed`, `status: open`. Never defer.
+   Ask-immediately is bounded by the **termination budget** in
+   `references/elicitation.md`: at most two follow-ups per gap, then escape
+   (record `status: open` / `basis: assumed` and move on), and a 20-question
+   check-in that lets the user park the rest. A gap that won't close is
+   captured `open`, never chased in a loop.
 
 7. **Final elicitation pass.** Review any `OQ-<NNN>` still `open` across
    `knowledge/questions/`, `domains/<d>/questions/`, `features/<f>/questions/`.
    Ask, incorporate, close. Many questions here means you deferred too much.
+   This pass asks each still-open OQ **once** — it does not reopen gaps already
+   escaped or parked under the termination budget. Anything still unresolved
+   after its turn stays `status: open` with an honest `basis`; it is recorded,
+   not re-asked.
 
 8. **Update registries** (append, never overwrite): `data-ownership.md`,
    `coverage.md`, `service-domains.md`, domain `index.md` if the feature is new.
