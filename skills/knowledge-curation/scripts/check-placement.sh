@@ -15,15 +15,17 @@ PREFIXES='BR|WF|JR|CN|IN'
 echo "Checking knowledge placement..."
 
 # 1. Definitions outside /knowledge
+# Prune heavy/irrelevant trees (dependencies, VCS) and the directories we deliberately
+# skip — the corpus itself and this skill's own files — in the find, so we never
+# descend into them or spawn head/grep per file there.
 while IFS= read -r f; do
-  case "$f" in
-    ./knowledge/*|./.git/*|*/knowledge-curation/*) continue ;;
-  esac
   if head -20 "$f" | grep -Eq "^id: ($PREFIXES)-"; then
     echo "  VIOLATION  $f defines a knowledge ID outside /knowledge/"
     fail=1
   fi
-done < <(find . -name '*.md' 2>/dev/null)
+done < <(find . \
+  \( -path ./.git -o -path ./knowledge -o -name node_modules -o -name vendor -o -name knowledge-curation \) -prune \
+  -o -type f -name '*.md' -print 2>/dev/null)
 
 # 2. Duplicate ID definitions anywhere
 dupes=$(grep -rhE "^id: ($PREFIXES)-" --exclude-dir=_templates knowledge/ 2>/dev/null \
