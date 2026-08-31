@@ -44,8 +44,15 @@ for f in sorted(glob.glob("knowledge/**/*.md", recursive=True)):
     if not txt.startswith("---"):
         bad(f, "no front matter — add the six-line block from _templates/README.md")
         continue
+    # Take the block between the opening and closing '---' *lines*. Splitting on the
+    # first two '---' substrings would truncate a value that itself contains '---'
+    # (e.g. a citation like source: "spec.docx §3 --- appendix").
+    m = re.match(r"^---[ \t]*\r?\n(.*?)\r?\n---[ \t]*(?:\r?\n|$)", txt, re.DOTALL)
+    if not m:
+        bad(f, "front matter has no closing '---' line")
+        continue
     try:
-        fm = yaml.safe_load(txt.split("---", 2)[1]) or {}
+        fm = yaml.safe_load(m.group(1)) or {}
     except Exception as e:
         bad(f, f"front matter is not valid YAML ({str(e).splitlines()[0]}). "
                "Usually an unquoted colon in a value.")
