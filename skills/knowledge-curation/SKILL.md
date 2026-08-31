@@ -177,8 +177,25 @@ then, not at 6.5 — that step is a safety net, not the elicitation moment.
 8. **Update registries** (append, never overwrite): `data-ownership.md`,
    `coverage.md`, `service-domains.md`, domain `index.md` if the feature is new.
 9. **Record gaps** in `coverage.md`.
-10. **Verify completeness** against the source's ToC — checklist at
-   `references/completeness.md`.
+10. **Verify completeness, then run the hygiene checks.** Work the checklist at
+   `references/completeness.md` against the source's ToC. Then run all four hygiene
+   scripts, invoking each by its path in this skill's `scripts/` directory and
+   passing the workspace root (the folder that holds `knowledge/`) as the argument —
+   each script `cd`s into it and scans `./knowledge/`:
+
+   ```bash
+   bash <this-skill>/scripts/check-frontmatter.sh <workspace-root>
+   bash <this-skill>/scripts/check-placement.sh   <workspace-root>
+   bash <this-skill>/scripts/check-examples.sh    <workspace-root>
+   bash <this-skill>/scripts/check-structure.sh   <workspace-root>
+   ```
+
+   (`<this-skill>` is wherever this skill is installed, e.g.
+   `.claude/skills/knowledge-curation`; the README's *Hygiene checks* section shows
+   the resolved commands.) Report any failures, fix them, and re-run until all four
+   exit clean. They need Bash + python3 (`check-frontmatter.sh` also wants pyyaml and
+   skips if it's absent); where that runtime isn't available, do the equivalent
+   checks by hand.
 
 **Example filing:** a refunds rule →
 `domains/billing/features/refund-processing/rules/eligibility.md`.
