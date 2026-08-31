@@ -131,8 +131,30 @@ then, not at 6.5 — that step is a safety net, not the elicitation moment.
    row. This check is the guard against a context blowout or interrupted run
    silently producing a second manifest row and duplicate rule entries under
    freshly allocated IDs.
-2. **Read the whole thing** before extracting. Ask about confusing passages as
-   they surface.
+2. **Size the source, then read the whole thing** before extracting. Ask about
+   confusing passages as they surface.
+
+   **Size guard.** Functional specs run to hundreds of pages and will not
+   survive a single pass. Before reading, estimate the source's size (pages, or
+   top-level sections from its ToC). If it's large — roughly **>40 pages or
+   >15 top-level sections**, or it plainly won't fit one context window — do not
+   attempt it in one pass. Split it into chunks along the source's own ToC
+   boundaries (never mid-section) and curate **one chunk at a time**, running
+   steps 3–9 per chunk. Domain/feature identification and the grouping
+   confirmation (steps 3–4) are done once up front against the whole ToC so
+   topics stay consistent across chunks; extraction (step 6) then proceeds chunk
+   by chunk with a checkpoint after each. Small sources take the whole-document
+   path unchanged.
+
+   **Checkpoint after every chunk (and before any risky pause).** The manifest
+   row is the resume point, so keep it current: set the source's `curated`
+   column to `partial` the moment extraction begins, and record which sections
+   are **done** and which **remain** in the row's `notes` (e.g.
+   `notes: in-progress — done §1–3; remaining §4–9`). Update it after each chunk
+   completes. On a resume (step 1), this is what tells you where the previous
+   run stopped; without it, an interrupted run leaves no partial-progress state.
+   Set `curated` to `yes` only when every section is extracted and the
+   completeness pass (step 10) is clean.
 3. **Identify domain and feature.** Ask if uncertain.
 4. **Map every section internally, then confirm the grouping with the user.**
    Produce a section → target → filename mapping table for your own working

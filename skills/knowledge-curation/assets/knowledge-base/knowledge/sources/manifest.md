@@ -10,6 +10,11 @@
 
 **Curated values:** `yes` / `partial` / `no` / `superseded`
 
+`partial` marks a curation still in progress — set it when extraction begins and
+record how far you got in `notes` (e.g. `in-progress — done §1–3; remaining §4–9`)
+so an interrupted run can be resumed from the manifest. Promote to `yes` only once
+every section is extracted and the completeness checks pass.
+
 ## Precedence
 
 When two sources disagree, the order of authority is:
