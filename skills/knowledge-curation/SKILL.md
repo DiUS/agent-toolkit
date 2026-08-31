@@ -111,7 +111,26 @@ Interviews, workshops and walkthroughs count as sources too — `stated`, not
 Elicit throughout. Steps 2–6 all surface questions when gaps appear. Ask them
 then, not at 6.5 — that step is a safety net, not the elicitation moment.
 
-1. **Register** in `knowledge/sources/manifest.md`.
+1. **Look up the source, then register** in `knowledge/sources/manifest.md`.
+   Before adding a row, scan the existing manifest for this source (match on
+   `file` — same path/name; treat an obvious rename or a new revision of the
+   same document as a match too). **If it's already listed, stop and ask which
+   this is** before writing anything:
+   - **Re-curation** (redo from scratch) — the prior derived files are stale.
+     Don't allocate fresh IDs alongside the old ones; agree with the user
+     whether to supersede or remove the previous entries first, so you don't
+     end up with two sets of `-NNN` IDs for the same content.
+   - **New version** (the document changed) — register as a new `version` of
+     the same source, mark the old row `superseded`, and reconcile rather than
+     duplicate the derived files.
+   - **Resume** (an earlier run was interrupted) — do not re-register; continue
+     against the existing row and its already-allocated IDs, extending only
+     what's missing.
+
+   Only when the source is **not** already in the manifest do you append a new
+   row. This check is the guard against a context blowout or interrupted run
+   silently producing a second manifest row and duplicate rule entries under
+   freshly allocated IDs.
 2. **Read the whole thing** before extracting. Ask about confusing passages as
    they surface.
 3. **Identify domain and feature.** Ask if uncertain.
