@@ -135,6 +135,18 @@ then, not at 6.5 — that step is a safety net, not the elicitation moment.
 
    Wait for confirmation before creating any files. Unmapped sections are
    gaps — ask.
+
+   **Slug and path safety.** Folder and file names are *derived*, never taken
+   verbatim from a heading. Slugify every path component to `[a-z0-9-]`:
+   lower-case, spaces and punctuation → `-`, collapse repeats, trim leading and
+   trailing `-`. Reject (don't sanitise-and-proceed) any component that is empty
+   after slugging, is `.` or `..`, or still contains `/`, `\`, or `:` — stop and
+   ask instead. This matters because the grouping is confirmed in plain business
+   prose (topic names), so the source's own heading text — not a name the user
+   ever saw — is what reaches the filesystem. Immediately before the first write,
+   show the user the **resolved paths** you're about to create (the full
+   `knowledge/...` path for each topic file) and get a yes. This is the one place
+   filenames are surfaced; the earlier grouping check stays in business language.
 5. **Open the actual template** in `references/knowledge/` before writing —
    never from memory. Match by the table below. If nothing fits, ask — don't
    invent structure.
