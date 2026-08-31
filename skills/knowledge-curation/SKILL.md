@@ -194,8 +194,9 @@ then, not at 6.5 — that step is a safety net, not the elicitation moment.
    `.claude/skills/knowledge-curation`; the README's *Hygiene checks* section shows
    the resolved commands.) Report any failures, fix them, and re-run until all four
    exit clean. They need Bash + python3 (`check-frontmatter.sh` also wants pyyaml and
-   skips if it's absent); where that runtime isn't available, do the equivalent
-   checks by hand.
+   skips if it's absent); where that runtime isn't available, verify the same
+   invariants manually — each script's header comment (and the README's checks table)
+   states exactly what it enforces.
 
 **Example filing:** a refunds rule →
 `domains/billing/features/refund-processing/rules/eligibility.md`.

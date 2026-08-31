@@ -42,7 +42,7 @@ summaries" rule).
 | `check-frontmatter.sh` | frontmatter parses and enum values are valid (needs `pyyaml`) |
 | `check-placement.sh` | ID definitions live only under `knowledge/`; no duplicate IDs |
 | `check-examples.sh` | no `example: true` placeholder content is cited as fact |
-| `check-structure.sh` | every domain and feature folder has an `index.md`; rules/workflows sit under a feature |
+| `check-structure.sh` | tier discipline — domain/feature folders have an `index.md`, and every tier-scoped folder (`rules/`, `workflows/`, `questions/`, `tech/*`, `constraints/`) sits at its correct tier |
 
 ## Install
 
