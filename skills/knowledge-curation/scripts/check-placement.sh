@@ -17,7 +17,7 @@ echo "Checking knowledge placement..."
 # 1. Definitions outside /knowledge
 while IFS= read -r f; do
   case "$f" in
-    ./knowledge/*|./.git/*|./scripts/*|./kiro-artefacts/*|./.claude/*) continue ;;
+    ./knowledge/*|./.git/*|./scripts/*|./.claude/*) continue ;;
   esac
   if head -20 "$f" | grep -Eq "^id: ($PREFIXES)-"; then
     echo "  VIOLATION  $f defines a knowledge ID outside /knowledge/"
