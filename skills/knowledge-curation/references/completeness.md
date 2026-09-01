@@ -32,16 +32,26 @@ Undocumented gaps are failures. Can't check a box → document why, or raise an 
 ## Retiring a source
 
 `knowledge/sources/` is a staging area, not an archive. Curated files are the living
-artefact.
+artefact — but **the agent never deletes a source document.** Deleting an original is
+irreversible and it is not the agent's call: at most the agent reports that a source
+now looks safe to archive, and the human decides and acts. This is deliberate — the
+agent cannot self-promote content to `verified` (only a human can; see the front-matter
+conventions), so "all derived files are verified" can never be a state the agent
+manufactured on its way to deleting the client's spec.
 
-**Preconditions for removal:**
+**A source looks safe to archive when all of these hold** — the agent *reports* this,
+it does not act on it:
 
-1. Every derived file is `status: verified` — not merely `curated`.
+1. Every derived file is `status: verified` — not merely `curated` — which, per the
+   self-verification rule, means a human confirmed each one.
 2. `system_of_record` is populated on each derived file.
-3. `knowledge/sources/manifest.md` records the removal.
+3. `knowledge/sources/manifest.md` records the intent.
 
-Then delete the file, set `source_status: removed` on derived files. Citation
-stays; local copy goes.
+When they hold, tell the user plainly — e.g. "Everything derived from `<source>` is
+verified and cites a system of record; the original now looks safe to archive. Want me
+to mark it removed in the manifest?" On their explicit yes, set `source_status: removed`
+on the derived files and note it in the manifest. Citation stays. **Removing the local
+copy is the human's action, never the skill's.**
 
 **Never re-derive from a source after `hand_edited: true`.** Regenerating
 silently discards deliberate divergence.
