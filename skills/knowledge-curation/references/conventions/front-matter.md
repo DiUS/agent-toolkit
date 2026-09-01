@@ -22,7 +22,7 @@ related: [WF-BILLING-REFUNDS-003]
 | field | what to put | if unsure |
 |-------|-------------|-----------|
 | `id` | namespaced, never changes | see ID conventions below |
-| `status` | `draft` until a human who knows confirms it, then `verified` | `draft` |
+| `status` | `draft`/`verified` for curated content; `open`/`answered`/`unresolvable` for `OQ-` files — the full closed vocabulary is below | `draft` (an OQ starts `open`) |
 | `basis` | how solid is this — four options below | pick the more cautious one |
 | `source` | free text. Anything a person could go and check. | `"—"` |
 | `updated` | date and who | today, you |
@@ -66,13 +66,29 @@ anyone asking the question.
 `stated` catches out careful people. One person's recollection is `stated`, not
 `documented`, however senior they are and however confident they sounded.
 
-## `status` — two values
+## `status` — the closed vocabulary
 
-`draft` — extracted or written, nobody has confirmed it.
-`verified` — a human who actually knows has confirmed it is correct.
+**This list is the authority.** Two lifecycles, five values total — the checker
+(`scripts/check-frontmatter.sh`) enforces exactly these and the per-type templates use
+them. Nothing else is a valid `status`; don't invent one. If this file and the checker
+ever disagree, that's a bug to fix, not a licence to guess.
 
-Everything starts `draft`. Most things stay `draft` for a while, and that is fine —
-`draft` is honest, not embarrassing.
+**Curated content** — rules, workflows, glossary, tech, constraints, ADRs: anything
+that states a fact:
+
+- `draft` — extracted or written, nobody has confirmed it.
+- `verified` — a human who actually knows has confirmed it is correct.
+
+**Open questions** — `OQ-<NNN>` files only, the question lifecycle:
+
+- `open` — asked, or still to be resolved; not yet answered.
+- `answered` — the user answered; the resolution is recorded and folded into the
+  affected content.
+- `unresolvable` — determined it cannot be answered (no source, nobody knows). A
+  terminal state, recorded with the reason.
+
+Everything curated starts `draft`. Most things stay `draft` for a while, and that is
+fine — `draft` is honest, not embarrassing.
 
 **Rule addressed to the agent: you write `draft`, only a human writes `verified`.**
 Extraction is never verification, so an agent never sets `verified` on its own —
