@@ -140,7 +140,9 @@ Keep the question file after resolution — the context and reasoning matter.
 - Defer everything to step 6.5
 - Batch multiple questions
 - Only ask feature-tier questions — platform/domain gaps get lost
-- Skip because "the user probably doesn't know" — ask anyway
+- Skip because "the user probably doesn't know" — ask anyway (but "ask anyway"
+  governs *raising* a question once, not looping on the answer: the follow-up depth
+  cap in the Termination budget still applies)
 - Answer the question file but not the curated content
 
 ## When not to raise an OQ
