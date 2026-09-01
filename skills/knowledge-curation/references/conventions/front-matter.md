@@ -103,8 +103,8 @@ updated: "2026-07-30 A. Analyst"
 ```
 
 Then write the content. Run the skill's `scripts/check-frontmatter.sh` (from the
-workspace root: `bash .claude/skills/knowledge-curation/scripts/check-frontmatter.sh`) and it
-will tell you if something is off.
+workspace root: `bash <skill>/scripts/check-frontmatter.sh`, where `<skill>` is
+wherever this skill is installed) and it will tell you if something is off.
 
 ## Editing curated content
 
@@ -229,7 +229,8 @@ corpus does not match a template. If you edit these, preserve that.
 ## Checks
 
 The hygiene scripts live in the skill (`scripts/`). Run them from the workspace root,
-e.g. `bash .claude/skills/knowledge-curation/scripts/check-frontmatter.sh`:
+e.g. `bash <skill>/scripts/check-frontmatter.sh` (`<skill>` = wherever this skill is
+installed):
 
 | script | enforces |
 |--------|----------|

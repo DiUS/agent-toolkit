@@ -6,5 +6,5 @@ to fill a gap. Invariants scoped to a single domain live under
 `domains/<domain>/constraints/` instead, and an invariant scoped to one feature is a
 rule, not a constraint.
 
-Ships empty. Template:
-`.claude/skills/knowledge-curation/references/knowledge/constraint.md`.
+Ships empty. Template: the knowledge-curation skill's
+`references/knowledge/constraint.md`.

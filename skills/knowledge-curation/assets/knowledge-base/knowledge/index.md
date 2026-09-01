@@ -27,7 +27,7 @@ _None curated yet._ Each domain gets a folder under `domains/<domain>/` with an
 - `decisions/` — ADRs for contested structural calls
 
 Templates, conventions, and hygiene scripts live in the knowledge-curation skill
-(`.claude/skills/knowledge-curation/`), not in the corpus.
+(wherever it's installed), not in the corpus.
 
 ## Health
 

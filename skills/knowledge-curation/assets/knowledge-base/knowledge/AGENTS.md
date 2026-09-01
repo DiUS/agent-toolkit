@@ -21,5 +21,7 @@ start here.
 - **Curation and structural edits go through the `knowledge-curation` skill.** Do not
   hand-edit provenance, invent IDs, or add a rule/constraint no source states.
 - The full conventions — tiers, ID scheme, front-matter schema, placement rules — live
-  in the skill at `.claude/skills/knowledge-curation/references/conventions/`
+  in the **knowledge-curation** skill, under its `references/conventions/`
   (`structure.md`, `front-matter.md`, `ba-principles.md`, `knowledge-boundary.md`).
+  Locate the skill wherever it's installed (a manual copy under `.claude/skills/`, a
+  plugin, or an `npx skills` install) rather than assuming a fixed path.

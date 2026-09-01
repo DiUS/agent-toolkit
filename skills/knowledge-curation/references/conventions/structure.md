@@ -116,8 +116,8 @@ ID conventions are in `front-matter.md` (this skill's `references/conventions/`)
 
 ## Templates
 
-A template exists for every curated file type, in
-`.claude/skills/knowledge-curation/references/knowledge/` — use them. The front-matter/ID
+A template exists for every curated file type, in this skill's
+`references/knowledge/` — use them. The front-matter/ID
 conventions reference is `references/conventions/front-matter.md`, and the registry
 templates are in `references/registry-templates/`. The front matter schema is not
 decorative — closed vocabularies are what let you filter and reason over the corpus.

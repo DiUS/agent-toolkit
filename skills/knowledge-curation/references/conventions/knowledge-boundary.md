@@ -55,4 +55,5 @@ narrowest tier where the fact is actually true. This file's rule is the simpler 
 business knowledge is central, in `/knowledge`, always.
 
 Mechanical check: the skill's `scripts/check-placement.sh` (run from the workspace
-root: `bash .claude/skills/knowledge-curation/scripts/check-placement.sh`).
+root: `bash <skill>/scripts/check-placement.sh`, where `<skill>` is wherever this
+skill is installed).
