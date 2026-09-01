@@ -1,6 +1,8 @@
 ---
 id: "{domain}-{feature}"          # plain descriptive slug — referenced by name, not cited by ID
 status: draft                      # draft | verified
+basis: documented                  # documented|stated|inferred|assumed
+source: "{where it came from}"
 updated: "{YYYY-MM-DD} {your name}"
 related: []                        # IDs only — e.g. journeys this feature appears in
 ---

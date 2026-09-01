@@ -42,7 +42,7 @@ summaries" rule).
 
 | script | enforces |
 |--------|----------|
-| `check-frontmatter.sh` | frontmatter parses and enum values are valid (needs `pyyaml`) |
+| `check-frontmatter.sh` | frontmatter parses, enum values are valid, and curated content carries `basis` + `source` (registries and ADRs exempt) — needs `pyyaml` |
 | `check-placement.sh` | ID definitions live only under `knowledge/`; no duplicate IDs |
 | `check-examples.sh` | no `example: true` placeholder content is cited as fact |
 | `check-structure.sh` | tier discipline — domain/feature folders have an `index.md`, and every tier-scoped folder (`rules/`, `workflows/`, `questions/`, `tech/*`, `constraints/`) sits at its correct tier |

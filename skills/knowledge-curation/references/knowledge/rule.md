@@ -1,6 +1,10 @@
 ---
 id: "BR-{DOMAIN}-{TOPIC}"    # shared base for every rule below; each appends -NNN
 status: draft                # draft | verified
+basis: documented            # documented|stated|inferred|assumed — the file-level
+                             # default; an entry whose provenance differs overrides it
+                             # inline (the `· <basis> — _source_` on the bullet below)
+source: "{where it came from}"   # file-level default source; entries may cite their own inline
 updated: "{YYYY-MM-DD} {your name}"
 related: []                  # IDs only
 ---

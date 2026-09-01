@@ -255,7 +255,7 @@ installed):
 
 | script | enforces |
 |--------|----------|
-| `check-frontmatter.sh` | front matter parses; enum values are valid |
+| `check-frontmatter.sh` | front matter parses; enum values are valid; curated content carries `basis` + `source` (registries and ADRs exempt) |
 | `check-placement.sh` | ID definitions live only in `/knowledge` |
 | `check-examples.sh` | no shipped example content remains |
 | `check-structure.sh` | every domain/feature folder has an `index.md`; rules/workflows under a feature |

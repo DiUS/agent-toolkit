@@ -63,14 +63,30 @@ for f in sorted(glob.glob("knowledge/**/*.md", recursive=True)):
     st = fm.get("status")
     if st not in STATUS:
         bad(f, f"status is {st!r} — must be one of: {', '.join(STATUS)}")
+
+    # Provenance is mandatory on curated content: an unlabelled statement reads as
+    # fact (ba-principles.md rule 2), and structure.md says do not omit basis. Two
+    # kinds of file legitimately carry none, so they're exempt from the requirement
+    # (but a basis they *do* set is still range-checked):
+    #   - the platform registries, which aggregate the corpus rather than state a
+    #     sourced fact;
+    #   - ADRs (knowledge/decisions/), which record a decision and are held to
+    #     'deciders' instead.
+    REGISTRY_IDS = {"coverage", "data-ownership", "service-domains"}
+    provenance_exempt = ("/decisions/" in f) or (str(fm.get("id") or "") in REGISTRY_IDS)
+
     b = fm.get("basis")
     if b is not None and b not in BASIS:
         bad(f, f"basis is {b!r} — must be one of: {', '.join(BASIS)}")
+    elif b is None and not provenance_exempt:
+        bad(f, "missing 'basis' — state how we know this "
+               f"({'/'.join(BASIS)}); structure.md says do not omit it")
     if st == "verified" and b == "assumed":
         bad(f, "status 'verified' with basis 'assumed' — confirming an assumption "
                "changes its basis to 'stated' or 'documented'")
-    if b and not str(fm.get("source", "")).strip():
-        bad(f, "basis is set but 'source' is empty — put something checkable, or '—'")
+    src = str(fm.get("source", "")).strip()
+    if not src and (b is not None or not provenance_exempt):
+        bad(f, "missing 'source' — put something checkable, or '—'")
     cov = fm.get("coverage")
     if cov is not None and cov not in COVERAGE:
         bad(f, f"coverage is {cov!r} — must be one of: {', '.join(COVERAGE)}")

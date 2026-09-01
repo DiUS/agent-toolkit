@@ -1,6 +1,9 @@
 ---
 id: "WF-{DOMAIN}-{TOPIC}"    # shared base for every workflow below; each appends -NNN
 status: draft                # draft | verified
+basis: documented            # documented|stated|inferred|assumed — file-level default;
+                             # an entry whose provenance differs overrides it inline
+source: "{where it came from}"   # file-level default source; entries may cite their own inline
 updated: "{YYYY-MM-DD} {your name}"
 related: []                  # IDs only — include any upstream/downstream workflow
                               # ID cited via Trigger/Outcomes below, not just rules
