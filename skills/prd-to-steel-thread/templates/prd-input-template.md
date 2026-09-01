@@ -1,8 +1,6 @@
-# PRD Input Template
-
-This generic product-focused structure shows the inputs `prd-to-steel-thread` expects. A source
-PRD does not need these exact headings, but equivalent information should be located or gaps
-raised with the human. Do not infer missing content.
+<!-- This generic product-focused structure shows the inputs `prd-to-steel-thread` expects. A
+source PRD does not need these exact headings, but equivalent information should be located or
+gaps raised with the human. Do not infer missing content. -->
 
 # PRD: <Feature / Capability Name>
 

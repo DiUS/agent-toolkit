@@ -24,11 +24,11 @@ remaining in-scope capability.>
 
 ## Sequence at a glance
 
-| # | Slice | Proves / delivers | JIT infrastructure | Demo-ready gate | Depends on | Parallel group | Dev+agent pairs | Recommended PRs |
-|---|---|---|---|---|---|---|---:|---:|
-| 0 | Steel thread: <name> | <end-to-end proof> | <only what is first needed> | <observable demo> | None | None | 1 | <N> |
-| 1 | <name> | <user outcome> | <new infra or "None"> | <observable demo> | 0 | <group or "None"> | <N> | <N> |
-| N | <name> | <user outcome> | <new infra or "None"> | <observable demo> | <slice numbers> | <group or "None"> | <N> | <N> |
+| # | Slice | Proves / delivers |
+|---|---|---|
+| 0 | Steel thread: <name> | <end-to-end proof> |
+| 1 | <name> | <user outcome> |
+| N | <name> | <user outcome> |
 
 ## Slice 0 - Steel thread: <name>
 
@@ -74,8 +74,6 @@ remaining in-scope capability.>
 
 **Depends on:** <slice numbers>
 
-**Parallel-safe with:** <slice numbers or "None">
-
 **Parallel group:** <group or "None">
 
 **Dev+agent pairs:** <N>
@@ -94,10 +92,7 @@ remaining in-scope capability.>
 
 ### Parallel group <N>
 
-- **Starts after:** <prerequisite slices>
 - **Slices:** <slice numbers>
-- **Available capacity:** <N> Dev+agent pairs
-- **Allocation:** <Slice X: N pairs; Slice Y: N pairs>
 - **Why parallel-safe:** <independent contracts, files, modules, or infrastructure>
 - **Synchronization point:** <what must be integrated or confirmed before dependent work>
 
@@ -145,6 +140,5 @@ Steel-thread roadmap: <relative/path/to/steel-thread.md>
 Concurrent capacity: <N> Dev+agent pair(s)
 
 Create the technical plan/design using steel-thread.md as the delivery sequence.
-Preserve its Slice 0..N ordering, demo-ready gates, JIT infrastructure,
-dependencies, parallel groups, synchronization points, and pair allocations.
+Preserve every delivery constraint in its SDD planning/design hand-off section.
 ```

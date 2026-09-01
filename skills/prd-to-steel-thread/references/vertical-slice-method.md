@@ -97,12 +97,8 @@ Tasks that do not support the current slice move later. Tasks outside the PRD re
 design. Pass it into the selected SDD workflow's technical planning/design step after product
 scope is established.
 
-The hand-off should preserve:
-
-- Slice 0 and the later slice sequence;
-- PRD traceability and verbatim task wording;
-- demo-ready gates and JIT infrastructure;
-- dependencies and parallel groups;
-- total Dev+agent pair capacity and per-slice allocation.
+Use the canonical hand-off section in
+[../templates/steel-thread.md](../templates/steel-thread.md) so the roadmap and invocation
+preserve the same delivery constraints.
 
 Do not invent framework commands. Confirm them with the human or official documentation.

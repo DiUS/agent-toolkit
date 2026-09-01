@@ -153,11 +153,12 @@ linear sequence when concurrency would increase coordination or merge risk.
 For every parallel group record:
 
 - slices in the group;
-- prerequisite slices;
-- available Dev+agent pairs;
-- pairs allocated to each slice;
 - why the work is parallel-safe;
 - the synchronization point before dependent work begins.
+
+Keep dependencies, pair allocations, and group membership in each slice section rather than
+repeating them in the parallel execution plan. The document header records total available
+capacity.
 
 Do not create artificial sub-slices merely to occupy every pair.
 
@@ -170,19 +171,25 @@ sequence, and parallel groups.
 
 Then write `steel-thread.md` next to the source PRD using
 [templates/steel-thread.md](templates/steel-thread.md). Include a ready-to-paste hand-off for
-the confirmed SDD planning/design step. The hand-off must carry forward the slice sequence,
-demo gates, dependencies, pair capacity, parallel groups, and just-in-time infrastructure
-without introducing technical design decisions.
+the confirmed SDD planning/design step. Follow the template's SDD planning/design hand-off
+section; it is the canonical definition of the information that the hand-off must preserve.
 
 ## Completion checks
 
-- [ ] The PRD and existing task file were read in full.
-- [ ] Blocking gaps were resolved by asking one question at a time.
-- [ ] The architecture path, infrastructure context, SDD hand-off, and Dev+agent pair count
-      were confirmed.
-- [ ] Slice 0 is the smallest credible end-to-end technical smoke test and is assigned one pair.
-- [ ] Every later slice is traceable, demo-ready, and only decomposed for feedback or risk.
-- [ ] Infrastructure appears only when first needed.
-- [ ] Parallel groups respect dependencies, pair capacity, and merge/contract safety.
-- [ ] Original PRD requirement and task descriptions are preserved verbatim.
-- [ ] `steel-thread.md` and its confirmed SDD hand-off were produced for human review.
+- [ ] The source PRD and task paths in `steel-thread.md` identify the inputs that were read in
+      full.
+- [ ] Unresolved source gaps appear in **Open questions and PRD gaps** with their planning
+      impact; the roadmap contains no silent assumptions.
+- [ ] **Confirmed planning context** records the agreed architecture path, infrastructure
+      context, SDD hand-off, and Dev+agent pair count.
+- [ ] Slice 0 traverses the confirmed end-to-end path, has one pair, and names observable
+      behaviour that proves the path works.
+- [ ] Every in-scope PRD requirement and task appears in exactly one slice, or in
+      **Deferred / pushed down** or **Excluded from this roadmap** with a reason.
+- [ ] Every slice's demo-ready gate names observable behaviour and how to exercise it, rather
+      than only confirming that a component exists.
+- [ ] No slice provisions infrastructure that it does not exercise in its own demo-ready gate.
+- [ ] Each parallel group fits within total pair capacity and its safety rationale addresses
+      dependencies, contract stability, and conflicting ownership.
+- [ ] The SDD hand-off is fully populated for the confirmed workflow and points technical
+      planning to the completed roadmap.
