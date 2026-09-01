@@ -33,21 +33,38 @@ front-matter schema. Load these before creating any file:
 ## Workspace setup — before first curation
 
 Curated knowledge is written to `knowledge/` at the **workspace root** (never inside
-the skill). Before writing anything, check what is already there — this skill is often
-copied into a repo that may already use a `knowledge/` folder for something else:
+the skill). Don't judge the directory's state by eye and decide what to copy — that's
+a script's job, and it's additive by construction so there is no destructive branch to
+get wrong. Run it and branch on the exit code:
 
-1. **No `knowledge/` folder** → scaffold it: copy `assets/knowledge-base/knowledge/`
-   from this skill to the workspace root. That lays down the empty registries
-   (`platform/coverage.md`, `platform/data-ownership.md`, `platform/service-domains.md`),
-   an empty `platform/constraints/` tier, `sources/manifest.md`, and `decisions/README.md`.
-2. **`knowledge/` exists AND looks like this skill's corpus** — it contains both
-   `knowledge/platform/coverage.md` and `knowledge/sources/manifest.md` — → it's an
-   existing knowledge base; **extend it, never overwrite**.
-3. **`knowledge/` exists but is MISSING those markers** → **stop and ask.** Do not
-   write into it. Tell the user plainly: a `knowledge/` folder already exists at the
-   workspace root and does not look like a knowledge base this skill manages, and ask
-   whether to (a) curate into a different path, (b) proceed and write into the existing
-   folder anyway, or (c) stop. Wait for their answer before creating any file.
+```bash
+bash <this-skill>/scripts/setup-workspace.sh <workspace-root>
+```
+
+It scaffolds a fresh `knowledge/` (empty registries — `platform/coverage.md`,
+`platform/data-ownership.md`, `platform/service-domains.md`, an empty
+`platform/constraints/` tier, `sources/manifest.md`, `decisions/README.md`), or, if
+one already exists, adds only the files that are missing. **It never overwrites**, so
+re-running is always safe: an interrupted first run is repaired by running it again.
+
+Branch on the exit code — do not write into `knowledge/` by any other path:
+
+- **`0`** → ready. The `STATE=` line reports `created` (new), `extended` (this skill's
+  corpus, or its own partial scaffold — missing files filled in), or `adopted`.
+  Proceed to curation.
+- **`2`** (blocked) → `knowledge` exists as a **file or symlink**, not a directory.
+  Stop. Tell the user; do not write through it.
+- **`3`** (needs-adopt) → a `knowledge/` folder exists that this skill didn't create
+  (no corpus markers, and it holds foreign files). **Stop and ask** whether to curate
+  into a different path, adopt this folder, or stop. Only on an explicit yes, re-run
+  with `--adopt` appended. Never pass `--adopt` on your own judgement — adoption means
+  writing into someone else's directory, so it takes a human's word in chat.
+- **`1`** → usage/setup error (bad arguments, or the scaffold is missing). Fix and
+  re-run.
+
+(`<this-skill>` is wherever this skill is installed, e.g.
+`.claude/skills/knowledge-curation`; `<workspace-root>` is the folder that holds — or
+will hold — `knowledge/`.)
 
 **Do not seed any constraint, rule, or other content that no source states** — the
 scaffold ships empty registries only.

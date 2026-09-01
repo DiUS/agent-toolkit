@@ -17,7 +17,7 @@ writes outside itself is the `knowledge/` corpus at the workspace root.
 | `references/conventions/` | the four always-load rule docs — see below |
 | `references/knowledge/` | the per-type file templates (one per curated file type) |
 | `references/registry-templates/` | templates for the platform registries and ADRs |
-| `scripts/` | the four hygiene checks — see below |
+| `scripts/` | `setup-workspace.sh` (additive, never-overwrite workspace scaffold) + the four hygiene checks — see below |
 | `assets/knowledge-base/` | the empty knowledge-base scaffold, laid down on first run |
 
 The two smaller sets below are stable, so they're named individually. The per-type
@@ -59,8 +59,10 @@ start. Confirm with `/knowledge-curation`.
    `knowledge/sources/<domain>/`).
 2. Ask Claude to **curate** it, pointing at the file (path or attachment), or type
    `/knowledge-curation`.
-3. On first run the skill scaffolds `knowledge/` at the workspace root from
-   `assets/knowledge-base/`. Thereafter it registers the source, confirms domain and
+3. On first run the skill scaffolds `knowledge/` at the workspace root by running
+   `scripts/setup-workspace.sh` (additive by construction — it only creates missing
+   files and never overwrites, so re-running repairs an interrupted setup). Thereafter
+   it registers the source, confirms domain and
    feature **with you in chat**, proposes a topic grouping, extracts into the right
    tiers, and updates the registries — every fact carrying an honest `basis`
    (`documented` / `stated` / `inferred` / `assumed`) and `status: draft` until a
