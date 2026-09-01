@@ -30,9 +30,24 @@ it. Only the filename may need derivation.
 
 ## Repeatability
 
-Curating the same source twice must produce the same files, same topics, same
-names. Since the grouping comes from the source (which doesn't change) and the
-name derives from source content, re-runs converge.
+Curating the same source twice should produce the same files, topics, and names.
+That is **not** something LLM naming converges on by itself — step 3 ("derive the
+name from the entity, trigger, phase, or distinguishing attribute") will pick
+different words on different runs. Repeatability comes from a mechanism, not a hope:
+**persist the confirmed mapping and reuse it.**
+
+- On the **first** curation, once the user confirms the grouping (Method step 4),
+  write the agreed section → topic → path mapping to
+  `knowledge/sources/<source-slug>.mapping.md` — a plain record, one row per grouped
+  file. (It lives under `sources/`, so it is staging metadata, exempt from the
+  frontmatter checks, not curated corpus.)
+- On any **re-run** — a resume, a re-curation, or a new version of the same source —
+  load that file first and **reuse the recorded names and paths**. Only sections the
+  mapping doesn't cover get fresh names (then append them to the mapping). This is
+  what makes re-runs actually converge; without the file, they don't.
+
+If the mapping file is missing (an older corpus, or a hand-built one), fall back to
+deriving names as above and write the mapping as you go, so the next run is stable.
 
 ## Recording a grouping convention
 

@@ -156,7 +156,12 @@ then, not at 6.5 — that step is a safety net, not the elicitation moment.
      duplicate the derived files.
    - **Resume** (an earlier run was interrupted) — do not re-register; continue
      against the existing row and its already-allocated IDs, extending only
-     what's missing.
+     what's missing. Load `knowledge/sources/<source-slug>.mapping.md` and reuse the
+     recorded topic names and paths so the resumed work lands in the same files.
+
+   On a **re-curation** or **new version**, likewise load the source's
+   `.mapping.md` if it exists and reuse its names, so re-runs converge on the same
+   topics and filenames rather than re-deriving them (`references/grouping.md`).
 
    Only when the source is **not** already in the manifest do you append a new
    row. This check is the guard against a context blowout or interrupted run
@@ -219,6 +224,14 @@ then, not at 6.5 — that step is a safety net, not the elicitation moment.
    show the user the **resolved paths** you're about to create (the full
    `knowledge/...` path for each topic file) and get a yes. This is the one place
    filenames are surfaced; the earlier grouping check stays in business language.
+
+   **Persist the confirmed mapping.** Once the grouping is confirmed and paths
+   resolved, write the agreed section → topic → path mapping to
+   `knowledge/sources/<source-slug>.mapping.md` (one row per grouped file). On any
+   re-run, load it first and reuse the recorded names — that, not LLM determinism, is
+   what makes re-curation converge (`references/grouping.md`). If you're resuming or
+   re-curating and the file already exists, reuse it rather than re-deriving names;
+   only add rows for sections it doesn't yet cover.
 5. **Open the actual template** in `references/knowledge/` before writing —
    never from memory. Match by the table below. If nothing fits, ask — don't
    invent structure.
