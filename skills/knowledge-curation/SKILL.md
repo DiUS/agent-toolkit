@@ -51,7 +51,7 @@ Branch on the exit code — do not write into `knowledge/` by any other path:
 
 - **`0`** → ready. The `STATE=` line reports `created` (new), `extended` (this skill's
   corpus, or its own partial scaffold — missing files filled in), or `adopted`.
-  Proceed to curation.
+  Proceed to curation. The setup also prints `AGENTS_MD=present|absent` — see below.
 - **`2`** (blocked) → `knowledge` exists as a **file or symlink**, not a directory.
   Stop. Tell the user; do not write through it.
 - **`3`** (needs-adopt) → a `knowledge/` folder exists that this skill didn't create
@@ -65,6 +65,17 @@ Branch on the exit code — do not write into `knowledge/` by any other path:
 (`<this-skill>` is wherever this skill is installed, e.g.
 `.claude/skills/knowledge-curation`; `<workspace-root>` is the folder that holds — or
 will hold — `knowledge/`.)
+
+**The `knowledge/AGENTS.md` on-ramp is opt-in — ask first.** Setup does **not** write
+it by default (`AGENTS_MD=absent`). It isn't corpus data: it's an on-ramp for other
+agents, and Claude Code **auto-loads any `AGENTS.md`**, so dropping it in quietly sets
+read-order and ground rules for *every* future session in that repo, not just curation
+runs. When `AGENTS_MD=absent`, tell the user plainly what it is and does — "an
+auto-loaded `knowledge/AGENTS.md` that tells any agent touching `knowledge/` how to
+read the corpus (read order, reference-by-ID, curation goes through this skill); it
+affects all sessions in this repo" — and ask whether to add it. Only on an explicit
+yes, re-run the same command with `--with-agents-md` appended. If `AGENTS_MD=present`
+it already exists; leave it be.
 
 **Do not seed any constraint, rule, or other content that no source states** — the
 scaffold ships empty registries only.

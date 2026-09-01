@@ -9,11 +9,15 @@
 # running it again, and a later scaffold version forward-migrates an existing
 # corpus by adding only its new files. There is no destructive path to take.
 #
-# Usage:  setup-workspace.sh [workspace-root] [--adopt]
-#   workspace-root  folder that holds (or will hold) ./knowledge/  (default: PWD)
-#   --adopt         permission — granted by the human in chat, never by the LLM
-#                   on its own — to add the scaffold into an existing ./knowledge/
-#                   that is NOT one of this skill's corpora (the exit-3 case).
+# Usage:  setup-workspace.sh [workspace-root] [--adopt] [--with-agents-md]
+#   workspace-root    folder that holds (or will hold) ./knowledge/  (default: PWD)
+#   --adopt           permission — granted by the human in chat, never by the LLM
+#                     on its own — to add the scaffold into an existing ./knowledge/
+#                     that is NOT one of this skill's corpora (the exit-3 case).
+#   --with-agents-md  also write knowledge/AGENTS.md, the auto-loaded agent on-ramp.
+#                     Held back by default because Claude Code auto-loads any
+#                     AGENTS.md, so it sets rules for every future session — pass this
+#                     only after the human has said yes in chat.
 #
 # Exit codes (branch on these):
 #   0  ready       — scaffold ensured; STATE line says created|extended|adopted
@@ -27,11 +31,13 @@ set -uo pipefail
 
 root="$PWD"
 adopt=0
+with_agents=0
 for arg in "$@"; do
   case "$arg" in
-    --adopt) adopt=1 ;;
-    -*)      echo "error: unknown option '$arg'" >&2; exit 1 ;;
-    *)       root="$arg" ;;
+    --adopt)          adopt=1 ;;
+    --with-agents-md) with_agents=1 ;;
+    -*)               echo "error: unknown option '$arg'" >&2; exit 1 ;;
+    *)                root="$arg" ;;
   esac
 done
 
@@ -102,9 +108,15 @@ else
 fi
 
 # Additive copy: create only files that do not exist. Never overwrite.
+# AGENTS.md is held back by default: it isn't corpus data — Claude Code auto-loads
+# any AGENTS.md, so it would silently set rules for every future session in the repo.
+# It is only written when the human has said yes in chat (--with-agents-md).
 created=0
 while IFS= read -r src; do
   rel="${src#"$scaffold"/}"
+  if [ "$rel" = "AGENTS.md" ] && [ "$with_agents" -eq 0 ]; then
+    continue
+  fi
   dest="$target/$rel"
   if [ -e "$dest" ]; then
     continue
@@ -114,6 +126,15 @@ while IFS= read -r src; do
   created=$((created + 1))
 done < <(find "$scaffold" -type f)
 
-echo "  OK — state=$state, files created=$created, none overwritten."
+# Tell the caller whether the auto-loaded on-ramp is in place, so it knows whether
+# to offer it to the user.
+if [ -f "$target/AGENTS.md" ]; then
+  agents_md="present"
+else
+  agents_md="absent"
+fi
+
+echo "  OK — state=$state, files created=$created, none overwritten. AGENTS.md: $agents_md."
 echo "STATE=$state"
+echo "AGENTS_MD=$agents_md"
 exit 0

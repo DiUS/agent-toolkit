@@ -6,7 +6,10 @@ interviews, glossaries) into structured, provenance-tagged knowledge under a
 **asks rather than guesses**.
 
 Self-contained: everything the skill needs lives in this folder. The only thing it
-writes outside itself is the `knowledge/` corpus at the workspace root.
+writes outside itself is the `knowledge/` corpus at the workspace root. One optional
+extra — an auto-loaded `knowledge/AGENTS.md` on-ramp — is written **only if you say
+yes** when the skill offers it, because Claude Code auto-loads any `AGENTS.md` and it
+would otherwise set rules for every session in the repo.
 
 ## What's in here
 
