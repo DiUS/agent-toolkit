@@ -10,7 +10,7 @@ Six lines. Copy them, fill them in, done.
 
 ```yaml
 ---
-id: BR-BILLING-REFUNDS-001
+id: "BR-BILLING-REFUNDS-001"    # quoted here only so the placement grep skips this doc — real files write it unquoted
 status: draft
 basis: documented
 source: "functional-spec.docx §3.2.1 p.24"
@@ -110,7 +110,7 @@ something from a conversation and want to record it:
 
 ```yaml
 ---
-id: BR-BILLING-REFUNDS-004
+id: "BR-BILLING-REFUNDS-004"    # quoted here only so the placement grep skips this doc — real files write it unquoted
 status: draft
 basis: stated
 source: "Architect walkthrough, 2026-07-30"
@@ -239,8 +239,13 @@ All templates live inside the knowledge-curation skill, so the workspace root ho
   conventions below) — `references/conventions/front-matter.md`, pointed to directly
   by `conventions/structure.md`.
 
-Placeholder IDs are quoted with `{}` slots so that grepping `^id: BR-` across the
-corpus does not match a template. If you edit these, preserve that.
+Every ID that appears in a template or a doc example is **quoted** — the `{}`-slot
+placeholders (`"BR-{DOMAIN}-{TOPIC}"`) and the concrete illustrative ones
+(`"BR-BILLING-REFUNDS-001"` in the examples above) alike — so that grepping
+`^id: BR-` (what `check-placement.sh` does) never matches a template or a reference
+doc, only a real definition under `knowledge/`. Real curated files write the ID
+unquoted; quoting is a doc-only device. If you add or edit an example ID anywhere in
+this skill, quote it.
 
 ## Checks
 
