@@ -20,7 +20,7 @@ would otherwise set rules for every session in the repo.
 | `references/conventions/` | the four always-load rule docs — see below |
 | `references/knowledge/` | the per-type file templates (one per curated file type) |
 | `references/registry-templates/` | templates for the platform registries and ADRs |
-| `scripts/` | `setup-workspace.sh` (additive, never-overwrite workspace scaffold) + the four hygiene checks — see below |
+| `scripts/` | five scripts — `setup-workspace.sh` (the workspace scaffold) plus the four hygiene checks — see below |
 | `assets/knowledge-base/` | the empty knowledge-base scaffold, laid down on first run |
 
 The two smaller sets below are stable, so they're named individually. The per-type
@@ -38,7 +38,19 @@ summaries" rule).
 | `knowledge-boundary.md` | the central-vs-provisional test for business vs. technology content |
 | `front-matter.md` | the metadata schema — the six fields, `basis`/`status` vocabularies, ID conventions |
 
-**The four checks** (`scripts/`) — read-only, run from the workspace root:
+**The `scripts/` folder holds five scripts** — one setup script and four hygiene
+checks.
+
+**The setup script** (`setup-workspace.sh`) scaffolds `knowledge/` at the workspace
+root. It is **additive by construction** — a create-only copy that never overwrites,
+so re-running repairs an interrupted setup and forward-migrates an existing corpus.
+Run it and branch on its exit code: `0` ready (`STATE=created|extended|adopted`), `2`
+`knowledge` exists as a file or symlink (stop), `3` a `knowledge/` folder this skill
+didn't create needs an explicit `--adopt` after the user says so, `1` usage error. The
+optional `knowledge/AGENTS.md` on-ramp is written only with `--with-agents-md`. SKILL.md
+drives this on the first run.
+
+**The four hygiene checks** — read-only, run from the workspace root:
 
 | script | enforces |
 |--------|----------|
