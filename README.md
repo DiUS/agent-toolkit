@@ -57,6 +57,7 @@ and any other agent).
 | Skill | Description |
 |---|---|
 | [`codebase-discovery`](skills/codebase-discovery/) | Reverse-engineers domain, architecture, business rules, workflows and a business glossary from an existing codebase into lean onboarding docs — ready for harness engineering / Spec Kit. |
+| [`knowledge-curation`](skills/knowledge-curation/) | Processes a source document (functional spec, technical doc, ADR, meeting notes, interview, workshop, glossary) into curated, ID-referenced knowledge under `knowledge/` — decomposing rather than summarising, eliciting gaps rather than guessing. |
 
 New skills, commands, agents and hooks are added over time; see
 [CONTRIBUTING.md](CONTRIBUTING.md) to add your own.
