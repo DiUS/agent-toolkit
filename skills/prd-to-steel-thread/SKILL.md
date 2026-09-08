@@ -1,6 +1,6 @@
 ---
 name: "prd-to-steel-thread"
-description: "Turn a product PRD into a lean steel-thread roadmap: first prove the thinnest end-to-end path, then sequence demo-ready vertical slices with just-in-time infrastructure and capacity-aware parallelism. Produces steel-thread.md for input to Spec Kit /speckit.plan or the equivalent technical planning step in another SDD workflow. Use when identifying a steel thread, vertically slicing a PRD, reorganising PRD tasks, planning parallel Dev+agent workstreams, or preparing product requirements for technical design."
+description: "Create or revise a product PRD's steel-thread roadmap: first prove the thinnest end-to-end path, then sequence demo-ready vertical slices with just-in-time infrastructure and capacity-aware parallelism. Saves a resumable steel-thread.md draft, approved for input to Spec Kit /speckit.plan or an equivalent SDD technical planning step. Use when identifying a steel thread, vertically slicing a PRD, revising a roadmap, reorganising PRD tasks, planning parallel Dev+agent workstreams, or preparing product requirements for technical design."
 argument-hint: "Path to the PRD; optionally include the existing tasks file and target SDD workflow"
 compatibility: "Host-agnostic. No hooks, MCP servers, or specific SDD runtime required."
 user-invocable: true
@@ -53,8 +53,52 @@ as an interpretation guide, not as permission to fill gaps.
 - Record capacity as the number of **Dev+agent pairs**, not personal names.
 - Keep the roadmap flat as `Slice 0..N`; express concurrency through dependencies,
   parallel-safe annotations, pair counts, and parallel groups.
+- Save progress in the roadmap itself, not only in conversation. An incomplete draft is not
+  approved input to technical planning.
+
+## Saving progress
+
+Use the output template's **Planning progress** section as portable session state. After each
+human answer or approval, save the confirmed value in its relevant section and record what
+was confirmed, when, any unresolved questions, and the next step **before continuing**.
+Save proposed slices and parallel groups as drafts as they are developed; a proposal is not
+an approval. Use `Pending` for unknown values rather than filling them from assumptions.
+
+Keep **Status** as `Draft - incomplete; not ready for technical planning` until step 8 is
+approved and the completion checks pass. Record approval of Slice 0 separately from approval
+of the whole roadmap. If a confirmed input or slice changes, mark affected decisions and
+dependent approvals as needing confirmation and clear final approval. Preserve unaffected
+content and human edits; do not regenerate the document wholesale unless replacement was
+explicitly chosen.
+
+Re-read the selected output before each save. If it appeared or changed unexpectedly, preserve
+it and ask how to reconcile conflicting edits before writing. If a save fails, report it and
+stop rather than treating conversation-only progress as durable. After an interruption,
+compaction, or new session, follow steps 0 and 1 again; never infer approvals from populated
+template fields or reconstruct missing decisions from memory.
 
 ## Procedure
+
+### 0. Select the artifact and protect existing work
+
+The default output is `steel-thread.md` next to the source PRD. Check whether it exists
+**before any write**. If it does, read it in full and ask which action the human wants:
+
+- resume an unfinished draft or revise the existing roadmap in place;
+- save a separate version at a human-confirmed, unused path, leaving the original untouched;
+- replace the existing file and discard its contents, only with explicit permission.
+
+Do not change the existing file until the action is confirmed. If no action is authorised,
+stop without writing. For a separate version, clarify whether to carry forward the existing
+content or start fresh; carried-forward decisions still require reconfirmation. Check the
+chosen path for collisions as well, and use that path consistently in all hand-off references.
+
+For a new file, explain that it will be saved incrementally and confirm its path before
+creating it. Once authorised, initialise or update the selected document using
+[templates/steel-thread.md](templates/steel-thread.md), retaining existing content when
+resuming or revising. Mark it as an incomplete draft, with any prior confirmations awaiting
+reconfirmation and no current final approval. Do not carry over a ready-to-paste invocation
+as usable while the document is a draft.
 
 ### 1. Read and assess the inputs
 
@@ -65,6 +109,19 @@ Read the PRD and existing task file in full. Extract:
 - data, UX, non-functional, reporting, audit, and operational requirements;
 - constraints, dependencies, risks, unresolved decisions, and future work;
 - every task description that must be preserved verbatim.
+
+On every resume or revision, compare current inputs with the saved context before updating
+that context, and summarise the saved decisions, approvals, progress, and relevant changes.
+Ask the human to reconfirm the saved decisions before relying on them, even when inputs appear
+unchanged. Clarify missing, changed, or conflicting decisions one at a time; reopen affected
+gates and downstream slice or parallelism decisions rather than silently carrying them forward.
+If the prior input version is unavailable, ask what changed rather than claiming it is unchanged.
+Record the source paths and available revision identifiers, or a dated summary of the inputs
+reviewed, in **Planning progress**, retaining enough prior context to explain revisions.
+
+**Resume gate:** saved decisions are explicitly reconfirmed or corrected and persisted before
+dependent work resumes. Continue from the first unresolved step; do not repeat unaffected work.
+An already-approved roadmap still needs fresh final approval after revision.
 
 Summarise the intended outcome and list gaps that would materially affect slicing. Ask about
 each blocking gap one at a time. Do not start slicing while the source meaning is uncertain.
@@ -162,20 +219,32 @@ capacity.
 
 Do not create artificial sub-slices merely to occupy every pair.
 
-### 8. Confirm the roadmap and write the artifact
+### 8. Confirm the roadmap and finalise the artifact
 
 Present the proposed Slice 0, later slice boundaries, deferred items, PR mapping, dependency
-sequence, and parallel groups.
+sequence, and parallel groups. For a revision, also summarise changes from the previous roadmap
+and their impact on any existing technical plan or tasks; do not update those downstream
+artifacts as part of this skill.
 
-**Gate:** obtain explicit human confirmation before writing the final artifact.
+**Gate:** obtain explicit human confirmation of the complete current roadmap before marking it
+approved. Saving drafts earlier does not satisfy this gate.
 
-Then write `steel-thread.md` next to the source PRD using
-[templates/steel-thread.md](templates/steel-thread.md). Include a ready-to-paste hand-off for
-the confirmed SDD planning/design step. Follow the template's SDD planning/design hand-off
-section; it is the canonical definition of the information that the hand-off must preserve.
+Prepare the final hand-off and apply the completion checks. Once they pass and final approval
+is recorded in **Planning progress**, set
+**Status** to `Approved - ready for technical planning`, and save to the selected output path.
+Include a ready-to-paste hand-off for the confirmed SDD planning/design step, pointing to that
+path. Follow the template's SDD planning/design hand-off section; it is the canonical
+definition of the information that the hand-off must preserve. If approval is withheld, save
+the outstanding questions and next step, and leave the document as an incomplete draft.
 
 ## Completion checks
 
+- [ ] The output path and any action on an existing file were explicitly authorised; unrelated
+      content and human edits were preserved unless replacement was chosen.
+- [ ] **Planning progress** durably records confirmed decisions, source context, Slice 0
+      approval, and the next step; saved decisions were reconfirmed on any resume.
+- [ ] The human explicitly approved the current roadmap, with no outstanding blocking gaps
+      or invalidated approvals. Only then may the document be marked ready for planning.
 - [ ] The source PRD and task paths in `steel-thread.md` identify the inputs that were read in
       full.
 - [ ] Unresolved source gaps appear in **Open questions and PRD gaps** with their planning

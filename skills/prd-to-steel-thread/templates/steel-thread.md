@@ -7,7 +7,38 @@
 **SDD workflow:** <confirmed framework or "standalone">
 **Planning/design hand-off:** <confirmed command or step, or "none">
 **Concurrent capacity:** <N> Dev+agent pair(s)
-**Status:** Draft for review
+**Status:** Draft - incomplete; not ready for technical planning
+
+## Planning progress
+
+**Source context:** <revision identifiers, or dated summary of inputs reviewed>
+**Last saved:** <YYYY-MM-DD>
+**Next step:** <first unresolved procedure step and question/action>
+**Resume confirmation:** <Not applicable for a new draft; Pending on every resume>
+
+| Decision / gate | State | Confirmation record |
+|---|---|---|
+| Output path and create/resume/revise/version/replace action | Pending | <authorised path and action, date> |
+| Source meaning and blocking gaps | Pending | <confirmed scope or unresolved gaps, date> |
+| SDD workflow and planning/design hand-off | Pending | <confirmed choice, date> |
+| Architecture, real data path, stack and deployment | Pending | <confirmed details or section reference, date> |
+| Infrastructure ownership and provisioning | Pending | <confirmed details or section reference, date> |
+| Dev+agent pair capacity | Pending | <confirmed count, date> |
+| Slice 0 | Pending | <explicit approval of the current slice, date> |
+| Complete roadmap | Pending | <explicit final approval of the current roadmap, date> |
+
+Use `Pending`, `Confirmed`, or `Needs reconfirmation` for decision states. Save each answer
+immediately, including partial confirmations while a gate remains pending. Store decision
+values in the relevant sections below; reference them here rather than duplicating them.
+Leave unknown values as `Pending`. Record unresolved questions in **Open questions and PRD
+gaps**. On every resume, summarise saved decisions and obtain explicit reconfirmation before
+using them, then record the reconfirmation and date in **Resume confirmation**. A populated
+section alone is not evidence of approval.
+
+Keep this document incomplete until the human approves the complete current roadmap and the
+completion checks pass. Then set **Status** to `Approved - ready for technical planning` and
+**Next step** to the confirmed planning/design hand-off. Revisions reopen final approval;
+record the requested changes and downstream planning impact here.
 
 ## Outcome
 
@@ -112,6 +143,10 @@ remaining in-scope capability.>
 
 ## SDD planning/design hand-off
 
+**Readiness:** Not ready while this document is an incomplete draft. Use this hand-off only
+when **Status** is `Approved - ready for technical planning` and current final approval is
+recorded above.
+
 **Selected workflow:** <framework or standalone>
 
 **Confirmed planning/design command or step:** <command/step or N/A>
@@ -131,14 +166,17 @@ trade-offs, and unresolved gaps for human review.
 
 ### Ready-to-paste invocation
 
+Include the invocation only after final approval. Use the actual selected roadmap path,
+including when the human chose a separate version instead of `steel-thread.md`.
+
 ```text
 <confirmed framework planning/design command, if any>
 
 Feature: <Feature / Capability Name>
 Source PRD: <relative/path/to/prd.md>
-Steel-thread roadmap: <relative/path/to/steel-thread.md>
+Steel-thread roadmap: <relative/path/to/selected-roadmap.md>
 Concurrent capacity: <N> Dev+agent pair(s)
 
-Create the technical plan/design using steel-thread.md as the delivery sequence.
+Create the technical plan/design using the roadmap identified above as the delivery sequence.
 Preserve every delivery constraint in its SDD planning/design hand-off section.
 ```

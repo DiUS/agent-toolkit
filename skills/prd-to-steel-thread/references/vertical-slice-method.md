@@ -94,8 +94,10 @@ Tasks that do not support the current slice move later. Tasks outside the PRD re
 ## SDD hand-off
 
 `steel-thread.md` constrains delivery sequencing and planning; it does not replace technical
-design. Pass it into the selected SDD workflow's technical planning/design step after product
-scope is established.
+design. It is saved incrementally as an incomplete draft. Pass it into the selected SDD
+workflow's technical planning/design step only after explicit final approval marks it ready.
+Revisions require renewed approval and an explanation of their impact on existing plans or
+tasks; this skill does not update those downstream artifacts.
 
 Use the canonical hand-off section in
 [../templates/steel-thread.md](../templates/steel-thread.md) so the roadmap and invocation
