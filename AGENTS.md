@@ -1,6 +1,6 @@
 # AGENTS.md
 
-Working context and rules for any AI agent (or human) contributing to **this** repository —
+Working context and rules for any AI agent (or human) contributing to **this** repository:
 the `agent-toolkit` repo itself, not the components it ships. `CLAUDE.md` imports this file and
 adds Claude-Code-specific notes. Keep it lean: it loads into an agent's context every session.
 
@@ -31,10 +31,10 @@ scripts/validate.js            Verification gate (run before committing).
 
 - **Host-agnostic first.** Components should run on any capable agent. Do **not** add hard
   dependencies on hooks, MCP servers, or a specific runtime. Optional integrations must degrade
-  gracefully — used when present, skipped cleanly when absent. Claude-specific wiring stays
+  gracefully: used when present, skipped cleanly when absent. Claude-specific wiring stays
   confined to `.claude-plugin/`, `commands/`, `agents/` and `hooks/`.
 - **Skills are self-contained.** Everything a skill's entry point references (playbooks,
-  references, templates) lives **inside its own `skills/<name>/` directory** — that directory is
+  references, templates) lives **inside its own `skills/<name>/` directory**, which is
   the unit `npx skills` and the plugin install. Never point a skill file at something outside
   its own directory.
 - **Lean docs.** Docs (including this file) earn their length by making a contributor
@@ -53,8 +53,8 @@ scripts/validate.js            Verification gate (run before committing).
   list scoped to the minimum it needs (read-only where the agent only inspects code). Add it to
   the `agents` array in `.claude-plugin/plugin.json` to ship it in the plugin.
 - **Hook** → new `hooks/<name>/` with a `hooks.json` and its script(s), following
-  [hooks/README.md](hooks/README.md). Do **not** wire it into `.claude-plugin/plugin.json` —
-  hooks stay opt-in; consumers copy them into their own project.
+  [hooks/README.md](hooks/README.md). Do **not** wire it into `.claude-plugin/plugin.json`;
+  hooks stay opt-in, and consumers copy them into their own project.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for the full mechanics.
 
@@ -68,19 +68,25 @@ node scripts/validate.js
 
 It checks that the manifests are valid JSON with required keys, that every `SKILL.md`,
 `agents/*.md` and `commands/*.md` (except its README) has `name` + `description` frontmatter,
-that every path referenced by `plugin.json` exists, and that any `hooks/**/hooks.json` is valid
-JSON. CI runs the same script on every push and PR — a red gate blocks merge.
+that every path referenced by `plugin.json` exists, that relative markdown links resolve and a
+skill's links stay inside that skill, and that any `hooks/**/hooks.json` is valid JSON. CI runs the
+same script on every push and PR, and a red gate blocks merge.
+
+`validate.js` itself stays **component-agnostic**: it validates the repo's format, never one
+component's content. A component with its own invariants (a rule worded identically in several
+files, a closed vocabulary) puts them in `scripts/checks/<component>.js`, which the gate loads
+automatically. See [scripts/checks/README.md](scripts/checks/README.md).
 
 ## Do not
 
 - Add hooks/MCP as a hard requirement, or otherwise break host-agnostic behaviour.
 - Reference files outside a skill's own directory from within that skill.
-- Wire a hook into `.claude-plugin/plugin.json` — hooks are opt-in only.
+- Wire a hook into `.claude-plugin/plugin.json`; hooks are opt-in only.
 - Bloat the repo docs or this file.
 - Commit with a failing `scripts/validate.js`.
 
 ## Pointers
 
-- Repo overview & install: [README.md](README.md)
+- Repo overview and install: [README.md](README.md)
 - Per-tool setup: [docs/getting-started.md](docs/getting-started.md)
 - Adding a component: [CONTRIBUTING.md](CONTRIBUTING.md)

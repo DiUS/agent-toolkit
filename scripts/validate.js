@@ -11,7 +11,12 @@
  *   - every skills/<name>/SKILL.md and agents/*.md has `name` + `description` frontmatter
  *   - every path referenced by plugin.json (skills dir, commands dir, agent files) exists
  *   - every commands/*.md (except README.md) has `name` + `description` frontmatter
+ *   - relative markdown links resolve, and a skill's links stay inside that skill
  *   - if any hooks.json exists anywhere under hooks/, it is valid JSON
+ *
+ * This file stays component-agnostic: it knows about the repo's *format*, never about any one
+ * skill's content. A component that needs its own content rules enforced drops a module into
+ * scripts/checks/ and this runner picks it up — see scripts/checks/README.md.
  *
  * Exit code 0 = all good, 1 = one or more problems.
  */
@@ -54,8 +59,12 @@ function loadJson(p) {
 function checkPlugin() {
   const plugin = loadJson(path.join(ROOT, ".claude-plugin", "plugin.json"));
   if (!plugin) return;
-  for (const key of ["name", "description"]) {
+  for (const key of ["name", "description", "version"]) {
     if (!plugin[key]) err(`.claude-plugin/plugin.json: missing "${key}"`);
+  }
+  // Marketplace installs and updates key off the version, so a malformed one is worse than absent.
+  if (plugin.version && !/^\d+\.\d+\.\d+(-[0-9A-Za-z.-]+)?$/.test(plugin.version)) {
+    err(`.claude-plugin/plugin.json: version "${plugin.version}" is not semver (x.y.z)`);
   }
   const skillsRel = plugin.skills || "./skills";
   if (!isDir(path.join(ROOT, skillsRel))) {
@@ -119,24 +128,50 @@ function commandFiles() {
     .map((name) => path.join(dir, name));
 }
 
-/** Recursively find all files named `hooks.json` under a directory. */
-function findHooksJson(dir) {
-  if (!isDir(dir)) return [];
-  const results = [];
-  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-    const p = path.join(dir, entry.name);
-    if (entry.isDirectory()) {
-      results.push(...findHooksJson(p));
-    } else if (entry.isFile() && entry.name === "hooks.json") {
-      results.push(p);
+/* Relative markdown links must resolve, and a skill's links must stay inside that skill — because a
+ * skill directory is the unit that gets installed, so a link out of it is broken for every consumer.
+ * Skipped inside skills/<name>/templates/: those files are scaffolds whose links point at paths in
+ * the TARGET repo, which don't exist here by design. */
+function checkMarkdownLinks() {
+  const roots = ["skills", "agents", "commands", "scripts", "docs"].map((d) => path.join(ROOT, d));
+  const files = roots.flatMap((d) => walkFiles(d, (p) => p.endsWith(".md")));
+  for (const name of ["README.md", "AGENTS.md", "CLAUDE.md", "CONTRIBUTING.md"]) {
+    const p = path.join(ROOT, name);
+    if (isFile(p)) files.push(p);
+  }
+
+  const skillsDir = path.join(ROOT, "skills");
+  for (const file of files) {
+    // Which skill (if any) owns this file, and is it a template?
+    let owner = null;
+    if (file.startsWith(skillsDir + path.sep)) {
+      const parts = path.relative(skillsDir, file).split(path.sep);
+      if (parts.length > 1) {
+        if (parts[1] === "templates") continue; // scaffold: links are output paths
+        owner = path.join(skillsDir, parts[0]);
+      }
+    }
+    for (const m of read(file).matchAll(/\]\(([^)\s]+)/g)) {
+      let target = m[1];
+      if (/^(https?:|mailto:|#|\$\{)/.test(target)) continue;
+      target = target.split("#")[0];
+      if (!target || target.includes("<")) continue; // placeholder path, not a real link
+      const abs = path.resolve(path.dirname(file), target);
+      if (owner && abs !== owner && !abs.startsWith(owner + path.sep)) {
+        err(
+          `${rel(file)}: link "${target}" points outside its own skill directory — a skill must be ` +
+          `self-contained, since that directory is what gets installed`
+        );
+      } else if (!fs.existsSync(abs)) {
+        err(`${rel(file)}: link "${target}" does not resolve to an existing file`);
+      }
     }
   }
-  return results;
 }
 
 function checkHooks() {
   const dir = path.join(ROOT, "hooks");
-  for (const p of findHooksJson(dir)) {
+  for (const p of walkFiles(dir, (p) => path.basename(p) === "hooks.json")) {
     try {
       JSON.parse(read(p));
     } catch (e) {
@@ -145,7 +180,41 @@ function checkHooks() {
   }
 }
 
+/** Recursively collect files matching a predicate. */
+function walkFiles(dir, predicate) {
+  if (!isDir(dir)) return [];
+  const out = [];
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    const p = path.join(dir, entry.name);
+    if (entry.isDirectory()) out.push(...walkFiles(p, predicate));
+    else if (predicate(p)) out.push(p);
+  }
+  return out;
+}
+
+/* Component-specific content rules live in their own module under scripts/checks/. This runner
+ * knows nothing about any of them — it loads each and hands over the shared helpers, so the
+ * format checks above stay generic and a component's rules ship with the component's PR. */
+function runContentChecks() {
+  const dir = path.join(__dirname, "checks");
+  if (!isDir(dir)) return;
+  const ctx = { ROOT, err, rel, read, isFile, isDir, walkFiles };
+  for (const p of fs.readdirSync(dir).filter((n) => n.endsWith(".js")).sort()) {
+    const mod = require(path.join(dir, p));
+    if (typeof mod.run !== "function") {
+      err(`scripts/checks/${p}: must export a run(ctx) function`);
+      continue;
+    }
+    try {
+      mod.run(ctx);
+    } catch (e) {
+      err(`scripts/checks/${p}: threw — ${e.message}`);
+    }
+  }
+}
+
 function main() {
+  // Format: the repo's own shape, component-agnostic.
   checkPlugin();
   checkMarketplace();
 
@@ -154,7 +223,11 @@ function main() {
   checkFrontmatterFiles(skills);
   checkFrontmatterFiles(agentFiles());
   checkFrontmatterFiles(commandFiles());
+  checkMarkdownLinks();
   checkHooks();
+
+  // Content: per-component rules, each owned by its own module in scripts/checks/.
+  runContentChecks();
 
   if (errors.length) {
     console.log(`VALIDATION FAILED (${errors.length} problem(s)):`);

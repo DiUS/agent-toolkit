@@ -1,11 +1,14 @@
-# Phase 2 — Interview
+# Phase 2: Interview
 
 **Role:** Senior Business Analyst, supported by a Product Manager.
-**Goal:** Validate the recon hypotheses and recover the **why** the code can't tell you —
-intent, business rules, edge cases, and domain language — through a real conversation.
+**Goal:** Validate the recon hypotheses and recover the **why** the code can't tell you (intent,
+business rules, edge cases, and domain language) through a real conversation.
 
 *Skipped in code-only mode.* In code-only mode, everything that would be confirmed here stays
 `[unverified]` / `[assumption]`.
+
+Entered directly by `--interview` when continuing a stopped queue, subject to that option's limits in
+`SKILL.md`.
 
 ---
 
@@ -22,7 +25,55 @@ intent, business rules, edge cases, and domain language — through a real conve
 - **Capture, don't assume.** If something isn't confirmed, it stays flagged.
 
 Use [`../references/question-bank.md`](../references/question-bank.md) for seed questions per
-area and per initiative type — but adapt to what recon actually found.
+area, but adapt to what recon actually found.
+
+---
+
+## The queue: highest impact first
+
+The stakeholder's attention is the scarcest input in this whole skill, so it goes to the questions
+whose wrong answers cost the most. Don't work through the coverage areas in order.
+
+**Ranking.** Take the open items from `docs/_discovery/assumptions-register.md` and sort by
+**impact if wrong (descending), then confidence (ascending)**. A high-impact/low-confidence item
+always outranks a high-impact/high-confidence one; a low-impact item never jumps the queue however
+shaky it looks.
+
+**Show the top 5.** Open the interview by showing the five that rank highest, in order, each with
+its evidence and one line on why it matters. Then keep the list in
+`discovery-state.md` and refresh it every time an item is resolved or parked, so the next one
+surfaces.
+
+**Refill it from the register, not from memory.** After each item is resolved or parked,
+**re-derive** the list by ranking the register's open items again and topping the table back up to
+five. Never refresh it from your recollection of what's left: your impression of the queue drifts
+as the conversation goes, toward thinking it is emptier than it is.
+
+**"The queue is empty" is a counted claim, not an impression.** You may say a queue — or one
+owner's share of it — is exhausted **only** after re-deriving from the register and finding zero,
+and you must state that count when you say it. If fewer than five remain, show the ones that do.
+Saying "there's nothing else worth asking" without a count is how this phase ends early, and it is
+a form of the prediction rule (`SKILL.md`).
+
+> Showing the list is **not** asking five questions. It's the agenda, so the stakeholder can see
+> what you think matters and redirect you if they disagree. Then ask about **#1 only** and wait.
+> Every conversation rule above still applies.
+
+If the stakeholder reorders the list or adds something not on it, follow them: they know things the
+register doesn't. Record the change of priority.
+
+**Where areas have different owners, group the queue by who can answer.** Nobody knows a large system
+end to end, and a top-5 that spans four owners can't be worked in one conversation. Sort within the
+person in front of you, keep the rest for whoever owns it, and record in `discovery-state.md` which
+SME covered which area so a later session doesn't re-ask them. The register's *who can confirm* column
+is what makes this possible; an item with nobody against it doesn't get actioned.
+
+**Offer an off-ramp at a seam the queue produces.** Two of them: when the top 5 has fully turned
+over (every item from the last agenda resolved or parked), and when the person in front of you has
+no items left — the second established by a count, per the rule above, not by feel. At either, say
+what's been covered, show the **re-derived** top 5 (or the count, if fewer than five remain), and ask
+whether to carry on now or pick it up later. Don't ask more often than that: the refreshed list
+already shows the stakeholder what's left, and repeatedly checking in reads as reluctance.
 
 ---
 
@@ -35,25 +86,31 @@ For every `[outdated]` or `[contradicted]` item from recon/pre-check, raise it w
 > through `payments/refunds/*` (`payments/refunds/handler.py:20`). I'd suggest the correct
 > statement is: *refunds are owned by the Payments service*. Confirm, or adjust?"
 
-On the user's confirmation, the item becomes accepted knowledge (unmarked) with the code
-evidence recorded. Do not silently pick a version.
+On the user's confirmation, the item becomes accepted knowledge (unmarked). Record it in
+`discovery-state.md` like any other fact, with the evidence and who confirmed it. Its traceability
+row follows in Phase 3, when the claim reaches a doc. Do not silently pick a version.
 
 ---
 
-## Areas to cover (adaptively)
+## Coverage checklist, not a running order
 
-Move through these as the conversation allows, always led by recon findings. Not a checklist
-to march through — a map of what needs to be understood.
+Seven things to have touched by the end, used to spot what the queue never reached. The **queue**
+decides what gets asked and when; this list only tells you where the gaps are.
 
-1. **Business context & purpose** — why the system exists, what problem it solves, for whom.
-2. **Users & stakeholders** — who uses it, who owns the processes, who's impacted.
+1. **Business context and purpose** — why the system exists, what problem it solves, for whom.
+2. **Users and stakeholders** — who uses it, who owns the processes, who's impacted.
 3. **Domain language** — confirm the meaning of terms found in code (entities, enums,
    error messages). Resolve synonyms and conflicts; capture agreed definitions.
 4. **Business rules** — validate the rules recon inferred; surface the ones code can't show
    (policy, regulation, "we always do X because…"), and the exceptions.
-5. **Workflows** — walk the key end-to-end flows: actors, triggers, states, decision points,
+5. **How rules and flows group** — recon can only group them the way the code does, and that carve-up
+   becomes the shape of the docs, so confirm it explicitly: *"the code keeps these five
+   rules together in `InvoicePolicy`. Is that how the business thinks about them, or do some belong
+   elsewhere?"* A confirmed grouping gets renamed to the agreed term; an unconfirmed one stays
+   `[unverified]`.
+6. **Workflows** — walk the key end-to-end flows: actors, triggers, states, decision points,
    exceptions/edge cases, hand-offs, SLAs.
-6. **Requirements & constraints** — the outcomes the system must deliver, plus
+7. **Requirements and constraints** — the outcomes the system must deliver, plus
    non-functional and compliance constraints (performance, availability, security,
    auditability, data handling, regulatory).
 
@@ -73,13 +130,54 @@ After each meaningful exchange, update `docs/_discovery/discovery-state.md`:
 Record who confirmed each fact (source/owner), and flag where different stakeholders
 disagree.
 
+Updating after **each** exchange is what makes stopping safe: if the stakeholder disappears
+mid-conversation, everything up to that point is already recorded.
+
+---
+
+## Stopping, and resuming later
+
+The interview ends when the queue is empty **or when the stakeholder decides it does.** Their time,
+their call.
+
+> **Prediction rule** (`SKILL.md`): **never characterise unasked items as predictable, low-value, or
+> not worth the stakeholder's time.** You cannot know what they will say, and a run of answers
+> following a pattern doesn't tell you the next one will. Present the ranked list and the count by
+> owner; the stakeholder decides what is worth asking. A recommendation to stop is permitted only at
+> the two seams above, and must be stated as *"N items remain, M answerable by you"* — never as a
+> qualitative dismissal of what is left.
+
+- **Say so once, up front**, before the first question: *"Stop whenever you like — say so and I'll
+  record where we got to; we can pick this up in a later session."* Once is enough.
+- **Recognise a stop for what it is.** "That's enough for now", "I need to go", "park the rest",
+  "let's finish tomorrow", or several "I don't know"s in a row are all stops. Never treat one as an
+  answer to the pending question, never argue, and never squeeze in one more question.
+- **Park what's left, don't assume it.** Unasked items keep their flags and stay in
+  `assumptions-register.md`, each with its *Why parked* value recorded and an SME named against any
+  that need one. They are not downgraded to accepted knowledge because nobody got to them.
+- **Hand off clearly** rather than just stopping: what was covered, what's parked (name the
+  highest-impact ones), and where it's recorded. Then ask the one question that remains: **proceed
+  to synthesis now with the gaps flagged, or end the session here?** Both are valid.
+- **Stopping the interview is not stopping the run.** Synthesis can write good onboarding docs from
+  partial validation, as long as the gaps are flagged. Never abandon the run because the interview
+  ended early.
+- **Record where you stopped** in `discovery-state.md` (items addressed, items open), and tell the
+  user how to come back: invoke the skill again and it resumes here, because Phase 0 reads the state
+  and re-enters at this phase rather than re-running recon. Continuing later in the *same* session
+  needs no re-invocation; just pick the queue back up.
+
 ---
 
 ## Exit criteria
 
-- Recon hypotheses validated or corrected with the stakeholder.
-- Contradictions/outdated items reconciled with confirmed, code-grounded wording.
-- Business rules, workflows, domain terms, and requirements understood well enough to write
-  onboarding docs.
-- Remaining unknowns captured and prioritised (not silently assumed).
+- Queue worked in impact order, **or** the stakeholder stopped and the remainder is parked in the
+  register as *needs SME*.
+- Coverage stated as a count, not a characterisation. Report the number of register items whose
+  next step is an interview, how many were asked, and how many remain — and for each remaining one,
+  its *Why parked* value, with a **named SME** wherever that value is *needs SME*.
+  "The rest are lower value" is not an outcome; a count is. Items whose next step is a **fix** are
+  not interview items and don't belong in this denominator.
+- Contradictions/outdated items reconciled with confirmed, code-grounded wording, or parked.
+- Coverage checklist reviewed: areas the queue never reached are named, not silently skipped.
+- Stopping point recorded in `discovery-state.md` so a later session resumes rather than restarts.
 - Working state current. Ready for synthesis.

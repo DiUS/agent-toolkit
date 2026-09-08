@@ -1,5 +1,6 @@
 {
   "name": "agent-toolkit",
+  "version": "0.1.0",
   "description": "A toolkit of DiUS agent skills, commands, agents and hooks for AI coding agents.",
   "author": {
     "name": "DiUS"

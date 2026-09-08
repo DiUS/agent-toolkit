@@ -9,6 +9,7 @@
   "plugins": [
     {
       "name": "agent-toolkit",
+      "version": "0.1.0",
       "source": {
         "source": "github",
         "repo": "DiUS/agent-toolkit"
